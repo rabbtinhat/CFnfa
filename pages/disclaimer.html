@@ -4,32 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[PAGE_TITLE] - CF Ng's Non Financial Advise</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
 </head>
 <body>
     <div id="header"></div>
     <main>
         <div class="container">
-            <h1>[PAGE_TITLE]</h1>
-            <p>Content coming soon...</p>
+            <h1>Disclaimer</h1>
+            <p>The content provided on this website is for informational and entertainment purposes only. The opinions expressed are solely those of the author and should not be construed as financial, investment, legal, or tax advice. The website owner is not a registered financial advisor, and any financial or investment decisions made based on the information presented here are done at the user's own risk.
+
+While every effort is made to ensure the accuracy of the information shared, the website may rely on third-party sources, including other websites and social media platforms, which may contain inaccuracies or outdated information. The website owner does not guarantee the completeness, reliability, or accuracy of any data, charts, or news presented.
+
+Users should conduct their own research and consult a licensed financial advisor before making any investment decisions. The website owner assumes no responsibility for any financial losses or damages resulting from the use of the information provided.</p>
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is important to us. This website does not sell, share, or distribute your personal information to third parties. Any data collected is used solely for analytical and site improvement purposes, such as tracking website traffic, engagement, and user behavior through third-party tools like Google Analytics.
+
+Cookies may be used to store visitor preferences and enhance user experience. Users may disable cookies through their browser settings, but doing so may affect website functionality.
+
+By using this website, you acknowledge and agree to the terms outlined in this Disclaimer and Privacy Policy. If you have any concerns, please contact us for further clarification.</p>
         </div>
     </main>
     <div id="footer"></div>
 
     <script>
-        fetch('../components/header.html')
+        fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-                return fetch('../components/nav.html');
+                return fetch('/components/nav.html');
             })
             .then(response => response.text())
             .then(data => {
                 document.getElementById('nav').innerHTML = data;
             });
 
-        fetch('../components/footer.html')
+        fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
