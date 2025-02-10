@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Market Update - CF Ng's Non Financial Advise</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
 </head>
 <body>
     <!-- Include header component -->
@@ -29,18 +29,18 @@
     
     <!-- Include footer component -->
     <script>
-        fetch('../components/header.html')
+        fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-                return fetch('../components/nav.html');
+                return fetch('/components/nav.html');
             })
             .then(response => response.text())
             .then(data => {
                 document.getElementById('nav').innerHTML = data;
             });
 
-        fetch('../components/footer.html')
+        fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
