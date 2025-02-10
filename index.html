@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CF Ng's Non Financial Advise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+        }
+
+        header {
+            background-color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .site-title {
+            font-size: 1.8em;
+            color: #000;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .social-links a {
+            color: #000;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-links a:hover {
+            color: #444;
+        }
+
+        nav {
+            width: 100%;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        nav ul li {
+            padding: 0 15px;
+        }
+
+        nav ul li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            white-space: nowrap;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #000;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #444;
+        }
+
+        main {
+            margin: 160px auto 50px;
+        }
+
+        .content {
+            padding: 30px 0;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            font-weight: 400;
+        }
+
+        /* Footer 樣式 */
+        footer {
+            border-top: 1px solid #e5e5e5;
+            padding: 40px 0;
+            margin-top: 60px;
+            background-color: #fff;
+        }
+
+        footer p {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            nav ul li {
+                padding: 5px 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            main {
+                margin-top: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="site-title">CF Ng's Non Financial Advise</div>
+                <div class="social-links">
+                    <a href="https://linkedin.com/your-profile" target="_blank" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/your-profile" target="_blank" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="return false;">Home</a></li>
+                <li><a href="daily-market-update.html">Daily Market Update</a></li>
+                <li><a href="macro.html">Macro</a></li>
+                <li><a href="global-equity.html">Global Equity</a></li>
+                <li><a href="asset-allocation.html">Asset Allocation</a></li>
+                <li><a href="crypto.html">Crypto</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="content">
+                <h1>Welcome to CF Ng's Non Financial Advise</h1>
+                <p>Here you will find comprehensive analysis and insights about global financial markets.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>
+                Not financial Advice. Please check the below link.<br>
+                <a href="disclaimer.html">Privacy Policy and full Disclaimer</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
