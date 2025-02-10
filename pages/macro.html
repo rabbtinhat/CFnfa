@@ -16,20 +16,15 @@
         </div>
     </main>
     <div id="footer"></div>
-    <script>
+
+        <script>
         // Load components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-                // Load nav after header
-                return fetch('/components/nav.html');
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav').innerHTML = data;
             });
-
+        
         fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
