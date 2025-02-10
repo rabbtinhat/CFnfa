@@ -3,32 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Market Update - CF Ng's Non Financial Advise</title>
+    <title>Blog - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <style>
+        .blog-list {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .blog-post {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.2s;
+        }
+        
+        .blog-post:hover {
+            transform: translateY(-2px);
+        }
+        
+        .blog-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0.5rem 0;
+        }
+        
+        .blog-category {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+        
+        .blog-summary {
+            color: #444;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        
+        .blog-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .blog-link:hover {
+            text-decoration: none;
+        }
+        
+        .blog-title {
+            color: #333;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .pagination button.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 <body>
-    <!-- Include header component -->
     <div id="header"></div>
-    
     <main>
-        <div class="container blog-layout">
-            <article class="post card">
-                <header class="post-header">
-                    <time datetime="2024-02-10">February 10, 2024</time>
-                    <h2>Market Update: Fed's Latest Decision Impact</h2>
-                </header>
-                <div class="post-content">
-                    <!-- Post content here -->
+        <div class="container">
+            <div class="blog-list">
+                <!-- Example blog post structure -->
+                <article class="blog-post">
+                    <a href="/blog/post-1.html" class="blog-link">
+                        <h2 class="blog-title">Understanding Global Equity Markets</h2>
+                        <div class="blog-meta">
+                            <span class="blog-category">Investing</span>
+                            <span class="blog-date">February 10, 2025</span>
+                        </div>
+                        <p class="blog-summary">
+                            In today's interconnected world, understanding global equity markets has become crucial for any investor. This post explores the fundamentals of international investing and why diversification across global markets matters...
+                        </p>
+                    </a>
+                </article>
+
+                <article class="blog-post">
+                    <a href="/blog/post-2.html" class="blog-link">
+                        <h2 class="blog-title">The Power of Dollar Cost Averaging</h2>
+                        <div class="blog-meta">
+                            <span class="blog-category">Strategy</span>
+                            <span class="blog-date">February 9, 2025</span>
+                        </div>
+                        <p class="blog-summary">
+                            Dollar cost averaging is a powerful investment strategy that can help reduce the impact of market volatility on your portfolio. Let's explore how this simple yet effective approach works...
+                        </p>
+                    </a>
+                </article>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>Next →</button>
                 </div>
-            </article>
-            
-            <!-- More posts -->
+            </div>
         </div>
     </main>
-    
-    <!-- Include footer component -->
+    <div id="footer"></div>
+
     <script>
+        // Your existing component loading script
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
@@ -45,6 +143,34 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
+
+        // Add blog loading functionality
+        async function loadBlogPosts() {
+            try {
+                // This would be replaced with your actual blog posts data source
+                const response = await fetch('/api/blog-posts');
+                const posts = await response.json();
+                
+                const blogList = document.querySelector('.blog-list');
+                blogList.innerHTML = posts.map(post => `
+                    <article class="blog-post">
+                        <a href="/blog/${post.slug}.html" class="blog-link">
+                            <h2 class="blog-title">${post.title}</h2>
+                            <div class="blog-meta">
+                                <span class="blog-category">${post.category}</span>
+                                <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
+                            </div>
+                            <p class="blog-summary">${post.summary}</p>
+                        </a>
+                    </article>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+            }
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
 </html>
