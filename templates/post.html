@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[POST_TITLE] - CF Ng's Non Financial Advice</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <style>
+        .blog-post-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .blog-header {
+            margin-bottom: 2rem;
+        }
+        
+        .blog-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-meta {
+            color: #666;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .blog-category {
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+        }
+        
+        .blog-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .blog-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-content h2 {
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .blog-content h3 {
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+        }
+        
+        .blog-content blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main>
+        <div class="blog-post-container">
+            <article>
+                <header class="blog-header">
+                    <h1 class="blog-title">[POST_TITLE]</h1>
+                    <div class="blog-meta">
+                        <time datetime="[POST_DATE]">[POST_DATE]</time>
+                        <span class="blog-category">[POST_CATEGORY]</span>
+                    </div>
+                </header>
+                
+                <div class="blog-content">
+                    [POST_CONTENT]
+                </div>
+            </article>
+        </div>
+    </main>
+    
+    <div id="footer"></div>
 
+    <script>
+        // Load header, nav, and footer components
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                return fetch('/components/nav.html');
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav').innerHTML = data;
+            });
+
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
