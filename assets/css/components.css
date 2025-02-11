@@ -100,18 +100,36 @@ footer a {
 
 /* Responsive */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-
     .header-content {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;  /* Reduced from 15px */
+        padding: 10px 0;  /* Reduced from 20px */
+    }
+
+    .site-title {
+        font-size: 1.5em;  /* Slightly smaller for mobile */
     }
 
     .social-links {
         justify-content: center;
+        gap: 15px;  /* Slightly reduced gap */
+    }
+
+    nav ul {
+        flex-direction: row;  /* Change to horizontal scrolling */
+        justify-content: flex-start;  /* Start from left */
+        overflow-x: auto;  /* Allow horizontal scrolling */
+        gap: 20px;
+        padding: 10px 0;  /* Reduced padding */
+        -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+    }
+
+    nav ul li {
+        flex-shrink: 0;  /* Prevent items from shrinking */
+    }
+
+    nav ul li a {
+        font-size: 0.85em;  /* Smaller font size */
+        white-space: nowrap;  /* Prevent text wrapping */
     }
 }
