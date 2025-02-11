@@ -3,16 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[PAGE_TITLE] - CF Ng's Non Financial Advise</title>
+    <title>About - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/components.css">
+    <style>
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .story-header {
+            text-align: left;
+            margin-bottom: 4rem;
+        }
+
+        .story-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #000;
+        }
+
+        .story-header p {
+            font-size: 1.25rem;
+            color: #666;
+        }
+
+        .timeline-section {
+            display: flex;
+            gap: 4rem;
+            margin-bottom: 8rem;
+            align-items: center;
+        }
+
+        .timeline-section:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #000;
+        }
+
+        .timeline-content p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-section {
+                flex-direction: column !important;
+                gap: 2rem;
+                margin-bottom: 4rem;
+            }
+
+            .timeline-image {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header"></div>
     <main>
-        <div class="container">
-            <h1>[PAGE_TITLE]</h1>
-            <p>Content coming soon...</p>
+        <div class="story-container">
+            <div class="story-header">
+                <p>About Me</p>
+                <h1>A Journey Through Financial Technology</h1>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-image">
+                    <img src="/api/placeholder/600/400" alt="Early days in finance">
+                </div>
+                <div class="timeline-content">
+                    <h2>The Beginning</h2>
+                    <p>My journey began in the world of finance, where I discovered the intricate relationship between technology and financial markets. This sparked my interest in developing tools that could make financial information more accessible to everyone.</p>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-image">
+                    <img src="/api/placeholder/600/400" alt="Learning and growth">
+                </div>
+                <div class="timeline-content">
+                    <h2>The Learning Phase</h2>
+                    <p>Through years of experience in both finance and technology, I've gained unique insights into how we can bridge the gap between complex financial concepts and everyday decision-making.</p>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-image">
+                    <img src="/api/placeholder/600/400" alt="Creating solutions">
+                </div>
+                <div class="timeline-content">
+                    <h2>Building Solutions</h2>
+                    <p>Today, I'm focused on creating tools and resources that help people make better financial decisions. This website is part of that mission - providing non-financial advice through the lens of technology and data.</p>
+                </div>
+            </div>
         </div>
     </main>
     <div id="footer"></div>
