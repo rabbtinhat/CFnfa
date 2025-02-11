@@ -1,0 +1,26 @@
+{
+  "name": "cfnfa",
+  "version": "1.0.0",
+  "main": "sync.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync": "node sync.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabbtinhat/CFnfa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rabbtinhat/CFnfa/issues"
+  },
+  "homepage": "https://github.com/rabbtinhat/CFnfa#readme",
+  "description": "",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.7",
+    "marked": "^15.0.7"
+  }
+}
