@@ -51,10 +51,14 @@ p {
 /* Responsive */
 @media (max-width: 768px) {
     :root {
-        --header-height: 200px;
+        --header-height: 140px;  /* Reduced from 200px */
     }
     
     h1 {
         font-size: 2em;
+    }
+
+    main {
+        margin-top: calc(var(--header-height) + 20px);  /* Add some breathing room */
     }
 }
