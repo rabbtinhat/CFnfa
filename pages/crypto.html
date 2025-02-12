@@ -389,7 +389,389 @@
     </div>
 </div>
 
+<!-- MVRV Chart Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">2. BTC MVRV Chart (Market Value to Realized Value)</h2>
+    </div>
 
+<!-- ETH Spot ETF Inflows Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">5. ETH Spot ETF Inflows</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_ethetf.png" alt="ETH Spot ETF Inflows" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://www.ethereumtreasuries.net/etf" target="_blank">Ethereum Treasuries</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>Similar to BTC ETF metrics but focused on Ethereum, assessing ETH's market preference shifts.</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Competitive Analysis: Faster ETH ETF inflows may hint at "altcoin season" rotations.</li>
+                <li>Ecosystem Trends: Ties to DeFi/NFT activity.</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Diversifies insights beyond BTC.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Smaller size and liquidity risks vs. BTC.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Futures Liquidation Heatmap Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">6. Futures Liquidation Heatmap</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_liquidationheatmap.png" alt="Futures Liquidation Heatmap" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://coinglass.com/LiquidationHeatmap" target="_blank">Coinglass</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>Visualizes forced liquidation volumes across price levels in crypto futures markets, highlighting support/resistance zones.</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Key Levels: High liquidation clusters may trigger volatility if prices approach.</li>
+                <li>Long/Short Signals: Upper heat = short squeeze risk; lower heat = long squeeze risk.</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Identifies leverage-driven vulnerabilities.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Manipulation risks (e.g., "stop hunts").</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Total Liquidations Data Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">7. Total Liquidations Data</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_totalliquidations.png" alt="Total Liquidations Data" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://coinglass.com/LiquidationData" target="_blank">Coinglass</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>Tracks 24h forced liquidation totals (longs vs. shorts) due to volatility.</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Extreme Alerts: Sudden spikes (>$1B) often precede reversals.</li>
+                <li>Sentiment Shifts: Excessive long liquidations signal over-optimism.</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Quantifies leverage risks.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Lacks asset-specific granularity.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BTC Quarterly Returns History Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">8. BTC Quarterly Returns History</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_btcquarterly.png" alt="BTC Quarterly Returns History" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://www.coingecko.com/en/coins/bitcoin/historical_data#panel" target="_blank">CoinGecko</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>Analyzes BTC's historical quarterly price changes for seasonal/cyclical patterns.</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Seasonality: e.g., Q4 rallies (traditional finance inflows); Q2 tax-related volatility.</li>
+                <li>Cycle Comparisons: High returns vs. history may warn of corrections.</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Long-term timing reference.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Past patterns may break (e.g., halving impacts).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ETH Quarterly Returns History Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">9. ETH Quarterly Returns History</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_ethquarterly.png" alt="ETH Quarterly Returns History" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://www.coingecko.com/en/coins/ethereum/historical_data#panel" target="_blank">CoinGecko</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>ETH-focused version of the quarterly returns analysis, comparing performance against BTC.</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Rotation Signals: ETH underperformance vs. BTC may hint at catch-up rallies.</li>
+                <li>Upgrade-Driven: Ties to ETH ecosystem updates (e.g., Cancun upgrade).</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Diversification tool.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Tech-driven volatility limits historical relevance.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fear & Greed Index Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">10. Fear & Greed Index</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_feargreed.png" alt="Fear & Greed Index" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://alternative.me/crypto/fear-and-greed-index/" target="_blank">Alternative.me</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>Scores market sentiment (0-100) using volatility, volume, social trends, etc.</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Contrarian Signal: >75 = greed (caution); <25 = fear (buying opportunity).</li>
+                <li>Divergence Alert: Rising prices + flat index = weak rally.</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Holistic sentiment gauge.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Opaque methodology; extremes can persist.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stablecoin Market Cap Metric Card -->
+<div class="metric-card">
+    <div class="metric-header">
+        <h2 class="metric-title">11. Stablecoin Market Cap</h2>
+    </div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_stablecoin.png" alt="Stablecoin Market Cap" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://www.coingecko.com/en/categories/stablecoins" target="_blank">CoinGecko</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>Tracks total USD-pegged stablecoin supply (e.g., USDT, USDC), reflecting crypto's "dry powder."</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Bullish Signal: Rising cap = potential buying pressure.</li>
+                <li>Liquidity Risk: Sharp drops may trigger sell-offs (e.g., UST collapse).</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Direct liquidity measure.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Exclude operational factors (e.g., Tether minting).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="metric-content">
+        <div class="graph-container rectangle" onclick="openModal(this)">
+            <img src="/assets/images/graphs/20250212_btcmvrv.png" alt="BTC MVRV Chart" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="graph-source">
+            Source: <a href="https://charts.woobull.com/bitcoin-mvrv/" target="_blank">Woo Bull Charts</a>
+        </div>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeModal(this)">&times;</span>
+                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+        
+        <div class="description">
+            <p>MVRV compares Bitcoin's market cap to its realized cap (calculated based on the last moved price of each BTC), assessing whether prices deviate from "fair value."</p>
+        </div>
+        
+        <div class="how-to-use">
+            <h3 class="section-title">How to Use</h3>
+            <ul>
+                <li>Overbought/Oversold: MVRV > 3.5 suggests overvaluation; MVRV < 1 implies undervaluation.</li>
+                <li>Trend Reversals: A drop from extreme highs signals bull-to-bear shifts; a rebound from lows may indicate a bottom.</li>
+            </ul>
+        </div>
+        
+        <div class="info-grid">
+            <div class="pros">
+                <h3 class="section-title">Pros</h3>
+                <ul>
+                    <li>Effective for gauging market profitability via on-chain data.</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h3 class="section-title">Cons</h3>
+                <ul>
+                    <li>Fails to predict black swan events (e.g., regulations); historical ranges may shift.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
                 
                                
             </div>
