@@ -3,21 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[PAGE_TITLE] - CF Ng's Non Financial Advise</title>
+    <title>Daily Market Wrap-up - CF Ng's Non Financial Advise</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .date-header {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .quick-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .overview-card {
+            background-color: #f0f7ff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .market-value {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .up {
+            color: #22c55e;
+        }
+
+        .down {
+            color: #ef4444;
+        }
+
+        .market-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .market-section h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .market-content {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+
+        .macro-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .macro-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .macro-item::before {
+            content: "→";
+            margin-right: 0.5rem;
+            color: #3b82f6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .quick-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header"></div>
+    
     <main>
         <div class="container">
-            <h1>[PAGE_TITLE]</h1>
-            <p>Content coming soon...</p>
+            <h1>Daily Market Wrap-up</h1>
+            <div class="date-header">
+                <script>
+                    const date = new Date().toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    document.write(date);
+                </script>
+            </div>
+
+            <!-- Quick Overview Section -->
+            <div class="quick-overview">
+                <div class="overview-card">
+                    <h3>US Markets</h3>
+                    <div class="market-value up">
+                        S&P 500: +0.5%
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <h3>European Markets</h3>
+                    <div class="market-value down">
+                        STOXX 600: -0.3%
+                    </div>
+                </div>
+                <div class="overview-card">
+                    <h3>Asian Markets</h3>
+                    <div class="market-value up">
+                        Nikkei 225: +1.2%
+                    </div>
+                </div>
+            </div>
+
+            <!-- North America Section -->
+            <section class="market-section">
+                <h2>North America Market</h2>
+                <div class="market-content">
+                    <!-- Replace with your content -->
+                    <p>Key developments in North American markets...</p>
+                </div>
+            </section>
+
+            <!-- Europe Section -->
+            <section class="market-section">
+                <h2>Europe Market</h2>
+                <div class="market-content">
+                    <!-- Replace with your content -->
+                    <p>European market summary and analysis...</p>
+                </div>
+            </section>
+
+            <!-- Asia Section -->
+            <section class="market-section">
+                <h2>Asia Market</h2>
+                <div class="market-content">
+                    <!-- Replace with your content -->
+                    <p>Asian market highlights and trends...</p>
+                </div>
+            </section>
+
+            <!-- Tech Section -->
+            <section class="market-section">
+                <h2>Technology Sector</h2>
+                <div class="market-content">
+                    <!-- Replace with your content -->
+                    <p>Technology sector updates and analysis...</p>
+                </div>
+            </section>
+
+            <!-- Upcoming Macro Data -->
+            <section class="market-section">
+                <h2>Upcoming Macro Data</h2>
+                <ul class="macro-list">
+                    <!-- Replace with your content -->
+                    <li class="macro-item">US CPI Data (Tuesday)</li>
+                    <li class="macro-item">ECB Interest Rate Decision (Thursday)</li>
+                    <li class="macro-item">Japan GDP (Friday)</li>
+                </ul>
+            </section>
         </div>
     </main>
+
     <div id="footer"></div>
 
     <script>
+        // Load header and footer components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
