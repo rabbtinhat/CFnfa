@@ -13,46 +13,31 @@
             padding: 0 1rem;
         }
         
-        .blog-header {
-            margin-bottom: 2rem;
-        }
-        
-        .blog-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
         .blog-meta {
+            margin: 1rem 0;
             color: #666;
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+            font-size: 0.9rem;
         }
         
         .blog-category {
-            background-color: #f0f0f0;
+            display: inline-block;
             padding: 0.2rem 0.8rem;
+            background-color: #f0f0f0;
             border-radius: 15px;
+            margin-right: 1rem;
         }
         
         .blog-content {
             line-height: 1.8;
-            font-size: 1.1rem;
+            color: #333;
+        }
+        
+        .blog-content h2 {
+            margin-top: 2rem;
         }
         
         .blog-content p {
             margin-bottom: 1.5rem;
-        }
-        
-        .blog-content h2 {
-            margin: 2rem 0 1rem;
-            font-size: 1.8rem;
-        }
-        
-        .blog-content h3 {
-            margin: 1.5rem 0 1rem;
-            font-size: 1.5rem;
         }
         
         .blog-content img {
@@ -71,29 +56,22 @@
 </head>
 <body>
     <div id="header"></div>
-    
     <main>
-        <div class="blog-post-container">
-            <article>
-                <header class="blog-header">
-                    <h1 class="blog-title">[POST_TITLE]</h1>
-                    <div class="blog-meta">
-                        <time datetime="[POST_DATE]">[POST_DATE]</time>
-                        <span class="blog-category">[POST_CATEGORY]</span>
-                    </div>
-                </header>
-                
-                <div class="blog-content">
-                    [POST_CONTENT]
-                </div>
-            </article>
-        </div>
+        <article class="blog-post-container">
+            <h1>[POST_TITLE]</h1>
+            <div class="blog-meta">
+                <span class="blog-category">[POST_CATEGORY]</span>
+                <span class="blog-date">[POST_DATE]</span>
+            </div>
+            <div class="blog-content">
+                [POST_CONTENT]
+            </div>
+        </article>
     </main>
-    
     <div id="footer"></div>
 
     <script>
-        // Load header, nav, and footer components
+        // Load components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
