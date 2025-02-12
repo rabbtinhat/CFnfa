@@ -7,22 +7,22 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
     <style>
-        /* Additional styles for the metrics dashboard */
-        /* Reset container styles to match your template */
+        /* Main content container styles */
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 35px; /* Match your template's side padding */
+            padding: 0 35px;
         }
 
-        /* Match your template's heading style */
-        h1 {
-            margin: 40px 0;
+        /* Page title styles */
+        .page-title {
             font-size: 48px;
             font-weight: bold;
+            margin: 40px 0;
             line-height: 1.2;
         }
 
+        /* Metrics grid layout */
         .metrics-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -36,7 +36,7 @@
             }
         }
 
-        /* Ensure cards have clean margins */
+        /* Individual metric card styles */
         .metric-card {
             border: 1px solid #e5e7eb;
             border-radius: 8px;
@@ -44,63 +44,45 @@
             overflow: hidden;
         }
 
-        /* Ensure minimum width for metric cards */
-        .metric-card {
-            min-width: 300px;
-            width: 100%;
-        }
-
-        .metric-card {
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            background: white;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
         .metric-header {
-            padding: 1rem 1.5rem;
+            padding: 20px;
             border-bottom: 1px solid #e5e7eb;
         }
 
         .metric-title {
-            font-size: 1.25rem;
+            font-size: 20px;
             font-weight: bold;
             margin: 0;
         }
 
         .metric-content {
-            padding: 1.5rem;
+            padding: 20px;
         }
 
         .graph-container {
             width: 100%;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
             background: #f3f4f6;
-            border-radius: 0.5rem;
+            border-radius: 4px;
+            min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: transform 0.2s;
-            min-height: 300px;  /* Minimum height for graphs */
         }
 
         .graph-container img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 0.5rem;
-        }
-        
-        .graph-container:hover {
-            transform: scale(1.02);
+            border-radius: 4px;
         }
 
         .graph-source {
-            font-size: 0.75rem;
+            font-size: 12px;
             color: #6b7280;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
         }
 
         .graph-source a {
@@ -111,154 +93,73 @@
         .graph-source a:hover {
             text-decoration: underline;
         }
-
-        /* Modal styles for full-size graph */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            background: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #4b5563;
-        }
-
-        .graph-container.rectangle {
-            aspect-ratio: 16/9;
-        }
-
-        .graph-container.square {
-            aspect-ratio: 1/1;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .info-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .section-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .description, .how-to-use, .pros-cons {
-            margin-bottom: 1.5rem;
-        }
-
-        ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-            margin: 0.5rem 0;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Responsive text sizes */
-        @media (max-width: 768px) {
-            .metric-title {
-                font-size: 1.125rem;
-            }
-            
-            .description, .how-to-use, .pros-cons {
-                font-size: 0.875rem;
-            }
-        }
     </style>
 </head>
 <body>
     <div id="header"></div>
     <main>
         <div class="container">
-            <h1>Crypto Market Metrics</h1>
+            <h1 class="page-title">Crypto Market Metrics</h1>
             
             <div class="metrics-grid">
-                <!-- Example of one metric card - repeat this structure for each metric -->
                 <div class="metric-card">
                     <div class="metric-header">
                         <h2 class="metric-title">1. Daily BTC Whale vs. Retail Net Buying/Selling Volume</h2>
                     </div>
                     <div class="metric-content">
-                        <!-- Graph placeholder - rectangle shape -->
-                        <div class="graph-container rectangle" onclick="openModal(this)">
-                           <img src="/assets/images/graphs/20250212_bitcoindistribution.png" alt="BTC Whale vs Retail Volume" style="width: 100%; height: 100%; object-fit: contain;">
+                        <div class="graph-container" onclick="openModal(this)">
+                            <img src="/assets/images/20250212_bitcoindistribution.png" alt="BTC Whale vs Retail Volume" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                         <div class="graph-source">
                             Source: <a href="https://bgeometrics.com/bitcoin-distribution/" target="_blank">BGeometrics</a>
-                        </div>
-
-                        <!-- Modal for full-size graph -->
-                        <div class="modal">
-                            <div class="modal-content">
-                                <span class="modal-close" onclick="closeModal(this)">&times;</span>
-                                <img src="" alt="Full size graph" style="max-width: 100%; height: auto;">
-                            </div>
                         </div>
                         
                         <div class="description">
                             <p>Tracks the net daily buying/selling volume of Bitcoin by whales and retail investors. Whale activity is often seen as a market indicator due to their capital influence on prices, while retail behavior reflects broader market sentiment.</p>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h2 class="metric-title">2. BTC MVRV Chart</h2>
+                    </div>
+                    <div class="metric-content">
+                        <div class="graph-container" onclick="openModal(this)">
+                            <img src="/assets/images/20250212_bitcoindistribution.png" alt="BTC Whale vs Retail Volume" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="graph-source">
+                            Source: <a href="#" target="_blank">BGeometrics</a>
+                        </div>
                         
-                        <div class="how-to-use">
+                        <div class="description">
+                            <p>MVRV compares Bitcoin's market cap to its realized cap (calculated based on the last moved price of each BTC), assessing whether prices deviate from "fair value."</p>
+                        </div>
+                        
+                        <div class="usage">
                             <h3 class="section-title">How to Use</h3>
                             <ul>
-                                <li>Track Whale Movements: Sustained net buying by whales may signal bullish expectations; heavy selling could indicate short-term peaks or risks.</li>
-                                <li>Retail Behavior Analysis: Concentrated retail buying often coincides with market overheating (e.g., FOMO), potentially leading to corrections. Panic selling by retail may signal a bottom.</li>
+                                <li>Overbought/Oversold: MVRV > 3.5 suggests overvaluation; MVRV < 1 implies undervaluation.</li>
+                                <li>Trend Reversals: A drop from extreme highs signals bull-to-bear shifts; a rebound from lows may indicate a bottom.</li>
                             </ul>
                         </div>
                         
-                        <div class="info-grid">
+                        <div class="pros-cons-grid">
                             <div class="pros">
                                 <h3 class="section-title">Pros</h3>
                                 <ul>
-                                    <li>Captures real-time sentiment via capital flows</li>
+                                    <li>Effective for gauging market profitability via on-chain data.</li>
                                 </ul>
                             </div>
                             <div class="cons">
                                 <h3 class="section-title">Cons</h3>
                                 <ul>
-                                    <li>Data lag; whales may hide actions across multiple accounts</li>
+                                    <li>Fails to predict black swan events (e.g., regulations); historical ranges may shift.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Add more metric cards here following the same structure -->
-                
             </div>
         </div>
     </main>
@@ -281,41 +182,6 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
-    </script>
-
-    <script>
-        // Functions for modal functionality
-        function openModal(graphContainer) {
-            const modal = graphContainer.parentElement.querySelector('.modal');
-            const modalImg = modal.querySelector('img');
-            // When implementing, replace with actual graph image source
-            modalImg.src = graphContainer.querySelector('img')?.src || '#';
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-        }
-
-        function closeModal(closeButton) {
-            const modal = closeButton.closest('.modal');
-            modal.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
-        }
-
-        // Close modal when clicking outside the image
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('modal')) {
-                closeModal(event.target.querySelector('.modal-close'));
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const activeModal = document.querySelector('.modal.active');
-                if (activeModal) {
-                    closeModal(activeModal.querySelector('.modal-close'));
-                }
-            }
-        });
     </script>
 </body>
 </html>
