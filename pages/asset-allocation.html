@@ -8,122 +8,140 @@
     <link rel="stylesheet" href="/assets/css/components.css">
     <style>
         /* Custom styles for the asset allocation page */
-       .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .chart-container {
+            margin: 30px 0;
+            /* Placeholder for charts */
+            min-height: 400px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+        }
+        
+        .strategy-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .strategy-card {
+            border: 1px solid #e0e0e0;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+        }
+        
+        .strategy-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.section {
-    margin-bottom: 4rem;
-}
+        /* Chart size control */
+        .chart-container {
+            /* You can modify these values as needed */
+            --chart-height: 400px;
+            min-height: var(--chart-height);
+        }
+        
+        /* Research sources style */
+        .research-sources {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 30px;
+        }
+        
+        .research-sources h2 {
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive images */
+        .responsive-chart {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
-h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: #444;
-}
-
-.strategy-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.strategy-card {
-    border: 1px solid #e0e0e0;
-    padding: 2rem;
-    border-radius: 8px;
-}
-
-.disclaimer {
-    background-color: #f8f9fa;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-top: 2.5rem;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    
-    h1 {
-        font-size: 2.5rem;
-    }
-    
-    .strategy-section {
-        grid-template-columns: 1fr;
-    }
-}
+        /* Add responsive design */
+        /* Chart size control for strategy cards */
+        .strategy-card .chart-container {
+            --chart-height: 300px;
+            margin: 20px 0;
+        }
     </style>
 </head>
-<!-- Replace everything between <body> and </body> with this code -->
 <body>
     <div id="header"></div>
     <main>
         <div class="container">
             <!-- Main title -->
-            <section class="section">
-                <h1>2025 Asset Allocation Outlook</h1>
-            </section>
+            <h1>2025 Asset Allocation Outlook</h1>
             
             <!-- Global Economic Landscape Section -->
             <section class="section">
                 <h2>Global Economic Landscape</h2>
                 <p>The economic environment in 2025 is projected to be dynamic, characterized by:</p>
+                <p><strong>US Fiscal Challenges:</strong> Potential government spending cuts and persistent inflation underscore the importance of a diversified equity portfolio and robust inflation hedging tools.</p>
+                <p><strong>Geopolitical Risks:</strong> Ongoing geopolitical tensions, including the Russia-Ukraine conflict, Middle East instability, and trade disputes involving the US, China, Mexico, and Canada, may induce market volatility, prompting investors to seek safe-haven assets like gold.</p>
+                <p><strong>AI Advancement:</strong> The continued advancement of artificial intelligence is expected to drive substantial growth beyond the tech sector, increasing electricity demand and creating investment opportunities in energy (particularly nuclear and natural gas), infrastructure, and utilities.</p>
                 
-                <div class="strategy-card">
-                    <h3>US Fiscal Challenges</h3>
-                    <p>Potential government spending cuts and persistent inflation underscore the importance of a diversified equity portfolio and robust inflation hedging tools.</p>
-                </div>
-                
-                <div class="strategy-card">
-                    <h3>Geopolitical Risks</h3>
-                    <p>Ongoing geopolitical tensions, including the Russia-Ukraine conflict, Middle East instability, and trade disputes involving the US, China, Mexico, and Canada, may induce market volatility, prompting investors to seek safe-haven assets like gold.</p>
-                </div>
-                
-                <div class="strategy-card">
-                    <h3>AI Advancement</h3>
-                    <p>The continued advancement of artificial intelligence is expected to drive substantial growth beyond the tech sector, increasing electricity demand and creating investment opportunities in energy (particularly nuclear and natural gas), infrastructure, and utilities.</p>
-                </div>
+                <!-- Comment: Insert economic landscape chart here 
+                <div class="chart-container">
+                    <p>Insert Economic Indicators Chart Here</p>  
+                </div>  -->
             </section>
             
             <!-- Asset Class Commentary -->
             <section class="section">
                 <h2>Asset Class Commentary</h2>
                 
-                <div class="strategy-card">
-                    <h3>Equities</h3>
-                    <p>We maintain a positive outlook on equities overall, anticipating them to outperform cash and bonds, although increased market volatility is expected in 2025. We are particularly optimistic about US equities due to their robust economy and dominance in key investment themes like AI.</p>
-                </div>
+                <!-- Equities -->
+                <h3>Equities</h3>
+                <p>We maintain a positive outlook on equities overall, anticipating them to outperform cash and bonds, although increased market volatility is expected in 2025. We are particularly optimistic about US equities due to their robust economy and dominance in key investment themes like AI.</p>
                 
-                <div class="strategy-card">
-                    <h3>Fixed Income</h3>
-                    <p>Fixed income assets can provide meaningful downside protection due to strong US private sector fundamentals and attractive yields. We recommend increasing allocations to short-term USD fixed income to take advantage of higher yields.</p>
-                </div>
+                <!-- Comment: Insert equities performance chart here 
+                <div class="chart-container">
+                    <p>Insert Equities Performance Chart Here</p> 
+                </div> -->
                 
-                <div class="strategy-card">
-                    <h3>Alternative Investments</h3>
-                    <p>We are optimistic about gold and natural resources, with various factors supporting prices and growth potential. Digital assets are poised to reach new all-time highs in 2025 as use cases expand and adoption increases.</p>
-                </div>
+                <!-- Fixed Income -->
+                <h3>Fixed Income</h3>
+                <p>Fixed income assets can provide meaningful downside protection due to strong US private sector fundamentals and attractive yields. We recommend increasing allocations to short-term USD fixed income to take advantage of higher yields.</p>
+                
+                <!-- Alternative Investments -->
+                <h3>Alternative Investments</h3>
+                <p>We are optimistic about gold and natural resources, with various factors supporting prices and growth potential. Digital assets are poised to reach new all-time highs in 2025 as use cases expand and adoption increases.</p>
             </section>
             
             <!-- Asset Allocation Strategies -->
@@ -133,6 +151,12 @@ p {
                     <!-- Diversified Growth Portfolio -->
                     <div class="strategy-card">
                         <h3>Diversified Growth Portfolio</h3>
+                        <!-- Comment: Insert pie chart for Diversified Growth Portfolio -->
+                        <div class="chart-container">
+    <img src="/assets/images/growth.svg" 
+         alt="Chart Description" 
+         class="responsive-chart">
+                        </div>
                         <ul>
                             <li>Equities: 50%</li>
                             <li>Fixed Income: 30%</li>
@@ -143,6 +167,12 @@ p {
                     <!-- Balanced Portfolio -->
                     <div class="strategy-card">
                         <h3>Balanced Portfolio</h3>
+                        <!-- Comment: Insert pie chart for Balanced Portfolio -->
+                        <div class="chart-container">
+    <img src="/assets/images/balanced.svg" 
+         alt="Chart Description" 
+         class="responsive-chart">
+                        </div>
                         <ul>
                             <li>Equities: 40%</li>
                             <li>Fixed Income: 40%</li>
@@ -153,6 +183,12 @@ p {
                     <!-- Conservative Portfolio -->
                     <div class="strategy-card">
                         <h3>Conservative Portfolio</h3>
+                        <!-- Comment: Insert pie chart for Conservative Portfolio -->
+                        <div class="chart-container">
+    <img src="/assets/images/conservative.svg" 
+         alt="Chart Description" 
+         class="responsive-chart">
+                        </div>
                         <ul>
                             <li>Equities: 30%</li>
                             <li>Fixed Income: 50%</li>
@@ -163,6 +199,12 @@ p {
                 </div>
             </section>
             
+            <!-- Conclusion -->
+            <section class="section">
+                <h2>Conclusion</h2>
+                <p>2025 is expected to be a dynamic year with both challenges and opportunities. We recommend investors maintain a patient approach and consider diversified investment strategies to navigate evolving market conditions. In this environment, tactical agility and the ability to adapt to changing market dynamics will be crucial.</p>
+            </section>
+            
             <!-- Disclaimer -->
             <div class="disclaimer">
                 <h3>Important Disclaimer</h3>
@@ -170,7 +212,7 @@ p {
             </div>
             
             <!-- Research Sources -->
-            <section class="section">
+            <section class="research-sources">
                 <h2>Research Sources</h2>
                 <p>This report utilized information and insights from BMO, JP Morgan, Goldman Sachs, Blackrock, Morgan Stanley, and VanEck.</p>
             </section>
@@ -178,6 +220,24 @@ p {
     </main>
     <div id="footer"></div>
 
-    <!-- Keep your existing scripts section unchanged -->
+    <!-- Scripts -->
+    <script>
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                return fetch('/components/nav.html');
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav').innerHTML = data;
+            });
+
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
 </body>
 </html>
