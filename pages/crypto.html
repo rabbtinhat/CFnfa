@@ -8,19 +8,26 @@
     <link rel="stylesheet" href="/assets/css/components.css">
     <style>
         /* Additional styles for the metrics dashboard */
+        /* Reset container styles to match your template */
         .container {
             max-width: 1400px;
-            width: 90%;  /* Add this to ensure consistent margins */
-            margin: 0 auto;  /* This centers the container */
-            padding: 2rem;  /* Consistent padding */
+            margin: 0 auto;
+            padding: 0 35px; /* Match your template's side padding */
+        }
+
+        /* Match your template's heading style */
+        h1 {
+            margin: 40px 0;
+            font-size: 48px;
+            font-weight: bold;
+            line-height: 1.2;
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem;
-            width: 100%;  /* Ensure full width within container */
-            margin: 0 auto;  /* Center the grid */
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
         @media (min-width: 1024px) {
@@ -29,11 +36,12 @@
             }
         }
 
-        /* Adjust header margin to match your screenshot */
-        h1 {
-            margin: 2rem 0;
-            font-size: 2.5rem;
-            font-weight: bold;
+        /* Ensure cards have clean margins */
+        .metric-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            overflow: hidden;
         }
 
         /* Ensure minimum width for metric cards */
@@ -206,7 +214,7 @@
                     <div class="metric-content">
                         <!-- Graph placeholder - rectangle shape -->
                         <div class="graph-container rectangle" onclick="openModal(this)">
-                            <img src="/assets/images/graphs/20250212_bitcoindistribution.png" alt="BTC Whale vs Retail Volume" style="width: 100%; height: 100%; object-fit: contain;">
+                           <img src="/assets/images/graphs/20250212_bitcoindistribution.png" alt="BTC Whale vs Retail Volume" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                         <div class="graph-source">
                             Source: <a href="https://bgeometrics.com/bitcoin-distribution/" target="_blank">BGeometrics</a>
