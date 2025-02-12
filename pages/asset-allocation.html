@@ -75,47 +75,55 @@ p {
 }
     </style>
 </head>
+<!-- Replace everything between <body> and </body> with this code -->
 <body>
     <div id="header"></div>
     <main>
         <div class="container">
             <!-- Main title -->
-            <h1>2025 Asset Allocation Outlook</h1>
+            <section class="section">
+                <h1>2025 Asset Allocation Outlook</h1>
+            </section>
             
             <!-- Global Economic Landscape Section -->
             <section class="section">
                 <h2>Global Economic Landscape</h2>
                 <p>The economic environment in 2025 is projected to be dynamic, characterized by:</p>
-                <p><strong>US Fiscal Challenges:</strong> Potential government spending cuts and persistent inflation underscore the importance of a diversified equity portfolio and robust inflation hedging tools.</p>
-                <p><strong>Geopolitical Risks:</strong> Ongoing geopolitical tensions, including the Russia-Ukraine conflict, Middle East instability, and trade disputes involving the US, China, Mexico, and Canada, may induce market volatility, prompting investors to seek safe-haven assets like gold.</p>
-                <p><strong>AI Advancement:</strong> The continued advancement of artificial intelligence is expected to drive substantial growth beyond the tech sector, increasing electricity demand and creating investment opportunities in energy (particularly nuclear and natural gas), infrastructure, and utilities.</p>
                 
-                <!-- Comment: Insert economic landscape chart here 
-                <div class="chart-container">
-                    <p>Insert Economic Indicators Chart Here</p>  
-                </div>  -->
+                <div class="strategy-card">
+                    <h3>US Fiscal Challenges</h3>
+                    <p>Potential government spending cuts and persistent inflation underscore the importance of a diversified equity portfolio and robust inflation hedging tools.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h3>Geopolitical Risks</h3>
+                    <p>Ongoing geopolitical tensions, including the Russia-Ukraine conflict, Middle East instability, and trade disputes involving the US, China, Mexico, and Canada, may induce market volatility, prompting investors to seek safe-haven assets like gold.</p>
+                </div>
+                
+                <div class="strategy-card">
+                    <h3>AI Advancement</h3>
+                    <p>The continued advancement of artificial intelligence is expected to drive substantial growth beyond the tech sector, increasing electricity demand and creating investment opportunities in energy (particularly nuclear and natural gas), infrastructure, and utilities.</p>
+                </div>
             </section>
             
             <!-- Asset Class Commentary -->
             <section class="section">
                 <h2>Asset Class Commentary</h2>
                 
-                <!-- Equities -->
-                <h3>Equities</h3>
-                <p>We maintain a positive outlook on equities overall, anticipating them to outperform cash and bonds, although increased market volatility is expected in 2025. We are particularly optimistic about US equities due to their robust economy and dominance in key investment themes like AI.</p>
+                <div class="strategy-card">
+                    <h3>Equities</h3>
+                    <p>We maintain a positive outlook on equities overall, anticipating them to outperform cash and bonds, although increased market volatility is expected in 2025. We are particularly optimistic about US equities due to their robust economy and dominance in key investment themes like AI.</p>
+                </div>
                 
-                <!-- Comment: Insert equities performance chart here 
-                <div class="chart-container">
-                    <p>Insert Equities Performance Chart Here</p> 
-                </div> -->
+                <div class="strategy-card">
+                    <h3>Fixed Income</h3>
+                    <p>Fixed income assets can provide meaningful downside protection due to strong US private sector fundamentals and attractive yields. We recommend increasing allocations to short-term USD fixed income to take advantage of higher yields.</p>
+                </div>
                 
-                <!-- Fixed Income -->
-                <h3>Fixed Income</h3>
-                <p>Fixed income assets can provide meaningful downside protection due to strong US private sector fundamentals and attractive yields. We recommend increasing allocations to short-term USD fixed income to take advantage of higher yields.</p>
-                
-                <!-- Alternative Investments -->
-                <h3>Alternative Investments</h3>
-                <p>We are optimistic about gold and natural resources, with various factors supporting prices and growth potential. Digital assets are poised to reach new all-time highs in 2025 as use cases expand and adoption increases.</p>
+                <div class="strategy-card">
+                    <h3>Alternative Investments</h3>
+                    <p>We are optimistic about gold and natural resources, with various factors supporting prices and growth potential. Digital assets are poised to reach new all-time highs in 2025 as use cases expand and adoption increases.</p>
+                </div>
             </section>
             
             <!-- Asset Allocation Strategies -->
@@ -125,12 +133,6 @@ p {
                     <!-- Diversified Growth Portfolio -->
                     <div class="strategy-card">
                         <h3>Diversified Growth Portfolio</h3>
-                        <!-- Comment: Insert pie chart for Diversified Growth Portfolio -->
-                        <div class="chart-container">
-    <img src="/assets/images/growth.svg" 
-         alt="Chart Description" 
-         class="responsive-chart">
-                        </div>
                         <ul>
                             <li>Equities: 50%</li>
                             <li>Fixed Income: 30%</li>
@@ -141,12 +143,6 @@ p {
                     <!-- Balanced Portfolio -->
                     <div class="strategy-card">
                         <h3>Balanced Portfolio</h3>
-                        <!-- Comment: Insert pie chart for Balanced Portfolio -->
-                        <div class="chart-container">
-    <img src="/assets/images/balanced.svg" 
-         alt="Chart Description" 
-         class="responsive-chart">
-                        </div>
                         <ul>
                             <li>Equities: 40%</li>
                             <li>Fixed Income: 40%</li>
@@ -157,12 +153,6 @@ p {
                     <!-- Conservative Portfolio -->
                     <div class="strategy-card">
                         <h3>Conservative Portfolio</h3>
-                        <!-- Comment: Insert pie chart for Conservative Portfolio -->
-                        <div class="chart-container">
-    <img src="/assets/images/conservative.svg" 
-         alt="Chart Description" 
-         class="responsive-chart">
-                        </div>
                         <ul>
                             <li>Equities: 30%</li>
                             <li>Fixed Income: 50%</li>
@@ -173,12 +163,6 @@ p {
                 </div>
             </section>
             
-            <!-- Conclusion -->
-            <section class="section">
-                <h2>Conclusion</h2>
-                <p>2025 is expected to be a dynamic year with both challenges and opportunities. We recommend investors maintain a patient approach and consider diversified investment strategies to navigate evolving market conditions. In this environment, tactical agility and the ability to adapt to changing market dynamics will be crucial.</p>
-            </section>
-            
             <!-- Disclaimer -->
             <div class="disclaimer">
                 <h3>Important Disclaimer</h3>
@@ -186,7 +170,7 @@ p {
             </div>
             
             <!-- Research Sources -->
-            <section class="research-sources">
+            <section class="section">
                 <h2>Research Sources</h2>
                 <p>This report utilized information and insights from BMO, JP Morgan, Goldman Sachs, Blackrock, Morgan Stanley, and VanEck.</p>
             </section>
@@ -194,24 +178,6 @@ p {
     </main>
     <div id="footer"></div>
 
-    <!-- Scripts -->
-    <script>
-        fetch('/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-                return fetch('/components/nav.html');
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav').innerHTML = data;
-            });
-
-        fetch('/components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
-    </script>
+    <!-- Keep your existing scripts section unchanged -->
 </body>
 </html>
