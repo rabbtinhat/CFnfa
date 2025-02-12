@@ -41,16 +41,17 @@
         }
         
         .strategy-section {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             margin: 30px 0;
         }
         
         .strategy-card {
             border: 1px solid #e0e0e0;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
+            width: 100%;
         }
         
         .strategy-card h3 {
@@ -93,10 +94,10 @@
         }
 
         /* Add responsive design */
-        @media (max-width: 768px) {
-            .strategy-section {
-                grid-template-columns: 1fr;
-            }
+        /* Chart size control for strategy cards */
+        .strategy-card .chart-container {
+            --chart-height: 300px;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -191,7 +192,8 @@
                         <ul>
                             <li>Equities: 30%</li>
                             <li>Fixed Income: 50%</li>
-                            <li>Alternative Investments: 20%</li>
+                            <li>Alternative Investments: 10%</li>
+                            <li>Cash: 10%</li>
                         </ul>
                     </div>
                 </div>
