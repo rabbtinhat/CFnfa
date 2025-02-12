@@ -9,26 +9,31 @@
     <style>
         /* Additional styles for the metrics dashboard */
         .container {
-            max-width: 1400px;  /* Increased from default */
-            margin: 0 auto;
-            padding: 0 1rem;
+            max-width: 1400px;
+            width: 90%;  /* Add this to ensure consistent margins */
+            margin: 0 auto;  /* This centers the container */
+            padding: 2rem;  /* Consistent padding */
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-            padding: 1rem;
-            width: 100%;
+            width: 100%;  /* Ensure full width within container */
+            margin: 0 auto;  /* Center the grid */
         }
 
         @media (min-width: 1024px) {
             .metrics-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .container {
-                padding: 0 2rem;
-            }
+        }
+
+        /* Adjust header margin to match your screenshot */
+        h1 {
+            margin: 2rem 0;
+            font-size: 2.5rem;
+            font-weight: bold;
         }
 
         /* Ensure minimum width for metric cards */
