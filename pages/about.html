@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - CF's Non Financial Advice</title>
-    <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
     <style>
         .story-container {
             max-width: 1200px;
@@ -154,18 +154,18 @@ Key skill unlocked: explaining “short-selling” to relatives at Lunar New Yea
     <div id="footer"></div>
 
     <script>
-        fetch('../components/header.html')
+        fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-                return fetch('../components/nav.html');
+                return fetch('/components/nav.html');
             })
             .then(response => response.text())
             .then(data => {
                 document.getElementById('nav').innerHTML = data;
             });
 
-        fetch('../components/footer.html')
+        fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
