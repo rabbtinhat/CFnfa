@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Another testing post - CF Ng's Non Financial Advice</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <style>
+        .blog-post {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .blog-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .blog-meta {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        .blog-category {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+        .blog-content {
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .blog-content h1 { font-size: 1.8rem; margin: 1.5rem 0; font-weight: bold; }
+        .blog-content h2 { font-size: 1.5rem; margin: 1.3rem 0; font-weight: bold; }
+        .blog-content h3 { font-size: 1.3rem; margin: 1.1rem 0; font-weight: bold; }
+        .blog-content p { margin: 1rem 0; }
+        .blog-content ul, .blog-content ol { margin: 1rem 0; padding-left: 2rem; }
+        .blog-content code { background: #f4f4f4; padding: 0.2rem 0.4rem; border-radius: 3px; }
+        .blog-content pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+        .blog-content blockquote { border-left: 4px solid #ddd; padding-left: 1rem; margin: 1rem 0; color: #666; }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <main>
+        <article class="blog-post">
+            <h1 class="blog-title">Another testing post</h1>
+            <div class="blog-meta">
+                <span class="blog-category">Macro</span>
+                <span class="blog-date">February 12, 2025</span>
+            </div>
+            <div class="blog-content">
+                <p>To See if evertything will be on the page, good morning good afternoon and good night</p>
+
+            </div>
+        </article>
+    </main>
+    <div id="footer"></div>
+
+    <script>
+        // Load components
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                return fetch('/components/nav.html');
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav').innerHTML = data;
+            });
+
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

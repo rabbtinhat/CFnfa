@@ -1,0 +1,30 @@
+[
+  {
+    "title": "daily test 20250213",
+    "slug": "Daily test",
+    "date": "2025-02-13",
+    "category": "Daily update",
+    "summary": "NGMI"
+  },
+  {
+    "title": "Another testing post",
+    "slug": "WAGMI",
+    "date": "2025-02-12",
+    "category": "Macro",
+    "summary": "DYOR "
+  },
+  {
+    "title": "daily update",
+    "slug": "testing-post-no-2",
+    "date": "2025-02-10",
+    "category": "Daily update",
+    "summary": "To test the sync function"
+  },
+  {
+    "title": "testing to change a post",
+    "slug": "testing-post",
+    "date": "2025-02-10",
+    "category": "Daily update",
+    "summary": "lets see if this works"
+  }
+]
