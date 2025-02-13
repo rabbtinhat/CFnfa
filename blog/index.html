@@ -7,85 +7,102 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
     <style>
-        .blog-container {
+        .blog-list {
             max-width: 800px;
             margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        .blog-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
         }
         
         .blog-post {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
             border-bottom: 1px solid #eee;
-            padding-bottom: 2rem;
+            transition: transform 0.2s;
         }
         
-        .blog-post:last-child {
-            border-bottom: none;
-        }
-        
-        .blog-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-            text-decoration: none;
-        }
-        
-        .blog-title:hover {
-            color: #007bff;
+        .blog-post:hover {
+            transform: translateY(-2px);
         }
         
         .blog-meta {
+            font-size: 0.9rem;
             color: #666;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+            margin: 0.5rem 0;
         }
         
         .blog-category {
-            background-color: #f0f0f0;
+            display: inline-block;
             padding: 0.2rem 0.8rem;
+            background-color: #f0f0f0;
             border-radius: 15px;
+            margin-right: 1rem;
         }
         
         .blog-summary {
             color: #444;
             line-height: 1.6;
+            margin: 1rem 0;
         }
         
-        .year-section {
-            margin-bottom: 3rem;
+        .blog-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
-        .year-heading {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+        .blog-link:hover {
+            text-decoration: none;
+        }
+        
+        .blog-title {
             color: #333;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .pagination button.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .no-posts {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
         }
     </style>
 </head>
 <body>
     <div id="header"></div>
-    
     <main>
-        <div class="blog-container">
-            <h1>Blog Posts</h1>
-            <div id="blog-content" class="blog-list">
-                <!-- Posts will be dynamically inserted here -->
+        <div class="container">
+            <div class="blog-list">
+                <!-- Posts will be loaded here dynamically -->
+                <div id="posts-container"></div>
+                
+                <!-- Pagination -->
+                <div class="pagination" id="pagination"></div>
             </div>
         </div>
     </main>
-    
     <div id="footer"></div>
 
-    <script src="/assets/js/blog-data.js"></script>
     <script>
-        // Load header, nav, and footer components
+        // Load components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
@@ -103,58 +120,99 @@
                 document.getElementById('footer').innerHTML = data;
             });
 
-        // Function to group posts by year
-        function groupPostsByYear(posts) {
-            return posts.reduce((acc, post) => {
-                const year = new Date(post.date).getFullYear();
-                if (!acc[year]) {
-                    acc[year] = [];
+        // Blog posts loading and pagination
+        const POSTS_PER_PAGE = 5;
+        let currentPage = 1;
+        let allPosts = [];
+
+        async function loadBlogPosts() {
+            try {
+                const response = await fetch('/content/posts/index.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load posts index');
                 }
-                acc[year].push(post);
-                return acc;
-            }, {});
+                
+                allPosts = await response.json();
+                // Sort posts by date (newest first)
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                displayCurrentPage();
+                setupPagination();
+            } catch (error) {
+                console.error('Error loading blog posts:', error);
+                document.getElementById('posts-container').innerHTML = `
+                    <div class="no-posts">
+                        <p>Unable to load blog posts. Please try again later.</p>
+                    </div>
+                `;
+            }
         }
 
-        // Function to format date
-        function formatDate(dateString) {
-            return new Date(dateString).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-        }
-
-        // Render blog posts
-        function renderBlogPosts() {
-            const blogContent = document.getElementById('blog-content');
-            const postsByYear = groupPostsByYear(blogPosts);
+        function displayCurrentPage() {
+            const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+            const endIndex = startIndex + POSTS_PER_PAGE;
+            const currentPosts = allPosts.slice(startIndex, endIndex);
             
-            // Sort years in descending order
-            const years = Object.keys(postsByYear).sort((a, b) => b - a);
-            
-            const html = years.map(year => `
-                <div class="year-section">
-                    <h2 class="year-heading">${year}</h2>
-                    ${postsByYear[year].map(post => `
-                        <article class="blog-post">
-                            <a href="/${post.path}" class="blog-title">
-                                <h3>${post.title}</h3>
-                            </a>
-                            <div class="blog-meta">
-                                <time datetime="${post.date}">${formatDate(post.date)}</time>
-                                <span class="blog-category">${post.category}</span>
-                            </div>
-                            <p class="blog-summary">${post.summary}</p>
-                        </article>
-                    `).join('')}
-                </div>
+            const postsHtml = currentPosts.map(post => `
+                <article class="blog-post">
+                    <a href="/content/posts/${post.slug}.html" class="blog-link">
+                        <h2 class="blog-title">${post.title}</h2>
+                        <div class="blog-meta">
+                            <span class="blog-category">${post.category}</span>
+                            <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
+                        </div>
+                        <p class="blog-summary">${post.summary || 'No summary available'}</p>
+                    </a>
+                </article>
             `).join('');
             
-            blogContent.innerHTML = html;
+            document.getElementById('posts-container').innerHTML = postsHtml || `
+                <div class="no-posts">
+                    <p>No blog posts found.</p>
+                </div>
+            `;
         }
 
-        // Initial render
-        renderBlogPosts();
+        function setupPagination() {
+            const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+            const paginationHtml = [];
+            
+            if (totalPages > 1) {
+                // Previous button
+                if (currentPage > 1) {
+                    paginationHtml.push(`
+                        <button onclick="changePage(${currentPage - 1})">← Previous</button>
+                    `);
+                }
+                
+                // Page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    paginationHtml.push(`
+                        <button onclick="changePage(${i})" 
+                                class="${currentPage === i ? 'active' : ''}">${i}</button>
+                    `);
+                }
+                
+                // Next button
+                if (currentPage < totalPages) {
+                    paginationHtml.push(`
+                        <button onclick="changePage(${currentPage + 1})">Next →</button>
+                    `);
+                }
+            }
+            
+            document.getElementById('pagination').innerHTML = paginationHtml.join('');
+        }
+
+        function changePage(newPage) {
+            currentPage = newPage;
+            displayCurrentPage();
+            setupPagination();
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
 </html>
