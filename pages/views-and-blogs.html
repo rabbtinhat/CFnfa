@@ -59,7 +59,6 @@
             font-size: 1.5rem;
         }
         
-        /* Pagination styles */
         .pagination {
             display: flex;
             justify-content: center;
@@ -79,6 +78,12 @@
             color: white;
             border-color: #007bff;
         }
+
+        .no-posts {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -86,47 +91,18 @@
     <main>
         <div class="container">
             <div class="blog-list">
-                <!-- Example blog post structure -->
-                <article class="blog-post">
-                    <a href="/blog/post-1.html" class="blog-link">
-                        <h2 class="blog-title">Understanding Global Equity Markets</h2>
-                        <div class="blog-meta">
-                            <span class="blog-category">Investing</span>
-                            <span class="blog-date">February 10, 2025</span>
-                        </div>
-                        <p class="blog-summary">
-                            In today's interconnected world, understanding global equity markets has become crucial for any investor. This post explores the fundamentals of international investing and why diversification across global markets matters...
-                        </p>
-                    </a>
-                </article>
-
-                <article class="blog-post">
-                    <a href="/blog/post-2.html" class="blog-link">
-                        <h2 class="blog-title">The Power of Dollar Cost Averaging</h2>
-                        <div class="blog-meta">
-                            <span class="blog-category">Strategy</span>
-                            <span class="blog-date">February 9, 2025</span>
-                        </div>
-                        <p class="blog-summary">
-                            Dollar cost averaging is a powerful investment strategy that can help reduce the impact of market volatility on your portfolio. Let's explore how this simple yet effective approach works...
-                        </p>
-                    </a>
-                </article>
-
+                <!-- Posts will be loaded here dynamically -->
+                <div id="posts-container"></div>
+                
                 <!-- Pagination -->
-                <div class="pagination">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>Next →</button>
-                </div>
+                <div class="pagination" id="pagination"></div>
             </div>
         </div>
     </main>
     <div id="footer"></div>
 
     <script>
-        // Your existing component loading script
+        // Load components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
@@ -144,32 +120,98 @@
                 document.getElementById('footer').innerHTML = data;
             });
 
-        // Add blog loading functionality
+        // Blog posts loading and pagination
+        const POSTS_PER_PAGE = 5;
+        let currentPage = 1;
+        let allPosts = [];
+
         async function loadBlogPosts() {
             try {
-                // This would be replaced with your actual blog posts data source
-                const response = await fetch('/api/blog-posts');
-                const posts = await response.json();
+                const response = await fetch('/content/posts/index.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load posts index');
+                }
                 
-                const blogList = document.querySelector('.blog-list');
-                blogList.innerHTML = posts.map(post => `
-                    <article class="blog-post">
-                        <a href="/blog/${post.slug}.html" class="blog-link">
-                            <h2 class="blog-title">${post.title}</h2>
-                            <div class="blog-meta">
-                                <span class="blog-category">${post.category}</span>
-                                <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
-                            </div>
-                            <p class="blog-summary">${post.summary}</p>
-                        </a>
-                    </article>
-                `).join('');
+                allPosts = await response.json();
+                // Sort posts by date (newest first)
+                allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                displayCurrentPage();
+                setupPagination();
             } catch (error) {
                 console.error('Error loading blog posts:', error);
+                document.getElementById('posts-container').innerHTML = `
+                    <div class="no-posts">
+                        <p>Unable to load blog posts. Please try again later.</p>
+                    </div>
+                `;
             }
         }
 
-        // Call the function when the page loads
+        function displayCurrentPage() {
+            const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+            const endIndex = startIndex + POSTS_PER_PAGE;
+            const currentPosts = allPosts.slice(startIndex, endIndex);
+            
+            const postsHtml = currentPosts.map(post => `
+                <article class="blog-post">
+                    <a href="/content/posts/${post.slug}.html" class="blog-link">
+                        <h2 class="blog-title">${post.title}</h2>
+                        <div class="blog-meta">
+                            <span class="blog-category">${post.category}</span>
+                            <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
+                        </div>
+                        <p class="blog-summary">${post.summary || 'No summary available'}</p>
+                    </a>
+                </article>
+            `).join('');
+            
+            document.getElementById('posts-container').innerHTML = postsHtml || `
+                <div class="no-posts">
+                    <p>No blog posts found.</p>
+                </div>
+            `;
+        }
+
+        function setupPagination() {
+            const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+            const paginationHtml = [];
+            
+            if (totalPages > 1) {
+                // Previous button
+                if (currentPage > 1) {
+                    paginationHtml.push(`
+                        <button onclick="changePage(${currentPage - 1})">← Previous</button>
+                    `);
+                }
+                
+                // Page numbers
+                for (let i = 1; i <= totalPages; i++) {
+                    paginationHtml.push(`
+                        <button onclick="changePage(${i})" 
+                                class="${currentPage === i ? 'active' : ''}">${i}</button>
+                    `);
+                }
+                
+                // Next button
+                if (currentPage < totalPages) {
+                    paginationHtml.push(`
+                        <button onclick="changePage(${currentPage + 1})">Next →</button>
+                    `);
+                }
+            }
+            
+            document.getElementById('pagination').innerHTML = paginationHtml.join('');
+        }
+
+        function changePage(newPage) {
+            currentPage = newPage;
+            displayCurrentPage();
+            setupPagination();
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize when the page loads
         document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
