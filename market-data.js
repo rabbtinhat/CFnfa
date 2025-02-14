@@ -5,46 +5,120 @@ const MARKET_SYMBOLS = {
     us: [
         { symbol: 'SPY', name: 'S&P 500' },
         { symbol: 'QQQ', name: 'NASDAQ' },
-        { symbol: 'TSX.TO', name: 'TSX' }
+        { symbol: 'XIC.TO', name: 'TSX' }
     ],
     europe: [
-        { symbol: 'FTSE.L', name: 'FTSE 100' },
-        { symbol: 'DAX.DE', name: 'DAX' },
+        { symbol: 'EZU', name: 'FTSE 100' },  // iShares MSCI Eurozone ETF
+        { symbol: 'DAX', name: 'DAX' },
         { symbol: 'CAC.PA', name: 'CAC 40' }
     ],
     asia: [
-        { symbol: 'N225.NK', name: 'Nikkei 225' },
-        { symbol: '000001.SS', name: 'SSE' },
-        { symbol: 'HSI.HK', name: 'HSI' }
+        { symbol: 'EWJ', name: 'Nikkei 225' }, // iShares MSCI Japan ETF
+        { symbol: 'MCHI', name: 'SSE' },       // iShares MSCI China ETF
+        { symbol: 'EWH', name: 'HSI' }         // iShares MSCI Hong Kong ETF
     ]
 };
 
-// For development/testing, return mock data
-function getMockMarketData() {
-    return {
-        us: [
-            { name: 'S&P 500', value: '5,023.45 +0.57%', class: 'up' },
-            { name: 'NASDAQ', value: '15,990.30 +0.95%', class: 'up' },
-            { name: 'TSX', value: '21,243.12 +0.31%', class: 'up' }
-        ],
-        europe: [
-            { name: 'FTSE 100', value: '7,595.23 -0.15%', class: 'down' },
-            { name: 'DAX', value: '17,047.45 +0.42%', class: 'up' },
-            { name: 'CAC 40', value: '7,768.55 +0.68%', class: 'up' }
-        ],
-        asia: [
-            { name: 'Nikkei 225', value: '38,157.94 +1.21%', class: 'up' },
-            { name: 'SSE', value: '2,865.90 -0.42%', class: 'down' },
-            { name: 'HSI', value: '15,878.07 -0.83%', class: 'down' }
-        ]
-    };
+function fetchAlphaVantageData(symbol) {
+    return new Promise((resolve, reject) => {
+        const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
+        if (!apiKey) {
+            console.error('Alpha Vantage API key not found');
+            return resolve({
+                price: '0.00',
+                change: '0.00'
+            });
+        }
+
+        const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`;
+        console.log(`Fetching data for ${symbol}...`);
+
+        https.get(url, (res) => {
+            let data = '';
+            
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+            
+            res.on('end', () => {
+                try {
+                    const response = JSON.parse(data);
+                    const quote = response['Global Quote'];
+                    
+                    if (!quote || !quote['05. price'] || !quote['10. change percent']) {
+                        console.error(`Invalid response format for ${symbol}:`, data);
+                        resolve({
+                            price: '0.00',
+                            change: '0.00'
+                        });
+                        return;
+                    }
+                    
+                    const price = parseFloat(quote['05. price']);
+                    const changePercent = quote['10. change percent'].replace('%', '');
+                    
+                    resolve({
+                        price: price.toFixed(2),
+                        change: parseFloat(changePercent).toFixed(2)
+                    });
+                } catch (error) {
+                    console.error(`Error processing data for ${symbol}:`, error);
+                    resolve({
+                        price: '0.00',
+                        change: '0.00'
+                    });
+                }
+            });
+        }).on('error', (error) => {
+            console.error(`Network error for ${symbol}:`, error);
+            resolve({
+                price: '0.00',
+                change: '0.00'
+            });
+        });
+    });
 }
 
 async function getMarketData() {
-    console.log('Getting market data...');
-    // For now, return mock data to ensure the rest of the system works
-    // We can implement the actual API calls later
-    return getMockMarketData();
+    console.log('Starting market data fetch...');
+    const marketData = {
+        us: [],
+        europe: [],
+        asia: []
+    };
+
+    try {
+        for (const [region, symbols] of Object.entries(MARKET_SYMBOLS)) {
+            console.log(`Fetching ${region} market data...`);
+            for (const { symbol, name } of symbols) {
+                try {
+                    const data = await fetchAlphaVantageData(symbol);
+                    const changePrefix = parseFloat(data.change) >= 0 ? '+' : '';
+                    marketData[region].push({
+                        name,
+                        value: `${data.price} ${changePrefix}${data.change}%`,
+                        class: parseFloat(data.change) >= 0 ? 'up' : 'down'
+                    });
+                    console.log(`Successfully fetched data for ${name}: ${data.price} ${changePrefix}${data.change}%`);
+                    
+                    // Add delay between requests to respect API rate limits
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                } catch (error) {
+                    console.error(`Error fetching data for ${symbol}:`, error);
+                    marketData[region].push({
+                        name,
+                        value: 'Data unavailable',
+                        class: ''
+                    });
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error in getMarketData:', error);
+    }
+
+    console.log('Market data fetch completed:', JSON.stringify(marketData, null, 2));
+    return marketData;
 }
 
 module.exports = {
