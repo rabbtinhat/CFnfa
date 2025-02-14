@@ -9,28 +9,51 @@ const notion = new Client({
     auth: process.env.NOTION_TOKEN
 });
 
+// Helper function to safely get property value
+function getPropertyValue(property) {
+    if (!property) return '';
+    
+    // Handle different property types
+    if (property.type === 'title') {
+        return property.title[0]?.plain_text || '';
+    }
+    if (property.type === 'rich_text') {
+        return property.rich_text[0]?.plain_text || '';
+    }
+    if (property.type === 'select') {
+        return property.select?.name || '';
+    }
+    if (property.type === 'text') {
+        return property.text?.content || '';
+    }
+    
+    return '';
+}
+
 async function processMarketData(page) {
+    console.log('Processing page properties:', Object.keys(page.properties));
+    
     return {
-        title: page.properties.Title.title[0]?.plain_text || 'Untitled',
-        status: page.properties.Status.select?.name || 'Draft',
+        title: getPropertyValue(page.properties.Title),
+        status: getPropertyValue(page.properties.Status),
         // US Markets
-        us_sp500: page.properties.US_SP500.rich_text[0]?.plain_text || '',
-        us_nasdaq: page.properties.US_NASDAQ.rich_text[0]?.plain_text || '',
-        us_tsx: page.properties.US_TSX.rich_text[0]?.plain_text || '',
+        us_sp500: getPropertyValue(page.properties.US_SP500),
+        us_nasdaq: getPropertyValue(page.properties.US_NASDAQ),
+        us_tsx: getPropertyValue(page.properties.US_TSX),
         // European Markets
-        eu_ftse: page.properties.EU_FTSE.rich_text[0]?.plain_text || '',
-        eu_dax: page.properties.EU_DAX.rich_text[0]?.plain_text || '',
-        eu_cac: page.properties.EU_CAC.rich_text[0]?.plain_text || '',
+        eu_ftse: getPropertyValue(page.properties.EU_FTSE),
+        eu_dax: getPropertyValue(page.properties.EU_DAX),
+        eu_cac: getPropertyValue(page.properties.EU_CAC),
         // Asian Markets
-        asia_nikkei: page.properties.ASIA_NIKKEI.rich_text[0]?.plain_text || '',
-        asia_sse: page.properties.ASIA_SSE.rich_text[0]?.plain_text || '',
-        asia_hsi: page.properties.ASIA_HSI.rich_text[0]?.plain_text || '',
-        tech_sector: page.properties.Tech_Sector.rich_text[0]?.plain_text || '',
-        macro_data: page.properties.Macro_Data.rich_text[0]?.plain_text || '',
-        north_america_content: page.properties.North_America_Content.rich_text[0]?.plain_text || '',
-        europe_content: page.properties.Europe_Content.rich_text[0]?.plain_text || '',
-        asia_content: page.properties.Asia_Content.rich_text[0]?.plain_text || '',
-        tech_content: page.properties.Tech_Content.rich_text[0]?.plain_text || ''
+        asia_nikkei: getPropertyValue(page.properties.ASIA_NIKKEI),
+        asia_sse: getPropertyValue(page.properties.ASIA_SSE),
+        asia_hsi: getPropertyValue(page.properties.ASIA_HSI),
+        // Content
+        north_america_content: getPropertyValue(page.properties.North_America_Content),
+        europe_content: getPropertyValue(page.properties.Europe_Content),
+        asia_content: getPropertyValue(page.properties.Asia_Content),
+        tech_content: getPropertyValue(page.properties.Tech_Content),
+        macro_data: getPropertyValue(page.properties.Macro_Data)
     };
 }
 
@@ -56,7 +79,8 @@ function generateMarketHtml(data) {
         { index: 'SSE', value: data.asia_sse, class: getMarketClass(data.asia_sse) },
         { index: 'HSI', value: data.asia_hsi, class: getMarketClass(data.asia_hsi) }
     ];
-    const macroItems = data.macro_data.split('\n');
+
+    const macroItems = data.macro_data.split('\n').filter(item => item.trim());
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -66,7 +90,74 @@ function generateMarketHtml(data) {
     <title>Daily Market Wrap-up - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <!-- Your existing styles here -->
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .date-header {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .quick-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .overview-card {
+            background-color: #f0f7ff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .market-value {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .up { color: #22c55e; }
+        .down { color: #ef4444; }
+        .market-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .market-section h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        .market-content {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+        .macro-list {
+            list-style: none;
+            padding: 0;
+        }
+        .macro-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        .macro-item::before {
+            content: "→";
+            margin-right: 0.5rem;
+            color: #3b82f6;
+        }
+        @media (max-width: 768px) {
+            .quick-overview {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header"></div>
@@ -154,7 +245,23 @@ function generateMarketHtml(data) {
     <div id="footer"></div>
 
     <script>
-        // Your existing component loading script
+        // Load header and footer components
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                return fetch('/components/nav.html');
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav').innerHTML = data;
+            });
+
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
     </script>
 </body>
 </html>`;
