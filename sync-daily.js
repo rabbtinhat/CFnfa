@@ -146,7 +146,7 @@ function generateMarketHtml(data) {
 
             <div class="quick-overview">
                 <div class="overview-card">
-                    <h3>US Markets</h3>
+                    <h3>North America Markets</h3>
                     ${us.map(market => `
                         <div class="market-value ${market.class}">
                             ${market.name}: ${market.value}
