@@ -1,135 +1,195 @@
-// sync.js
+// sync-daily.js
 require('dotenv').config();
 const { Client } = require('@notionhq/client');
 const fs = require('fs').promises;
 const path = require('path');
-const { marked } = require('marked');
 
 // Initialize Notion client
 const notion = new Client({
     auth: process.env.NOTION_TOKEN
 });
 
-// Helper function to clean title (remove date prefix if exists)
-function cleanTitle(title) {
-    // Remove date pattern like "20250210" from the beginning of the title
-    return title.replace(/^\d{8}\s+/, '');
-}
-
-async function processPost(page) {
-    const rawTitle = page.properties.Title.title[0]?.plain_text || 'Untitled';
-    console.log(`Processing post: ${rawTitle}`);
-    
-    // Get the content directly from the Content property
-    const content = page.properties.Content.rich_text[0]?.plain_text || '';
-    
+async function processMarketData(page) {
     return {
-        title: cleanTitle(rawTitle),
-        slug: page.properties.Slug.rich_text[0]?.plain_text || '',
-        date: page.properties.Date.date?.start || '',
-        summary: page.properties.Summary.rich_text[0]?.plain_text || '',
-        category: page.properties.Category.select?.name || 'Daily update',
-        content: content,
+        title: page.properties.Title.title[0]?.plain_text || 'Untitled',
+        status: page.properties.Status.select?.name || 'Draft',
+        // US Markets
+        us_sp500: page.properties.US_SP500.rich_text[0]?.plain_text || '',
+        us_nasdaq: page.properties.US_NASDAQ.rich_text[0]?.plain_text || '',
+        us_tsx: page.properties.US_TSX.rich_text[0]?.plain_text || '',
+        // European Markets
+        eu_ftse: page.properties.EU_FTSE.rich_text[0]?.plain_text || '',
+        eu_dax: page.properties.EU_DAX.rich_text[0]?.plain_text || '',
+        eu_cac: page.properties.EU_CAC.rich_text[0]?.plain_text || '',
+        // Asian Markets
+        asia_nikkei: page.properties.ASIA_NIKKEI.rich_text[0]?.plain_text || '',
+        asia_sse: page.properties.ASIA_SSE.rich_text[0]?.plain_text || '',
+        asia_hsi: page.properties.ASIA_HSI.rich_text[0]?.plain_text || '',
+        tech_sector: page.properties.Tech_Sector.rich_text[0]?.plain_text || '',
+        macro_data: page.properties.Macro_Data.rich_text[0]?.plain_text || '',
+        north_america_content: page.properties.North_America_Content.rich_text[0]?.plain_text || '',
+        europe_content: page.properties.Europe_Content.rich_text[0]?.plain_text || '',
+        asia_content: page.properties.Asia_Content.rich_text[0]?.plain_text || '',
+        tech_content: page.properties.Tech_Content.rich_text[0]?.plain_text || ''
     };
 }
 
-function generateHtml(post) {
-    // Convert content to HTML using marked
-    const htmlContent = marked.parse(post.content);
+function generateMarketHtml(data) {
+    const getMarketClass = (value) => {
+        return value.includes('+') ? 'up' : 'down';
+    };
+
+    const usMarkets = [
+        { index: 'S&P 500', value: data.us_sp500, class: getMarketClass(data.us_sp500) },
+        { index: 'NASDAQ', value: data.us_nasdaq, class: getMarketClass(data.us_nasdaq) },
+        { index: 'TSX', value: data.us_tsx, class: getMarketClass(data.us_tsx) }
+    ];
+
+    const europeMarkets = [
+        { index: 'FTSE 100', value: data.eu_ftse, class: getMarketClass(data.eu_ftse) },
+        { index: 'DAX', value: data.eu_dax, class: getMarketClass(data.eu_dax) },
+        { index: 'CAC 40', value: data.eu_cac, class: getMarketClass(data.eu_cac) }
+    ];
+
+    const asiaMarkets = [
+        { index: 'Nikkei 225', value: data.asia_nikkei, class: getMarketClass(data.asia_nikkei) },
+        { index: 'SSE', value: data.asia_sse, class: getMarketClass(data.asia_sse) },
+        { index: 'HSI', value: data.asia_hsi, class: getMarketClass(data.asia_hsi) }
+    ];
+    const macroItems = data.macro_data.split('\n');
 
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${post.title} - CF Ng's Non Financial Advice</title>
+    <title>Daily Market Wrap-up - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <style>
-        .blog-post {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        .blog-title {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .blog-meta {
-            margin-bottom: 2rem;
-            color: #666;
-        }
-        .blog-category {
-            display: inline-block;
-            padding: 0.2rem 0.8rem;
-            background-color: #f0f0f0;
-            border-radius: 15px;
-            margin-right: 1rem;
-        }
-        .blog-content {
-            line-height: 1.6;
-            white-space: pre-wrap;
-        }
-        .blog-content h1 { font-size: 1.8rem; margin: 1.5rem 0; font-weight: bold; }
-        .blog-content h2 { font-size: 1.5rem; margin: 1.3rem 0; font-weight: bold; }
-        .blog-content h3 { font-size: 1.3rem; margin: 1.1rem 0; font-weight: bold; }
-        .blog-content p { margin: 1rem 0; }
-        .blog-content ul, .blog-content ol { margin: 1rem 0; padding-left: 2rem; }
-        .blog-content code { background: #f4f4f4; padding: 0.2rem 0.4rem; border-radius: 3px; }
-        .blog-content pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; }
-        .blog-content blockquote { border-left: 4px solid #ddd; padding-left: 1rem; margin: 1rem 0; color: #666; }
-    </style>
+    <!-- Your existing styles here -->
 </head>
 <body>
     <div id="header"></div>
+    
     <main>
-        <article class="blog-post">
-            <h1 class="blog-title">${post.title}</h1>
-            <div class="blog-meta">
-                <span class="blog-category">${post.category}</span>
-                <span class="blog-date">${new Date(post.date).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                })}</span>
+        <div class="container">
+            <h1>Daily Market Wrap-up</h1>
+            <div class="date-header">
+                ${new Date().toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })}
             </div>
-            <div class="blog-content">
-                ${htmlContent}
+
+            <div class="quick-overview">
+                <div class="overview-card">
+                    <h3>US Markets</h3>
+                    ${usMarkets.map(market => `
+                        <div class="market-value ${market.class}">
+                            ${market.index}: ${market.value}
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="overview-card">
+                    <h3>European Markets</h3>
+                    ${europeMarkets.map(market => `
+                        <div class="market-value ${market.class}">
+                            ${market.index}: ${market.value}
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="overview-card">
+                    <h3>Asian Markets</h3>
+                    ${asiaMarkets.map(market => `
+                        <div class="market-value ${market.class}">
+                            ${market.index}: ${market.value}
+                        </div>
+                    `).join('')}
+                </div>
             </div>
-        </article>
+
+            <section class="market-section">
+                <h2>North America Market</h2>
+                <div class="market-content">
+                    ${data.north_america_content}
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Europe Market</h2>
+                <div class="market-content">
+                    ${data.europe_content}
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Asia Market</h2>
+                <div class="market-content">
+                    ${data.asia_content}
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Technology Sector</h2>
+                <div class="market-content">
+                    ${data.tech_content}
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Upcoming Macro Data</h2>
+                <ul class="macro-list">
+                    ${macroItems.map(item => `
+                        <li class="macro-item">${item}</li>
+                    `).join('')}
+                </ul>
+            </section>
+        </div>
     </main>
+
     <div id="footer"></div>
 
     <script>
-        // Load components
-        fetch('/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-                return fetch('/components/nav.html');
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav').innerHTML = data;
-            });
-
-        fetch('/components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
+        // Your existing component loading script
     </script>
 </body>
 </html>`;
 }
 
-async function syncNotionToWebsite() {
+async function validateData(marketData) {
+    // Check if essential properties exist
+    const requiredProps = [
+        'us_sp500', 'us_nasdaq', 'us_tsx',
+        'eu_ftse', 'eu_dax', 'eu_cac',
+        'asia_nikkei', 'asia_sse', 'asia_hsi'
+    ];
+    
+    const missingProps = requiredProps.filter(prop => !marketData[prop]);
+    if (missingProps.length > 0) {
+        throw new Error(`Missing required market data: ${missingProps.join(', ')}`);
+    }
+
+    // Validate percentage format
+    const percentageRegex = /^[+-]\d+(\.\d+)?%$/;
+    for (const prop of requiredProps) {
+        if (!percentageRegex.test(marketData[prop])) {
+            throw new Error(`Invalid percentage format for ${prop}: ${marketData[prop]}`);
+        }
+    }
+
+    return true;
+}
+
+async function syncDailyMarket() {
     try {
-        console.log('Starting Notion sync...');
+        console.log('Starting Daily Market sync...');
         
         const response = await notion.databases.query({
-            database_id: process.env.NOTION_DATABASE_ID,
+            database_id: process.env.NOTION_DAILY_DATABASE_ID,
             filter: {
                 property: 'Status',
                 select: {
@@ -138,54 +198,45 @@ async function syncNotionToWebsite() {
             },
             sorts: [
                 {
-                    property: 'Date',
+                    property: 'Title',
                     direction: 'descending',
                 }
             ],
+            page_size: 1 // We only need the latest entry
         });
         
-        console.log(`Found ${response.results.length} published posts`);
+        if (response.results.length === 0) {
+            console.log('No published daily market update found');
+            return;
+        }
         
-        const posts = await Promise.all(
-            response.results.map(page => processPost(page))
-        );
+        const marketData = await processMarketData(response.results[0]);
         
-        const contentDir = path.join(process.cwd(), 'content', 'posts');
-        await fs.mkdir(contentDir, { recursive: true });
+        // Validate data before proceeding
+        await validateData(marketData);
         
-        const postsIndex = posts.map(post => ({
-            title: post.title,
-            slug: post.slug,
-            date: post.date,
-            category: post.category,
-            summary: post.summary
-        }));
+        // Create backup before making changes
+        const backupPath = path.join(process.cwd(), 'daily.html.backup');
+        await fs.copyFile(path.join(process.cwd(), 'daily.html'), backupPath);
+        const htmlContent = generateMarketHtml(marketData);
         
+        // Save the file
         await fs.writeFile(
-            path.join(contentDir, 'index.json'),
-            JSON.stringify(postsIndex, null, 2),
+            path.join(process.cwd(), 'daily.html'),
+            htmlContent,
             'utf8'
         );
         
-        for (const post of posts) {
-            const fileName = `${post.slug || 'untitled'}.html`;
-            const filePath = path.join(contentDir, fileName);
-            
-            const htmlContent = generateHtml(post);
-            await fs.writeFile(filePath, htmlContent, 'utf8');
-            console.log(`Saved: ${fileName}`);
-        }
-        
-        console.log('Sync completed successfully!');
+        console.log('Daily market sync completed successfully!');
         
     } catch (error) {
-        console.error('Sync failed:', error);
+        console.error('Daily market sync failed:', error);
         throw error;
     }
 }
 
 // Run the sync
-syncNotionToWebsite()
+syncDailyMarket()
     .then(() => console.log('Done!'))
     .catch(error => {
         console.error('Error:', error);
