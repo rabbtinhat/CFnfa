@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Market Wrap-up - CF Ng's Non Financial Advice</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .date-header {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .quick-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .overview-card {
+            background-color: #f0f7ff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .market-value {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .up { color: #22c55e; }
+        .down { color: #ef4444; }
+        .market-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .market-section h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        .market-content {
+            color: #4a4a4a;
+            line-height: 1.6;
+        }
+        .macro-list {
+            list-style: none;
+            padding: 0;
+        }
+        .macro-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        .macro-item::before {
+            content: "→";
+            margin-right: 0.5rem;
+            color: #3b82f6;
+        }
+        @media (max-width: 768px) {
+            .quick-overview {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    
+    <main>
+        <div class="container">
+            <h1>Daily Market Wrap-up</h1>
+            <div class="date-header">
+                Friday, February 14, 2025
+            </div>
+
+            <div class="quick-overview">
+                <div class="overview-card">
+                    <h3>US Markets</h3>
+                    
+                        <div class="market-value up">
+                            S&P 500: +0.77%
+                        </div>
+                    
+                        <div class="market-value up">
+                            NASDAQ: +1.5%
+                        </div>
+                    
+                        <div class="market-value up">
+                            TSX: +0.53%
+                        </div>
+                    
+                </div>
+                
+                <div class="overview-card">
+                    <h3>European Markets</h3>
+                    
+                        <div class="market-value down">
+                            FTSE 100: -0.49%
+                        </div>
+                    
+                        <div class="market-value up">
+                            DAX: +2.09%
+                        </div>
+                    
+                        <div class="market-value up">
+                            CAC 40: +1.52%
+                        </div>
+                    
+                </div>
+
+                <div class="overview-card">
+                    <h3>Asian Markets</h3>
+                    
+                        <div class="market-value up">
+                            Nikkei 225: +1.2%
+                        </div>
+                    
+                        <div class="market-value down">
+                            SSE: -0.42%
+                        </div>
+                    
+                        <div class="market-value down">
+                            HSI: -0.2%
+                        </div>
+                    
+                </div>
+            </div>
+
+            <section class="market-section">
+                <h2>North America Market</h2>
+                <div class="market-content">
+                    The North American markets showed strong momentum today with technology stocks leading the gains...
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Europe Market</h2>
+                <div class="market-content">
+                    European markets were mixed with the FTSE 100 facing headwinds while continental indices surged...
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Asia Market</h2>
+                <div class="market-content">
+                    Asian markets showed mixed performance with Japanese stocks outperforming while Chinese markets declined...
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Technology Sector</h2>
+                <div class="market-content">
+                    The technology sector continued its upward trajectory with AI-related stocks showing particular strength...
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Upcoming Macro Data</h2>
+                <ul class="macro-list">
+                    
+                        <li class="macro-item">US CPI Data (Tuesday)</li>
+                    
+                        <li class="macro-item">ECB Interest Rate Decision (Thursday)</li>
+                    
+                        <li class="macro-item">Japan GDP (Friday)</li>
+                    
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer components
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+                return fetch('/components/nav.html');
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav').innerHTML = data;
+            });
+
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
