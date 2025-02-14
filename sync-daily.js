@@ -9,6 +9,51 @@ const notion = new Client({
     auth: process.env.NOTION_TOKEN
 });
 
+const FMP_API_KEY = process.env.FMP_API_KEY;
+const FMP_INDICES = {
+    // US Markets
+    '^GSPC': { name: 'S&P 500', market: 'us' },
+    '^IXIC': { name: 'NASDAQ', market: 'us' },
+    '^GSPTSE': { name: 'TSX', market: 'us' },
+    // European Markets
+    '^FTSE': { name: 'FTSE 100', market: 'eu' },
+    '^GDAXI': { name: 'DAX', market: 'eu' },
+    '^FCHI': { name: 'CAC 40', market: 'eu' },
+    // Asian Markets
+    '^N225': { name: 'Nikkei 225', market: 'asia' },
+    '000001.SS': { name: 'SSE', market: 'asia' },
+    '^HSI': { name: 'HSI', market: 'asia' }
+};
+
+async function fetchMarketData() {
+    try {
+        const symbols = Object.keys(FMP_INDICES).join(',');
+        const response = await fetch(
+            `https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`
+        );
+        const data = await response.json();
+        
+        const marketData = {};
+        data.forEach(quote => {
+            const index = FMP_INDICES[quote.symbol];
+            if (index) {
+                marketData[quote.symbol] = {
+                    name: index.name,
+                    market: index.market,
+                    price: quote.price.toFixed(2),
+                    change: quote.changesPercentage.toFixed(2),
+                    direction: quote.changesPercentage >= 0 ? '+' : ''
+                };
+            }
+        });
+        
+        return marketData;
+    } catch (error) {
+        console.error('Error fetching market data:', error);
+        return {};
+    }
+}
+
 function getPropertyValue(property, type = 'rich_text') {
     if (!property) return '';
     
@@ -57,22 +102,32 @@ function generateMarketHtml(data) {
         return value.includes('+') ? 'up' : 'down';
     };
 
+    const formatMarketData = (symbol, marketData) => {
+        const data = marketData[symbol];
+        if (!data) return { index: FMP_INDICES[symbol].name, value: 'N/A', class: '' };
+        return {
+            index: data.name,
+            value: `${data.price} ${data.direction}${data.change}%`,
+            class: data.change >= 0 ? 'up' : 'down'
+        };
+    };
+
     const usMarkets = [
-        { index: 'S&P 500', value: data.us_sp500, class: getMarketClass(data.us_sp500) },
-        { index: 'NASDAQ', value: data.us_nasdaq, class: getMarketClass(data.us_nasdaq) },
-        { index: 'TSX', value: data.us_tsx, class: getMarketClass(data.us_tsx) }
+        formatMarketData('^GSPC', marketData),
+        formatMarketData('^IXIC', marketData),
+        formatMarketData('^GSPTSE', marketData)
     ];
 
     const europeMarkets = [
-        { index: 'FTSE 100', value: data.eu_ftse, class: getMarketClass(data.eu_ftse) },
-        { index: 'DAX', value: data.eu_dax, class: getMarketClass(data.eu_dax) },
-        { index: 'CAC 40', value: data.eu_cac, class: getMarketClass(data.eu_cac) }
+        formatMarketData('^FTSE', marketData),
+        formatMarketData('^GDAXI', marketData),
+        formatMarketData('^FCHI', marketData)
     ];
 
     const asiaMarkets = [
-        { index: 'Nikkei 225', value: data.asia_nikkei, class: getMarketClass(data.asia_nikkei) },
-        { index: 'SSE', value: data.asia_sse, class: getMarketClass(data.asia_sse) },
-        { index: 'HSI', value: data.asia_hsi, class: getMarketClass(data.asia_hsi) }
+        formatMarketData('^N225', marketData),
+        formatMarketData('000001.SS', marketData),
+        formatMarketData('^HSI', marketData)
     ];
 
     const macroItems = data.macro_data.split('\n').filter(item => item.trim() !== '');
@@ -265,6 +320,10 @@ function generateMarketHtml(data) {
 async function syncDailyMarket() {
     try {
         console.log('Starting Daily Market sync...');
+        
+        // Fetch market data from FMP
+        console.log('Fetching market data from FMP...');
+        const marketData = await fetchMarketData();
         
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DAILY_DATABASE_ID,
