@@ -3,6 +3,7 @@ require('dotenv').config();
 const { Client } = require('@notionhq/client');
 const fs = require('fs').promises;
 const path = require('path');
+const { getMarketData } = require('./market-data');
 
 // Initialize Notion client
 const notion = new Client({
@@ -29,32 +30,27 @@ async function processMarketData(page, marketData) {
     console.log('Processing page with properties:', JSON.stringify(page.properties, null, 2));
     console.log('Market data:', JSON.stringify(marketData, null, 2));
 
-    return {
+    const processed = {
         title: getPropertyValue(page.properties.Title, 'title'),
         status: getPropertyValue(page.properties.Status, 'select'),
-        marketData, // Include the entire market data object
-        north_america_content: getPropertyValue(page.properties.North_America_Content),
-        europe_content: getPropertyValue(page.properties.Europe_Content),
-        asia_content: getPropertyValue(page.properties.Asia_Content),
-        tech_content: getPropertyValue(page.properties.Tech_Content),
-        macro_data: getPropertyValue(page.properties.Macro_Data)
+        marketData: marketData,
+        northAmericaContent: getPropertyValue(page.properties.North_America_Content),
+        europeContent: getPropertyValue(page.properties.Europe_Content),
+        asiaContent: getPropertyValue(page.properties.Asia_Content),
+        techContent: getPropertyValue(page.properties.Tech_Content),
+        macroData: getPropertyValue(page.properties.Macro_Data)
     };
-        // Content
-        north_america_content: getPropertyValue(page.properties.North_America_Content),
-        europe_content: getPropertyValue(page.properties.Europe_Content),
-        asia_content: getPropertyValue(page.properties.Asia_Content),
-        tech_content: getPropertyValue(page.properties.Tech_Content),
-        macro_data: getPropertyValue(page.properties.Macro_Data)
-    };
+
+    console.log('Processed data:', JSON.stringify(processed, null, 2));
+    return processed;
 }
 
 function generateMarketHtml(data) {
     console.log('Generating HTML with data:', JSON.stringify(data, null, 2));
 
     // Destructure market data with default empty arrays as fallback
-    const { us = [], europe = [], asia = [] } = data.marketData;
-
-    const macroItems = data.macro_data.split('\n').filter(item => item.trim() !== '');
+    const { us = [], europe = [], asia = [] } = data.marketData || {};
+    const macroItems = data.macroData.split('\n').filter(item => item.trim() !== '');
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -151,27 +147,27 @@ function generateMarketHtml(data) {
             <div class="quick-overview">
                 <div class="overview-card">
                     <h3>US Markets</h3>
-                    ${usMarkets.map(market => `
+                    ${us.map(market => `
                         <div class="market-value ${market.class}">
-                            ${market.index}: ${market.value}
+                            ${market.name}: ${market.value}
                         </div>
                     `).join('')}
                 </div>
                 
                 <div class="overview-card">
                     <h3>European Markets</h3>
-                    ${europeMarkets.map(market => `
+                    ${europe.map(market => `
                         <div class="market-value ${market.class}">
-                            ${market.index}: ${market.value}
+                            ${market.name}: ${market.value}
                         </div>
                     `).join('')}
                 </div>
 
                 <div class="overview-card">
                     <h3>Asian Markets</h3>
-                    ${asiaMarkets.map(market => `
+                    ${asia.map(market => `
                         <div class="market-value ${market.class}">
-                            ${market.index}: ${market.value}
+                            ${market.name}: ${market.value}
                         </div>
                     `).join('')}
                 </div>
@@ -180,28 +176,28 @@ function generateMarketHtml(data) {
             <section class="market-section">
                 <h2>North America Market</h2>
                 <div class="market-content">
-                    ${data.north_america_content}
+                    ${data.northAmericaContent}
                 </div>
             </section>
 
             <section class="market-section">
                 <h2>Europe Market</h2>
                 <div class="market-content">
-                    ${data.europe_content}
+                    ${data.europeContent}
                 </div>
             </section>
 
             <section class="market-section">
                 <h2>Asia Market</h2>
                 <div class="market-content">
-                    ${data.asia_content}
+                    ${data.asiaContent}
                 </div>
             </section>
 
             <section class="market-section">
                 <h2>Technology Sector</h2>
                 <div class="market-content">
-                    ${data.tech_content}
+                    ${data.techContent}
                 </div>
             </section>
 
@@ -241,8 +237,6 @@ function generateMarketHtml(data) {
 </html>`;
 }
 
-const { getMarketData } = require('./market-data');
-
 async function syncDailyMarket() {
     try {
         console.log('Starting Daily Market sync...');
@@ -250,7 +244,9 @@ async function syncDailyMarket() {
         // Fetch market data from Yahoo Finance
         console.log('Fetching market data...');
         const marketData = await getMarketData();
+        console.log('Market data fetched:', JSON.stringify(marketData, null, 2));
         
+        console.log('Querying Notion database...');
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DAILY_DATABASE_ID,
             filter: {
@@ -265,7 +261,7 @@ async function syncDailyMarket() {
                     direction: 'descending',
                 }
             ],
-            page_size: 1 // We only need the latest entry
+            page_size: 1
         });
         
         if (response.results.length === 0) {
@@ -273,27 +269,31 @@ async function syncDailyMarket() {
             return;
         }
 
-        // Debug log
-        console.log('Notion API Response:', JSON.stringify(response.results[0], null, 2));
+        console.log('Found latest published entry in Notion');
         
         const pageData = await processMarketData(response.results[0], marketData);
-        const htmlContent = generateMarketHtml(marketData);
+        console.log('Data processing complete');
+        
+        const htmlContent = generateMarketHtml(pageData);
+        console.log('HTML content generated');
         
         // Ensure pages directory exists
         const pagesDir = path.join(process.cwd(), 'pages');
+        console.log('Creating pages directory if it doesn\'t exist:', pagesDir);
         await fs.mkdir(pagesDir, { recursive: true });
         
         // Save the file in pages directory
-        await fs.writeFile(
-            path.join(pagesDir, 'daily.html'),
-            htmlContent,
-            'utf8'
-        );
+        const filePath = path.join(pagesDir, 'daily.html');
+        console.log('Saving file to:', filePath);
+        await fs.writeFile(filePath, htmlContent, 'utf8');
         
         console.log('Daily market sync completed successfully!');
         
     } catch (error) {
         console.error('Daily market sync failed:', error);
+        if (error.response) {
+            console.error('API Response:', error.response.data);
+        }
         throw error;
     }
 }
