@@ -17,11 +17,8 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: |
-          npm install @notionhq/client
-          npm install dotenv
-          npm install marked
-          
+        run: npm install
+        
       - name: Run blog sync script
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -32,6 +29,7 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DAILY_DATABASE_ID: ${{ secrets.NOTION_DAILY_DATABASE_ID }}
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
         run: node sync-daily.js
         
       - name: Commit and push changes
