@@ -27,12 +27,18 @@ function getPropertyValue(property, type = 'rich_text') {
 async function processMarketData(page, marketData) {
     // Debug log
     console.log('Processing page with properties:', JSON.stringify(page.properties, null, 2));
+    console.log('Market data:', JSON.stringify(marketData, null, 2));
 
     return {
         title: getPropertyValue(page.properties.Title, 'title'),
         status: getPropertyValue(page.properties.Status, 'select'),
-        // Market data from Yahoo Finance
-        marketData,
+        marketData, // Include the entire market data object
+        north_america_content: getPropertyValue(page.properties.North_America_Content),
+        europe_content: getPropertyValue(page.properties.Europe_Content),
+        asia_content: getPropertyValue(page.properties.Asia_Content),
+        tech_content: getPropertyValue(page.properties.Tech_Content),
+        macro_data: getPropertyValue(page.properties.Macro_Data)
+    };
         // Content
         north_america_content: getPropertyValue(page.properties.North_America_Content),
         europe_content: getPropertyValue(page.properties.Europe_Content),
@@ -43,11 +49,10 @@ async function processMarketData(page, marketData) {
 }
 
 function generateMarketHtml(data) {
-    const getMarketClass = (value) => {
-        return value.includes('+') ? 'up' : 'down';
-    };
+    console.log('Generating HTML with data:', JSON.stringify(data, null, 2));
 
-    const { us: usMarkets, europe: europeMarkets, asia: asiaMarkets } = data.marketData;
+    // Destructure market data with default empty arrays as fallback
+    const { us = [], europe = [], asia = [] } = data.marketData;
 
     const macroItems = data.macro_data.split('\n').filter(item => item.trim() !== '');
 
