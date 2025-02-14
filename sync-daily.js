@@ -155,7 +155,7 @@ function generateMarketHtml(data) {
                 </div>
                 
                 <div class="overview-card">
-                    <h3>European Markets</h3>
+                    <h3>Europe Markets</h3>
                     ${europe.map(market => `
                         <div class="market-value ${market.class}">
                             ${market.name}: ${market.value}
@@ -164,7 +164,7 @@ function generateMarketHtml(data) {
                 </div>
 
                 <div class="overview-card">
-                    <h3>Asian Markets</h3>
+                    <h3>Asia Markets</h3>
                     ${asia.map(market => `
                         <div class="market-value ${market.class}">
                             ${market.name}: ${market.value}
