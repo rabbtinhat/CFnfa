@@ -10,6 +10,10 @@ const notion = new Client({
 });
 
 const FMP_API_KEY = process.env.FMP_API_KEY;
+console.log('FMP API Key available:', !!FMP_API_KEY);
+if (!FMP_API_KEY) {
+    console.error('FMP_API_KEY is not set in environment variables');
+}
 const FMP_INDICES = {
     // US Markets
     '^GSPC': { name: 'S&P 500', market: 'us' },
@@ -28,28 +32,45 @@ const FMP_INDICES = {
 async function fetchMarketData() {
     try {
         const symbols = Object.keys(FMP_INDICES).join(',');
+        console.log('Fetching data for symbols:', symbols);
+        console.log('Using API URL:', `https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`);
+        
         const response = await fetch(
             `https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`
         );
+        
+        console.log('API Response status:', response.status);
         const data = await response.json();
+        console.log('API Response data:', JSON.stringify(data, null, 2));
+        
+        if (!Array.isArray(data)) {
+            console.error('Unexpected API response format:', data);
+            return {};
+        }
         
         const marketData = {};
         data.forEach(quote => {
+            console.log('Processing quote:', quote);
             const index = FMP_INDICES[quote.symbol];
             if (index) {
                 marketData[quote.symbol] = {
                     name: index.name,
                     market: index.market,
-                    price: quote.price.toFixed(2),
-                    change: quote.changesPercentage.toFixed(2),
-                    direction: quote.changesPercentage >= 0 ? '+' : ''
+                    price: quote.price?.toFixed(2) || 'N/A',
+                    change: quote.changesPercentage?.toFixed(2) || '0.00',
+                    direction: (quote.changesPercentage >= 0) ? '+' : ''
                 };
             }
         });
         
+        console.log('Processed market data:', JSON.stringify(marketData, null, 2));
         return marketData;
     } catch (error) {
         console.error('Error fetching market data:', error);
+        console.error('Error details:', {
+            message: error.message,
+            stack: error.stack
+        });
         return {};
     }
 }
