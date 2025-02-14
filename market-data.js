@@ -3,37 +3,34 @@ const https = require('https');
 
 const MARKET_SYMBOLS = {
     us: [
-        { symbol: 'SPY', name: 'S&P 500' },
-        { symbol: 'QQQ', name: 'NASDAQ' },
-        { symbol: 'XIC.TO', name: 'TSX' }
+        { symbol: '^GSPC', name: 'S&P 500' },  // S&P 500
+        { symbol: '^IXIC', name: 'NASDAQ' },   // NASDAQ
+        { symbol: '^GSPTSE', name: 'TSX' }     // Toronto Stock Exchange
     ],
     europe: [
-        { symbol: 'EZU', name: 'FTSE 100' },  // iShares MSCI Eurozone ETF
-        { symbol: 'DAX', name: 'DAX' },
-        { symbol: 'CAC.PA', name: 'CAC 40' }
+        { symbol: '^FTSE', name: 'FTSE 100' }, // FTSE 100
+        { symbol: '^GDAXI', name: 'DAX' },     // German DAX
+        { symbol: '^FCHI', name: 'CAC 40' }    // French CAC 40
     ],
     asia: [
-        { symbol: 'EWJ', name: 'Nikkei 225' }, // iShares MSCI Japan ETF
-        { symbol: 'MCHI', name: 'SSE' },       // iShares MSCI China ETF
-        { symbol: 'EWH', name: 'HSI' }         // iShares MSCI Hong Kong ETF
+        { symbol: '^N225', name: 'Nikkei 225' },  // Japanese Nikkei
+        { symbol: '000001.SS', name: 'SSE' },     // Shanghai Composite
+        { symbol: '^HSI', name: 'HSI' }           // Hang Seng Index
     ]
 };
 
-function fetchAlphaVantageData(symbol) {
+function fetchYahooFinanceData(symbol) {
     return new Promise((resolve, reject) => {
-        const apiKey = process.env.ALPHA_VANTAGE_API_KEY;
-        if (!apiKey) {
-            console.error('Alpha Vantage API key not found');
-            return resolve({
-                price: '0.00',
-                change: '0.00'
-            });
-        }
+        const options = {
+            hostname: 'query1.finance.yahoo.com',
+            path: `/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=2d`,
+            method: 'GET',
+            headers: {
+                'User-Agent': 'Mozilla/5.0'
+            }
+        };
 
-        const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`;
-        console.log(`Fetching data for ${symbol}...`);
-
-        https.get(url, (res) => {
+        const req = https.request(options, (res) => {
             let data = '';
             
             res.on('data', (chunk) => {
@@ -43,39 +40,44 @@ function fetchAlphaVantageData(symbol) {
             res.on('end', () => {
                 try {
                     const response = JSON.parse(data);
-                    const quote = response['Global Quote'];
-                    
-                    if (!quote || !quote['05. price'] || !quote['10. change percent']) {
-                        console.error(`Invalid response format for ${symbol}:`, data);
-                        resolve({
-                            price: '0.00',
-                            change: '0.00'
-                        });
-                        return;
+                    if (!response.chart?.result?.[0]) {
+                        throw new Error('Invalid response format');
                     }
+
+                    const result = response.chart.result[0];
+                    const quotes = result.indicators.quote[0];
+                    const prices = result.meta;
                     
-                    const price = parseFloat(quote['05. price']);
-                    const changePercent = quote['10. change percent'].replace('%', '');
+                    // Get current and previous close
+                    const currentClose = quotes.close[quotes.close.length - 1];
+                    const previousClose = quotes.close[quotes.close.length - 2];
+                    
+                    // Calculate percentage change
+                    const percentChange = ((currentClose - previousClose) / previousClose) * 100;
                     
                     resolve({
-                        price: price.toFixed(2),
-                        change: parseFloat(changePercent).toFixed(2)
+                        price: currentClose.toFixed(2),
+                        change: percentChange.toFixed(2)
                     });
                 } catch (error) {
-                    console.error(`Error processing data for ${symbol}:`, error);
-                    resolve({
-                        price: '0.00',
-                        change: '0.00'
-                    });
+                    console.error(`Error processing ${symbol}:`, error.message);
+                    reject(error);
                 }
             });
-        }).on('error', (error) => {
-            console.error(`Network error for ${symbol}:`, error);
-            resolve({
-                price: '0.00',
-                change: '0.00'
-            });
         });
+
+        req.on('error', (error) => {
+            console.error(`Network error for ${symbol}:`, error.message);
+            reject(error);
+        });
+
+        // Set timeout
+        req.setTimeout(10000, () => {
+            req.destroy();
+            reject(new Error(`Timeout for ${symbol}`));
+        });
+
+        req.end();
     });
 }
 
@@ -87,37 +89,34 @@ async function getMarketData() {
         asia: []
     };
 
-    try {
-        for (const [region, symbols] of Object.entries(MARKET_SYMBOLS)) {
-            console.log(`Fetching ${region} market data...`);
-            for (const { symbol, name } of symbols) {
-                try {
-                    const data = await fetchAlphaVantageData(symbol);
-                    const changePrefix = parseFloat(data.change) >= 0 ? '+' : '';
-                    marketData[region].push({
-                        name,
-                        value: `${data.price} ${changePrefix}${data.change}%`,
-                        class: parseFloat(data.change) >= 0 ? 'up' : 'down'
-                    });
-                    console.log(`Successfully fetched data for ${name}: ${data.price} ${changePrefix}${data.change}%`);
-                    
-                    // Add delay between requests to respect API rate limits
-                    await new Promise(resolve => setTimeout(resolve, 1500));
-                } catch (error) {
-                    console.error(`Error fetching data for ${symbol}:`, error);
-                    marketData[region].push({
-                        name,
-                        value: 'Data unavailable',
-                        class: ''
-                    });
-                }
+    for (const [region, symbols] of Object.entries(MARKET_SYMBOLS)) {
+        console.log(`Fetching ${region} market data...`);
+        for (const { symbol, name } of symbols) {
+            try {
+                console.log(`Fetching data for ${name} (${symbol})...`);
+                const data = await fetchYahooFinanceData(symbol);
+                const changePrefix = parseFloat(data.change) >= 0 ? '+' : '';
+                marketData[region].push({
+                    name,
+                    value: `${data.price} ${changePrefix}${data.change}%`,
+                    class: parseFloat(data.change) >= 0 ? 'up' : 'down'
+                });
+                console.log(`Successfully fetched data for ${name}: ${data.price} ${changePrefix}${data.change}%`);
+                
+                // Add delay between requests to avoid rate limiting
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            } catch (error) {
+                console.error(`Failed to fetch data for ${name}:`, error.message);
+                // Add a placeholder on error
+                marketData[region].push({
+                    name,
+                    value: 'Data unavailable',
+                    class: ''
+                });
             }
         }
-    } catch (error) {
-        console.error('Error in getMarketData:', error);
     }
 
-    console.log('Market data fetch completed:', JSON.stringify(marketData, null, 2));
     return marketData;
 }
 
