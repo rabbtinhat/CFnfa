@@ -57,7 +57,7 @@ function generateMarketHtml(data) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Market Wrap-up - CF Ng's Non Financial Advice</title>
+    <title>Daily Equity Market Wrap-up - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
     <style>
@@ -134,7 +134,7 @@ function generateMarketHtml(data) {
     
     <main>
         <div class="container">
-            <h1>Daily Market Wrap-up</h1>
+            <h1>Daily Equity Market Wrap-up</h1>
             <div class="date-header">
                 ${new Date().toLocaleDateString('en-US', {
                     weekday: 'long',
