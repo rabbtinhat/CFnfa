@@ -69,26 +69,10 @@ function getPropertyValue(property, type = 'rich_text') {
     }
 }
 
-async function processMarketData(page) {
-    // Debug log
-    console.log('Processing page with properties:', JSON.stringify(page.properties, null, 2));
-
+async function processNotionData(page) {
     return {
         title: getPropertyValue(page.properties.Title, 'title'),
         status: getPropertyValue(page.properties.Status, 'select'),
-        // US Markets
-        us_sp500: getPropertyValue(page.properties.US_SP500),
-        us_nasdaq: getPropertyValue(page.properties.US_NASDAQ),
-        us_tsx: getPropertyValue(page.properties.US_TSX),
-        // European Markets
-        eu_ftse: getPropertyValue(page.properties.EU_FTSE),
-        eu_dax: getPropertyValue(page.properties.EU_DAX),
-        eu_cac: getPropertyValue(page.properties.EU_CAC),
-        // Asian Markets
-        asia_nikkei: getPropertyValue(page.properties.ASIA_NIKKEI),
-        asia_sse: getPropertyValue(page.properties.ASIA_SSE),
-        asia_hsi: getPropertyValue(page.properties.ASIA_HSI),
-        // Content
         north_america_content: getPropertyValue(page.properties.North_America_Content),
         europe_content: getPropertyValue(page.properties.Europe_Content),
         asia_content: getPropertyValue(page.properties.Asia_Content),
@@ -98,39 +82,35 @@ async function processMarketData(page) {
 }
 
 function generateMarketHtml(data) {
-    const getMarketClass = (value) => {
-        return value.includes('+') ? 'up' : 'down';
-    };
-
     const formatMarketData = (symbol, marketData) => {
-        const data = marketData[symbol];
-        if (!data) return { index: FMP_INDICES[symbol].name, value: 'N/A', class: '' };
+        const indexData = marketData[symbol];
+        if (!indexData) return { index: FMP_INDICES[symbol].name, value: 'N/A', class: '' };
         return {
-            index: data.name,
-            value: `${data.price} ${data.direction}${data.change}%`,
-            class: data.change >= 0 ? 'up' : 'down'
+            index: indexData.name,
+            value: `${indexData.price} ${indexData.direction}${indexData.change}%`,
+            class: indexData.change >= 0 ? 'up' : 'down'
         };
     };
 
     const usMarkets = [
-        formatMarketData('^GSPC', marketData),
-        formatMarketData('^IXIC', marketData),
-        formatMarketData('^GSPTSE', marketData)
+        formatMarketData('^GSPC', data.fmpData),
+        formatMarketData('^IXIC', data.fmpData),
+        formatMarketData('^GSPTSE', data.fmpData)
     ];
 
     const europeMarkets = [
-        formatMarketData('^FTSE', data.marketData),
-        formatMarketData('^GDAXI', data.marketData),
-        formatMarketData('^FCHI', data.marketData)
+        formatMarketData('^FTSE', data.fmpData),
+        formatMarketData('^GDAXI', data.fmpData),
+        formatMarketData('^FCHI', data.fmpData)
     ];
 
     const asiaMarkets = [
-        formatMarketData('^N225', data.marketData),
-        formatMarketData('000001.SS', data.marketData),
-        formatMarketData('^HSI', data.marketData)
+        formatMarketData('^N225', data.fmpData),
+        formatMarketData('000001.SS', data.fmpData),
+        formatMarketData('^HSI', data.fmpData)
     ];
 
-    const macroItems = data.macro_data.split('\n').filter(item => item.trim() !== '');
+    const macroItems = data.notionData.macro_data.split('\n').filter(item => item.trim() !== '');
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -256,28 +236,28 @@ function generateMarketHtml(data) {
             <section class="market-section">
                 <h2>North America Market</h2>
                 <div class="market-content">
-                    ${data.north_america_content}
+                    ${data.notionData.north_america_content}
                 </div>
             </section>
 
             <section class="market-section">
                 <h2>Europe Market</h2>
                 <div class="market-content">
-                    ${data.europe_content}
+                    ${data.notionData.europe_content}
                 </div>
             </section>
 
             <section class="market-section">
                 <h2>Asia Market</h2>
                 <div class="market-content">
-                    ${data.asia_content}
+                    ${data.notionData.asia_content}
                 </div>
             </section>
 
             <section class="market-section">
                 <h2>Technology Sector</h2>
                 <div class="market-content">
-                    ${data.tech_content}
+                    ${data.notionData.tech_content}
                 </div>
             </section>
 
@@ -323,7 +303,7 @@ async function syncDailyMarket() {
         
         // Fetch market data from FMP
         console.log('Fetching market data from FMP...');
-        const fmpMarketData = await fetchMarketData();
+        const fmpData = await fetchMarketData();
         
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DAILY_DATABASE_ID,
@@ -350,14 +330,13 @@ async function syncDailyMarket() {
         // Debug log
         console.log('Notion API Response:', JSON.stringify(response.results[0], null, 2));
         
-        const notionData = await processMarketData(response.results[0]);
+        const notionData = await processNotionData(response.results[0]);
         
-        // Combine the data
-        const htmlContent = generateMarketHtml({ 
-            ...notionData, 
-            marketData: fmpMarketData 
+        // Generate HTML with combined data
+        const finalHtml = generateMarketHtml({ 
+            fmpData,
+            notionData
         });
-        const htmlContent = generateMarketHtml(marketData);
         
         // Ensure pages directory exists
         const pagesDir = path.join(process.cwd(), 'pages');
@@ -366,7 +345,7 @@ async function syncDailyMarket() {
         // Save the file in pages directory
         await fs.writeFile(
             path.join(pagesDir, 'daily.html'),
-            htmlContent,
+            finalHtml,
             'utf8'
         );
         
