@@ -160,30 +160,6 @@ function generateMarketHtml(data) {
 </html>`;
 }
 
-async function validateData(marketData) {
-    // Check if essential properties exist
-    const requiredProps = [
-        'us_sp500', 'us_nasdaq', 'us_tsx',
-        'eu_ftse', 'eu_dax', 'eu_cac',
-        'asia_nikkei', 'asia_sse', 'asia_hsi'
-    ];
-    
-    const missingProps = requiredProps.filter(prop => !marketData[prop]);
-    if (missingProps.length > 0) {
-        throw new Error(`Missing required market data: ${missingProps.join(', ')}`);
-    }
-
-    // Validate percentage format
-    const percentageRegex = /^[+-]\d+(\.\d+)?%$/;
-    for (const prop of requiredProps) {
-        if (!percentageRegex.test(marketData[prop])) {
-            throw new Error(`Invalid percentage format for ${prop}: ${marketData[prop]}`);
-        }
-    }
-
-    return true;
-}
-
 async function syncDailyMarket() {
     try {
         console.log('Starting Daily Market sync...');
@@ -211,13 +187,6 @@ async function syncDailyMarket() {
         }
         
         const marketData = await processMarketData(response.results[0]);
-        
-        // Validate data before proceeding
-        await validateData(marketData);
-        
-        // Create backup before making changes
-        const backupPath = path.join(process.cwd(), 'daily.html.backup');
-        await fs.copyFile(path.join(process.cwd(), 'daily.html'), backupPath);
         const htmlContent = generateMarketHtml(marketData);
         
         // Save the file
