@@ -14,8 +14,8 @@ console.log('FMP API Key available:', !!FMP_API_KEY);
 if (!FMP_API_KEY) {
     console.error('FMP_API_KEY is not set in environment variables');
 }
-const FMP_INDICES = {
-    // US Markets
+const MARKET_INDICES = {
+    // US Markets (Yahoo Finance symbols)
     '^GSPC': { name: 'S&P 500', market: 'us' },
     '^IXIC': { name: 'NASDAQ', market: 'us' },
     '^GSPTSE': { name: 'TSX', market: 'us' },
@@ -31,34 +31,39 @@ const FMP_INDICES = {
 
 async function fetchMarketData() {
     try {
-        const symbols = Object.keys(FMP_INDICES).join(',');
+        const symbols = Object.keys(MARKET_INDICES).join(',');
         console.log('Fetching data for symbols:', symbols);
-        console.log('Using API URL:', `https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`);
         
-        const response = await fetch(
-            `https://financialmodelingprep.com/api/v3/quote/${symbols}?apikey=${FMP_API_KEY}`
-        );
+        // Using Yahoo Finance API
+        const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbols}`;
+        console.log('Using API URL:', url);
+        
+        const response = await fetch(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+        });
         
         console.log('API Response status:', response.status);
         const data = await response.json();
         console.log('API Response data:', JSON.stringify(data, null, 2));
         
-        if (!Array.isArray(data)) {
+        if (!data.quoteResponse?.result) {
             console.error('Unexpected API response format:', data);
             return {};
         }
         
         const marketData = {};
-        data.forEach(quote => {
+        data.quoteResponse.result.forEach(quote => {
             console.log('Processing quote:', quote);
-            const index = FMP_INDICES[quote.symbol];
+            const index = MARKET_INDICES[quote.symbol];
             if (index) {
                 marketData[quote.symbol] = {
                     name: index.name,
                     market: index.market,
-                    price: quote.price?.toFixed(2) || 'N/A',
-                    change: quote.changesPercentage?.toFixed(2) || '0.00',
-                    direction: (quote.changesPercentage >= 0) ? '+' : ''
+                    price: quote.regularMarketPrice?.toFixed(2) || 'N/A',
+                    change: quote.regularMarketChangePercent?.toFixed(2) || '0.00',
+                    direction: (quote.regularMarketChangePercent >= 0) ? '+' : ''
                 };
             }
         });
