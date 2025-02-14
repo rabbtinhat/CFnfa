@@ -1,208 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Market Wrap-up - CF Ng's Non Financial Advise</title>
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
-    <style>
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+import React from 'react';
+import { ArrowUpCircle, ArrowDownCircle, ArrowRight } from 'lucide-react';
 
-        .date-header {
-            color: #666;
-            margin-bottom: 2rem;
-        }
+const DailyMarketWrap = ({ 
+  markets = {
+    us: { value: '+0.5%', isUp: true },
+    europe: { value: '-0.3%', isUp: false },
+    asia: { value: '+1.2%', isUp: true }
+  },
+  content = {
+    northAmerica: 'Key developments in North American markets...',
+    europe: 'European market summary and analysis...',
+    asia: 'Asian market highlights and trends...',
+    tech: 'Technology sector updates and analysis...'
+  },
+  upcomingData = [
+    'US CPI Data (Tuesday)',
+    'ECB Interest Rate Decision (Thursday)',
+    'Japan GDP (Friday)'
+  ]
+}) => {
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
-        .quick-overview {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
+  const MarketCard = ({ title, value, isUp }) => (
+    <div className="bg-blue-50 p-4 rounded-lg">
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <div className="flex items-center gap-2">
+        {isUp ? (
+          <ArrowUpCircle className="text-green-500" size={20} />
+        ) : (
+          <ArrowDownCircle className="text-red-500" size={20} />
+        )}
+        <span className={isUp ? 'text-green-500' : 'text-red-500'}>
+          {value}
+        </span>
+      </div>
+    </div>
+  );
 
-        .overview-card {
-            background-color: #f0f7ff;
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
+  const Section = ({ title, content }) => (
+    <section className="bg-white p-6 rounded-lg shadow-sm mb-8">
+      <h2 className="text-2xl font-bold mb-4 text-gray-900">{title}</h2>
+      <div className="text-gray-700 leading-relaxed">
+        <p>{content}</p>
+      </div>
+    </section>
+  );
 
-        .market-value {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+  return (
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-4">Daily Market Wrap-up</h1>
+      <div className="text-gray-600 mb-8">{currentDate}</div>
 
-        .up {
-            color: #22c55e;
-        }
+      {/* Quick Overview */}
+      <div className="grid md:grid-cols-3 gap-4 mb-8">
+        <MarketCard title="US Markets" value={markets.us.value} isUp={markets.us.isUp} />
+        <MarketCard title="European Markets" value={markets.europe.value} isUp={markets.europe.isUp} />
+        <MarketCard title="Asian Markets" value={markets.asia.value} isUp={markets.asia.isUp} />
+      </div>
 
-        .down {
-            color: #ef4444;
-        }
+      {/* Market Sections */}
+      <Section title="North America Market" content={content.northAmerica} />
+      <Section title="Europe Market" content={content.europe} />
+      <Section title="Asia Market" content={content.asia} />
+      <Section title="Technology Sector" content={content.tech} />
 
-        .market-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
+      {/* Upcoming Macro Data */}
+      <section className="bg-white p-6 rounded-lg shadow-sm mb-8">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900">Upcoming Macro Data</h2>
+        <ul className="space-y-2">
+          {upcomingData.map((item, index) => (
+            <li key={index} className="flex items-center text-gray-700">
+              <ArrowRight className="text-blue-500 mr-2" size={16} />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+};
 
-        .market-section h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
-        }
-
-        .market-content {
-            color: #4a4a4a;
-            line-height: 1.6;
-        }
-
-        .macro-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .macro-item {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 0;
-        }
-
-        .macro-item::before {
-            content: "→";
-            margin-right: 0.5rem;
-            color: #3b82f6;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .quick-overview {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div id="header"></div>
-    
-    <main>
-        <div class="container">
-            <h1>Daily Market Wrap-up</h1>
-            <div class="date-header">
-                <script>
-                    const date = new Date().toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                    document.write(date);
-                </script>
-            </div>
-
-            <!-- Quick Overview Section -->
-            <div class="quick-overview">
-                <div class="overview-card">
-                    <h3>US Markets</h3>
-                    <div class="market-value up">
-                        S&P 500: +0.5%
-                    </div>
-                </div>
-                <div class="overview-card">
-                    <h3>European Markets</h3>
-                    <div class="market-value down">
-                        STOXX 600: -0.3%
-                    </div>
-                </div>
-                <div class="overview-card">
-                    <h3>Asian Markets</h3>
-                    <div class="market-value up">
-                        Nikkei 225: +1.2%
-                    </div>
-                </div>
-            </div>
-
-            <!-- North America Section -->
-            <section class="market-section">
-                <h2>North America Market</h2>
-                <div class="market-content">
-                    <!-- Replace with your content -->
-                    <p>Key developments in North American markets...</p>
-                </div>
-            </section>
-
-            <!-- Europe Section -->
-            <section class="market-section">
-                <h2>Europe Market</h2>
-                <div class="market-content">
-                    <!-- Replace with your content -->
-                    <p>European market summary and analysis...</p>
-                </div>
-            </section>
-
-            <!-- Asia Section -->
-            <section class="market-section">
-                <h2>Asia Market</h2>
-                <div class="market-content">
-                    <!-- Replace with your content -->
-                    <p>Asian market highlights and trends...</p>
-                </div>
-            </section>
-
-            <!-- Tech Section -->
-            <section class="market-section">
-                <h2>Technology Sector</h2>
-                <div class="market-content">
-                    <!-- Replace with your content -->
-                    <p>Technology sector updates and analysis...</p>
-                </div>
-            </section>
-
-            <!-- Upcoming Macro Data -->
-            <section class="market-section">
-                <h2>Upcoming Macro Data</h2>
-                <ul class="macro-list">
-                    <!-- Replace with your content -->
-                    <li class="macro-item">US CPI Data (Tuesday)</li>
-                    <li class="macro-item">ECB Interest Rate Decision (Thursday)</li>
-                    <li class="macro-item">Japan GDP (Friday)</li>
-                </ul>
-            </section>
-        </div>
-    </main>
-
-    <div id="footer"></div>
-
-    <script>
-        // Load header and footer components
-        fetch('/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-                return fetch('/components/nav.html');
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav').innerHTML = data;
-            });
-
-        fetch('/components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
-    </script>
-</body>
-</html>
+export default DailyMarketWrap;
