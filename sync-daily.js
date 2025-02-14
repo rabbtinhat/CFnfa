@@ -119,15 +119,15 @@ function generateMarketHtml(data) {
     ];
 
     const europeMarkets = [
-        formatMarketData('^FTSE', marketData),
-        formatMarketData('^GDAXI', marketData),
-        formatMarketData('^FCHI', marketData)
+        formatMarketData('^FTSE', data.marketData),
+        formatMarketData('^GDAXI', data.marketData),
+        formatMarketData('^FCHI', data.marketData)
     ];
 
     const asiaMarkets = [
-        formatMarketData('^N225', marketData),
-        formatMarketData('000001.SS', marketData),
-        formatMarketData('^HSI', marketData)
+        formatMarketData('^N225', data.marketData),
+        formatMarketData('000001.SS', data.marketData),
+        formatMarketData('^HSI', data.marketData)
     ];
 
     const macroItems = data.macro_data.split('\n').filter(item => item.trim() !== '');
@@ -323,7 +323,7 @@ async function syncDailyMarket() {
         
         // Fetch market data from FMP
         console.log('Fetching market data from FMP...');
-        const marketData = await fetchMarketData();
+        const fmpMarketData = await fetchMarketData();
         
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DAILY_DATABASE_ID,
@@ -350,7 +350,13 @@ async function syncDailyMarket() {
         // Debug log
         console.log('Notion API Response:', JSON.stringify(response.results[0], null, 2));
         
-        const marketData = await processMarketData(response.results[0]);
+        const notionData = await processMarketData(response.results[0]);
+        
+        // Combine the data
+        const htmlContent = generateMarketHtml({ 
+            ...notionData, 
+            marketData: fmpMarketData 
+        });
         const htmlContent = generateMarketHtml(marketData);
         
         // Ensure pages directory exists
