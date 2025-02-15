@@ -10,6 +10,10 @@
     margin-bottom: 0 !important;
 }
 
+main {
+    margin-top: 80px !important; /* Adjust this value to match other pages */
+}
+
 /* Market Ticker Banner */
 .market-ticker-banner {
     background: rgba(10, 10, 15, 0.95);
