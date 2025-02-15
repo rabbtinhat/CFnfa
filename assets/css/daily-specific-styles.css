@@ -5,50 +5,66 @@
     --neon-pink: #ff00ff;
 }
 
-/* Header and Navigation Spacing Fixes */
+/* Fixed Header Spacing */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background-color: #000;
+}
+
 .header-content {
-    padding: 0.75rem 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
 }
 
 .site-title {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 15px !important;
+    text-align: center;
 }
 
+/* Navigation Fixes */
 nav {
-    margin-bottom: 0;
+    width: 100%;
+    background: #000;
+    border-bottom: 1px solid var(--neon-cyan);
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     gap: 2rem;
-    padding: 0.75rem 1.25rem;
+    padding: 15px 20px;
     margin: 0;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 nav ul li a {
     color: var(--neon-cyan);
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    text-transform: uppercase;
     position: relative;
-    padding-left: 1.2rem;
+    padding-left: 1rem;
 }
 
-nav ul li a::before {
-    content: ">";
-    position: absolute;
-    left: 0;
-    color: var(--neon-purple);
+/* Main Content Spacing */
+main {
+    margin-top: 140px !important;
+    padding: 20px 0;
 }
 
-/* Container and Main Content */
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem;
-}
-
-main {
-    margin-top: 2rem;
+    padding: 0 20px;
 }
 
 /* Page Title */
@@ -58,7 +74,6 @@ h1.daily-title {
     color: var(--neon-cyan);
     text-shadow: 0 0 10px var(--neon-cyan);
     margin-bottom: 1.5rem;
-    padding-top: 1rem;
 }
 
 /* Date Header */
@@ -135,69 +150,42 @@ h1.daily-title {
     color: var(--text-primary);
 }
 
-/* Macro List */
-.macro-list {
-    list-style: none;
-    padding: 0;
-}
-
-.macro-item {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    color: var(--text-primary);
-    position: relative;
-    padding-left: 0.75rem;
-}
-
-.macro-item::before {
-    content: "→";
-    position: absolute;
-    left: -0.5rem;
-    color: var(--neon-pink);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
-    .quick-overview {
-        grid-template-columns: 1fr;
-    }
-    
-    .container {
-        padding: 0.75rem;
+    .header-content {
+        padding: 10px 20px;
     }
 
-    h1.daily-title {
-        font-size: 1.2rem;
-    }
-
-    .market-section h2 {
-        font-size: 0.8rem;
-    }
-
-    .market-content,
-    .macro-item,
-    .market-value {
-        font-size: 0.6rem;
-    }
-
-    .overview-card h3 {
-        font-size: 0.7rem;
+    .site-title {
+        font-size: 1rem;
     }
 
     nav ul {
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 1rem;
-        padding: 0.75rem;
+        padding: 10px 20px;
         -webkit-overflow-scrolling: touch;
-        justify-content: flex-start;
     }
 
     nav ul li a {
         font-size: 0.7rem;
         white-space: nowrap;
+    }
+
+    main {
+        margin-top: 120px !important;
+    }
+
+    .quick-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    h1.daily-title {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 0 15px;
     }
 }
