@@ -3,7 +3,7 @@ require('dotenv').config();
 const { Client } = require('@notionhq/client');
 const fs = require('fs').promises;
 const path = require('path');
-const { getMarketData } = require('./market-data');
+const { getMarketData } = require('./MarketApp');
 
 // Initialize Notion client
 const notion = new Client({
