@@ -3,43 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V day testing - CF Ng's Non Financial Advice</title>
+    <title>V day testing - CF's Non Financial Advice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
+    <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
     <style>
         .blog-post {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
+        
         .blog-title {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
         }
+        
         .blog-meta {
             margin-bottom: 2rem;
-            color: #666;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            color: var(--text-primary);
         }
+        
         .blog-category {
             display: inline-block;
             padding: 0.2rem 0.8rem;
-            background-color: #f0f0f0;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--neon-pink);
             border-radius: 15px;
             margin-right: 1rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
         }
+        
+        .blog-date {
+            color: var(--text-secondary);
+        }
+        
         .blog-content {
-            line-height: 1.6;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: var(--text-primary);
             white-space: pre-wrap;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-purple);
+            border-radius: 0.5rem;
+            padding: 2rem;
         }
-        .blog-content h1 { font-size: 1.8rem; margin: 1.5rem 0; font-weight: bold; }
-        .blog-content h2 { font-size: 1.5rem; margin: 1.3rem 0; font-weight: bold; }
-        .blog-content h3 { font-size: 1.3rem; margin: 1.1rem 0; font-weight: bold; }
-        .blog-content p { margin: 1rem 0; }
-        .blog-content ul, .blog-content ol { margin: 1rem 0; padding-left: 2rem; }
-        .blog-content code { background: #f4f4f4; padding: 0.2rem 0.4rem; border-radius: 3px; }
-        .blog-content pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; }
-        .blog-content blockquote { border-left: 4px solid #ddd; padding-left: 1rem; margin: 1rem 0; color: #666; }
+        
+        .blog-content h1 { 
+            font-size: 1.3rem; 
+            margin: 2rem 0 1rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        .blog-content h2 { 
+            font-size: 1.1rem; 
+            margin: 1.5rem 0 1rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+        
+        .blog-content h3 { 
+            font-size: 1rem; 
+            margin: 1.3rem 0 1rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 5px var(--neon-purple);
+        }
+        
+        .blog-content p { 
+            margin: 1rem 0; 
+        }
+        
+        .blog-content ul, 
+        .blog-content ol { 
+            margin: 1rem 0; 
+            padding-left: 2rem; 
+        }
+        
+        .blog-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-content code { 
+            background: rgba(0, 255, 245, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            border: 1px solid var(--neon-blue);
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .blog-content pre { 
+            background: rgba(10, 10, 15, 0.95);
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid var(--neon-purple);
+        }
+        
+        .blog-content blockquote { 
+            border-left: 4px solid var(--neon-pink);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+        }
+        
+        .blog-content a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-content a:hover {
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 1.2rem;
+            }
+            
+            .blog-meta {
+                font-size: 0.6rem;
+            }
+            
+            .blog-content {
+                font-size: 0.7rem;
+                padding: 1rem;
+            }
+            
+            .blog-content h1 { font-size: 1.1rem; }
+            .blog-content h2 { font-size: 1rem; }
+            .blog-content h3 { font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
@@ -60,7 +166,6 @@
     <div id="footer"></div>
 
     <script>
-        // Load components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
