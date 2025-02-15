@@ -12,9 +12,12 @@ header {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px 0;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .site-title {
@@ -47,10 +50,12 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 2rem;
     padding: 15px 20px;
     margin: 0;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 nav ul li a {
