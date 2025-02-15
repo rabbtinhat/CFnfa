@@ -1,0 +1,187 @@
+/* global-cyberpunk-styles.css */
+:root {
+    --neon-blue: #00fff5;
+    --neon-pink: #ff00ff;
+    --neon-purple: #b026ff;
+    --dark-bg: #0a0a0a;
+    --card-bg: rgba(26, 26, 26, 0.9);
+}
+
+/* Global Text Styles */
+body {
+    background-color: var(--dark-bg);
+    color: #e0e0e0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px var(--neon-pink);
+}
+
+/* Navigation Updates */
+nav ul li a {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+/* Blog Post Cards */
+.blog-post {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.blog-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.blog-meta {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: var(--neon-pink);
+}
+
+/* Market Updates */
+.market-updates {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.market-value {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+}
+
+.price-up {
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.price-down {
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+}
+
+/* Asset Allocation Page */
+.section-content {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+.strategy-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Disclaimer Page */
+.disclaimer-content {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+}
+
+/* About Page */
+.story-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.story-header h1 {
+    font-size: 2rem;
+    text-shadow: 0 0 10px var(--neon-blue);
+    margin-bottom: 1.5rem;
+}
+
+.timeline-content {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* Common Elements */
+.date-header {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+/* Links */
+a {
+    color: var(--neon-pink);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+/* Card Hover Effects */
+.card:hover, 
+.blog-post:hover, 
+.strategy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-purple);
+    transition: all 0.3s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    .story-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    nav ul li a {
+        font-size: 0.7rem;
+    }
+}
