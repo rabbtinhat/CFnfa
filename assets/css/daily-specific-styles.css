@@ -31,17 +31,16 @@ h1.daily-title {
 
 /* Rest of your existing daily-specific styles... */
 /* Header and Navigation Spacing Fixes */
-.header-content {
-    padding: 20px 0;  /* Consistent padding for header content */
-}
-
-nav {
-    border-top: 1px solid rgba(0, 255, 245, 0.2);
-    margin-top: 1rem;  /* Space after header content */
+header {
+    margin-bottom: 2rem;  /* Add space below the entire header */
 }
 
 nav ul {
-    padding: 15px 20px;  /* Padding around navigation items */
+    list-style: none;
+    display: flex;
+    justify-content: center;  /* Keep navigation centered */
+    gap: 2rem;
+    padding: 15px 20px;
     margin: 0;
 }
 
