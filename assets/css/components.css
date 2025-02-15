@@ -10,19 +10,24 @@ header {
     border-bottom: 1px solid #00fff5;
 }
 
-.header-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-    position: relative;
+.container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center; /* Center the title */
+    align-items: center;
+    padding: 10px 0;
+    position: relative; /* For absolute positioning of social links */
 }
 
 .site-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
+    text-align: center; /* Center the text */
 }
 
 .site-title a {
@@ -50,7 +55,7 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center the navigation */
     gap: 2rem;
     padding: 15px 20px;
     margin: 0;
@@ -85,7 +90,10 @@ nav ul li a:hover {
     display: flex;
     gap: 20px;
     align-items: center;
-    margin-left: auto; /* Ensures icons stay on the right */
+    position: absolute; /* Position absolutely */
+    right: 0; /* Align to the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Perfect vertical centering */
 }
 
 .social-links svg {
@@ -129,7 +137,7 @@ footer a:hover {
 
 /* Main content spacing */
 main {
-    margin-top: 120px; /* Adjusted to remove gap below header */
+    margin-top: 140px; /* Increased to ensure visibility of daily content */
     padding: 0;
 }
 
@@ -147,13 +155,20 @@ main {
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 1rem;
-        padding: 10px;
+        padding: 10px 20px;
         -webkit-overflow-scrolling: touch;
+        justify-content: flex-start; /* Allow scrolling on mobile */
     }
 
     nav ul li a {
         font-size: 0.7rem;
         white-space: nowrap;
+    }
+
+    .social-links {
+        position: static;
+        transform: none;
+        margin-left: 20px;
     }
 
     .social-links svg {
@@ -162,6 +177,6 @@ main {
     }
 
     main {
-        margin-top: 100px;
+        margin-top: 120px;
     }
 }
