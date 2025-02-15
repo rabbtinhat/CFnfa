@@ -35,7 +35,6 @@
 
 .metric-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 10px var(--neon-purple);
 }
 
 .metric-header {
@@ -44,13 +43,14 @@
     border-bottom: 1px solid var(--neon-purple);
 }
 
+/* Updated metric title styling */
 .metric-title {
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    color: #00fff5;
+    font-size: 1rem;
+    color: #fff;
     margin: 0;
     line-height: 1.4;
-    text-shadow: none;
+    text-transform: uppercase;
 }
 
 .metric-content {
@@ -80,25 +80,24 @@
 
 .graph-container:hover {
     transform: scale(1.01);
-    box-shadow: 0 0 8px var(--neon-blue);
 }
 
 .graph-source {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.6rem;
-    color: var(--neon-pink);
+    color: #fff;
     margin-bottom: 0.5rem;
 }
 
 .graph-source a {
     font-family: 'Press Start 2P', cursive;
-    color: var(--neon-blue);
+    color: #00fff5;
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .graph-source a:hover {
-    text-shadow: 0 0 5px var(--neon-blue);
+    color: #fff;
 }
 
 /* Updated description styles */
@@ -123,12 +122,11 @@
 
 .how-to-use h3 {
     font-family: 'Press Start 2P', cursive;
-    color: #00fff5;
+    color: #fff;
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
-    text-shadow: none;
 }
 
 /* Info-grid styles */
@@ -142,12 +140,11 @@
 .info-grid .pros h3,
 .info-grid .cons h3 {
     font-family: 'Press Start 2P', cursive;
-    color: #00fff5;
+    color: #fff;
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
-    text-shadow: none;
 }
 
 ul {
@@ -207,8 +204,7 @@ li::before {
     right: 0.25rem;
     font-size: 1.25rem;
     cursor: pointer;
-    color: var(--neon-pink);
-    text-shadow: 0 0 5px var(--neon-pink);
+    color: #fff;
     font-family: 'Press Start 2P', cursive;
 }
 
@@ -224,7 +220,7 @@ li::before {
     }
     
     .metric-title {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
     
     .description, .how-to-use, li {
