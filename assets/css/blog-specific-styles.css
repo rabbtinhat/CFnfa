@@ -1,0 +1,109 @@
+/* blog-specific-styles.css */
+.blog-list {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.blog-post {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.blog-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+.blog-meta {
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin: 0.5rem 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.blog-category {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    background: rgba(176, 38, 255, 0.1);
+    border: 1px solid var(--neon-pink);
+    border-radius: 15px;
+    margin-right: 1rem;
+    color: var(--neon-pink);
+    font-size: 0.7rem;
+}
+
+.blog-summary {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.blog-title {
+    color: var(--neon-cyan);
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.pagination button {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.pagination button:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.pagination button.active {
+    background: var(--neon-blue);
+    color: #000;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.no-posts {
+    text-align: center;
+    padding: 2rem;
+    color: var(--neon-blue);
+    font-family: 'Press Start 2P', cursive;
+}
+
+@media (max-width: 768px) {
+    .blog-list {
+        padding: 0 1rem;
+    }
+    
+    .blog-title {
+        font-size: 1rem;
+    }
+    
+    .blog-post {
+        padding: 1rem;
+    }
+}
