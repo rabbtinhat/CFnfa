@@ -57,85 +57,20 @@ function generateMarketHtml(data) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Equity Market Wrap-up - CF Ng's Non Financial Advice</title>
+    <title>Daily Equity Market Wrap-up - CF's Non Financial Advice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <style>
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .date-header {
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        .quick-overview {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .overview-card {
-            background-color: #f0f7ff;
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-        .market-value {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .up { color: #22c55e; }
-        .down { color: #ef4444; }
-        .market-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        .market-section h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
-        }
-        .market-content {
-            color: #4a4a4a;
-            line-height: 1.6;
-        }
-        .macro-list {
-            list-style: none;
-            padding: 0;
-        }
-        .macro-item {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 0;
-        }
-        .macro-item::before {
-            content: "→";
-            margin-right: 0.5rem;
-            color: #3b82f6;
-        }
-        @media (max-width: 768px) {
-            .quick-overview {
-                grid-template-columns: 1fr;
-            }
-            .container {
-                padding: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
+    <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
 </head>
 <body>
     <div id="header"></div>
     
     <main>
         <div class="container">
-            <h1>Daily Equity Market Wrap-up</h1>
-            <div class="date-header">
+            <h1 class="neon-text pixel-text">Daily Equity Market Wrap-up</h1>
+            <div class="date-header pixel-text">
                 ${new Date().toLocaleDateString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
@@ -145,8 +80,8 @@ function generateMarketHtml(data) {
             </div>
 
             <div class="quick-overview">
-                <div class="overview-card">
-                    <h3>North America Markets</h3>
+                <div class="market-card pixel-border">
+                    <h3 class="neon-text">North America Markets</h3>
                     ${us.map(market => `
                         <div class="market-value ${market.class}">
                             ${market.name}: ${market.value}
@@ -154,8 +89,8 @@ function generateMarketHtml(data) {
                     `).join('')}
                 </div>
                 
-                <div class="overview-card">
-                    <h3>Europe Markets</h3>
+                <div class="market-card pixel-border">
+                    <h3 class="neon-text">Europe Markets</h3>
                     ${europe.map(market => `
                         <div class="market-value ${market.class}">
                             ${market.name}: ${market.value}
@@ -163,8 +98,8 @@ function generateMarketHtml(data) {
                     `).join('')}
                 </div>
 
-                <div class="overview-card">
-                    <h3>Asia Markets</h3>
+                <div class="market-card pixel-border">
+                    <h3 class="neon-text">Asia Markets</h3>
                     ${asia.map(market => `
                         <div class="market-value ${market.class}">
                             ${market.name}: ${market.value}
@@ -173,39 +108,39 @@ function generateMarketHtml(data) {
                 </div>
             </div>
 
-            <section class="market-section">
-                <h2>North America Market</h2>
+            <section class="content-section pixel-border">
+                <h2 class="section-title">North America Market</h2>
                 <div class="market-content">
                     ${data.northAmericaContent}
                 </div>
             </section>
 
-            <section class="market-section">
-                <h2>Europe Market</h2>
+            <section class="content-section pixel-border">
+                <h2 class="section-title">Europe Market</h2>
                 <div class="market-content">
                     ${data.europeContent}
                 </div>
             </section>
 
-            <section class="market-section">
-                <h2>Asia Market</h2>
+            <section class="content-section pixel-border">
+                <h2 class="section-title">Asia Market</h2>
                 <div class="market-content">
                     ${data.asiaContent}
                 </div>
             </section>
 
-            <section class="market-section">
-                <h2>Technology Sector</h2>
+            <section class="content-section pixel-border">
+                <h2 class="section-title">Technology Sector</h2>
                 <div class="market-content">
                     ${data.techContent}
                 </div>
             </section>
 
-            <section class="market-section">
-                <h2>Upcoming Macro Data</h2>
+            <section class="content-section pixel-border">
+                <h2 class="section-title">Upcoming Macro Data</h2>
                 <ul class="macro-list">
                     ${macroItems.map(item => `
-                        <li class="macro-item">${item}</li>
+                        <li class="macro-item pixel-text">${item}</li>
                     `).join('')}
                 </ul>
             </section>
@@ -215,7 +150,6 @@ function generateMarketHtml(data) {
     <div id="footer"></div>
 
     <script>
-        // Load header and footer components
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
