@@ -103,6 +103,20 @@ nav ul li a:hover {
 }
 
 /* Blog Styles */
+.blog-post {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
 .blog-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 1rem;
@@ -114,6 +128,19 @@ nav ul li a:hover {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.7rem;
     color: var(--neon-pink);
+    margin: 1rem 0;
+}
+
+.blog-summary {
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin: 1rem 0;
+}
+
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 /* Market Updates */
