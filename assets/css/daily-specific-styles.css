@@ -5,8 +5,9 @@
     --neon-pink: #ff00ff;
 }
 
-.site-title {
-    margin-bottom: 2.5rem;  /* Increase space between title and nav */
+/* Remove conflicting margin and adjust header spacing */
+.header-content {
+    padding: 1.5rem 0;
 }
 
 .container {
@@ -20,9 +21,8 @@ h1.daily-title {
     font-family: 'Press Start 2P', cursive;
     color: var(--neon-cyan);
     font-size: 1.5rem;
-    margin-top: 4rem;
-    margin-bottom: 1rem;
     text-transform: uppercase;
+    margin-bottom: 1rem;
 }
 
 /* Date Header */
@@ -31,35 +31,6 @@ h1.daily-title {
     color: #666;
     font-size: 0.8rem;
     margin-bottom: 1.5rem;
-}
-
-/* Rest of your existing daily-specific styles... */
-/* Header and Navigation Spacing Fixes */
-header {
-    margin-bottom: 2rem;  /* Add space below the entire header */
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;  /* Keep navigation centered */
-    gap: 2rem;
-    padding: 15px 20px;
-    margin: 0;
-}
-
-/* Navigation style matching other pages */
-nav ul li a {
-    color: var(--neon-cyan);
-    position: relative;
-    padding-left: 1.2rem;
-}
-
-nav ul li a::before {
-    content: ">";
-    position: absolute;
-    left: 0;
-    color: var(--neon-purple);
 }
 
 /* Market Overview Cards */
@@ -110,7 +81,49 @@ nav ul li a::before {
     border: 1px solid var(--neon-cyan);
 }
 
-/* Responsive */
+.market-section h2 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    color: var(--neon-pink);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.market-content {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* Macro List */
+.macro-list {
+    list-style: none;
+    padding: 0;
+}
+
+.macro-item {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.macro-item::before {
+    content: "→";
+    margin-right: 0.5rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+/* Main content spacing */
+main {
+    padding-top: 2rem;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .quick-overview {
         grid-template-columns: 1fr;
@@ -118,10 +131,22 @@ nav ul li a::before {
     
     h1.daily-title {
         font-size: 1.2rem;
-        margin-top: 3rem;  /* Slightly reduced top margin for mobile */
     }
     
     .container {
         padding: 0.75rem;
+    }
+
+    .market-section h2 {
+        font-size: 0.8rem;
+    }
+
+    .market-content,
+    .macro-item {
+        font-size: 0.6rem;
+    }
+
+    .overview-card h3 {
+        font-size: 0.7rem;
     }
 }
