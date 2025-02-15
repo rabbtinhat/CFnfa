@@ -6,178 +6,182 @@
     <title>CF's Non Financial Advise</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Market Summary Section */
-        .market-summary {
-            background-color: #000;
-            color: white;
-            padding: 2rem 0;
+        /* Cyberpunk/Degen Style */
+        :root {
+            --neon-blue: #00fff5;
+            --neon-pink: #ff00ff;
+            --neon-purple: #b026ff;
+            --dark-bg: #0a0a0a;
+            --cyber-gradient: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
         }
 
-        .market-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .market-summary {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 2rem 0;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+        }
+
+        .data-source {
+            font-size: 0.7rem;
+            color: #666;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .last-update {
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-family: 'Press Start 2P', cursive;
         }
 
         .market-card {
-            background: #1a1a1a;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-pink);
             padding: 1rem;
             border-radius: 0.5rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .market-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
+        .market-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--neon-pink);
         }
 
-        .price-up { color: #22c55e; }
-        .price-down { color: #ef4444; }
+        .price-up { 
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
 
-        /* Content Sections */
+        .price-down { 
+            color: #ff0000;
+            text-shadow: 0 0 5px #ff0000;
+        }
+
+        /* Content Sections Styling */
         .content-section {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: white;
+            background: var(--dark-bg);
+            border: 1px solid var(--neon-purple);
             border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
         }
 
         .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #111827;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: var(--cyber-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .view-all {
-            color: #4F46E5;
+            color: var(--neon-pink);
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            transition: all 0.3s;
         }
 
-        /* Crypto Cards */
-        .metrics-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+        .view-all:hover {
+            text-shadow: 0 0 10px var(--neon-pink);
+            transform: scale(1.05);
         }
 
+        /* Market Updates Section */
+        .market-update-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .market-update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Crypto Section */
         .metric-card {
-            border: 1px solid #e5e7eb;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-purple);
             border-radius: 0.5rem;
             overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--neon-purple);
         }
 
         .metric-header {
+            background: rgba(176, 38, 255, 0.1);
             padding: 1rem;
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid var(--neon-purple);
         }
 
-        .metric-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .metric-content {
-            padding: 1rem;
-        }
-
-        .graph-container {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #f3f4f6;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Daily Market Update */
-        .market-updates {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .market-update-card {
-            background: #f9fafb;
-            border-radius: 0.5rem;
-            padding: 1rem;
-        }
-
-        .market-name {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .market-values {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        /* Blog Preview */
-        .blog-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
+        /* Blog Section */
         .blog-card {
-            border: 1px solid #e5e7eb;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-pink);
             border-radius: 0.5rem;
             padding: 1rem;
-            transition: transform 0.2s;
+            color: white;
+            transition: all 0.3s;
         }
 
         .blog-card:hover {
-            transform: translateY(-2px);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--neon-pink);
         }
 
         .blog-meta {
-            font-size: 0.875rem;
-            color: #6b7280;
-            margin-bottom: 0.5rem;
+            color: var(--neon-blue);
+            font-size: 0.8rem;
+            font-family: 'Press Start 2P', cursive;
         }
 
-        .blog-card-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #111827;
+        /* Pixel Art Elements */
+        .pixel-border {
+            position: relative;
+            padding: 3px;
         }
 
-        .blog-summary {
-            font-size: 0.875rem;
-            color: #4b5563;
-            line-height: 1.5;
+        .pixel-border::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: var(--cyber-gradient);
+            z-index: -1;
+            clip-path: polygon(
+                0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+                100% calc(100% - 5px), calc(100% - 5px) 100%,
+                5px 100%, 0 calc(100% - 5px)
+            );
         }
 
         @media (max-width: 768px) {
-            .market-grid,
-            .metrics-preview,
-            .market-updates,
-            .blog-preview {
-                grid-template-columns: 1fr;
+            .section-title {
+                font-size: 1rem;
             }
-
-            .content-section {
-                padding: 1rem;
-                margin: 1rem 0;
+            
+            .view-all {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -189,30 +193,66 @@
         <!-- Market Summary -->
         <section class="market-summary">
             <div class="container">
+                <div class="last-update">Last Close: Feb 14, 2025 4:00 PM EST</div>
                 <div class="market-grid">
-                    <!-- Auto-populated from daily.html -->
+                    <div class="market-card">
+                        <div class="market-header">
+                            <span>S&P 500</span>
+                            <span class="price-down">-0.01%</span>
+                        </div>
+                        <div>6,114.62</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="market-header">
+                            <span>NASDAQ</span>
+                            <span class="price-up">+0.38%</span>
+                        </div>
+                        <div>22,114.49</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="market-header">
+                            <span>DOW 30</span>
+                            <span class="price-down">-0.37%</span>
+                        </div>
+                        <div>44,546.09</div>
+                    </div>
+                </div>
+                <div class="data-source">Source: Yahoo Finance</div>
+            </div>
+        </section>
+
+        <!-- Market Updates -->
+        <section class="content-section pixel-border">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Market Updates</h2>
+                    <a href="/daily.html" class="view-all">View all →</a>
+                </div>
+                <div class="market-updates">
                     <script>
-                        fetch('/pages/daily.html')
+                        fetch('/daily.html')
                             .then(response => response.text())
                             .then(html => {
                                 const parser = new DOMParser();
                                 const doc = parser.parseFromString(html, 'text/html');
-                                const marketValues = doc.querySelectorAll('.market-value');
-                                const marketGrid = document.querySelector('.market-grid');
+                                const marketSections = Array.from(doc.querySelectorAll('.market-section'))
+                                    .filter(section => {
+                                        const title = section.querySelector('h2').textContent;
+                                        return title.includes('North America') || title.includes('Technology');
+                                    });
+                                const marketUpdates = document.querySelector('.market-updates');
                                 
-                                marketValues.forEach(value => {
-                                    const card = document.createElement('div');
-                                    card.className = 'market-card';
-                                    const isUp = value.classList.contains('up');
-                                    const [name, priceChange] = value.textContent.split(':');
+                                marketSections.forEach(section => {
+                                    const title = section.querySelector('h2').textContent;
+                                    const content = section.querySelector('.market-content').textContent;
                                     
-                                    card.innerHTML = `
-                                        <div class="market-header">
-                                            <span>${name.trim()}</span>
-                                            <span class="${isUp ? 'price-up' : 'price-down'}">${priceChange.trim()}</span>
-                                        </div>
+                                    const updateCard = document.createElement('div');
+                                    updateCard.className = 'market-update-card';
+                                    updateCard.innerHTML = `
+                                        <h3 class="market-name">${title}</h3>
+                                        <p>${content}</p>
                                     `;
-                                    marketGrid.appendChild(card);
+                                    marketUpdates.appendChild(updateCard);
                                 });
                             });
                     </script>
@@ -220,26 +260,34 @@
             </div>
         </section>
 
-        <!-- Crypto Market Metrics -->
-        <section class="content-section">
+        <!-- Crypto Section -->
+        <section class="content-section pixel-border">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Crypto Market Metrics</h2>
-                    <a href="/pages/crypto.html" class="view-all">View all →</a>
+                    <h2 class="section-title">Crypto Metrics</h2>
+                    <a href="/crypto.html" class="view-all">View all →</a>
                 </div>
                 <div class="metrics-preview">
-                    <!-- Auto-populated from crypto.html -->
                     <script>
-                        fetch('/pages/crypto.html')
+                        fetch('/crypto.html')
                             .then(response => response.text())
                             .then(html => {
                                 const parser = new DOMParser();
                                 const doc = parser.parseFromString(html, 'text/html');
-                                const metricCards = doc.querySelectorAll('.metric-card');
+                                const allMetricCards = Array.from(doc.querySelectorAll('.metric-card'));
+                                const targetTitles = [
+                                    'Daily BTC Whale vs. Retail Net Buying/Selling Volume',
+                                    'BTC Spot ETF Inflows'
+                                ];
+                                
+                                const selectedCards = allMetricCards.filter(card => {
+                                    const title = card.querySelector('.metric-title').textContent;
+                                    return targetTitles.includes(title);
+                                });
+
                                 const metricsPreview = document.querySelector('.metrics-preview');
                                 
-                                // Display first 3 metric cards
-                                Array.from(metricCards).slice(0, 3).forEach(card => {
+                                selectedCards.forEach(card => {
                                     const title = card.querySelector('.metric-title').textContent;
                                     const description = card.querySelector('.description').textContent;
                                     const graphSrc = card.querySelector('.graph-container img').src;
@@ -265,76 +313,25 @@
             </div>
         </section>
 
-        <!-- Daily Market Updates -->
-        <section class="content-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Market Updates</h2>
-                    <a href="/pages/daily.html" class="view-all">View all →</a>
-                </div>
-                <div class="market-updates">
-                    <!-- Auto-populated from daily.html -->
-                    <script>
-                        fetch('/pages/daily.html')
-                            .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-                                const marketSections = doc.querySelectorAll('.market-section');
-                                const marketUpdates = document.querySelector('.market-updates');
-                                
-                                Array.from(marketSections).slice(0, 3).forEach(section => {
-                                    const title = section.querySelector('h2').textContent;
-                                    const content = section.querySelector('.market-content').textContent;
-                                    
-                                    const updateCard = document.createElement('div');
-                                    updateCard.className = 'market-update-card';
-                                    updateCard.innerHTML = `
-                                        <h3 class="market-name">${title}</h3>
-                                        <p>${content}</p>
-                                    `;
-                                    marketUpdates.appendChild(updateCard);
-                                });
-                            });
-                    </script>
-                </div>
-            </div>
-        </section>
-
         <!-- Latest Views & Blogs -->
-        <section class="content-section">
+        <section class="content-section pixel-border">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Latest Views & Blogs</h2>
-                    <a href="/pages/views-and-blogs.html" class="view-all">View all →</a>
+                    <a href="/views-and-blogs.html" class="view-all">View all →</a>
                 </div>
                 <div class="blog-preview">
-                    <!-- Auto-populated from views-and-blogs.html -->
-                    <script>
-                        fetch('/pages/views-and-blogs.html')
-                            .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-                                const blogPosts = doc.querySelectorAll('.blog-post');
-                                const blogPreview = document.querySelector('.blog-preview');
-                                
-                                Array.from(blogPosts).slice(0, 3).forEach(post => {
-                                    const title = post.querySelector('.blog-title').textContent;
-                                    const meta = post.querySelector('.blog-meta').textContent;
-                                    const summary = post.querySelector('.blog-summary').textContent;
-                                    
-                                    const blogCard = document.createElement('div');
-                                    blogCard.className = 'blog-card';
-                                    blogCard.innerHTML = `
-                                        <div class="blog-meta">${meta}</div>
-                                        <h3 class="blog-card-title">${title}</h3>
-                                        <p class="blog-summary">${summary}</p>
-                                    `;
-                                    blogPreview.appendChild(blogCard);
-                                });
-                            });
-                    </script>
+                    <!-- Static placeholder content until blog system is set up -->
+                    <div class="blog-card">
+                        <div class="blog-meta">Latest Update</div>
+                        <h3 class="blog-card-title">Market Analysis: Weekly Outlook</h3>
+                        <p class="blog-summary">Comprehensive analysis of current market trends and future outlook...</p>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-meta">Technical Analysis</div>
+                        <h3 class="blog-card-title">Key Support and Resistance Levels</h3>
+                        <p class="blog-summary">Detailed technical analysis of major market indices...</p>
+                    </div>
                 </div>
             </div>
         </section>
