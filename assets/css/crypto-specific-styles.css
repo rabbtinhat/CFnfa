@@ -33,12 +33,14 @@
     border-bottom: 1px solid var(--neon-purple);
 }
 
+/* Standardized heading style for all titles */
 .metric-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-    color: #00fff5; /* Updated to cyan color */
+    color: #00fff5;
     margin: 0;
     line-height: 1.4;
+    text-shadow: none;
 }
 
 .metric-content {
@@ -97,7 +99,7 @@
     line-height: 1.4;
 }
 
-/* Updated HOW TO USE styles */
+/* Updated HOW TO USE styles - removed neon effect */
 .how-to-use {
     margin: 1rem 0;
 }
@@ -109,9 +111,10 @@
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
+    text-shadow: none;
 }
 
-/* Updated info-grid styles */
+/* Updated info-grid styles - removed neon effect */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -122,11 +125,12 @@
 .info-grid .pros h3,
 .info-grid .cons h3 {
     font-family: 'Press Start 2P', cursive;
-    color: #ffffff;
+    color: #00fff5;
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
+    text-shadow: none;
 }
 
 ul {
