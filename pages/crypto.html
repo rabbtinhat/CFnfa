@@ -12,18 +12,17 @@
 </head>
 <body>
     <div id="header"></div>
-<main>
-    <div class="container content-section pixel-border">
-        <h1 class="page-title">Crypto Market Indicators</h1>
-        
-        <div class="metrics-grid">
-                 <!-- Each metric card will automatically use the cyberpunk styling -->
+    <main>
+        <div class="container content-section pixel-border">
+            <h1 class="page-title">Crypto Market Indicators</h1>
+            
+            <div class="metrics-grid">
+                <!-- Daily BTC Whale vs. Retail Card -->
                 <div class="metric-card">
                     <div class="metric-header">
                         <h2 class="metric-title">Daily BTC Whale vs. Retail Net Buying/Selling Volume</h2>
                     </div>
                     <div class="metric-content">
-                        <!-- Graph placeholder - rectangle shape -->
                         <div class="graph-container rectangle" onclick="openModal(this)">
                             <img src="/assets/images/graphs/bitcoindistribution.png" alt="BTC Whale vs Retail Volume" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
@@ -31,7 +30,6 @@
                             Source: <a href="https://bgeometrics.com/bitcoin-distribution/" target="_blank">BGeometrics</a>
                         </div>
 
-                        <!-- Modal for full-size graph -->
                         <div class="modal">
                             <div class="modal-content">
                                 <span class="modal-close" onclick="closeModal(this)">&times;</span>
@@ -507,7 +505,7 @@
     </div>
 </div>
                                
-            </div>
+          </div>
         </div>
     </main>
     <div id="footer"></div>
@@ -532,30 +530,26 @@
     </script>
 
     <script>
-        // Functions for modal functionality
         function openModal(graphContainer) {
             const modal = graphContainer.parentElement.querySelector('.modal');
             const modalImg = modal.querySelector('img');
-            // When implementing, replace with actual graph image source
             modalImg.src = graphContainer.querySelector('img')?.src || '#';
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(closeButton) {
             const modal = closeButton.closest('.modal');
             modal.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
-        // Close modal when clicking outside the image
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal')) {
                 closeModal(event.target.querySelector('.modal-close'));
             }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 const activeModal = document.querySelector('.modal.active');
