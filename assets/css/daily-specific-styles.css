@@ -5,32 +5,68 @@
     --neon-pink: #ff00ff;
 }
 
-/* Remove conflicting margin and adjust header spacing */
+/* Header and Navigation Spacing Fixes */
 .header-content {
-    padding: 1.5rem 0;
+    padding: 0.75rem 0 !important;
 }
 
+.site-title {
+    margin-bottom: 0.5rem !important;
+}
+
+nav {
+    margin-bottom: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.75rem 1.25rem;
+    margin: 0;
+}
+
+nav ul li a {
+    color: var(--neon-cyan);
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+nav ul li a::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--neon-purple);
+}
+
+/* Container and Main Content */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1rem;
 }
 
+main {
+    margin-top: 2rem;
+}
+
 /* Page Title */
 h1.daily-title {
     font-family: 'Press Start 2P', cursive;
-    color: var(--neon-cyan);
     font-size: 1.5rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
 }
 
 /* Date Header */
 .date-header {
     font-family: 'Press Start 2P', cursive;
-    color: #666;
     font-size: 0.8rem;
-    margin-bottom: 1.5rem;
+    color: var(--neon-cyan);
+    margin-bottom: 2rem;
 }
 
 /* Market Overview Cards */
@@ -56,10 +92,13 @@ h1.daily-title {
 }
 
 .market-value {
-    font-family: monospace;
-    font-size: 0.9rem;
-    color: #e0e0e0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 0.5rem;
+    color: var(--text-primary);
 }
 
 .up { 
@@ -75,10 +114,10 @@ h1.daily-title {
 /* Market Sections */
 .market-section {
     background: rgba(10, 10, 15, 0.95);
-    padding: 1.25rem;
+    padding: 1.5rem;
     border-radius: 0.25rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--neon-cyan);
+    margin-bottom: 2rem;
+    border: 1px solid var(--neon-purple);
 }
 
 .market-section h2 {
@@ -109,18 +148,15 @@ h1.daily-title {
     align-items: center;
     padding: 0.5rem 0;
     color: var(--text-primary);
+    position: relative;
+    padding-left: 0.75rem;
 }
 
 .macro-item::before {
     content: "→";
-    margin-right: 0.5rem;
-    color: var(--neon-blue);
-    text-shadow: 0 0 5px var(--neon-blue);
-}
-
-/* Main content spacing */
-main {
-    padding-top: 2rem;
+    position: absolute;
+    left: -0.5rem;
+    color: var(--neon-pink);
 }
 
 /* Responsive Design */
@@ -129,12 +165,12 @@ main {
         grid-template-columns: 1fr;
     }
     
-    h1.daily-title {
-        font-size: 1.2rem;
-    }
-    
     .container {
         padding: 0.75rem;
+    }
+
+    h1.daily-title {
+        font-size: 1.2rem;
     }
 
     .market-section h2 {
@@ -142,11 +178,26 @@ main {
     }
 
     .market-content,
-    .macro-item {
+    .macro-item,
+    .market-value {
         font-size: 0.6rem;
     }
 
     .overview-card h3 {
         font-size: 0.7rem;
+    }
+
+    nav ul {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 0.75rem;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+    }
+
+    nav ul li a {
+        font-size: 0.7rem;
+        white-space: nowrap;
     }
 }
