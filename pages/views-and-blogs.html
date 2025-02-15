@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - CF Ng's Non Financial Advice</title>
+    <title>Views and Blogs - CF's Non Financial Advice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
-    <link rel="stylesheet" href="/assets/css/blog-specific-styles.css">
-<link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
+    <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
 </head>
 <body>
     <div id="header"></div>
     <main>
         <div class="container">
-            <h1 class="section-title">Views and Blogs</h1>
+            <h1 class="neon-text pixel-text">Views and Blogs</h1>
             
             <div class="blog-list">
-                <!-- Posts will be loaded here dynamically -->
                 <div id="posts-container"></div>
-                
-                <!-- Pagination -->
                 <div class="pagination" id="pagination"></div>
             </div>
         </div>
@@ -60,7 +56,6 @@
                 }
                 
                 allPosts = await response.json();
-                // Sort posts by date (newest first)
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
                 displayCurrentPage();
@@ -69,7 +64,7 @@
                 console.error('Error loading blog posts:', error);
                 document.getElementById('posts-container').innerHTML = `
                     <div class="no-posts">
-                        <p>Unable to load blog posts. Please try again later.</p>
+                        <p class="neon-text">Unable to load blog posts. Please try again later.</p>
                     </div>
                 `;
             }
@@ -83,9 +78,9 @@
             const postsHtml = currentPosts.map(post => `
                 <article class="blog-post">
                     <a href="/content/posts/${post.slug}.html" class="blog-link">
-                        <h2 class="blog-title">${post.title}</h2>
+                        <h2 class="blog-title neon-text">${post.title}</h2>
                         <div class="blog-meta">
-                            <span class="blog-category">${post.category}</span>
+                            <span class="blog-category pixel-text">${post.category}</span>
                             <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
                         </div>
                         <p class="blog-summary">${post.summary || 'No summary available'}</p>
@@ -95,7 +90,7 @@
             
             document.getElementById('posts-container').innerHTML = postsHtml || `
                 <div class="no-posts">
-                    <p>No blog posts found.</p>
+                    <p class="neon-text">No blog posts found.</p>
                 </div>
             `;
         }
@@ -105,25 +100,22 @@
             const paginationHtml = [];
             
             if (totalPages > 1) {
-                // Previous button
                 if (currentPage > 1) {
                     paginationHtml.push(`
-                        <button onclick="changePage(${currentPage - 1})">← Previous</button>
+                        <button class="pixel-text" onclick="changePage(${currentPage - 1})">← Previous</button>
                     `);
                 }
                 
-                // Page numbers
                 for (let i = 1; i <= totalPages; i++) {
                     paginationHtml.push(`
                         <button onclick="changePage(${i})" 
-                                class="${currentPage === i ? 'active' : ''}">${i}</button>
+                                class="pixel-text ${currentPage === i ? 'active' : ''}">${i}</button>
                     `);
                 }
                 
-                // Next button
                 if (currentPage < totalPages) {
                     paginationHtml.push(`
-                        <button onclick="changePage(${currentPage + 1})">Next →</button>
+                        <button class="pixel-text" onclick="changePage(${currentPage + 1})">Next →</button>
                     `);
                 }
             }
@@ -138,7 +130,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Initialize when the page loads
         document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
