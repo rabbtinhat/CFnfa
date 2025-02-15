@@ -12,14 +12,13 @@
             background-color: #000;
             color: white;
             padding: 2rem 0;
-            margin-bottom: 2rem;
         }
 
         .market-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
-            margin: 1rem 0;
+            margin-bottom: 2rem;
         }
 
         .market-card {
@@ -39,10 +38,10 @@
 
         /* Content Sections */
         .content-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
             background: white;
             border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
@@ -50,58 +49,135 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
         }
 
         .section-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 600;
+            color: #111827;
         }
 
         .view-all {
             color: #4F46E5;
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .content-grid {
+        /* Crypto Cards */
+        .metrics-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .metric-header {
+            padding: 1rem;
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .metric-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .metric-content {
+            padding: 1rem;
+        }
+
+        .graph-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #f3f4f6;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Daily Market Update */
+        .market-updates {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        .content-card {
+        .market-update-card {
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .market-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .market-values {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* Blog Preview */
+        .blog-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .blog-card {
             border: 1px solid #e5e7eb;
             border-radius: 0.5rem;
             padding: 1rem;
             transition: transform 0.2s;
         }
 
-        .content-card:hover {
+        .blog-card:hover {
             transform: translateY(-2px);
         }
 
-        .content-meta {
+        .blog-meta {
             font-size: 0.875rem;
             color: #6b7280;
             margin-bottom: 0.5rem;
         }
 
-        .content-title {
+        .blog-card-title {
+            font-size: 1.125rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: #111827;
         }
 
-        .content-preview {
-            color: #4b5563;
+        .blog-summary {
             font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.5;
         }
 
         @media (max-width: 768px) {
-            .market-grid {
+            .market-grid,
+            .metrics-preview,
+            .market-updates,
+            .blog-preview {
                 grid-template-columns: 1fr;
             }
-            .content-grid {
-                grid-template-columns: 1fr;
+
+            .content-section {
+                padding: 1rem;
+                margin: 1rem 0;
             }
         }
     </style>
@@ -114,93 +190,151 @@
         <section class="market-summary">
             <div class="container">
                 <div class="market-grid">
-                    <div class="market-card">
-                        <div class="market-header">
-                            <span>S&P 500</span>
-                            <span class="price-down">-0.01%</span>
-                        </div>
-                        <div>6,114.62</div>
-                    </div>
-                    <div class="market-card">
-                        <div class="market-header">
-                            <span>Nasdaq</span>
-                            <span class="price-up">+0.38%</span>
-                        </div>
-                        <div>22,114.49</div>
-                    </div>
-                    <div class="market-card">
-                        <div class="market-header">
-                            <span>Dow 30</span>
-                            <span class="price-down">-0.37%</span>
-                        </div>
-                        <div>44,546.09</div>
-                    </div>
+                    <!-- Auto-populated from daily.html -->
+                    <script>
+                        fetch('/daily.html')
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                const marketValues = doc.querySelectorAll('.market-value');
+                                const marketGrid = document.querySelector('.market-grid');
+                                
+                                marketValues.forEach(value => {
+                                    const card = document.createElement('div');
+                                    card.className = 'market-card';
+                                    const isUp = value.classList.contains('up');
+                                    const [name, priceChange] = value.textContent.split(':');
+                                    
+                                    card.innerHTML = `
+                                        <div class="market-header">
+                                            <span>${name.trim()}</span>
+                                            <span class="${isUp ? 'price-up' : 'price-down'}">${priceChange.trim()}</span>
+                                        </div>
+                                    `;
+                                    marketGrid.appendChild(card);
+                                });
+                            });
+                    </script>
                 </div>
             </div>
         </section>
 
-        <!-- Global Daily -->
-        <section class="content-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Global Daily</h2>
-                    <a href="/daily.html" class="view-all">View all →</a>
-                </div>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-meta">Latest Update</div>
-                        <h3 class="content-title">US Markets</h3>
-                        <p class="content-preview">Key developments in North American markets...</p>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-meta">Today</div>
-                        <h3 class="content-title">European Markets</h3>
-                        <p class="content-preview">European market summary and analysis...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Crypto Section -->
+        <!-- Crypto Market Metrics -->
         <section class="content-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Crypto Market Metrics</h2>
                     <a href="/crypto.html" class="view-all">View all →</a>
                 </div>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-meta">Latest Update</div>
-                        <h3 class="content-title">BTC Distribution Analysis</h3>
-                        <p class="content-preview">Tracking whale vs. retail buying patterns...</p>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-meta">Today</div>
-                        <h3 class="content-title">ETH Metrics</h3>
-                        <p class="content-preview">Latest Ethereum market metrics and analysis...</p>
-                    </div>
+                <div class="metrics-preview">
+                    <!-- Auto-populated from crypto.html -->
+                    <script>
+                        fetch('/crypto.html')
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                const metricCards = doc.querySelectorAll('.metric-card');
+                                const metricsPreview = document.querySelector('.metrics-preview');
+                                
+                                // Display first 3 metric cards
+                                Array.from(metricCards).slice(0, 3).forEach(card => {
+                                    const title = card.querySelector('.metric-title').textContent;
+                                    const description = card.querySelector('.description').textContent;
+                                    const graphSrc = card.querySelector('.graph-container img').src;
+                                    
+                                    const previewCard = document.createElement('div');
+                                    previewCard.className = 'metric-card';
+                                    previewCard.innerHTML = `
+                                        <div class="metric-header">
+                                            <h3 class="metric-title">${title}</h3>
+                                        </div>
+                                        <div class="metric-content">
+                                            <div class="graph-container">
+                                                <img src="${graphSrc}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                            <p>${description}</p>
+                                        </div>
+                                    `;
+                                    metricsPreview.appendChild(previewCard);
+                                });
+                            });
+                    </script>
                 </div>
             </div>
         </section>
 
-        <!-- Views and Blogs -->
+        <!-- Daily Market Updates -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Market Updates</h2>
+                    <a href="/daily.html" class="view-all">View all →</a>
+                </div>
+                <div class="market-updates">
+                    <!-- Auto-populated from daily.html -->
+                    <script>
+                        fetch('/daily.html')
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                const marketSections = doc.querySelectorAll('.market-section');
+                                const marketUpdates = document.querySelector('.market-updates');
+                                
+                                Array.from(marketSections).slice(0, 3).forEach(section => {
+                                    const title = section.querySelector('h2').textContent;
+                                    const content = section.querySelector('.market-content').textContent;
+                                    
+                                    const updateCard = document.createElement('div');
+                                    updateCard.className = 'market-update-card';
+                                    updateCard.innerHTML = `
+                                        <h3 class="market-name">${title}</h3>
+                                        <p>${content}</p>
+                                    `;
+                                    marketUpdates.appendChild(updateCard);
+                                });
+                            });
+                    </script>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Views & Blogs -->
         <section class="content-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Latest Views & Blogs</h2>
                     <a href="/views-and-blogs.html" class="view-all">View all →</a>
                 </div>
-                <div class="content-grid">
-                    <div class="content-card">
-                        <div class="content-meta">Featured</div>
-                        <h3 class="content-title">Market Analysis: Weekly Outlook</h3>
-                        <p class="content-preview">In-depth analysis of market trends and opportunities...</p>
-                    </div>
-                    <div class="content-card">
-                        <div class="content-meta">2 days ago</div>
-                        <h3 class="content-title">Technical Analysis Update</h3>
-                        <p class="content-preview">Latest technical indicators and market patterns...</p>
-                    </div>
+                <div class="blog-preview">
+                    <!-- Auto-populated from views-and-blogs.html -->
+                    <script>
+                        fetch('/views-and-blogs.html')
+                            .then(response => response.text())
+                            .then(html => {
+                                const parser = new DOMParser();
+                                const doc = parser.parseFromString(html, 'text/html');
+                                const blogPosts = doc.querySelectorAll('.blog-post');
+                                const blogPreview = document.querySelector('.blog-preview');
+                                
+                                Array.from(blogPosts).slice(0, 3).forEach(post => {
+                                    const title = post.querySelector('.blog-title').textContent;
+                                    const meta = post.querySelector('.blog-meta').textContent;
+                                    const summary = post.querySelector('.blog-summary').textContent;
+                                    
+                                    const blogCard = document.createElement('div');
+                                    blogCard.className = 'blog-card';
+                                    blogCard.innerHTML = `
+                                        <div class="blog-meta">${meta}</div>
+                                        <h3 class="blog-card-title">${title}</h3>
+                                        <p class="blog-summary">${summary}</p>
+                                    `;
+                                    blogPreview.appendChild(blogCard);
+                                });
+                            });
+                    </script>
                 </div>
             </div>
         </section>
