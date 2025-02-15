@@ -5,36 +5,41 @@
     --neon-pink: #ff00ff;
 }
 
-/* Header and Navigation Spacing Fixes */
-.site-title {
-    margin-bottom: 1rem !important; /* Reduce space between title and nav */
+/* Remove all margin/padding adjustments for header/nav */
+#header {
+    margin-bottom: 0 !important;
 }
 
-nav {
-    margin-bottom: 2rem; /* Add space between nav and main content */
+/* Market Ticker Banner */
+.market-ticker-banner {
+    background: rgba(10, 10, 15, 0.95);
+    border-top: 1px solid var(--neon-cyan);
     border-bottom: 1px solid var(--neon-cyan);
-}
-
-nav ul {
-    list-style: none;
+    padding: 0.5rem 0;
+    margin-top: 0;
     display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 0.75rem 1.25rem;
-    margin: 0;
+    justify-content: space-around;
+    overflow: hidden;
 }
 
-/* Container and Main Content */
+.ticker-region {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+}
+
+.ticker-region div {
+    white-space: nowrap;
+}
+
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem;
-}
-
-/* Main content adjustment */
-main {
-    margin-top: 0; /* Remove default top margin */
-    padding-top: 1rem; /* Add smaller padding */
+    padding: 2rem 1rem;
 }
 
 /* Page Title */
@@ -43,7 +48,6 @@ h1.daily-title {
     color: var(--neon-cyan);
     font-size: 1.5rem;
     text-transform: uppercase;
-    margin-top: 1rem; /* Add space after navigation */
     margin-bottom: 1rem;
     text-shadow: 0 0 10px var(--neon-cyan);
 }
@@ -51,9 +55,10 @@ h1.daily-title {
 /* Date Header */
 .date-header {
     font-family: 'Press Start 2P', cursive;
-    color: #666;
+    color: var(--neon-cyan);
     font-size: 0.8rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
 }
 
 /* Market Overview Cards */
@@ -78,10 +83,10 @@ h1.daily-title {
     margin-bottom: 0.75rem;
 }
 
+/* Market Values */
 .market-value {
-    font-family: monospace;
-    font-size: 0.9rem;
-    color: #e0e0e0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
     margin-bottom: 0.5rem;
 }
 
@@ -116,47 +121,27 @@ h1.daily-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.7rem;
     line-height: 1.6;
-    color: var(--text-primary);
+    color: #e0e0e0;
 }
 
-/* Macro List */
-.macro-list {
-    list-style: none;
-    padding: 0;
-}
-
-.macro-item {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    color: var(--text-primary);
-}
-
-.macro-item::before {
-    content: "→";
-    margin-right: 0.5rem;
-    color: var(--neon-blue);
-    text-shadow: 0 0 5px var(--neon-blue);
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-    .site-title {
-        margin-bottom: 0.75rem !important;
+    .market-ticker-banner {
+        flex-direction: column;
+        padding: 0.25rem;
     }
-    
-    nav {
-        margin-bottom: 1.5rem;
+
+    .ticker-region {
+        font-size: 0.6rem;
+        padding: 0.25rem;
     }
-    
+
     h1.daily-title {
         font-size: 1.2rem;
-        margin-top: 0.75rem;
     }
     
     .container {
-        padding: 0.75rem;
+        padding: 1rem;
     }
 
     .quick-overview {
@@ -167,12 +152,7 @@ h1.daily-title {
         font-size: 0.8rem;
     }
 
-    .market-content,
-    .macro-item {
+    .market-content {
         font-size: 0.6rem;
-    }
-
-    .overview-card h3 {
-        font-size: 0.7rem;
     }
 }
