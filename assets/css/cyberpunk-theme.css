@@ -1,0 +1,294 @@
+/* cyberpunk-theme.css */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    /* Cyberpunk Theme Colors */
+    --neon-blue: #00fff5;
+    --neon-pink: #ff00ff;
+    --neon-purple: #b026ff;
+    --dark-bg: #0a0a0a;
+    --cyber-gradient: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    --card-bg: rgba(26, 26, 26, 0.9);
+}
+
+/* Global Theme Overrides */
+body {
+    background-color: var(--dark-bg);
+    color: #fff;
+}
+
+header {
+    background-color: var(--dark-bg) !important;
+    border-bottom: 1px solid var(--neon-blue) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+}
+
+.site-title {
+    color: var(--neon-pink) !important;
+    text-shadow: 0 0 10px var(--neon-pink);
+    font-family: 'Press Start 2P', cursive;
+}
+
+nav ul li a {
+    color: #fff !important;
+}
+
+nav ul li a:hover {
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+nav ul li a::after {
+    background-color: var(--neon-blue) !important;
+}
+
+/* Market Summary Styles */
+.market-summary {
+    background-color: var(--dark-bg);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.last-update {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.market-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-pink);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.market-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.price-up { 
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.price-down { 
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+}
+
+/* Content Sections */
+.content-section {
+    background: var(--dark-bg);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
+}
+
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    background: var(--cyber-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.view-all {
+    color: var(--neon-pink);
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.view-all:hover {
+    text-shadow: 0 0 10px var(--neon-pink);
+    transform: scale(1.05);
+}
+
+/* Market Updates Section */
+.market-update-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-blue);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: white;
+    transition: transform 0.3s;
+}
+
+.market-update-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* Crypto Section */
+.metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+.metric-header {
+    background: rgba(176, 38, 255, 0.1);
+    padding: 1rem;
+    border-bottom: 1px solid var(--neon-purple);
+}
+
+/* Blog Section */
+.blog-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-pink);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: white;
+    transition: all 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.blog-meta {
+    color: var(--neon-blue);
+    font-size: 0.8rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Footer Modifications */
+footer {
+    background-color: var(--dark-bg) !important;
+    border-top: 1px solid var(--neon-blue) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+}
+
+footer p {
+    color: #fff !important;
+}
+
+footer a {
+    color: var(--neon-pink) !important;
+    border-bottom: 1px solid var(--neon-pink);
+}
+
+/* Pixel Border Effect */
+.pixel-border {
+    position: relative;
+    padding: 3px;
+}
+
+.pixel-border::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: var(--cyber-gradient);
+    z-index: -1;
+    clip-path: polygon(
+        0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
+        100% calc(100% - 5px), calc(100% - 5px) 100%,
+        5px 100%, 0 calc(100% - 5px)
+    );
+}
+
+/* Data Source Attribution */
+.data-source {
+    font-size: 0.7rem;
+    color: #666;
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+/* Container Width Override */
+.container {
+    max-width: 1200px !important;
+}
+
+/* Crypto Page Specific */
+.metrics-grid {
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.graph-container {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+}
+
+.graph-source a {
+    color: var(--neon-blue);
+}
+
+/* Daily Page Specific */
+.overview-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 255, 245, 0.2);
+}
+
+.market-section {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+}
+
+.market-section h2 {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Blog Page Specific */
+.blog-post {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-pink);
+    transition: transform 0.3s;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.pagination button {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-blue);
+    color: white;
+}
+
+.pagination button.active {
+    background: var(--neon-blue);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    .view-all {
+        font-size: 0.7rem;
+    }
+    
+    .market-card, .market-update-card, .metric-card, .blog-card {
+        margin: 0.5rem 0;
+    }
+}
