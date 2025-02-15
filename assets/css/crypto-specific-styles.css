@@ -19,7 +19,7 @@
     border-radius: 0.25rem;
     overflow: hidden;
     transition: transform 0.3s;
-    min-width: 0; /* Prevents cards from expanding */
+    min-width: 0;
 }
 
 .metric-card:hover {
@@ -55,7 +55,7 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s;
-    min-height: 150px; /* Reduced height */
+    min-height: 150px;
     border: 1px solid var(--neon-blue);
     position: relative;
 }
@@ -94,21 +94,32 @@
     line-height: 1.4;
 }
 
+/* Updated HOW TO USE styles */
 .how-to-use {
     margin-bottom: 0.75rem;
 }
 
 .how-to-use h3 {
+    font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
     color: var(--neon-blue);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
+/* Updated info-grid styles */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
+}
+
+.info-grid h3 {
+    font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
 ul {
@@ -133,7 +144,7 @@ li::before {
     color: var(--neon-pink);
 }
 
-/* Modal styles */
+/* Rest of the styles remain unchanged */
 .modal {
     display: none;
     position: fixed;
