@@ -2,8 +2,8 @@
 .metrics-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 0.5rem;
     width: 100%;
 }
 
@@ -58,7 +58,7 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s;
-    min-height: 300px;
+    min-height: 200px;
     border: 1px solid var(--neon-blue);
 }
 
