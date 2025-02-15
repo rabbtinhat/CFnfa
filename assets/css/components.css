@@ -70,11 +70,26 @@ nav ul li a {
     font-size: 0.8rem;
     text-transform: uppercase;
     position: relative;
-    padding: 0.5rem;
-    transition: all 0.3s ease;
+    padding-left: 1rem;
 }
 
-/* Removed the ::before pseudo-element that was adding the ">" arrow */
+/* Modified nav arrow styling to prevent double arrows */
+nav ul li a::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: #ff00ff;
+}
+
+/* Remove any additional pseudo-elements that might cause double arrows */
+nav ul li a::after {
+    content: none;
+}
+
+/* Ensure no other elements can add arrows */
+nav ul li > *::before {
+    content: none;
+}
 
 nav ul li a:hover {
     color: #ff00ff;
