@@ -1,12 +1,11 @@
-/* Updated header styles */
+/* Header styles */
 header {
-    background-color: var(--dark-bg);
+    background-color: var(--bg-primary);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--neon-blue);
-    box-shadow: 0 0 10px rgba(0, 255, 245, 0.2);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-content {
@@ -17,47 +16,45 @@ header {
 }
 
 .site-title {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.2rem;
-}
-
-.site-title a {
-    color: var(--neon-blue);
-    text-shadow: 0 0 5px var(--neon-blue);
-    transition: all 0.3s ease;
-}
-
-.site-title a:hover {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
+    font-size: 1.8em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 /* Navigation styles */
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: flex-start;
-    padding: 8px 20px;
-    gap: 1.5rem;
-    background: rgba(0, 0, 0, 0.95);
-    border-bottom: 1px solid var(--neon-purple);
+    justify-content: space-between;
+    padding: 15px 0;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 nav ul li a {
-    color: var(--neon-blue);
+    color: var(--text-primary);
     text-decoration: none;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
+    font-size: 0.95em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
     position: relative;
     padding: 5px 0;
-    transition: all 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--text-primary);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 /* Social links */
@@ -70,63 +67,69 @@ nav ul li a:hover {
 .social-links svg {
     width: 24px;
     height: 24px;
-    fill: var(--neon-blue);
-    transition: all 0.3s ease;
+    fill: currentColor;
 }
 
-.social-links a:hover svg {
-    fill: var(--neon-pink);
-    filter: drop-shadow(0 0 5px var(--neon-pink));
+.social-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 /* Footer styles */
 footer {
-    background-color: var(--dark-bg);
-    border-top: 1px solid var(--neon-purple);
+    border-top: 1px solid var(--border-color);
     padding: 40px 0;
     margin-top: 60px;
+    background-color: var(--bg-primary);
 }
 
 footer p {
     text-align: center;
     font-size: 0.9em;
-    color: var(--neon-blue);
-    font-family: 'Press Start 2P', cursive;
-    line-height: 1.8;
+    color: var(--text-secondary);
 }
 
 footer a {
-    color: var(--neon-pink);
+    color: var(--text-primary);
     text-decoration: none;
-    transition: all 0.3s ease;
+    border-bottom: 1px solid currentColor;
 }
 
-footer a:hover {
-    text-shadow: 0 0 10px var(--neon-pink);
-}
-
-/* Responsive styles */
+/* Responsive */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
-        gap: 10px;
-        padding: 10px 0;
+        gap: 10px;  /* Reduced from 15px */
+        padding: 10px 0;  /* Reduced from 20px */
     }
 
     .site-title {
-        font-size: 1rem;
+        font-size: 1.5em;  /* Slightly smaller for mobile */
+    }
+
+    .social-links {
+        justify-content: center;
+        gap: 15px;  /* Slightly reduced gap */
     }
 
     nav ul {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 1rem;
-        padding: 10px;
-        -webkit-overflow-scrolling: touch;
+        flex-direction: row;  /* Change to horizontal scrolling */
+        justify-content: flex-start;  /* Start from left */
+        overflow-x: auto;  /* Allow horizontal scrolling */
+        gap: 20px;
+        padding: 10px 0;  /* Reduced padding */
+        -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+    }
+
+    nav ul li {
+        flex-shrink: 0;  /* Prevent items from shrinking */
     }
 
     nav ul li a {
-        font-size: 0.7rem;
-        white-space: nowrap;
+        font-size: 0.85em;  /* Smaller font size */
+        white-space: nowrap;  /* Prevent text wrapping */
     }
 }
