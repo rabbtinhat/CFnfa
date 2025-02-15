@@ -1,8 +1,7 @@
-/* cyberpunk-theme.css */
+/* cyberpunk-theme.css - Replace your existing cyberpunk-theme.css with this */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    /* Cyberpunk Theme Colors */
     --neon-blue: #00fff5;
     --neon-pink: #ff00ff;
     --neon-purple: #b026ff;
@@ -17,6 +16,7 @@ body {
     color: #fff;
 }
 
+/* Header Styles */
 header {
     background-color: var(--dark-bg) !important;
     border-bottom: 1px solid var(--neon-blue) !important;
@@ -29,20 +29,34 @@ header {
     font-family: 'Press Start 2P', cursive;
 }
 
+/* Navigation Styles */
 nav ul li a {
     color: #fff !important;
+    font-family: 'Press Start 2P', cursive;
 }
 
 nav ul li a:hover {
     color: var(--neon-blue) !important;
-    text-shadow: 0 0 10px var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
 }
 
-nav ul li a::after {
-    background-color: var(--neon-blue) !important;
+/* Card Styles */
+.market-card, .market-update-card, .blog-card, .metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    min-height: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Market Summary Styles */
+.market-card:hover, .market-update-card:hover, .blog-card:hover, .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* Market Summary Section */
 .market-summary {
     background-color: var(--dark-bg);
     border: 1px solid var(--neon-blue);
@@ -58,40 +72,54 @@ nav ul li a::after {
     margin-bottom: 1rem;
 }
 
-.market-card {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-pink);
+/* Crypto Metrics Section */
+.metrics-preview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.metric-header {
+    background: rgba(176, 38, 255, 0.1);
     padding: 1rem;
-    border-radius: 0.5rem;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s, box-shadow 0.3s;
+    border-bottom: 1px solid var(--neon-purple);
 }
 
-.market-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--neon-pink);
+.description p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px rgba(0, 255, 245, 0.5);
+    margin-bottom: 1rem;
 }
 
-.price-up { 
-    color: #00ff00;
-    text-shadow: 0 0 5px #00ff00;
+.how-to-use li {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
 }
 
-.price-down { 
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000;
+.how-to-use li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: var(--neon-purple);
 }
 
-/* Content Sections */
-.content-section {
-    background: var(--dark-bg);
-    border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin: 2rem 0;
-    box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
+/* Blog Section */
+.blog-meta {
+    color: var(--neon-blue);
+    font-size: 0.8rem;
+    font-family: 'Press Start 2P', cursive;
 }
 
+/* Section Titles */
 .section-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
@@ -103,76 +131,7 @@ nav ul li a::after {
     -webkit-text-fill-color: transparent;
 }
 
-.view-all {
-    color: var(--neon-pink);
-    text-decoration: none;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    transition: all 0.3s;
-}
-
-.view-all:hover {
-    text-shadow: 0 0 10px var(--neon-pink);
-    transform: scale(1.05);
-}
-
-/* Market Updates Section */
-.market-update-card {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-blue);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    color: white;
-    transition: transform 0.3s;
-}
-
-.market-update-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--neon-blue);
-}
-
-/* Crypto Section */
-.metric-card {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    transition: transform 0.3s;
-}
-
-.metric-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--neon-purple);
-}
-
-.metric-header {
-    background: rgba(176, 38, 255, 0.1);
-    padding: 1rem;
-    border-bottom: 1px solid var(--neon-purple);
-}
-
-/* Blog Section */
-.blog-card {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-pink);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    color: white;
-    transition: all 0.3s;
-}
-
-.blog-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--neon-pink);
-}
-
-.blog-meta {
-    color: var(--neon-blue);
-    font-size: 0.8rem;
-    font-family: 'Press Start 2P', cursive;
-}
-
-/* Footer Modifications */
+/* Footer Styles */
 footer {
     background-color: var(--dark-bg) !important;
     border-top: 1px solid var(--neon-blue) !important;
@@ -185,110 +144,21 @@ footer p {
 
 footer a {
     color: var(--neon-pink) !important;
-    border-bottom: 1px solid var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
 }
 
-/* Pixel Border Effect */
-.pixel-border {
-    position: relative;
-    padding: 3px;
-}
-
-.pixel-border::after {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: var(--cyber-gradient);
-    z-index: -1;
-    clip-path: polygon(
-        0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
-        100% calc(100% - 5px), calc(100% - 5px) 100%,
-        5px 100%, 0 calc(100% - 5px)
-    );
-}
-
-/* Data Source Attribution */
-.data-source {
-    font-size: 0.7rem;
-    color: #666;
-    text-align: right;
-    margin-top: 0.5rem;
-}
-
-/* Container Width Override */
-.container {
-    max-width: 1200px !important;
-}
-
-/* Crypto Page Specific */
-.metrics-grid {
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.graph-container {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-purple);
-}
-
-.graph-source a {
-    color: var(--neon-blue);
-}
-
-/* Daily Page Specific */
-.overview-card {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-blue);
-    box-shadow: 0 0 15px rgba(0, 255, 245, 0.2);
-}
-
-.market-section {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-purple);
-}
-
-.market-section h2 {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
-}
-
-/* Blog Page Specific */
-.blog-post {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-pink);
-    transition: transform 0.3s;
-}
-
-.blog-post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--neon-pink);
-}
-
-.pagination button {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-blue);
-    color: white;
-}
-
-.pagination button.active {
-    background: var(--neon-blue);
-    box-shadow: 0 0 10px var(--neon-blue);
-}
-
-/* Responsive Adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
     .section-title {
         font-size: 1rem;
     }
     
-    .view-all {
+    .description p, .how-to-use li {
         font-size: 0.7rem;
     }
     
-    .market-card, .market-update-card, .metric-card, .blog-card {
-        margin: 0.5rem 0;
+    .market-card, .market-update-card, .blog-card, .metric-card {
+        min-height: 250px;
+        padding: 1rem;
     }
 }
