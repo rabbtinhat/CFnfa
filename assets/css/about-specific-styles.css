@@ -1,21 +1,4 @@
 /* about-specific-styles.css */
-/* Override the base styles for the main title */
-.story-header h1,
-.story-header h1.neon-text,
-.story-header h1.pixel-text,
-.story-header h1.neon-text.pixel-text {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-    font-size: 48px !important;
-    font-weight: 600 !important;
-    color: #00fff5 !important;
-    text-shadow: 0 0 10px rgba(0, 255, 245, 0.5) !important;
-    text-transform: none !important;
-    margin-bottom: 2rem !important;
-    letter-spacing: normal !important;
-    line-height: 1.2 !important;
-}
-
-/* Rest of the styles remain the same */
 .story-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -25,6 +8,17 @@
 .story-header {
     text-align: left;
     margin-bottom: 3rem;
+}
+
+/* Main title - matching Crypto Market Indicators style */
+.story-header h1 {
+    color: rgb(0, 255, 245);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+    text-shadow: none;
 }
 
 .timeline-section {
@@ -71,13 +65,13 @@
     flex: 1;
 }
 
-/* Subtitle styles */
+/* Updated subtitle style with higher specificity to override consolidated-cyberpunk.css */
 .story-container .timeline-section .timeline-content h2 {
-    color: #00fff5 !important;
+    color: #00fff5 !important; /* Using !important to ensure override */
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    text-shadow: none !important;
+    text-shadow: none !important; /* Removing text shadow */
 }
 
 .timeline-content p {
@@ -87,13 +81,6 @@
 }
 
 @media (max-width: 768px) {
-    .story-header h1,
-    .story-header h1.neon-text,
-    .story-header h1.pixel-text,
-    .story-header h1.neon-text.pixel-text {
-        font-size: 32px !important;
-    }
-
     .timeline-section {
         flex-direction: column !important;
         gap: 1.5rem;
@@ -102,6 +89,10 @@
 
     .timeline-image {
         max-width: 100%;
+    }
+
+    .story-header h1 {
+        font-size: 1.8rem;
     }
 
     .timeline-content h2 {
