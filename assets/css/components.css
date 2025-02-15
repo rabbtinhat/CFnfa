@@ -18,16 +18,17 @@ header {
 
 .header-content {
     display: flex;
-    justify-content: center; /* Center the title */
+    flex-direction: column;
     align-items: center;
-    padding: 10px 0;
-    position: relative; /* For absolute positioning of social links */
+    padding: 1.5rem 0;
+    position: relative;
 }
 
 .site-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
-    text-align: center; /* Center the text */
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .site-title a {
@@ -50,14 +51,15 @@ header {
 /* Navigation styles */
 nav {
     background: #000;
+    width: 100%;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center; /* Center the navigation */
+    justify-content: center;
     gap: 2rem;
-    padding: 15px 20px;
+    padding: 1rem 1.25rem;
     margin: 0;
     max-width: 1200px;
     margin: 0 auto;
@@ -90,10 +92,10 @@ nav ul li a:hover {
     display: flex;
     gap: 20px;
     align-items: center;
-    position: absolute; /* Position absolutely */
-    right: 0; /* Align to the right */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Perfect vertical centering */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .social-links svg {
@@ -137,27 +139,28 @@ footer a:hover {
 
 /* Main content spacing */
 main {
-    margin-top: 140px; /* Increased to ensure visibility of daily content */
+    margin-top: 140px;
     padding: 0;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .header-content {
-        padding: 10px 20px;
+        padding: 1rem 20px;
     }
 
     .site-title {
         font-size: 1rem;
+        margin-bottom: 1rem;
     }
 
     nav ul {
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 1rem;
-        padding: 10px 20px;
+        padding: 0.75rem 1rem;
         -webkit-overflow-scrolling: touch;
-        justify-content: flex-start; /* Allow scrolling on mobile */
+        justify-content: flex-start;
     }
 
     nav ul li a {
