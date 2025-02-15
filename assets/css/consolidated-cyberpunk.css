@@ -1,0 +1,216 @@
+/* Consolidated Cyberpunk Styles */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --neon-blue: #00fff5;
+    --neon-pink: #ff00ff;
+    --neon-purple: #b026ff;
+    --dark-bg: #0a0a0a;
+    --card-bg: rgba(26, 26, 26, 0.9);
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --text-highlight: #ffffff;
+    --cyber-gradient: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+}
+
+/* Global Base Styles */
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--neon-pink);
+    text-shadow: 0 0 8px var(--neon-pink);
+}
+
+p, div, span {
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Links */
+a {
+    color: var(--neon-pink);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+/* Header Styles */
+header {
+    background-color: var(--dark-bg) !important;
+    border-bottom: 1px solid var(--neon-blue) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+}
+
+.site-title {
+    color: var(--neon-pink) !important;
+    text-shadow: 0 0 10px var(--neon-pink);
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Navigation */
+nav ul li a {
+    color: var(--neon-blue);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+nav ul li a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Card Styles */
+.market-card, .market-update-card, .blog-card, .metric-card, .strategy-card {
+    background: var(--card-bg);
+    border: 1px solid var(--neon-purple);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover, 
+.blog-post:hover, 
+.strategy-card:hover,
+.market-card:hover, 
+.market-update-card:hover, 
+.blog-card:hover, 
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* Blog Styles */
+.blog-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    color: var(--neon-blue);
+    margin-bottom: 1rem;
+}
+
+.blog-meta {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: var(--neon-pink);
+}
+
+/* Market Updates */
+.market-updates {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.market-value {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    color: var(--text-highlight);
+}
+
+.price-up {
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.price-down {
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+}
+
+/* Section Styles */
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 8px var(--neon-blue);
+}
+
+.date-header {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin-bottom: 1.5rem;
+}
+
+/* Source Attribution */
+.data-source, 
+.source-text {
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+/* Special Effects */
+.neon-text {
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.pixel-text {
+    font-family: 'Press Start 2P', cursive;
+    text-transform: uppercase;
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--dark-bg) !important;
+    border-top: 1px solid var(--neon-blue) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+}
+
+footer p {
+    color: #fff !important;
+}
+
+footer a {
+    color: var(--neon-pink) !important;
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    nav ul li a {
+        font-size: 0.7rem;
+    }
+    
+    .blog-content, 
+    .section-content, 
+    .timeline-content {
+        font-size: 0.7rem;
+    }
+}
