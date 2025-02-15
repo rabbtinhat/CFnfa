@@ -6,20 +6,102 @@
     <title>CF's Non Financial Advise</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.12.0/recharts.min.js"></script>
     <style>
-        /* Add any additional styles here */
-        #market-app {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
+        /* Market Summary Section */
+        .market-summary {
+            background-color: #000;
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .market-card {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-up { color: #22c55e; }
+        .price-down { color: #ef4444; }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .view-all {
+            color: #4F46E5;
+            text-decoration: none;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .content-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-preview {
+            color: #4b5563;
+            font-size: 0.875rem;
         }
 
         @media (max-width: 768px) {
-            #market-app {
-                padding: 1rem;
+            .market-grid {
+                grid-template-columns: 1fr;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -28,7 +110,100 @@
     <div id="header"></div>
     
     <main>
-        <div id="market-app"></div>
+        <!-- Market Summary -->
+        <section class="market-summary">
+            <div class="container">
+                <div class="market-grid">
+                    <div class="market-card">
+                        <div class="market-header">
+                            <span>S&P 500</span>
+                            <span class="price-down">-0.01%</span>
+                        </div>
+                        <div>6,114.62</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="market-header">
+                            <span>Nasdaq</span>
+                            <span class="price-up">+0.38%</span>
+                        </div>
+                        <div>22,114.49</div>
+                    </div>
+                    <div class="market-card">
+                        <div class="market-header">
+                            <span>Dow 30</span>
+                            <span class="price-down">-0.37%</span>
+                        </div>
+                        <div>44,546.09</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Daily -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Global Daily</h2>
+                    <a href="/daily.html" class="view-all">View all →</a>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-meta">Latest Update</div>
+                        <h3 class="content-title">US Markets</h3>
+                        <p class="content-preview">Key developments in North American markets...</p>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-meta">Today</div>
+                        <h3 class="content-title">European Markets</h3>
+                        <p class="content-preview">European market summary and analysis...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crypto Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Crypto Market Metrics</h2>
+                    <a href="/crypto.html" class="view-all">View all →</a>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-meta">Latest Update</div>
+                        <h3 class="content-title">BTC Distribution Analysis</h3>
+                        <p class="content-preview">Tracking whale vs. retail buying patterns...</p>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-meta">Today</div>
+                        <h3 class="content-title">ETH Metrics</h3>
+                        <p class="content-preview">Latest Ethereum market metrics and analysis...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Views and Blogs -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Latest Views & Blogs</h2>
+                    <a href="/views-and-blogs.html" class="view-all">View all →</a>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-meta">Featured</div>
+                        <h3 class="content-title">Market Analysis: Weekly Outlook</h3>
+                        <p class="content-preview">In-depth analysis of market trends and opportunities...</p>
+                    </div>
+                    <div class="content-card">
+                        <div class="content-meta">2 days ago</div>
+                        <h3 class="content-title">Technical Analysis Update</h3>
+                        <p class="content-preview">Latest technical indicators and market patterns...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     
     <div id="footer"></div>
@@ -51,12 +226,6 @@
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
-
-        // Initialize React App
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('market-app');
-            ReactDOM.render(React.createElement(MarketApp), container);
-        });
     </script>
 </body>
 </html>
