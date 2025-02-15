@@ -3,168 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - CF's Non Financial Advice</title>
+    <title>2025 Asset Allocation Outlook - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
     <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
+    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css.css">
     <style>
-        .story-container {
-            max-width: 1200px;
+        /* Custom styles for the asset allocation page */
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0;
         }
-
-        .story-header {
-            text-align: left;
-            margin-bottom: 4rem;
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
         }
-
-        .story-header h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #000;
+        
+        h2 {
+            font-size: 24px;
+            margin-top: 40px;
+            margin-bottom: 20px;
         }
-
-        .story-header p {
-            font-size: 1.25rem;
-            color: #666;
+        
+        .section {
+            margin-bottom: 40px;
         }
-
-        .timeline-section {
+        
+        .chart-container {
+            margin: 30px 0;
+            /* Placeholder for charts */
+            min-height: 400px;
+            background-color: #f5f5f5;
             display: flex;
-            gap: 4rem;
-            margin-bottom: 8rem;
             align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
         }
-
-        .timeline-section:nth-child(odd) {
-            flex-direction: row-reverse;
+        
+        .strategy-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 30px 0;
         }
-
-        .timeline-image {
-            flex: 1;
-            max-width: 500px;
-        }
-
-        .timeline-image {
-            flex: 1;
-            max-width: 500px;
-            overflow: hidden;
-        }
-
-        .timeline-image img {
-            width: 100%;
-            height: auto;
+        
+        .strategy-card {
+            border: 1px solid #e0e0e0;
+            padding: 30px;
             border-radius: 8px;
+            width: 100%;
+        }
+        
+        .strategy-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Chart size control */
+        .chart-container {
+            /* You can modify these values as needed */
+            --chart-height: 400px;
+            min-height: var(--chart-height);
+        }
+        
+        /* Research sources style */
+        .research-sources {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 30px;
+        }
+        
+        .research-sources h2 {
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive images */
+        .responsive-chart {
+            max-width: 100%;
+            height: auto;
             display: block;
-            object-fit: cover;
-            aspect-ratio: 1 / 1;
+            margin: 0 auto;
         }
 
-        .timeline-content {
-            flex: 1;
-        }
-
-        .timeline-content h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #000;
-        }
-
-        .timeline-content p {
-            font-size: 1.125rem;
-            line-height: 1.6;
-            color: #444;
-        }
-
-        @media (max-width: 768px) {
-            .timeline-section {
-                flex-direction: column !important;
-                gap: 2rem;
-                margin-bottom: 4rem;
-            }
-
-            .timeline-image {
-                max-width: 100%;
-            }
+        /* Add responsive design */
+        /* Chart size control for strategy cards */
+        .strategy-card .chart-container {
+            --chart-height: 300px;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
     <div id="header"></div>
     <main>
-        <div class="story-container">
-            <div class="story-header">
-                <!--  <p>  About C F </p> -->
-                <h1>A Finance Maverick’s High-Stakes Odyssey</h1>
-            </div>
-
-            <div class="timeline-section">
-                <div class="timeline-image">
-                    <img src="/assets/images/chapter1.png" alt="chapter 1">
+        <div class="container">
+            <!-- Main title -->
+            <h1>Q1 2025 Asset Allocation Outlook</h1>
+            
+            <!-- Global Economic Landscape Section -->
+            <section class="section">
+                <h2>Global Economic Landscape</h2>
+                <p>The economic environment in 2025 is projected to be dynamic, characterized by:</p>
+                <p><strong>US Fiscal Challenges:</strong> Potential government spending cuts and persistent inflation underscore the importance of a diversified equity portfolio and robust inflation hedging tools.</p>
+                <p><strong>Geopolitical Risks:</strong> Ongoing geopolitical tensions, including the Russia-Ukraine conflict, Middle East instability, and trade disputes involving the US, China, Mexico, and Canada, may induce market volatility, prompting investors to seek safe-haven assets like gold.</p>
+                <p><strong>AI Advancement:</strong> The continued advancement of artificial intelligence is expected to drive substantial growth beyond the tech sector, increasing electricity demand and creating investment opportunities in energy (particularly nuclear and natural gas), infrastructure, and utilities.</p>
+                
+                <!-- Comment: Insert economic landscape chart here 
+                <div class="chart-container">
+                    <p>Insert Economic Indicators Chart Here</p>  
+                </div>  -->
+            </section>
+            
+            <!-- Asset Class Commentary -->
+            <section class="section">
+                <h2>Asset Class Commentary</h2>
+                
+                <!-- Equities -->
+                <h3>Equities</h3>
+                <p>Outlook stays positive on equities overall, anticipating them to outperform cash and bonds, although increased market volatility is expected in 2025. Analysts seem to be particularly optimistic about US equities due to their robust economy and dominance in key investment themes like AI.</p>
+                
+                <!-- Comment: Insert equities performance chart here 
+                <div class="chart-container">
+                    <p>Insert Equities Performance Chart Here</p> 
+                </div> -->
+                
+                <!-- Fixed Income -->
+                <h3>Fixed Income</h3>
+                <p>Fixed income assets can provide meaningful downside protection due to strong US private sector fundamentals and attractive yields. Most analysts recommend increasing allocations to short-term USD fixed income to take advantage of higher yields.</p>
+                
+                <!-- Alternative Investments -->
+                <h3>Alternative Investments</h3>
+                <p>Analysts are optimistic about gold and natural resources, with various factors supporting prices and growth potential. Digital assets are poised to reach new all-time highs in 2025 as use cases expand and adoption increases.</p>
+            </section>
+            
+            <!-- Asset Allocation Strategies -->
+            <section class="section">
+                <h2>Asset Allocation Strategies</h2>
+                <div class="strategy-section">
+                    <!-- Diversified Growth Portfolio -->
+                    <div class="strategy-card">
+                        <h3>Diversified Growth Portfolio</h3>
+                        <!-- Comment: Insert pie chart for Diversified Growth Portfolio -->
+                        <div class="chart-container">
+    <img src="/assets/images/growth.svg" 
+         alt="Chart Description" 
+         class="responsive-chart">
+                        </div>
+                        <ul>
+                            <li>Equities: 50%</li>
+                            <li>Fixed Income: 30%</li>
+                            <li>Alternative Investments: 20%</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Balanced Portfolio -->
+                    <div class="strategy-card">
+                        <h3>Balanced Portfolio</h3>
+                        <!-- Comment: Insert pie chart for Balanced Portfolio -->
+                        <div class="chart-container">
+    <img src="/assets/images/balanced.svg" 
+         alt="Chart Description" 
+         class="responsive-chart">
+                        </div>
+                        <ul>
+                            <li>Equities: 40%</li>
+                            <li>Fixed Income: 40%</li>
+                            <li>Alternative Investments: 20%</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Conservative Portfolio -->
+                    <div class="strategy-card">
+                        <h3>Conservative Portfolio</h3>
+                        <!-- Comment: Insert pie chart for Conservative Portfolio -->
+                        <div class="chart-container">
+    <img src="/assets/images/conservative.svg" 
+         alt="Chart Description" 
+         class="responsive-chart">
+                        </div>
+                        <ul>
+                            <li>Equities: 30%</li>
+                            <li>Fixed Income: 50%</li>
+                            <li>Alternative Investments: 10%</li>
+                            <li>Cash: 10%</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="timeline-content">
-                    <h2>The Hong Kong Undergrad and his daydreams of Wall Street</h2>
-                    <p>Armed with a degree from the University of Hong Kong, CF debated equity valuations like a pro—while relatives mistook his passion for “gambling.” Little did they know, CF will soon turn “gambling” into a career. 
-Key skill unlocked: explaining “short-selling” to relatives at Lunar New Year without triggering a family intervention</p>
-                </div>
-            </div>
-
-            <div class="timeline-section">
-                <div class="timeline-image">
-                    <img src="/assets/images/chapter2.png" alt="chapter 2">
-                </div>
-                <div class="timeline-content">
-                    <h2>Equity Samurai & Asset Allocation Ninja: Everywhere was a Dojo</h2>
-                    <p>At EFG Bank, CF turned himself into a machine, handling hundreds of trade orders everyday. He also became a spreadsheet ninja, slaying trade discrepancies with Excel macros and broker negotiations.
-Then, at China Citic Bank, CF morphed into a “Portfolio Yoda”, training rookies on market trends while dodging regulatory Sith Lords. His secret? Turning Sharpe ratios into bedtime stories. Bonus: surviving 2013–2015 on coffee and Bloomberg Terminal alerts.</p>
-                </div>
-            </div>
-
-            <div class="timeline-section">
-                <div class="timeline-image">
-                    <img src="/assets/images/chapter3.png" alt="chapter 3">
-                </div>
-                <div class="timeline-content">
-                    <h2>Private Banking’s Dynamic Duo, HSBC & BMO HK’s High-Stakes Tango</h2>
-                    <p>At HSBC Private Banking and BMO Private Bank HK, CF played the role as a “wealth therapist” to high-net-worth clients, aligning portfolios with risk appetites. 
-Secret talent: convincing billionaires that “diversification” isn’t code for “boring.”
-Meanwhile, his CFA charter arrived—finally, a license to geek out legally and obtained one of the most epic names: CF, CFA. This could be the best time in his life, but CF decided to walked away in 2019 thinking: “What’s next?”
-</p>
-                </div>
+            </section>
+            
+            <!-- Conclusion -->
+            <section class="section">
+                <h2>Conclusion</h2>
+                <p>2025 is expected to be a dynamic year with both challenges and opportunities. Investors may maintain a patient approach and consider diversified investment strategies to navigate evolving market conditions. In this environment, tactical agility and the ability to adapt to changing market dynamics will be crucial.</p>
+            </section>
+            
+            <!-- Disclaimer -->
+            <div class="disclaimer">
+                <h3>Important Disclaimer</h3>
+                <p>The information provided herein is for informational purposes only and does not constitute investment advice. All investments involve risk, including the potential loss of principal. Diversification does not guarantee a profit or protect against loss in declining markets. Past performance is not indicative of future results.</p>
             </div>
             
-            <div class="timeline-section">
-                <div class="timeline-image">
-                    <img src="/assets/images/chapter4.png" alt="chapter 4">
-                </div>
-                <div class="timeline-content">
-                    <h2>Career Break: Masters, Mountains, and Cards</h2>
-                    <p>CF rage-quit the career he has been longing for years, to hike trails, debate tax policy and catch bluffs in Auckland. Earned a Master’s in Taxation, grinded poker tables, mastered reading “tells” in markets and humans, and learnt that “all-in” decisions on poker tables translate well to different matters in life. 
-New mantra: “Fortune favors the brave… and robots and the decentralized? WAGMI!”
-</p>
-                </div>
-            </div>
-            
-            <div class="timeline-section">
-                <div class="timeline-image">
-                    <img src="/assets/images/chapter5.png" alt="chapter 5">
-                </div>
-                <div class="timeline-content">
-                    <h2>From Poker Tables to Blockchain and AI, All-In or Fold?</h2>
-                    <p>Relocating again, to Canada this time, CF is merging poker grit with blockchain brains. Participated in different Web3 projects, and started training his AI agents to predict the market (...they still can’t). 
-Now CF is a  “decentralization DJ,” spinning Defi podcasts and DAO meetups. 
-Secret mission: Convert Tim Hortons regulars into Bitcoin Maxis. 
-Latest flex: Turning his CFA into a “Crypto Finance Authority” badge.</p>
-                </div>
-            </div>
+            <!-- Research Sources -->
+            <section class="research-sources">
+                <h2>Research Sources</h2>
+                <p>This report utilized information and insights from BMO, JP Morgan, Goldman Sachs, Blackrock, Morgan Stanley, and VanEck.</p>
+            </section>
         </div>
     </main>
     <div id="footer"></div>
 
+    <!-- Scripts -->
     <script>
         fetch('/components/header.html')
             .then(response => response.text())
