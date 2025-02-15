@@ -108,7 +108,7 @@
     letter-spacing: 0.1em;
 }
 
-/* Updated info-grid styles */
+/* Updated info-grid styles - keeping PROS/CONS in pixel font and white */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -118,9 +118,9 @@
 
 .info-grid .pros h3,
 .info-grid .cons h3 {
-    color: #00fff5;
+    color: #ffffff;
     font-size: 1rem;
-    font-family: sans-serif;
+    font-family: 'Press Start 2P', cursive;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
