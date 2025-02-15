@@ -65,16 +65,13 @@
     flex: 1;
 }
 
-/* Subtitles - using the previous main title style */
+/* Updated subtitle style to match the crypto market indicators */
 .timeline-content h2 {
     color: #00fff5;
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    text-shadow: 
-        0 0 7px #00fff5,
-        0 0 10px #00fff5,
-        0 0 21px #00fff5;
+    text-shadow: none;
 }
 
 .timeline-content p {
