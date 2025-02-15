@@ -30,6 +30,11 @@ h1.daily-title {
 }
 
 /* Rest of your existing daily-specific styles... */
+/* Header and Navigation spacing */
+.header-content {
+    margin-bottom: 1.5rem;  /* Add space after the site title */
+}
+
 /* Navigation style matching crypto page */
 nav ul li a {
     color: var(--neon-cyan);
