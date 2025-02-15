@@ -11,10 +11,16 @@
 }
 
 .story-header h1 {
-    color: var(--neon-cyan);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 2rem;
+    color: #00fff5;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+    text-shadow: 
+        0 0 7px #00fff5,
+        0 0 10px #00fff5,
+        0 0 21px #00fff5;
 }
 
 .timeline-section {
@@ -86,7 +92,7 @@
     }
 
     .story-header h1 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .timeline-content h2 {
