@@ -3,49 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[PAGE_TITLE] - CF Ng's Non Financial Advise</title>
+    <title>CF's Non Financial Advise</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <style>
+        /* Section Styles */
+        .content-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .view-all {
+            color: #4F46E5;
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 160px;
+            background: #f3f4f6;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-meta {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.875rem;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        /* Market Dashboard Styles */
+        #market-dashboard {
+            margin-top: -2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header"></div>
+    
     <main>
-        <div class="container">
-            
-            <h1>Disclaimer</h1>
-            <p>The content provided on this website is for informational and entertainment purposes only. The opinions expressed are solely those of the author and should not be construed as financial, investment, legal, or tax advice. The website owner is not a registered financial advisor, and any financial or investment decisions made based on the information presented here are done at the user's own risk.
+        <!-- Market Dashboard -->
+        <div id="market-dashboard"></div>
 
-While every effort is made to ensure the accuracy of the information shared, the website may rely on third-party sources, including other websites and social media platforms, which may contain inaccuracies or outdated information. The website owner does not guarantee the completeness, reliability, or accuracy of any data, charts, or news presented.
+        <!-- Global Daily Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Global Daily</h2>
+                    <a href="/daily.html" class="view-all">View all</a>
+                </div>
+                <div class="card-grid" id="daily-content">
+                    <div class="loading">Loading daily updates...</div>
+                </div>
+            </div>
+        </section>
 
-Users should conduct their own research and consult a licensed financial advisor before making any investment decisions. The website owner assumes no responsibility for any financial losses or damages resulting from the use of the information provided.</p>
-            
-            <h1>Privacy Policy</h1>
-            <p>Your privacy is important to us. This website does not sell, share, or distribute your personal information to third parties. Any data collected is used solely for analytical and site improvement purposes, such as tracking website traffic, engagement, and user behavior through third-party tools like Google Analytics.
+        <!-- Crypto Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Crypto Market Metrics</h2>
+                    <a href="/crypto.html" class="view-all">View all</a>
+                </div>
+                <div class="card-grid" id="crypto-content">
+                    <div class="loading">Loading crypto metrics...</div>
+                </div>
+            </div>
+        </section>
 
-Cookies may be used to store visitor preferences and enhance user experience. Users may disable cookies through their browser settings, but doing so may affect website functionality.
-
-By using this website, you acknowledge and agree to the terms outlined in this Disclaimer and Privacy Policy. If you have any concerns, please contact us for further clarification.</p>
-        </div>
+        <!-- Views and Blogs Section -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Latest Views & Blogs</h2>
+                    <a href="/views-and-blogs.html" class="view-all">View all</a>
+                </div>
+                <div class="card-grid" id="blog-content">
+                    <div class="loading">Loading latest posts...</div>
+                </div>
+            </div>
+        </section>
     </main>
+    
     <div id="footer"></div>
 
     <script>
-        fetch('/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-                return fetch('/components/nav.html');
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('nav').innerHTML = data;
-            });
+        // Load components
+        async function loadComponents() {
+            try {
+                const [headerResponse, navResponse, footerResponse] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/nav.html'),
+                    fetch('/components/footer.html')
+                ]);
 
-        fetch('/components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
+                const headerText = await headerResponse.text();
+                const navText = await navResponse.text();
+                const footerText = await footerResponse.text();
+
+                document.getElementById('header').innerHTML = headerText;
+                document.getElementById('nav').innerHTML = navText;
+                document.getElementById('footer').innerHTML = footerText;
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        }
+
+        // Load content sections
+        async function loadSectionContent() {
+            try {
+                // Load daily content
+                const dailyContent = [
+                    {
+                        title: 'US Markets Rally on Strong Economic Data',
+                        date: '2 hours ago',
+                        description: 'Major indices climb as economic indicators exceed expectations...'
+                    },
+                    // Add more daily content items
+                ];
+
+                // Load crypto content
+                const cryptoContent = [
+                    {
+                        title: 'Bitcoin Distribution Analysis',
+                        date: 'Latest Update',
+                        description: 'Tracking whale vs. retail buying patterns...'
+                    },
+                    // Add more crypto content items
+                ];
+
+                // Load blog content
+                const blogContent = [
+                    {
+                        title: 'Market Analysis: Weekly Outlook',
+                        date: 'Featured',
+                        description: 'In-depth analysis of market trends and opportunities...'
+                    },
+                    // Add more blog content items
+                ];
+
+                // Render content
+                renderSectionContent('daily-content', dailyContent);
+                renderSectionContent('crypto-content', cryptoContent);
+                renderSectionContent('blog-content', blogContent);
+            } catch (error) {
+                console.error('Error loading section content:', error);
+            }
+        }
+
+        // Render content helper
+        function renderSectionContent(elementId, content) {
+            const container = document.getElementById(elementId);
+            container.innerHTML = content.map(item => `
+                <div class="card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <div class="card-meta">${item.date}</div>
+                        <h3 class="card-title">${item.title}</h3>
+                        <p class="card-description">${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadComponents();
+            await loadSectionContent();
+            
+            // Initialize Market Dashboard React component
+            const dashboardContainer = document.getElementById('market-dashboard');
+            ReactDOM.render(React.createElement(MarketDashboard), dashboardContainer);
+        });
     </script>
 </body>
 </html>
