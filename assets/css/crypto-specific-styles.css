@@ -36,7 +36,7 @@
 .metric-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-    color: var(--neon-blue);
+    color: #00fff5; /* Updated to cyan color */
     margin: 0;
     line-height: 1.4;
 }
@@ -72,12 +72,14 @@
 }
 
 .graph-source {
-    font-size: 0.7rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
     color: var(--neon-pink);
     margin-bottom: 0.5rem;
 }
 
 .graph-source a {
+    font-family: 'Press Start 2P', cursive;
     color: var(--neon-blue);
     text-decoration: none;
     transition: all 0.3s;
@@ -88,27 +90,28 @@
 }
 
 .description {
-    font-size: 0.8rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
     color: #e0e0e0;
     margin-bottom: 0.75rem;
     line-height: 1.4;
 }
 
-/* Updated HOW TO USE styles to match screenshot */
+/* Updated HOW TO USE styles */
 .how-to-use {
     margin: 1rem 0;
 }
 
 .how-to-use h3 {
+    font-family: 'Press Start 2P', cursive;
     color: #00fff5;
-    font-size: 1rem;
-    font-family: sans-serif;
+    font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
 }
 
-/* Updated info-grid styles - keeping PROS/CONS in pixel font and white */
+/* Updated info-grid styles */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -118,9 +121,9 @@
 
 .info-grid .pros h3,
 .info-grid .cons h3 {
-    color: #ffffff;
-    font-size: 1rem;
     font-family: 'Press Start 2P', cursive;
+    color: #ffffff;
+    font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
@@ -133,13 +136,13 @@ ul {
 }
 
 li {
+    font-family: 'Press Start 2P', cursive;
     color: #e0e0e0;
     position: relative;
     padding-left: 1rem;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     line-height: 1.5;
-    margin-bottom: 0.5rem;
-    font-family: sans-serif;
+    margin-bottom: 0.75rem;
 }
 
 li::before {
@@ -149,7 +152,7 @@ li::before {
     color: #00fff5;
 }
 
-/* Modal styles remain unchanged */
+/* Modal styles */
 .modal {
     display: none;
     position: fixed;
@@ -185,6 +188,7 @@ li::before {
     cursor: pointer;
     color: var(--neon-pink);
     text-shadow: 0 0 5px var(--neon-pink);
+    font-family: 'Press Start 2P', cursive;
 }
 
 @media (max-width: 768px) {
@@ -197,6 +201,6 @@ li::before {
     }
     
     .description, .how-to-use, li {
-        font-size: 0.75rem;
+        font-size: 0.6rem;
     }
 }
