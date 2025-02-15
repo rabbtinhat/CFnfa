@@ -33,12 +33,14 @@
     border-bottom: 1px solid var(--neon-purple);
 }
 
+/* Standardized heading style for all titles */
 .metric-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
     color: #00fff5;
     margin: 0;
     line-height: 1.4;
+    text-shadow: none;
 }
 
 .metric-content {
@@ -97,22 +99,22 @@
     line-height: 1.4;
 }
 
-/* Standardized HOW TO USE styles */
+/* Updated HOW TO USE styles - removed neon effect */
 .how-to-use {
     margin: 1rem 0;
 }
 
-.how-to-use h3,
-.section-title {
+.how-to-use h3 {
     font-family: 'Press Start 2P', cursive;
     color: #00fff5;
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
+    text-shadow: none;
 }
 
-/* Standardized info-grid styles */
+/* Updated info-grid styles - removed neon effect */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -120,7 +122,6 @@
     margin-top: 1rem;
 }
 
-.info-grid h3,
 .info-grid .pros h3,
 .info-grid .cons h3 {
     font-family: 'Press Start 2P', cursive;
@@ -129,6 +130,7 @@
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
+    text-shadow: none;
 }
 
 ul {
