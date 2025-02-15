@@ -5,83 +5,55 @@
     --neon-pink: #ff00ff;
 }
 
-/* Fixed Header Spacing */
-header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    background-color: #000;
-}
-
-.header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-}
-
+/* Header and Navigation Spacing Fixes */
 .site-title {
-    margin-bottom: 15px !important;
-    text-align: center;
+    margin-bottom: 1rem !important; /* Reduce space between title and nav */
 }
 
-/* Navigation Fixes */
 nav {
-    width: 100%;
-    background: #000;
+    margin-bottom: 2rem; /* Add space between nav and main content */
     border-bottom: 1px solid var(--neon-cyan);
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center !important;
+    justify-content: center;
     gap: 2rem;
-    padding: 15px 20px;
+    padding: 0.75rem 1.25rem;
     margin: 0;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
-nav ul li a {
-    color: var(--neon-cyan);
-    text-decoration: none;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    position: relative;
-    padding-left: 1rem;
-}
-
-/* Main Content Spacing */
-main {
-    margin-top: 140px !important;
-    padding: 20px 0;
-}
-
-/* Container */
+/* Container and Main Content */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 1rem;
+}
+
+/* Main content adjustment */
+main {
+    margin-top: 0; /* Remove default top margin */
+    padding-top: 1rem; /* Add smaller padding */
 }
 
 /* Page Title */
 h1.daily-title {
     font-family: 'Press Start 2P', cursive;
-    font-size: 1.5rem;
     color: var(--neon-cyan);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-top: 1rem; /* Add space after navigation */
+    margin-bottom: 1rem;
     text-shadow: 0 0 10px var(--neon-cyan);
-    margin-bottom: 1.5rem;
 }
 
 /* Date Header */
 .date-header {
     font-family: 'Press Start 2P', cursive;
+    color: #666;
     font-size: 0.8rem;
-    color: var(--neon-cyan);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 /* Market Overview Cards */
@@ -107,13 +79,10 @@ h1.daily-title {
 }
 
 .market-value {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #e0e0e0;
     margin-bottom: 0.5rem;
-    color: var(--text-primary);
 }
 
 .up { 
@@ -129,10 +98,10 @@ h1.daily-title {
 /* Market Sections */
 .market-section {
     background: rgba(10, 10, 15, 0.95);
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 0.25rem;
-    margin-bottom: 2rem;
-    border: 1px solid var(--neon-purple);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--neon-cyan);
 }
 
 .market-section h2 {
@@ -150,42 +119,60 @@ h1.daily-title {
     color: var(--text-primary);
 }
 
-/* Responsive Design */
+/* Macro List */
+.macro-list {
+    list-style: none;
+    padding: 0;
+}
+
+.macro-item {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.macro-item::before {
+    content: "→";
+    margin-right: 0.5rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
 @media (max-width: 768px) {
-    .header-content {
-        padding: 10px 20px;
-    }
-
     .site-title {
-        font-size: 1rem;
+        margin-bottom: 0.75rem !important;
     }
-
-    nav ul {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 1rem;
-        padding: 10px 20px;
-        -webkit-overflow-scrolling: touch;
+    
+    nav {
+        margin-bottom: 1.5rem;
     }
-
-    nav ul li a {
-        font-size: 0.7rem;
-        white-space: nowrap;
+    
+    h1.daily-title {
+        font-size: 1.2rem;
+        margin-top: 0.75rem;
     }
-
-    main {
-        margin-top: 120px !important;
+    
+    .container {
+        padding: 0.75rem;
     }
 
     .quick-overview {
         grid-template-columns: 1fr;
     }
-    
-    h1.daily-title {
-        font-size: 1.2rem;
+
+    .market-section h2 {
+        font-size: 0.8rem;
     }
 
-    .container {
-        padding: 0 15px;
+    .market-content,
+    .macro-item {
+        font-size: 0.6rem;
+    }
+
+    .overview-card h3 {
+        font-size: 0.7rem;
     }
 }
