@@ -6,90 +6,16 @@
     <title>Blog - CF Ng's Non Financial Advice</title>
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <style>
-        .blog-list {
-            max-width: 800px;
-            margin: 2rem auto;
-        }
-        
-        .blog-post {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            border-bottom: 1px solid #eee;
-            transition: transform 0.2s;
-        }
-        
-        .blog-post:hover {
-            transform: translateY(-2px);
-        }
-        
-        .blog-meta {
-            font-size: 0.9rem;
-            color: #666;
-            margin: 0.5rem 0;
-        }
-        
-        .blog-category {
-            display: inline-block;
-            padding: 0.2rem 0.8rem;
-            background-color: #f0f0f0;
-            border-radius: 15px;
-            margin-right: 1rem;
-        }
-        
-        .blog-summary {
-            color: #444;
-            line-height: 1.6;
-            margin: 1rem 0;
-        }
-        
-        .blog-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .blog-link:hover {
-            text-decoration: none;
-        }
-        
-        .blog-title {
-            color: #333;
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-        
-        .pagination button {
-            padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            background: white;
-            cursor: pointer;
-        }
-        
-        .pagination button.active {
-            background: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-
-        .no-posts {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
+    <link rel="stylesheet" href="/assets/css/blog-specific-styles.css">
 </head>
 <body>
     <div id="header"></div>
     <main>
         <div class="container">
+            <h1 class="section-title">Views and Blogs</h1>
+            
             <div class="blog-list">
                 <!-- Posts will be loaded here dynamically -->
                 <div id="posts-container"></div>
