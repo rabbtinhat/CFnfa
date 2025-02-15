@@ -1,26 +1,25 @@
 /* Header styles */
-header {
-    background-color: var(--bg-primary);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-}
-
 .site-title {
-    font-size: 1.8em;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
 }
 
+.site-title a {
+    color: #ff00ff; /* Neon pink */
+    text-decoration: none;
+    text-shadow: 
+        0 0 7px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 21px #ff00ff;
+    transition: all 0.3s ease;
+}
+
+.site-title a:hover {
+    text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #ff00ff;
+}
 /* Navigation styles */
 nav ul {
     list-style: none;
@@ -58,26 +57,18 @@ nav ul li a:hover::after {
 }
 
 /* Social links */
-.social-links {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
 .social-links svg {
     width: 24px;
     height: 24px;
-    fill: currentColor;
+    fill: #00fff5; /* Neon cyan */
+    filter: drop-shadow(0 0 5px #00fff5);
+    transition: all 0.3s ease;
 }
 
-.social-links a {
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
+.social-links a:hover svg {
+    fill: #ff00ff; /* Neon pink */
+    filter: drop-shadow(0 0 7px #ff00ff);
 }
-
 /* Footer styles */
 footer {
     border-top: 1px solid var(--border-color);
@@ -100,20 +91,15 @@ footer a {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 10px;  /* Reduced from 15px */
-        padding: 10px 0;  /* Reduced from 20px */
-    }
-
     .site-title {
-        font-size: 1.5em;  /* Slightly smaller for mobile */
+        font-size: 1rem;
     }
 
-    .social-links {
-        justify-content: center;
-        gap: 15px;  /* Slightly reduced gap */
+    .social-links svg {
+        width: 20px;
+        height: 20px;
     }
+}
 
     nav ul {
         flex-direction: row;  /* Change to horizontal scrolling */
