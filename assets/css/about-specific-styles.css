@@ -65,13 +65,13 @@
     flex: 1;
 }
 
-/* Updated subtitle style to match the crypto market indicators */
-.timeline-content h2 {
-    color: #00fff5;
+/* Updated subtitle style with higher specificity to override consolidated-cyberpunk.css */
+.story-container .timeline-section .timeline-content h2 {
+    color: #00fff5 !important; /* Using !important to ensure override */
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
     margin-bottom: 1rem;
-    text-shadow: none;
+    text-shadow: none !important; /* Removing text shadow */
 }
 
 .timeline-content p {
