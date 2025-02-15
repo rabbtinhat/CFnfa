@@ -1,0 +1,81 @@
+/* header-cyberpunk.css */
+.site-title a {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    font-family: 'Press Start 2P', cursive;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.95);
+}
+
+nav ul li {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li::before {
+    content: ">";
+    color: var(--neon-pink);
+    margin-right: 0.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+}
+
+nav ul li a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.page-title {
+    color: var(--neon-blue);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    margin: 2rem 0;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Social icons in the corner */
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--neon-blue);
+    transition: all 0.3s ease;
+}
+
+.social-links svg:hover {
+    fill: var(--neon-pink);
+    filter: drop-shadow(0 0 5px var(--neon-pink));
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.5rem;
+    }
+
+    nav ul li a {
+        font-size: 0.7rem;
+    }
+}
