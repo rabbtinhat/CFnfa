@@ -30,12 +30,22 @@ h1.daily-title {
 }
 
 /* Rest of your existing daily-specific styles... */
-/* Header and Navigation spacing */
+/* Header and Navigation Spacing Fixes */
 .header-content {
-    margin-bottom: 1.5rem;  /* Add space after the site title */
+    padding: 20px 0;  /* Consistent padding for header content */
 }
 
-/* Navigation style matching crypto page */
+nav {
+    border-top: 1px solid rgba(0, 255, 245, 0.2);
+    margin-top: 1rem;  /* Space after header content */
+}
+
+nav ul {
+    padding: 15px 20px;  /* Padding around navigation items */
+    margin: 0;
+}
+
+/* Navigation style matching other pages */
 nav ul li a {
     color: var(--neon-cyan);
     position: relative;
