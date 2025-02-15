@@ -2,12 +2,11 @@
 
 /* Page title styling */
 .page-title {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
     color: #fff;
     margin: 2rem 0;
-    letter-spacing: -0.5px;
+    line-height: 1.4;
 }
 
 .container {
@@ -215,7 +214,7 @@ li::before {
 /* Responsive styles */
 @media (max-width: 768px) {
     .page-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin: 1.5rem 0;
     }
 
