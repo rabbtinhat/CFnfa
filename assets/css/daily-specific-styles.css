@@ -16,6 +16,7 @@ h1.daily-title {
     font-family: 'Press Start 2P', cursive;
     color: var(--neon-cyan);
     font-size: 1.5rem;
+    margin-top: 4rem;  /* Added top margin */
     margin-bottom: 1rem;
     text-transform: uppercase;
 }
@@ -28,6 +29,7 @@ h1.daily-title {
     margin-bottom: 1.5rem;
 }
 
+/* Rest of your existing daily-specific styles... */
 /* Navigation style matching crypto page */
 nav ul li a {
     color: var(--neon-cyan);
@@ -90,40 +92,6 @@ nav ul li a::before {
     border: 1px solid var(--neon-cyan);
 }
 
-.market-section h2 {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.9rem;
-    color: var(--neon-cyan);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.market-content {
-    color: #e0e0e0;
-    line-height: 1.6;
-    font-size: 0.9rem;
-}
-
-/* Macro List */
-.macro-list {
-    list-style: none;
-    padding: 0;
-}
-
-.macro-item {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    color: #e0e0e0;
-    font-size: 0.9rem;
-}
-
-.macro-item::before {
-    content: ">";
-    margin-right: 0.5rem;
-    color: var(--neon-pink);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .quick-overview {
@@ -132,6 +100,7 @@ nav ul li a::before {
     
     h1.daily-title {
         font-size: 1.2rem;
+        margin-top: 3rem;  /* Slightly reduced top margin for mobile */
     }
     
     .container {
