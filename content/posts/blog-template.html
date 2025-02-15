@@ -3,98 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - CF Ng's Non Financial Advice</title>
+    <title>Blog - CF's Non Financial Advice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
+    <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
     <style>
-        .blog-list {
+        .blog-container {
             max-width: 800px;
             margin: 2rem auto;
+            padding: 0 1rem;
         }
-        
+
         .blog-post {
-            margin-bottom: 2rem;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-purple);
+            border-radius: 0.5rem;
             padding: 1.5rem;
-            border-bottom: 1px solid #eee;
-            transition: transform 0.2s;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
         }
-        
+
         .blog-post:hover {
-            transform: translateY(-2px);
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--neon-purple);
         }
-        
+
         .blog-meta {
-            font-size: 0.9rem;
-            color: #666;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
+            color: var(--neon-blue);
             margin: 0.5rem 0;
         }
-        
+
         .blog-category {
             display: inline-block;
             padding: 0.2rem 0.8rem;
-            background-color: #f0f0f0;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--neon-pink);
             border-radius: 15px;
             margin-right: 1rem;
+            color: var(--neon-pink);
+            font-size: 0.7rem;
+            text-shadow: 0 0 5px var(--neon-pink);
         }
-        
+
+        .blog-date {
+            color: var(--text-secondary);
+        }
+
         .blog-summary {
-            color: #444;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
             line-height: 1.6;
+            color: var(--text-primary);
             margin: 1rem 0;
         }
-        
+
         .blog-link {
             text-decoration: none;
             color: inherit;
             display: block;
         }
-        
-        .blog-link:hover {
-            text-decoration: none;
-        }
-        
+
         .blog-title {
-            color: #333;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--neon-blue);
             margin: 0;
-            font-size: 1.5rem;
+            text-shadow: 0 0 5px var(--neon-blue);
         }
-        
+
         .pagination {
             display: flex;
             justify-content: center;
             gap: 1rem;
             margin: 2rem 0;
         }
-        
+
         .pagination button {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.7rem;
             padding: 0.5rem 1rem;
-            border: 1px solid #ddd;
-            background: white;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
             cursor: pointer;
+            transition: all 0.3s ease;
         }
-        
+
+        .pagination button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
         .pagination button.active {
-            background: #007bff;
-            color: white;
-            border-color: #007bff;
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            text-shadow: none;
+            box-shadow: 0 0 10px var(--neon-blue);
         }
 
         .no-posts {
             text-align: center;
             padding: 2rem;
-            color: #666;
+            font-family: 'Press Start 2P', cursive;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        /* Blog Content Styles */
+        .blog-content {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .blog-content h1,
+        .blog-content h2,
+        .blog-content h3 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .blog-content p {
+            margin-bottom: 1rem;
+        }
+
+        .blog-content a {
+            color: var(--neon-pink);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .blog-content a:hover {
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        .blog-content ul,
+        .blog-content ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .blog-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-content blockquote {
+            border-left: 2px solid var(--neon-purple);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: var(--text-secondary);
+        }
+
+        .blog-content code {
+            font-family: monospace;
+            background: rgba(0, 255, 245, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--neon-blue);
+        }
+
+        .blog-content pre {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--neon-purple);
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .blog-content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 1rem;
+            }
+
+            .blog-summary {
+                font-size: 0.7rem;
+            }
+
+            .blog-meta {
+                font-size: 0.6rem;
+            }
+
+            .pagination button {
+                font-size: 0.6rem;
+                padding: 0.4rem 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
     <div id="header"></div>
     <main>
-        <div class="container">
+        <div class="blog-container">
             <div class="blog-list">
-                <!-- Posts will be loaded here dynamically -->
                 <div id="posts-container"></div>
-                
-                <!-- Pagination -->
                 <div class="pagination" id="pagination"></div>
             </div>
         </div>
@@ -133,7 +247,6 @@
                 }
                 
                 allPosts = await response.json();
-                // Sort posts by date (newest first)
                 allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 
                 displayCurrentPage();
@@ -178,14 +291,12 @@
             const paginationHtml = [];
             
             if (totalPages > 1) {
-                // Previous button
                 if (currentPage > 1) {
                     paginationHtml.push(`
                         <button onclick="changePage(${currentPage - 1})">← Previous</button>
                     `);
                 }
                 
-                // Page numbers
                 for (let i = 1; i <= totalPages; i++) {
                     paginationHtml.push(`
                         <button onclick="changePage(${i})" 
@@ -193,7 +304,6 @@
                     `);
                 }
                 
-                // Next button
                 if (currentPage < totalPages) {
                     paginationHtml.push(`
                         <button onclick="changePage(${currentPage + 1})">Next →</button>
@@ -211,7 +321,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Initialize when the page loads
         document.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
