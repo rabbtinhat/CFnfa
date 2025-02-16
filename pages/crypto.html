@@ -512,7 +512,7 @@
 
     <script>
        // Load header and navigation
-        fetch('/components/header.html')
+         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
@@ -530,7 +530,7 @@
                 document.getElementById('footer').innerHTML = data;
             });
 
-        // Modal functionality
+        // Modal functionality remains unchanged
         function openModal(graphContainer) {
             const modal = graphContainer.parentElement.querySelector('.modal');
             const modalImg = modal.querySelector('img');
