@@ -1,80 +1,128 @@
 /* allocation-specific-styles.css */
-.strategy-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+
+/* Executive Summary Section */
+.executive-summary {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-blue);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.executive-summary h2 {
+    color: var(--neon-cyan);
+    margin-bottom: 1.5rem;
+}
+
+/* Table of Contents */
+.toc {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    position: sticky;
+    top: 180px;
+}
+
+.toc ul {
+    list-style: none;
+    padding: 0;
+}
+
+.toc li {
+    margin: 0.5rem 0;
+}
+
+.toc a {
+    color: var(--neon-blue);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* Main Content Sections */
+.content-section {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.key-takeaways {
+    background: rgba(26, 26, 26, 0.9);
+    border-left: 4px solid var(--neon-pink);
+    padding: 1.5rem;
     margin: 1.5rem 0;
+}
+
+/* Asset Allocation Strategy Grid */
+.strategy-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
 }
 
 .strategy-card {
     background: rgba(10, 10, 15, 0.95);
     border: 1px solid var(--neon-purple);
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     padding: 1.5rem;
     transition: transform 0.3s;
 }
 
-.strategy-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px var(--neon-purple);
-}
-
 .strategy-card h3 {
-    color: var(--neon-cyan);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.chart-container {
-    margin: 1.5rem 0;
-    border: 1px solid var(--neon-blue);
-    border-radius: 0.25rem;
-    overflow: hidden;
-}
-
-.chart-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.section h2 {
-    color: var(--neon-cyan);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.2rem;
-    margin: 2rem 0 1rem;
-}
-
-.disclaimer {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-pink);
-    border-radius: 0.25rem;
-    padding: 1.5rem;
-    margin-top: 2rem;
-}
-
-.disclaimer h3 {
-    color: var(--neon-pink);
-    font-family: 'Press Start 2P', cursive;
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
 
+.chart-container {
+    margin: 1rem 0;
+}
+
+/* Two Column Layout */
+.two-column-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Footer Sections */
+.disclaimer-section {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-pink);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
 .research-sources {
-    color: var(--neon-blue);
-    font-size: 0.8rem;
-    margin-top: 2rem;
-    opacity: 0.8;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-blue);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .strategy-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .two-column-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
-    .strategy-card h3 {
-        font-size: 0.9rem;
+    .strategy-section {
+        grid-template-columns: 1fr;
     }
     
-    .section h2 {
-        font-size: 1rem;
+    .content-section {
+        padding: 1rem;
     }
 }
