@@ -78,7 +78,7 @@
             const postsHtml = currentPosts.map(post => `
                 <article class="blog-post">
                     <a href="/content/posts/${post.slug}.html" class="blog-link">
-                        <h2 class="blog-title neon-text">${post.title}</h2>
+                        <h2 class="blog-title">${post.title}</h2>
                         <div class="blog-meta">
                             <span class="blog-category pixel-text">${post.category}</span>
                             <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
