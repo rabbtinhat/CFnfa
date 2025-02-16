@@ -1,220 +1,148 @@
-/* allocation-specific-styles.css */
-
-/* Page Title */
-.page-title {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 2rem 0;
-    letter-spacing: -0.5px;
+/* blog-specific-styles.css */
+/* Override general styles to remove neon effects */
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: none;
 }
 
-/* Layout Structure */
-.main-container {
-    display: flex;
-    gap: 2rem;
-    position: relative;
-    margin-top: 2rem;
+.neon-text {
+    text-shadow: none;
 }
 
-/* Left Side Navigation - Made more specific to override global styles */
-.main-container .toc {
-    position: sticky;
-    top: 180px;
-    width: 250px;
-    height: fit-content;
+a:hover {
+    text-shadow: none;
+}
+
+/* Page title styling */
+.page-title { 
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: #fff; 
+    margin: 2rem 0; 
+    letter-spacing: -0.5px; 
+}
+
+/* Blog list container */
+.blog-list {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+/* Blog post card */
+.blog-post {
     background: rgba(10, 10, 15, 0.95);
     border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin-right: 1rem;
-    flex-shrink: 0;
-    overflow-x: hidden;
-}
-
-.main-container .toc h2 {
-    color: var(--neon-cyan);
-    font-size: 0.9rem;
+    border-radius: 0.25rem;
     margin-bottom: 1.5rem;
-    text-align: left !important;
-}
-
-/* Force vertical layout for TOC list and remove arrows */
-.main-container .toc ul {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-    width: 100% !important;
-}
-
-.main-container .toc li {
-    margin: 0.5rem 0 !important;
-    border-left: 2px solid transparent;
-    padding-left: 1rem !important;
-    width: 100% !important;
-    display: block !important;
-    list-style-type: none !important;
-}
-
-/* Remove arrow from TOC links */
-.main-container .toc li a::before {
-    display: none !important;
-    content: none !important;
-}
-
-.main-container .toc li::before,
-.main-container .toc li::after {
-    display: none !important;
-    content: none !important;
-}
-
-.main-container .toc li:hover {
-    border-left: 2px solid var(--neon-pink);
-}
-
-.main-container .toc a {
-    color: var(--neon-blue) !important;
-    text-decoration: none !important;
-    font-size: 0.8rem !important;
-    display: block !important;
-    transition: color 0.3s;
-    white-space: normal !important;
-    width: 100% !important;
-    text-align: left !important;
-    padding: 0.25rem 0 !important;
-}
-
-.main-container .toc a:hover {
-    color: var(--neon-pink) !important;
-}
-
-/* Main Content Area */
-.main-content {
-    flex-grow: 1;
-    max-width: calc(100% - 280px);
-}
-
-/* Pixel Font Style for Content Text */
-.content-section p,
-.key-takeaways p,
-.content-section li,
-.key-takeaways li,
-.content-card p,
-.disclaimer-section p,
-.research-sources p {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-}
-
-/* Executive Summary */
-.executive-summary {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-blue);
-    border-radius: 0.5rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Content Sections */
-.content-section {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Strategy Section */
-.strategy-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.strategy-card {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    overflow: hidden;
-}
-
-.strategy-header {
     padding: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--neon-purple);
-}
-
-.strategy-header h3 {
-    margin: 0;
-}
-
-.strategy-content {
-    padding: 1.5rem;
-    display: none;
-}
-
-.strategy-content.active {
-    display: block;
-}
-
-.toggle-icon {
-    color: var(--neon-blue);
     transition: transform 0.3s;
 }
 
-.toggle-icon.active {
-    transform: rotate(180deg);
+.blog-post:hover {
+    transform: translateY(-2px);
+    box-shadow: none;
 }
 
-/* Key Takeaways */
-.key-takeaways {
-    background: rgba(26, 26, 26, 0.9);
-    border-left: 4px solid var(--neon-pink);
-    padding: 1.5rem;
-    margin: 1.5rem 0;
+/* Blog metadata */
+.blog-meta {
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin: 0.5rem 0;
+    font-family: 'Press Start 2P', cursive;
 }
 
-/* Footer Sections */
-.disclaimer-section {
-    background: rgba(10, 10, 15, 0.95);
+/* Blog category tag */
+.blog-category {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    background: rgba(176, 38, 255, 0.1);
     border: 1px solid var(--neon-pink);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
+    border-radius: 15px;
+    margin-right: 1rem;
+    color: var(--neon-pink);
+    font-size: 0.7rem;
+}
+
+/* Blog summary text */
+.blog-summary {
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Blog link */
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Blog title - updated to match page title color */
+.blog-title {
+    color: #00fff5;
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Blog date */
+.blog-date {
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
     margin: 2rem 0;
 }
 
-.research-sources {
+.pagination button {
     background: rgba(10, 10, 15, 0.95);
     border: 1px solid var(--neon-blue);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin: 2rem 0;
+    color: var(--neon-blue);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    transition: all 0.3s;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .main-container {
-        flex-direction: column;
+.pagination button:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: none;
+}
+
+.pagination button.active {
+    background: var(--neon-blue);
+    color: #000;
+    border-color: var(--neon-blue);
+    box-shadow: none;
+}
+
+/* No posts message */
+.no-posts {
+    text-align: center;
+    padding: 2rem;
+    color: var(--neon-blue);
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .blog-list {
+        padding: 0 1rem;
     }
     
-    .main-container .toc {
-        position: relative;
-        top: 0;
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 2rem;
+    .blog-title {
+        font-size: 1rem;
     }
     
-    .main-content {
-        max-width: 100%;
+    .blog-post {
+        padding: 1rem;
     }
 }
