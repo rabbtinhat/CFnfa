@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/css/crypto-specific-styles.css">
     <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
     <style>
-        /* Additional Modal Styles */
+        /* Updated Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -31,40 +31,56 @@
 
         .modal-content {
             position: relative;
-            max-width: 95vw;
-            max-height: 95vh;
+            width: auto;
+            height: auto;
             background: transparent;
             border: none;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .modal-content img {
-            max-width: 95vw;
-            max-height: 95vh;
+            width: auto;
+            height: auto;
+            max-width: 90vw;
+            max-height: 80vh;
             object-fit: contain;
             border: 1px solid var(--neon-purple);
+            transform: scale(1.5); /* Enlarge the image */
         }
 
         .modal-close {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            font-size: 2rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
             cursor: pointer;
             color: var(--neon-pink);
             text-shadow: 0 0 5px var(--neon-pink);
             font-family: 'Press Start 2P', cursive;
             z-index: 1001;
             background: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 50%;
+            border: 1px solid var(--neon-pink);
+        }
+
+        /* Ensure graph containers maintain aspect ratio */
+        .graph-container {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .graph-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -570,7 +586,7 @@
 
     <script>
        // Load header and navigation
-                fetch('/components/header.html')
+         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
@@ -588,22 +604,28 @@
                 document.getElementById('footer').innerHTML = data;
             });
 
-        // Updated modal functionality
+        // Updated modal functionality with improved sizing
         function openModal(graphContainer) {
             const modal = graphContainer.parentElement.querySelector('.modal');
             const modalImg = modal.querySelector('img');
             const originalImg = graphContainer.querySelector('img');
             
-            // Set the modal image source to the original image
+            // Set the modal image source
             modalImg.src = originalImg.src;
             
             // Show the modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            // Ensure image is loaded at full size
-            modalImg.style.width = 'auto';
-            modalImg.style.height = 'auto';
+
+            // Ensure image is displayed at enlarged size
+            modalImg.onload = function() {
+                const scale = Math.min(
+                    (window.innerWidth * 0.9) / this.naturalWidth,
+                    (window.innerHeight * 0.8) / this.naturalHeight
+                ) * 1.5; // 1.5 for 50% enlargement
+
+                this.style.transform = `scale(${scale})`;
+            };
         }
 
         function closeModal(closeButton) {
