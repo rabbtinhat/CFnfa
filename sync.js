@@ -45,9 +45,10 @@ function generateHtml(post) {
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
-    <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
+    <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
+    <link rel="stylesheet" href="/assets/css/blog-specific-styles.css">
     <style>
+        /* Blog post specific styles that maintain consistency */
         .blog-post {
             max-width: 800px;
             margin: 0 auto;
@@ -57,8 +58,7 @@ function generateHtml(post) {
         .blog-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 1.5rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
+            color: #00fff5;
             margin-bottom: 1.5rem;
             line-height: 1.4;
         }
@@ -78,7 +78,6 @@ function generateHtml(post) {
             border-radius: 15px;
             margin-right: 1rem;
             color: var(--neon-pink);
-            text-shadow: 0 0 5px var(--neon-pink);
         }
         
         .blog-date {
@@ -101,21 +100,18 @@ function generateHtml(post) {
             font-size: 1.3rem; 
             margin: 2rem 0 1rem;
             color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
         }
         
         .blog-content h2 { 
             font-size: 1.1rem; 
             margin: 1.5rem 0 1rem;
             color: var(--neon-pink);
-            text-shadow: 0 0 5px var(--neon-pink);
         }
         
         .blog-content h3 { 
             font-size: 1rem; 
             margin: 1.3rem 0 1rem;
             color: var(--neon-purple);
-            text-shadow: 0 0 5px var(--neon-purple);
         }
         
         .blog-content p { 
@@ -161,10 +157,6 @@ function generateHtml(post) {
             text-decoration: none;
             transition: all 0.3s ease;
         }
-        
-        .blog-content a:hover {
-            text-shadow: 0 0 5px var(--neon-blue);
-        }
 
         @media (max-width: 768px) {
             .blog-title {
@@ -207,6 +199,7 @@ function generateHtml(post) {
     <div id="footer"></div>
 
     <script>
+        // Load header and navigation
         fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
@@ -218,6 +211,7 @@ function generateHtml(post) {
                 document.getElementById('nav').innerHTML = data;
             });
 
+        // Load footer
         fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
