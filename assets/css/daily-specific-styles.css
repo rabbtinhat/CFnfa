@@ -5,15 +5,6 @@
     --neon-pink: #ff00ff;
 }
 
-/* Header spacing adjustments */
-header .header-content {
-    padding: 5px 0;  /* Reduce from 10px */
-}
-
-header nav ul {
-    padding: 8px 20px;  /* Reduce from 15px */
-}
-
 /* Remove neon effects from content while preserving in header/nav */
 .container {
     max-width: 1200px;
