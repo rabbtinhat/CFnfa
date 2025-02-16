@@ -5,59 +5,21 @@
     --neon-pink: #ff00ff;
 }
 
-/* Header & Navigation Spacing Fixes */
-.header-content {
-    padding: 20px 0;
-}
-
-nav {
-    margin-top: 10px;
-}
-
-main {
-    margin-top: 140px !important;
-}
-
-/* Market Ticker Banner */
-.market-ticker-banner {
-    background: rgba(10, 10, 15, 0.95);
-    border-top: 1px solid var(--neon-cyan);
-    border-bottom: 1px solid var(--neon-cyan);
-    padding: 0.5rem 0;
-    margin-top: 0;
-    display: flex;
-    justify-content: space-around;
-    overflow: hidden;
-}
-
-.ticker-region {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
-}
-
-.ticker-region div {
-    white-space: nowrap;
-}
-
-/* Container */
+/* Remove neon effects from content while preserving in header/nav */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
 }
 
-/* Page Title - Keep cyberpunk effect */
-h1.daily-title {
-    font-family: 'Press Start 2P', cursive;
-    color: var(--neon-cyan);
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 10px var(--neon-cyan);
+/* Page Title */
+.page-title, h1.daily-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2rem 0;
+    letter-spacing: -0.5px;
 }
 
 /* Date Header */
@@ -66,7 +28,7 @@ h1.daily-title {
     color: var(--neon-cyan);
     font-size: 0.8rem;
     margin-bottom: 2rem;
-    text-shadow: none; /* Remove glow effect */
+    text-shadow: none;
 }
 
 /* Market Overview Cards */
@@ -89,7 +51,7 @@ h1.daily-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
     margin-bottom: 0.75rem;
-    text-shadow: none; /* Remove glow effect */
+    text-shadow: none;
 }
 
 /* Market Values */
@@ -97,10 +59,9 @@ h1.daily-title {
     font-family: 'Press Start 2P', cursive;
     font-size: 0.7rem;
     margin-bottom: 0.5rem;
-    text-shadow: none; /* Remove glow effect */
+    text-shadow: none;
 }
 
-/* Keep glow effects only for up/down indicators */
 .up { 
     color: #00ff00;
     text-shadow: 0 0 5px #00ff00;
@@ -125,7 +86,7 @@ h1.daily-title {
     font-size: 1rem;
     color: var(--neon-pink);
     margin-bottom: 1rem;
-    text-shadow: 0 0 5px var(--neon-pink); /* Keep glow effect for section titles */
+    text-shadow: 0 0 5px var(--neon-pink);
 }
 
 .market-content {
@@ -133,7 +94,7 @@ h1.daily-title {
     font-size: 0.7rem;
     line-height: 1.6;
     color: #e0e0e0;
-    text-shadow: none; /* Remove glow effect */
+    text-shadow: none;
 }
 
 /* Macro List */
@@ -149,7 +110,7 @@ h1.daily-title {
     display: flex;
     align-items: center;
     padding: 0.5rem 0;
-    text-shadow: none; /* Remove glow effect */
+    text-shadow: none;
 }
 
 .macro-item::before {
@@ -160,18 +121,9 @@ h1.daily-title {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .market-ticker-banner {
-        flex-direction: column;
-        padding: 0.25rem;
-    }
-
-    .ticker-region {
-        font-size: 0.6rem;
-        padding: 0.25rem;
-    }
-
-    h1.daily-title {
-        font-size: 1.2rem;
+    .page-title, h1.daily-title {
+        font-size: 2rem;
+        margin: 1.5rem 0;
     }
     
     .container {
@@ -186,11 +138,9 @@ h1.daily-title {
         font-size: 0.8rem;
     }
 
-    .market-content {
+    .market-content,
+    .macro-item,
+    .market-value {
         font-size: 0.6rem;
-    }
-
-    main {
-        margin-top: 120px !important;
     }
 }
