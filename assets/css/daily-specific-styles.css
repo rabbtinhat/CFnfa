@@ -5,7 +5,25 @@
     --neon-pink: #ff00ff;
 }
 
-/* Remove neon effects from content while preserving in header/nav */
+/* Override main spacing to match crypto page */
+main {
+    margin-top: 80px !important;
+}
+
+/* Tighten header spacing */
+.header-content {
+    padding: 8px 0 !important;
+}
+
+nav ul {
+    padding: 8px 20px !important;
+}
+
+.site-title {
+    margin-bottom: 0 !important;
+}
+
+/* Rest of the styles remain unchanged */
 .container {
     max-width: 1200px;
     margin: 0 auto;
