@@ -9,6 +9,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/crypto-specific-styles.css">
     <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
+    <style>
+        /* Additional Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            background: transparent;
+            border: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content img {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            border: 1px solid var(--neon-purple);
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--neon-pink);
+            text-shadow: 0 0 5px var(--neon-pink);
+            font-family: 'Press Start 2P', cursive;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
     <div id="header"></div>
@@ -512,7 +570,7 @@
 
     <script>
        // Load header and navigation
-         fetch('/components/header.html')
+                fetch('/components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
@@ -523,20 +581,29 @@
                 document.getElementById('nav').innerHTML = data;
             });
 
-        // Load footer
+        // Load footer - keeping existing functionality
         fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
 
-        // Modal functionality remains unchanged
+        // Updated modal functionality
         function openModal(graphContainer) {
             const modal = graphContainer.parentElement.querySelector('.modal');
             const modalImg = modal.querySelector('img');
-            modalImg.src = graphContainer.querySelector('img')?.src || '#';
+            const originalImg = graphContainer.querySelector('img');
+            
+            // Set the modal image source to the original image
+            modalImg.src = originalImg.src;
+            
+            // Show the modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Ensure image is loaded at full size
+            modalImg.style.width = 'auto';
+            modalImg.style.height = 'auto';
         }
 
         function closeModal(closeButton) {
@@ -545,12 +612,14 @@
             document.body.style.overflow = '';
         }
 
+        // Click outside to close
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal')) {
                 closeModal(event.target.querySelector('.modal-close'));
             }
         });
 
+        // Press Escape to close
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 const activeModal = document.querySelector('.modal.active');
