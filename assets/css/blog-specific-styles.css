@@ -1,9 +1,24 @@
 /* blog-specific-styles.css */
+/* Override general styles to remove neon effects */
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: none;
+}
+
+.neon-text {
+    text-shadow: none;
+}
+
+a:hover {
+    text-shadow: none;
+}
+
+/* Blog list container */
 .blog-list {
     max-width: 800px;
     margin: 2rem auto;
 }
 
+/* Blog post card */
 .blog-post {
     background: rgba(10, 10, 15, 0.95);
     border: 1px solid var(--neon-purple);
@@ -15,9 +30,10 @@
 
 .blog-post:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 15px var(--neon-purple);
+    box-shadow: none;
 }
 
+/* Blog metadata */
 .blog-meta {
     font-size: 0.8rem;
     color: var(--neon-blue);
@@ -25,6 +41,7 @@
     font-family: 'Press Start 2P', cursive;
 }
 
+/* Blog category tag */
 .blog-category {
     display: inline-block;
     padding: 0.2rem 0.8rem;
@@ -36,6 +53,7 @@
     font-size: 0.7rem;
 }
 
+/* Blog summary text */
 .blog-summary {
     color: #e0e0e0;
     line-height: 1.6;
@@ -44,23 +62,27 @@
     font-family: 'Press Start 2P', cursive;
 }
 
+/* Blog link */
 .blog-link {
     text-decoration: none;
     color: inherit;
     display: block;
 }
 
+/* Blog title - updated to match page title color */
 .blog-title {
-    color: #00ffff; /* Matching the cyan color of the page title */
+    color: #00fff5; /* Matching the neon-blue variable */
     margin: 0;
     font-size: 1.2rem;
     font-family: 'Press Start 2P', cursive;
 }
 
+/* Blog date */
 .blog-date {
     font-family: 'Press Start 2P', cursive;
 }
 
+/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -82,16 +104,17 @@
 .pagination button:hover {
     background: var(--neon-blue);
     color: #000;
-    box-shadow: 0 0 10px var(--neon-blue);
+    box-shadow: none;
 }
 
 .pagination button.active {
     background: var(--neon-blue);
     color: #000;
     border-color: var(--neon-blue);
-    box-shadow: 0 0 10px var(--neon-blue);
+    box-shadow: none;
 }
 
+/* No posts message */
 .no-posts {
     text-align: center;
     padding: 2rem;
@@ -99,6 +122,7 @@
     font-family: 'Press Start 2P', cursive;
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
     .blog-list {
         padding: 0 1rem;
