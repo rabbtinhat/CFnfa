@@ -9,80 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/crypto-specific-styles.css">
     <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
-    <style>
-        /* Updated Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            position: relative;
-            width: auto;
-            height: auto;
-            background: transparent;
-            border: none;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content img {
-            width: auto;
-            height: auto;
-            max-width: 90vw;
-            max-height: 80vh;
-            object-fit: contain;
-            border: 1px solid var(--neon-purple);
-            transform: scale(1.5); /* Enlarge the image */
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--neon-pink);
-            text-shadow: 0 0 5px var(--neon-pink);
-            font-family: 'Press Start 2P', cursive;
-            z-index: 1001;
-            background: rgba(0, 0, 0, 0.5);
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            border: 1px solid var(--neon-pink);
-        }
-
-        /* Ensure graph containers maintain aspect ratio */
-        .graph-container {
-            aspect-ratio: 16/9;
-            overflow: hidden;
-        }
-
-        .graph-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-    </style>
 </head>
 <body>
     <div id="header"></div>
@@ -597,35 +523,20 @@
                 document.getElementById('nav').innerHTML = data;
             });
 
-        // Load footer - keeping existing functionality
+        // Load footer
         fetch('/components/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
             });
 
-        // Updated modal functionality with improved sizing
+        // Modal functionality remains unchanged
         function openModal(graphContainer) {
             const modal = graphContainer.parentElement.querySelector('.modal');
             const modalImg = modal.querySelector('img');
-            const originalImg = graphContainer.querySelector('img');
-            
-            // Set the modal image source
-            modalImg.src = originalImg.src;
-            
-            // Show the modal
+            modalImg.src = graphContainer.querySelector('img')?.src || '#';
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-
-            // Ensure image is displayed at enlarged size
-            modalImg.onload = function() {
-                const scale = Math.min(
-                    (window.innerWidth * 0.9) / this.naturalWidth,
-                    (window.innerHeight * 0.8) / this.naturalHeight
-                ) * 1.5; // 1.5 for 50% enlargement
-
-                this.style.transform = `scale(${scale})`;
-            };
         }
 
         function closeModal(closeButton) {
@@ -634,14 +545,12 @@
             document.body.style.overflow = '';
         }
 
-        // Click outside to close
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal')) {
                 closeModal(event.target.querySelector('.modal-close'));
             }
         });
 
-        // Press Escape to close
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 const activeModal = document.querySelector('.modal.active');
