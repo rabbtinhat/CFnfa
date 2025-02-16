@@ -41,6 +41,7 @@
     line-height: 1.6;
     margin: 1rem 0;
     font-size: 0.9rem;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .blog-link {
@@ -50,9 +51,13 @@
 }
 
 .blog-title {
-    color: var(--neon-cyan);
+    color: #00ff00; /* Using the same base color as the page title */
     margin: 0;
     font-size: 1.2rem;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.blog-date {
     font-family: 'Press Start 2P', cursive;
 }
 
