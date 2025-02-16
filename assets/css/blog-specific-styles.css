@@ -1,47 +1,35 @@
 /* blog-specific-styles.css */
-/* Override general styles to remove neon effects */
-h1, h2, h3, h4, h5, h6 {
-    text-shadow: none;
-}
-
-.neon-text {
-    text-shadow: none;
-}
-
-a:hover {
-    text-shadow: none;
-}
-
-/* Page title styling with neon effect */
-.page-title { 
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
-    font-size: 2.5rem; 
-    font-weight: 700; 
-    color: #00fff5; /* Changed to cyan color */
-    margin: 2rem 0; 
+/* Page Title with neon effect */
+.page-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: rgb(0, 255, 247);
+    margin: 2rem 0;
     letter-spacing: -0.5px;
-    text-shadow: 
-        0 0 5px rgba(0, 255, 245, 0.5),
-        0 0 10px rgba(0, 255, 245, 0.3),
-        0 0 15px rgba(0, 255, 245, 0.2),
-        0 0 20px rgba(0, 255, 245, 0.1);
-    position: relative;
+    text-shadow: 0 0 10px rgba(0, 255, 247, 0.8),
+                 0 0 20px rgba(0, 255, 247, 0.8),
+                 0 0 30px rgba(0, 255, 247, 0.6),
+                 0 0 40px rgba(0, 255, 247, 0.4);
+    animation: neonPulse 1.5s ease-in-out infinite alternate;
 }
 
-.page-title::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: #00fff5;
-    box-shadow: 
-        0 0 5px rgba(0, 255, 245, 0.5),
-        0 0 10px rgba(0, 255, 245, 0.3);
+@keyframes neonPulse {
+    from {
+        text-shadow: 0 0 10px rgba(0, 255, 247, 0.8),
+                     0 0 20px rgba(0, 255, 247, 0.8),
+                     0 0 30px rgba(0, 255, 247, 0.6),
+                     0 0 40px rgba(0, 255, 247, 0.4);
+    }
+    to {
+        text-shadow: 0 0 15px rgba(0, 255, 247, 0.9),
+                     0 0 25px rgba(0, 255, 247, 0.9),
+                     0 0 35px rgba(0, 255, 247, 0.7),
+                     0 0 45px rgba(0, 255, 247, 0.5);
+    }
 }
 
-/* Blog list container */
+/* Rest of your existing blog-specific styles */
 .blog-list {
     max-width: 800px;
     margin: 2rem auto;
