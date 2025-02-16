@@ -156,7 +156,7 @@ ul {
     margin: 0.25rem 0;
 }
 
-li {
+.metric-content li {
     font-family: 'Press Start 2P', cursive;
     color: #e0e0e0;
     position: relative;
@@ -166,7 +166,7 @@ li {
     margin-bottom: 0.75rem;
 }
 
-li::before {
+.metric-content li::before {
     content: '>';
     position: absolute;
     left: -0.5rem;
