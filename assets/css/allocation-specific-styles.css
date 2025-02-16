@@ -8,8 +8,8 @@
     margin-top: 2rem;
 }
 
-/* Left Side Navigation */
-.toc {
+/* Left Side Navigation - Made more specific to override global styles */
+.main-container .toc {
     position: sticky;
     top: 180px;
     width: 250px;
@@ -20,39 +20,53 @@
     padding: 1.5rem;
     margin-right: 1rem;
     flex-shrink: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-.toc h2 {
+.main-container .toc h2 {
     color: var(--neon-cyan);
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
+    text-align: left !important;
 }
 
-.toc ul {
-    list-style: none;
-    padding: 0;
+/* Force vertical layout for TOC list */
+.main-container .toc ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
 }
 
-.toc li {
-    margin: 1rem 0;
+.main-container .toc li {
+    margin: 0.5rem 0 !important;
     border-left: 2px solid transparent;
-    padding-left: 1rem;
+    padding-left: 1rem !important;
+    width: 100% !important;
+    display: block !important;
 }
 
-.toc li:hover {
+.main-container .toc li:hover {
     border-left: 2px solid var(--neon-pink);
 }
 
-.toc a {
-    color: var(--neon-blue);
-    text-decoration: none;
-    font-size: 0.8rem;
-    display: block;
+.main-container .toc a {
+    color: var(--neon-blue) !important;
+    text-decoration: none !important;
+    font-size: 0.8rem !important;
+    display: block !important;
     transition: color 0.3s;
+    white-space: normal !important;
+    width: 100% !important;
+    text-align: left !important;
+    padding: 0.25rem 0 !important;
 }
 
-.toc a:hover {
-    color: var(--neon-pink);
+.main-container .toc a:hover {
+    color: var(--neon-pink) !important;
 }
 
 /* Main Content Area */
@@ -155,11 +169,12 @@
         flex-direction: column;
     }
     
-    .toc {
+    .main-container .toc {
         position: relative;
         top: 0;
         width: 100%;
         margin-right: 0;
+        margin-bottom: 2rem;
     }
     
     .main-content {
