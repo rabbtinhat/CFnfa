@@ -78,10 +78,12 @@ function generateHtml(post) {
             border-radius: 15px;
             margin-right: 1rem;
             color: var(--neon-pink);
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-date {
             color: var(--text-secondary);
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content {
@@ -100,32 +102,38 @@ function generateHtml(post) {
             font-size: 1.3rem; 
             margin: 2rem 0 1rem;
             color: var(--neon-blue);
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content h2 { 
             font-size: 1.1rem; 
             margin: 1.5rem 0 1rem;
             color: var(--neon-pink);
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content h3 { 
             font-size: 1rem; 
             margin: 1.3rem 0 1rem;
             color: var(--neon-purple);
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content p { 
-            margin: 1rem 0; 
+            margin: 1rem 0;
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content ul, 
         .blog-content ol { 
             margin: 1rem 0; 
-            padding-left: 2rem; 
+            padding-left: 2rem;
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content li {
             margin-bottom: 0.5rem;
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content code { 
@@ -150,12 +158,14 @@ function generateHtml(post) {
             padding-left: 1rem;
             margin: 1rem 0;
             color: var(--text-secondary);
+            font-family: 'Press Start 2P', cursive;
         }
         
         .blog-content a {
             color: var(--neon-blue);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
         }
 
         @media (max-width: 768px) {
