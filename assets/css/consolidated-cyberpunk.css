@@ -68,7 +68,7 @@ header {
     font-family: 'Press Start 2P', cursive;
 }
 
-/* Navigation */
+/* Navigation - Removed duplicate arrow styles */
 nav ul li a {
     color: var(--neon-blue);
     font-family: 'Press Start 2P', cursive;
