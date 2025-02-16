@@ -12,6 +12,16 @@ a:hover {
     text-shadow: none;
 }
 
+/* Page title styling */
+.page-title { 
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: #fff; 
+    margin: 2rem 0; 
+    letter-spacing: -0.5px; 
+}
+
 /* Blog list container */
 .blog-list {
     max-width: 800px;
@@ -71,7 +81,7 @@ a:hover {
 
 /* Blog title - updated to match page title color */
 .blog-title {
-    color: #00fff5; /* Matching the neon-blue variable */
+    color: #00fff5;
     margin: 0;
     font-size: 1.2rem;
     font-family: 'Press Start 2P', cursive;
