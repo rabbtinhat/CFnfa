@@ -70,7 +70,6 @@
     min-height: 150px;
     border: 1px solid var(--neon-blue);
     position: relative;
-    overflow: hidden;
 }
 
 .graph-container img {
@@ -103,7 +102,7 @@
     text-shadow: 0 0 5px var(--neon-blue);
 }
 
-/* Updated Modal styles for better image display */
+/* Modal styles - Enhanced for better image viewing */
 .modal {
     display: none;
     position: fixed;
@@ -115,59 +114,54 @@
     z-index: 1000;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    overflow: auto;
+    padding: 20px;
 }
 
 .modal.active {
     display: flex;
-    opacity: 1;
 }
 
 .modal-content {
     position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    background: transparent;
+    background: var(--dark-bg);
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--neon-purple);
+    max-width: 95%;
+    max-height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
-    padding: 0;
-    border: none;
+    overflow: hidden;
 }
 
 .modal-content img {
-    max-width: 90vw;
+    max-width: 100%;
     max-height: 90vh;
     object-fit: contain;
-    transform: scale(0.95);
+    transform-origin: center;
     transition: transform 0.3s ease;
 }
 
-.modal.active .modal-content img {
-    transform: scale(1);
-}
-
 .modal-close {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--neon-pink);
     text-shadow: 0 0 5px var(--neon-pink);
     font-family: 'Press Start 2P', cursive;
-    background: none;
-    border: none;
     z-index: 1001;
-    opacity: 0.8;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.modal-close:hover {
-    opacity: 1;
-    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--neon-pink);
 }
 
 /* Description styles */
@@ -262,13 +256,22 @@ ul {
     }
 
     .modal-content {
-        max-width: 95vw;
-        max-height: 95vh;
+        padding: 0.5rem;
+        max-width: 98%;
     }
 
     .modal-close {
+        top: 0.25rem;
+        right: 0.25rem;
         font-size: 1.2rem;
-        top: 0.5rem;
-        right: 0.5rem;
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Additional responsive safeguards */
+@media (orientation: landscape) and (max-height: 500px) {
+    .modal-content img {
+        max-height: 85vh;
     }
 }
