@@ -60,6 +60,12 @@
     list-style-type: none !important;
 }
 
+/* Remove arrow from TOC links */
+.main-container .toc li a::before {
+    display: none !important;
+    content: none !important;
+}
+
 .main-container .toc li::before,
 .main-container .toc li::after {
     display: none !important;
