@@ -12,14 +12,33 @@ a:hover {
     text-shadow: none;
 }
 
-/* Page title styling */
+/* Page title styling with neon effect */
 .page-title { 
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
     font-size: 2.5rem; 
     font-weight: 700; 
-    color: #fff; 
+    color: #00fff5; /* Changed to cyan color */
     margin: 2rem 0; 
-    letter-spacing: -0.5px; 
+    letter-spacing: -0.5px;
+    text-shadow: 
+        0 0 5px rgba(0, 255, 245, 0.5),
+        0 0 10px rgba(0, 255, 245, 0.3),
+        0 0 15px rgba(0, 255, 245, 0.2),
+        0 0 20px rgba(0, 255, 245, 0.1);
+    position: relative;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #00fff5;
+    box-shadow: 
+        0 0 5px rgba(0, 255, 245, 0.5),
+        0 0 10px rgba(0, 255, 245, 0.3);
 }
 
 /* Blog list container */
@@ -79,7 +98,7 @@ a:hover {
     display: block;
 }
 
-/* Blog title - updated to match page title color */
+/* Blog title */
 .blog-title {
     color: #00fff5;
     margin: 0;
