@@ -1,5 +1,15 @@
 /* allocation-specific-styles.css */
 
+/* Page Title */
+.page-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2rem 0;
+    letter-spacing: -0.5px;
+}
+
 /* Layout Structure */
 .main-container {
     display: flex;
@@ -20,7 +30,7 @@
     padding: 1.5rem;
     margin-right: 1rem;
     flex-shrink: 0;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 .main-container .toc h2 {
@@ -30,7 +40,7 @@
     text-align: left !important;
 }
 
-/* Force vertical layout for TOC list */
+/* Force vertical layout for TOC list and remove arrows */
 .main-container .toc ul {
     list-style: none !important;
     padding: 0 !important;
@@ -47,6 +57,13 @@
     padding-left: 1rem !important;
     width: 100% !important;
     display: block !important;
+    list-style-type: none !important;
+}
+
+.main-container .toc li::before,
+.main-container .toc li::after {
+    display: none !important;
+    content: none !important;
 }
 
 .main-container .toc li:hover {
@@ -73,6 +90,20 @@
 .main-content {
     flex-grow: 1;
     max-width: calc(100% - 280px);
+}
+
+/* Pixel Font Style for Content Text */
+.content-section p,
+.key-takeaways p,
+.content-section li,
+.key-takeaways li,
+.content-card p,
+.disclaimer-section p,
+.research-sources p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
 }
 
 /* Executive Summary */
