@@ -48,6 +48,15 @@
         let currentPage = 1;
         let allPosts = [];
 
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
         async function loadBlogPosts() {
             try {
                 const response = await fetch('/content/posts/index.json');
@@ -81,16 +90,16 @@
                         <h2 class="blog-title">${post.title}</h2>
                         <div class="blog-meta">
                             <span class="blog-category pixel-text">${post.category}</span>
-                            <span class="blog-date">${new Date(post.date).toLocaleDateString()}</span>
+                            <span class="blog-date pixel-text">${formatDate(post.date)}</span>
                         </div>
-                        <p class="blog-summary">${post.summary || 'No summary available'}</p>
+                        <p class="blog-summary pixel-text">${post.summary || 'No summary available'}</p>
                     </a>
                 </article>
             `).join('');
             
             document.getElementById('posts-container').innerHTML = postsHtml || `
                 <div class="no-posts">
-                    <p class="neon-text">No blog posts found.</p>
+                    <p class="neon-text pixel-text">No blog posts found.</p>
                 </div>
             `;
         }
