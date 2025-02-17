@@ -1,5 +1,12 @@
 [
   {
+    "title": "another day of testing",
+    "slug": "heyt",
+    "date": "2025-02-17",
+    "category": "Daily update",
+    "summary": "should be final test"
+  },
+  {
     "title": "testing every day",
     "slug": "Hello Sunday",
     "date": "2025-02-16",
