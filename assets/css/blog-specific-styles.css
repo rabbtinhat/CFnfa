@@ -1,6 +1,9 @@
 /* blog-specific-styles.css */
+/* Override general styles to remove neon effects */
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: none;
+}
 
-/* Remove the general override since we want to be more specific */
 .neon-text {
     text-shadow: none;
 }
@@ -9,19 +12,7 @@ a:hover {
     text-shadow: none;
 }
 
-/* Page title styling - using specificity instead of !important */
-.container > h1.page-title { 
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 2rem 0;
-    letter-spacing: -0.5px;
-    text-shadow: none;
-    text-transform: none;
-}
-
-/* Rest of the original blog-specific styles remain unchanged */
+/* Blog list container */
 .blog-list {
     max-width: 800px;
     margin: 2rem auto;
@@ -144,4 +135,16 @@ a:hover {
     .blog-post {
         padding: 1rem;
     }
+}
+
+/* Page title styling - moved to end and made more specific */
+.container .page-title { 
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2rem 0;
+    letter-spacing: -0.5px;
+    text-transform: none;
+    text-shadow: none;
 }
