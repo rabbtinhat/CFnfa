@@ -6,7 +6,7 @@
 }
 
 /* Page Title - keeping original neon effect */
-.daily-title { 
+.page-title { 
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
@@ -109,7 +109,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .daily-title {
+    .page-title {
         font-size: 2rem;
         margin: 1.5rem 0;
     }
