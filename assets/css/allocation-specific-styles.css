@@ -1,97 +1,139 @@
 /* allocation-specific-styles.css */
+
 /* Page Title */
 .page-title {
-font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-font-size: 2.5rem;
-font-weight: 700;
-color: #fff;
-margin: 2rem 0;
-letter-spacing: -0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2rem 0;
+    letter-spacing: -0.5px;
 }
+
 /* Layout Structure */
 .main-container {
-display: flex;
-gap: 2rem;
-position: relative;
-margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    margin-top: 2rem;
 }
+
 /* Left Side Navigation - Made more specific to override global styles */
 .main-container .toc {
-position: sticky;
-top: 180px;
-width: 250px;
-height: fit-content;
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid var(--neon-purple);
-border-radius: 0.5rem;
-padding: 1.5rem;
-margin-right: 1rem;
-flex-shrink: 0;
-overflow-x: hidden;
+    position: sticky;
+    top: 180px;
+    width: 250px;
+    height: fit-content;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    overflow-x: hidden;
 }
+
 .main-container .toc h2 {
-color: var(--neon-cyan);
-font-size: 0.9rem;
-margin-bottom: 1.5rem;
-text-align: left !important;
+    color: var(--neon-cyan);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    text-align: left !important;
 }
+
 /* Force vertical layout for TOC list and remove arrows */
 .main-container .toc ul {
-list-style: none !important;
-padding: 0 !important;
-margin: 0 !important;
-display: flex !important;
-flex-direction: column !important;
-gap: 0.5rem !important;
-width: 100% !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
 }
+
 .main-container .toc li {
-margin: 0.5rem 0 !important;
-border-left: 2px solid transparent;
-padding-left: 1rem !important;
-width: 100% !important;
-display: block !important;
-list-style-type: none !important;
+    margin: 0.5rem 0 !important;
+    border-left: 2px solid transparent;
+    padding-left: 1rem !important;
+    width: 100% !important;
+    display: block !important;
+    list-style-type: none !important;
 }
+
 /* Remove arrow from TOC links */
 .main-container .toc li a::before {
-display: none !important;
-content: none !important;
+    display: none !important;
+    content: none !important;
 }
+
 .main-container .toc li::before,
 .main-container .toc li::after {
-display: none !important;
-content: none !important;
+    display: none !important;
+    content: none !important;
 }
+
 .main-container .toc li:hover {
-border-left: 2px solid var(--neon-pink);
+    border-left: 2px solid var(--neon-pink);
 }
+
 .main-container .toc a {
-color: var(--neon-blue) !important;
-text-decoration: none !important;
-font-size: 0.8rem !important;
-display: block !important;
-transition: color 0.3s;
-white-space: normal !important;
-width: 100% !important;
-text-align: left !important;
-padding: 0.25rem 0 !important;
+    color: var(--neon-blue) !important;
+    text-decoration: none !important;
+    font-size: 0.8rem !important;
+    display: block !important;
+    transition: color 0.3s;
+    white-space: normal !important;
+    width: 100% !important;
+    text-align: left !important;
+    padding: 0.25rem 0 !important;
 }
+
 .main-container .toc a:hover {
-color: var(--neon-pink) !important;
+    color: var(--neon-pink) !important;
 }
+
 /* Main Content Area */
 .main-content {
-flex-grow: 1;
-max-width: calc(100% - 280px);
+    flex-grow: 1;
+    max-width: calc(100% - 280px);
 }
-/* Section Titles */
+
+/* Main section titles */
 .section-title {
-font-size: 1.8rem !important;
-font-weight: 700 !important;
-margin-bottom: 2rem !important;
-letter-spacing: 0.02em !important;
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 2rem !important;
+    letter-spacing: 0.02em !important;
 }
+
+/* Override for Contents and Research Sources */
+.toc .section-title,
+.research-sources .section-title {
+    font-size: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Explicitly remove neon effects */
+.neon-text {
+    text-shadow: none !important;
+    color: inherit !important;
+}
+
+/* Remove any remaining glow effects */
+.content-section h3,
+.key-takeaways h3,
+.content-card h3 {
+    text-shadow: none !important;
+    color: inherit !important;
+}
+
+/* Ensure content cards don't have glow */
+.content-card {
+    text-shadow: none !important;
+    box-shadow: none !important;
+    margin-bottom: 2.5rem !important;
+}
+
 /* Pixel Font Style for Content Text */
 .content-section p,
 .key-takeaways p,
@@ -100,111 +142,119 @@ letter-spacing: 0.02em !important;
 .content-card p,
 .disclaimer-section p,
 .research-sources p {
-font-family: 'Press Start 2P', cursive;
-font-size: 0.8rem;
-line-height: 2.2 !important;
-letter-spacing: 0.5px;
-margin-bottom: 1.5rem !important;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 2.2 !important;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem !important;
 }
+
 /* Executive Summary */
 .executive-summary {
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid var(--neon-blue);
-border-radius: 0.5rem;
-padding: 2rem;
-margin-bottom: 2rem;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-blue);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
 }
+
 /* Content Sections */
 .content-section {
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid var(--neon-purple);
-border-radius: 0.5rem;
-padding: 2rem;
-margin-bottom: 2rem;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
 }
+
 /* Strategy Section */
 .strategy-section {
-display: flex;
-flex-direction: column;
-gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
+
 .strategy-card {
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid var(--neon-purple);
-border-radius: 0.5rem;
-overflow: hidden;
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-purple);
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
+
 .strategy-header {
-padding: 1.5rem;
-cursor: pointer;
-display: flex;
-justify-content: space-between;
-align-items: center;
-border-bottom: 1px solid var(--neon-purple);
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--neon-purple);
 }
+
 .strategy-header h3 {
-margin: 0;
+    margin: 0;
 }
+
 .strategy-content {
-padding: 1.5rem;
-display: none;
+    padding: 1.5rem;
+    display: none;
 }
+
 .strategy-content.active {
-display: block;
+    display: block;
 }
+
 .toggle-icon {
-color: var(--neon-blue);
-transition: transform 0.3s;
+    color: var(--neon-blue);
+    transition: transform 0.3s;
 }
+
 .toggle-icon.active {
-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
+
 /* Key Takeaways */
 .key-takeaways {
-background: rgba(26, 26, 26, 0.9);
-border-left: 4px solid var(--neon-pink);
-padding: 1.5rem;
-margin: 1.5rem 0;
+    background: rgba(26, 26, 26, 0.9);
+    border-left: 4px solid var(--neon-pink);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
 }
-/* Content Cards */
-.content-card {
-margin-bottom: 2.5rem !important;
+
+/* Increase spacing between key points sections */
+.key-takeaways .content-card:not(:last-child) {
+    margin-bottom: 2.5rem !important;
 }
+
+/* Footer Sections */
+.disclaimer-section {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-pink);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.research-sources {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-blue);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Ensure last paragraphs don't have extra margin */
 .content-card:last-child,
 .content-section p:last-child,
 .key-takeaways p:last-child {
-margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
-/* Remove text shadows from content area */
-.content-section,
-.executive-summary,
-.key-takeaways,
-.content-card,
-.strategy-section,
-.disclaimer-section,
-.research-sources {
-text-shadow: none !important;
-}
-/* Footer Sections */
-.disclaimer-section {
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid var(--neon-pink);
-border-radius: 0.5rem;
-padding: 1.5rem;
-margin: 2rem 0;
-}
-.research-sources {
-background: rgba(10, 10, 15, 0.95);
-border: 1px solid var(--neon-blue);
-border-radius: 0.5rem;
-padding: 1.5rem;
-margin: 2rem 0;
-}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
-.main-container {
-flex-direction: column;
-}    
+    .main-container {
+        flex-direction: column;
+    }
+    
     .main-container .toc {
         position: relative;
         top: 0;
