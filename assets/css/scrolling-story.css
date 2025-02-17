@@ -1,0 +1,154 @@
+/* scrolling-story.css */
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/cyberpunk-background.jpg'); /* Update with your image path */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(0deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.5) 100%);
+    backdrop-filter: blur(2px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: #00fff5;
+    text-shadow: 0 0 10px rgba(0, 255, 245, 0.8), 0 0 20px rgba(0, 255, 245, 0.6);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.hero-content p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.25rem;
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid #ff00ff;
+    color: #ff00ff;
+    font-family: 'Press Start 2P', cursive;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.hero-button:hover {
+    background: #ff00ff;
+    color: white;
+}
+
+.arrow-right {
+    margin-left: 0.5rem;
+}
+
+/* Market Updates */
+.market-update-card {
+    padding: 2rem;
+    border: 1px solid #b026ff;
+    background: #0a0a0a;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.market-update-card:hover {
+    transform: translateY(-5px);
+}
+
+.market-name {
+    color: #00fff5;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+/* Terminal Section */
+.terminal-container {
+    padding: 2rem;
+    border: 1px solid #00fff5;
+    background: black;
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+}
+
+.terminal-icon {
+    color: #00fff5;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.terminal-content {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.875rem;
+}
+
+.terminal-line {
+    margin-bottom: 1rem;
+}
+
+.line-1 { color: #00fff5; }
+.line-2 { color: #ff00ff; }
+.line-3 { color: #b026ff; }
+.line-4 { color: #00fff5; }
+
+.terminal-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid #00fff5;
+    color: #00fff5;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(0, 255, 245, 0.8);
+}
+
+.terminal-button:hover {
+    background: #00fff5;
+    color: black;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .market-update-card,
+    .terminal-container {
+        padding: 1rem;
+    }
+}
