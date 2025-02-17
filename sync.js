@@ -87,16 +87,14 @@ function generateHtml(post) {
         }
         
         .blog-content {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-            line-height: 2;
-            color: var(--text-primary);
-            white-space: pre-wrap;
-            background: rgba(26, 26, 26, 0.9);
-            border: none;
-            border-radius: 0.5rem;
-            padding: 2rem;
-        }
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 2;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+    background: transparent;
+    padding: 2rem;
+}
         
         .blog-content h1 { 
             font-size: 1.3rem; 
