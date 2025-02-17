@@ -62,18 +62,6 @@ a:hover {
     font-family: 'Press Start 2P', cursive;
 }
 
-/* Navigation - Removed duplicate arrow styles */
-nav ul li a {
-    color: var(--neon-blue);
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    text-shadow: 0 0 5px var(--neon-blue);
-}
-
-nav ul li a:hover {
-    color: var(--neon-pink);
-    text-shadow: 0 0 10px var(--neon-pink);
-}
 
 /* Card Styles */
 .market-card, .market-update-card, .blog-card, .metric-card, .strategy-card {
