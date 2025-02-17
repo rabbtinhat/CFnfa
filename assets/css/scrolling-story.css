@@ -15,7 +15,7 @@
     background-image: url('/assets/images/homebanner.png');
     background-size: cover;
     background-position: center;
-    filter: brightness(0.6);
+    filter: brightness(0.8);
 }
 
 .hero-overlay {
@@ -32,10 +32,17 @@
     padding: 0 20px;
 }
 
+/* Override any text-shadow and animation from consolidated-cyberpunk.css */
+.hero-content h1,
+.section-title {
+    font-family: 'Press Start 2P', cursive !important;
+    color: #00fff5 !important;
+    text-shadow: none !important;
+    animation: none !important;
+}
+
 .hero-content h1 {
-    font-family: 'Press Start 2P', cursive;
     font-size: 2.5rem;
-    color: #00fff5;
     line-height: 1.6;
     margin-bottom: 2rem;
 }
@@ -71,9 +78,8 @@
 
 /* Market Updates */
 .section-title {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', cursive !important;
     font-size: 2rem;
-    color: #00fff5;
     text-align: center;
     margin-bottom: 3rem;
 }
@@ -106,7 +112,7 @@
 
 /* Terminal Section */
 .terminal-container {
-    background: #1a1a1a;
+    background: #000000;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -142,20 +148,28 @@
 
 .terminal-content {
     padding: 1.5rem;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.75rem;
-    background: #1a1a1a;
+    font-family: Monaco, monospace;
+    font-size: 0.875rem;
+    background: #000000;
+    line-height: 1.6;
 }
 
 .terminal-line {
-    color: #ffffff;
+    color: #00ff00;
     margin-bottom: 1rem;
-    line-height: 1.8;
 }
 
-.terminal-line::before {
+.terminal-line.warning {
+    color: #ffbd2e;
+}
+
+.terminal-line.command {
+    color: #ffffff;
+}
+
+.terminal-line.command::before {
     content: '$ ';
-    color: #27c93f;
+    color: #00ff00;
 }
 
 .terminal-button {
@@ -165,9 +179,9 @@
     background: #2d2d2d;
     border: none;
     border-radius: 4px;
-    color: #ffffff;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.75rem;
+    color: #00ff00;
+    font-family: Monaco, monospace;
+    font-size: 0.875rem;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -195,8 +209,11 @@
         padding: 1rem;
     }
     
-    .market-update-card p,
-    .terminal-line {
+    .market-update-card p {
         font-size: 0.65rem;
+    }
+    
+    .terminal-line {
+        font-size: 0.75rem;
     }
 }
