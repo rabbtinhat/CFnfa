@@ -5,21 +5,6 @@
     --neon-pink: #ff00ff;
 }
 
-/* Override main spacing to match crypto page */
-
-
-/* Tighten header spacing */
-.header-content {
-    padding: 8px 0 !important;
-}
-
-nav ul {
-    padding: 8px 20px !important;
-}
-
-.site-title {
-    margin-bottom: 0 !important;
-}
 
 /* Rest of the styles remain unchanged */
 .container {
