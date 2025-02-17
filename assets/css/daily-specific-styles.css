@@ -6,9 +6,7 @@
 }
 
 /* Override main spacing to match crypto page */
-main {
-    margin-top: 80px !important;
-}
+
 
 /* Tighten header spacing */
 .header-content {
