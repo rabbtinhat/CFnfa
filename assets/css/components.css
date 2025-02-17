@@ -40,7 +40,7 @@ header::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding: 20px 0;
     position: relative;
 }
 
@@ -76,6 +76,7 @@ header::before {
     text-align: center;
     position: relative;
     z-index: 2;
+    margin-bottom: 15px;  
 }
 
 .site-title a {
@@ -97,10 +98,10 @@ header::before {
 /* Navigation styles */
 nav {
     background: #000;
-    border-top: none; /* Removed the top border */
+    border-top: none; 
     position: relative;
     z-index: 2;
-    margin-top: -10px; /* Reduce space between title and nav */
+    margin-top: 0px; 
 }
 
 nav ul {
