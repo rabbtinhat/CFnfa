@@ -14,22 +14,12 @@ a:hover {
 
 /* Page title styling */
 .page-title { 
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important; 
-    font-size: 2.5rem !important; 
-    font-weight: 700 !important; 
-    color: #fff !important; 
-    margin: 2rem 0 !important; 
-    letter-spacing: -0.5px !important;
-    /* Override cyberpunk styles */
-    text-shadow: none !important;
-    text-transform: none !important;
-    /* Additional overrides to ensure exact match */
-    background: transparent !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    text-decoration: none !important;
-    line-height: 1.2 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: #fff; 
+    margin: 2rem 0; 
+    letter-spacing: -0.5px; 
 }
 
 /* Blog list container */
