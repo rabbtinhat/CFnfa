@@ -1,9 +1,5 @@
 /* blog-specific-styles.css */
-/* Override general styles to remove neon effects */
-h1, h2, h3, h4, h5, h6 {
-    text-shadow: none;
-}
-
+/* Remove general neon effect overrides to allow title glow */
 .neon-text {
     text-shadow: none;
 }
@@ -12,14 +8,17 @@ a:hover {
     text-shadow: none;
 }
 
-/* Page title styling */
+/* Page title styling to match the Daily Equity Market title */
 .page-title { 
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; 
-    font-size: 2.5rem; 
-    font-weight: 700; 
-    color: #fff; 
-    margin: 2rem 0; 
-    letter-spacing: -0.5px; 
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 2rem 0;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(0, 255, 245, 0.6),
+        0 0 30px rgba(0, 255, 245, 0.6);
+    animation: titlePulse 2s infinite;
 }
 
 /* Blog list container */
@@ -28,19 +27,18 @@ a:hover {
     margin: 2rem auto;
 }
 
-/* Blog post card */
+/* Blog post card - removed border, kept hover effect */
 .blog-post {
     background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-purple);
     border-radius: 0.25rem;
     margin-bottom: 1.5rem;
     padding: 1.5rem;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
 }
 
 .blog-post:hover {
     transform: translateY(-2px);
-    box-shadow: none;
+    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
 }
 
 /* Blog metadata */
@@ -79,7 +77,7 @@ a:hover {
     display: block;
 }
 
-/* Blog title - updated to match page title color */
+/* Blog title */
 .blog-title {
     color: #00fff5;
     margin: 0;
@@ -108,20 +106,18 @@ a:hover {
     cursor: pointer;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .pagination button:hover {
     background: var(--neon-blue);
     color: #000;
-    box-shadow: none;
 }
 
 .pagination button.active {
     background: var(--neon-blue);
     color: #000;
     border-color: var(--neon-blue);
-    box-shadow: none;
 }
 
 /* No posts message */
@@ -130,6 +126,28 @@ a:hover {
     padding: 2rem;
     color: var(--neon-blue);
     font-family: 'Press Start 2P', cursive;
+}
+
+/* Title pulse animation */
+@keyframes titlePulse {
+    0% {
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(0, 255, 245, 0.6),
+            0 0 30px rgba(0, 255, 245, 0.6);
+    }
+    50% {
+        text-shadow: 
+            0 0 15px rgba(255, 255, 255, 0.9),
+            0 0 25px rgba(0, 255, 245, 0.7),
+            0 0 35px rgba(0, 255, 245, 0.7);
+    }
+    100% {
+        text-shadow: 
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 20px rgba(0, 255, 245, 0.6),
+            0 0 30px rgba(0, 255, 245, 0.6);
+    }
 }
 
 /* Responsive styles */
@@ -144,5 +162,9 @@ a:hover {
     
     .blog-post {
         padding: 1rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
     }
 }
