@@ -1,18 +1,13 @@
 /* about-specific-styles.css */
 
 /* Page Title Styling */
-.page-title { 
+.page-title {
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
     color: #fff;
     margin: 2rem 0;
-    text-align: center;
-    text-shadow: 
-        0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(0, 255, 245, 0.6),
-        0 0 30px rgba(0, 255, 245, 0.6);
-    animation: titlePulse 2s infinite;
+    letter-spacing: -0.5px;
 }
 
 /* Container Styles */
@@ -83,9 +78,11 @@
 }
 
 .timeline-content p {
+    font-family: 'Press Start 2P', cursive;
     color: #e0e0e0;
     line-height: 1.6;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 /* Responsive Styles */
@@ -106,5 +103,9 @@
 
     .timeline-content h2 {
         font-size: 1rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.7rem;
     }
 }
