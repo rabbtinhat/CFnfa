@@ -8,141 +8,17 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
     <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
-     <link rel="stylesheet" href="/assets/css/about-specific-styles.css">
-    <style>
-        .story-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .story-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .story-header h1 {
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        .timeline-section {
-            display: flex;
-            gap: 4rem;
-            margin-bottom: 4rem;
-            align-items: center;
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid var(--neon-purple);
-            border-radius: 0.5rem;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .timeline-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
-        }
-
-        .timeline-section:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-image {
-            flex: 1;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .timeline-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 255, 245, 0.2);
-        }
-
-        .timeline-content {
-            flex: 1;
-            padding: 2rem;
-        }
-
-        .timeline-content h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            color: var(--neon-pink);
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 8px var(--neon-pink);
-        }
-
-        .timeline-content p {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-            line-height: 1.6;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .pixel-border {
-            position: relative;
-            padding: 3px;
-        }
-
-        .pixel-border::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: var(--cyber-gradient);
-            z-index: -1;
-            clip-path: polygon(
-                0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
-                100% calc(100% - 5px), calc(100% - 5px) 100%,
-                5px 100%, 0 calc(100% - 5px)
-            );
-        }
-
-        @media (max-width: 768px) {
-            .timeline-section {
-                flex-direction: column !important;
-                gap: 2rem;
-                padding: 1rem;
-            }
-
-            .timeline-image {
-                max-width: 100%;
-            }
-
-            .timeline-content {
-                padding: 1rem;
-            }
-
-            .timeline-content h2 {
-                font-size: 1rem;
-            }
-
-            .timeline-content p {
-                font-size: 0.7rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/about-specific-styles.css">
 </head>
 <body>
     <div id="header"></div>
     <main>
         <div class="story-container">
             <div class="story-header">
-                <h1 class="neon-text pixel-text">A Finance Maverick's High-Stakes Odyssey</h1>
+                <h1 class="page-title">A Finance Maverick's High-Stakes Odyssey</h1>
             </div>
 
-            <div class="timeline-section pixel-border">
+            <div class="timeline-section">
                 <div class="timeline-image">
                     <img src="/assets/images/newchapter1.png" alt="The Hong Kong Undergrad">
                 </div>
@@ -153,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="timeline-section pixel-border">
+            <div class="timeline-section">
                 <div class="timeline-image">
                     <img src="/assets/images/newchapter2.png" alt="Equity Samurai">
                 </div>
@@ -164,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="timeline-section pixel-border">
+            <div class="timeline-section">
                 <div class="timeline-image">
                     <img src="/assets/images/newchapter3.png" alt="Private Banking">
                 </div>
@@ -175,7 +51,7 @@
                 </div>
             </div>
             
-            <div class="timeline-section pixel-border">
+            <div class="timeline-section">
                 <div class="timeline-image">
                     <img src="/assets/images/newchapter4.png" alt="Career Break">
                 </div>
@@ -186,7 +62,7 @@
                 </div>
             </div>
             
-            <div class="timeline-section pixel-border">
+            <div class="timeline-section">
                 <div class="timeline-image">
                     <img src="/assets/images/newchapter5.png" alt="Blockchain and AI">
                 </div>
