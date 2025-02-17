@@ -5,16 +5,8 @@
     --neon-pink: #ff00ff;
 }
 
-
-/* Rest of the styles remain unchanged */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
 /* Page Title */
-.page-title, h1.daily-title {
+.daily-title {
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
@@ -122,13 +114,9 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .page-title, h1.daily-title {
+    .daily-title {
         font-size: 2rem;
         margin: 1.5rem 0;
-    }
-    
-    .container {
-        padding: 1rem;
     }
 
     .quick-overview {
