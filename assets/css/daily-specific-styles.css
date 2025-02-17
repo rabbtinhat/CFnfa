@@ -1,125 +1,157 @@
-/* daily-specific-styles.css */
-:root {
-    --neon-cyan: #00fff5;
-    --neon-purple: #b026ff;
-    --neon-pink: #ff00ff;
+/* blog-specific-styles.css */
+/* Override general styles to remove neon effects */
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: none;
 }
 
-/* Page Title - keeping original neon effect */
-.daily-title {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 2rem 0;
+.neon-text {
+    text-shadow: none;
+}
+
+a:hover {
+    text-shadow: none;
+}
+
+/* Page title styling - updated to match the Asset Allocation design */
+.page-title { 
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: #00fff5; 
+    margin: 2rem 0; 
     letter-spacing: -0.5px;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 10px rgba(0, 255, 245, 0.8),
+        0 0 20px rgba(0, 255, 245, 0.4),
+        0 0 30px rgba(0, 255, 245, 0.2);
 }
 
-/* Date Header - removed text shadow */
-.date-header {
-    font-family: 'Press Start 2P', cursive;
-    color: #00fff5;
-    font-size: 0.8rem;
-    margin-bottom: 2rem;
+/* Blog list container */
+.blog-list {
+    max-width: 800px;
+    margin: 2rem auto;
 }
 
-/* Market Overview Cards */
-.quick-overview {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.overview-card {
+/* Blog post card - removed border */
+.blog-post {
     background: rgba(10, 10, 15, 0.95);
-    padding: 1rem;
-    border-radius: 0.25rem;
-}
-
-.overview-card h3 {
-    color: #00fff5;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    margin-bottom: 0.75rem;
-}
-
-/* Market Values - simplified colors, removed shadows */
-.market-value {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
-    margin-bottom: 0.5rem;
-}
-
-.up { 
-    color: #00ff00;
-}
-
-.down { 
-    color: #ff0000;
-}
-
-/* Market Sections - removed borders and updated headings */
-.market-section {
-    background: rgba(10, 10, 15, 0.95);
-    padding: 1.25rem;
     border-radius: 0.25rem;
     margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
 }
 
-.market-section h2 {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.2rem;
-    color: #00fff5;
-    margin-bottom: 1rem;
+/* Updated hover effect with more visible shadow */
+.blog-post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
 }
 
-.market-content {
+/* Blog metadata */
+.blog-meta {
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin: 0.5rem 0;
     font-family: 'Press Start 2P', cursive;
+}
+
+/* Blog category tag */
+.blog-category {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    background: rgba(176, 38, 255, 0.1);
+    border: 1px solid var(--neon-pink);
+    border-radius: 15px;
+    margin-right: 1rem;
+    color: var(--neon-pink);
     font-size: 0.7rem;
+}
+
+/* Blog summary text */
+.blog-summary {
+    color: #e0e0e0;
     line-height: 1.6;
-    color: #ffffff;
-}
-
-/* Macro List - simplified styling */
-.macro-list {
-    list-style: none;
-    padding: 0;
-}
-
-.macro-item {
+    margin: 1rem 0;
+    font-size: 0.9rem;
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
 }
 
-.macro-item::before {
-    content: "→";
-    margin-right: 0.5rem;
+/* Blog link */
+.blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Blog title */
+.blog-title {
     color: #00fff5;
+    margin: 0;
+    font-size: 1.2rem;
+    font-family: 'Press Start 2P', cursive;
 }
 
-/* Responsive Design */
+/* Blog date */
+.blog-date {
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.pagination button {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.pagination button:hover {
+    background: var(--neon-blue);
+    color: #000;
+    box-shadow: none;
+}
+
+.pagination button.active {
+    background: var(--neon-blue);
+    color: #000;
+    border-color: var(--neon-blue);
+    box-shadow: none;
+}
+
+/* No posts message */
+.no-posts {
+    text-align: center;
+    padding: 2rem;
+    color: var(--neon-blue);
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
-    .daily-title {
-        font-size: 2rem;
-        margin: 1.5rem 0;
+    .blog-list {
+        padding: 0 1rem;
     }
-
-    .quick-overview {
-        grid-template-columns: 1fr;
-    }
-
-    .market-section h2 {
+    
+    .blog-title {
         font-size: 1rem;
     }
+    
+    .blog-post {
+        padding: 1rem;
+    }
 
-    .market-content,
-    .macro-item,
-    .market-value {
-        font-size: 0.6rem;
+    .page-title {
+        font-size: 1.8rem;
     }
 }
