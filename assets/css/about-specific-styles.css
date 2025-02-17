@@ -1,4 +1,16 @@
 /* about-specific-styles.css */
+
+/* Page Title Styling */
+.page-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 2rem 0;
+    letter-spacing: -0.5px;
+}
+
+/* Container Styles */
 .story-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -10,16 +22,7 @@
     margin-bottom: 2rem;
 }
 
-/* Updated main title to exactly match Crypto Market Indicators style */
-.story-header h1 {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 2rem 0;
-    letter-spacing: -0.5px;
-}
-
+/* Timeline Section Styles */
 .timeline-section {
     display: flex;
     gap: 3rem;
@@ -41,6 +44,7 @@
     flex-direction: row-reverse;
 }
 
+/* Image Styles */
 .timeline-image {
     flex: 1;
     max-width: 500px;
@@ -60,12 +64,12 @@
     transform: scale(1.05);
 }
 
+/* Content Styles */
 .timeline-content {
     flex: 1;
 }
 
-/* Updated subtitle style with higher specificity to override consolidated-cyberpunk.css */
-.story-container .timeline-section .timeline-content h2 {
+.timeline-content h2 {
     color: #00fff5 !important;
     font-family: 'Press Start 2P', cursive;
     font-size: 1.2rem;
@@ -79,6 +83,7 @@
     font-size: 0.9rem;
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
     .timeline-section {
         flex-direction: column !important;
@@ -90,7 +95,7 @@
         max-width: 100%;
     }
 
-    .story-header h1 {
+    .about-title {
         font-size: 1.8rem;
     }
 
