@@ -20,20 +20,8 @@ async function processPost(page) {
     const rawTitle = page.properties.Title.title[0]?.plain_text || 'Untitled';
     console.log(`Processing post: ${rawTitle}`);
     
-    // Get the complete page content
-    const blocks = await notion.blocks.children.list({
-        block_id: page.id,
-        page_size: 100  // Adjust this number based on your needs
-    });
-    
-    // Combine all text content from blocks
-    const content = blocks.results.map(block => {
-        if (block.type === 'paragraph') {
-            return block.paragraph.rich_text.map(text => text.plain_text).join('') + '\n\n';
-        }
-        // Add handling for other block types as needed
-        return '';
-    }).join('');
+    // Get the content directly from the Content property
+    const content = page.properties.Content.rich_text[0]?.plain_text || '';
     
     return {
         title: cleanTitle(rawTitle),
