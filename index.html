@@ -8,226 +8,30 @@
     <link rel="stylesheet" href="/assets/css/components.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
-    <style>
-        /* Cyberpunk/Degen Style */
-        :root {
-            --neon-blue: #00fff5;
-            --neon-pink: #ff00ff;
-            --neon-purple: #b026ff;
-            --dark-bg: #0a0a0a;
-            --cyber-gradient: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-        }
-
-        .market-summary {
-            background-color: var(--dark-bg);
-            color: white;
-            padding: 2rem 0;
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
-        }
-
-        .data-source {
-            font-size: 0.7rem;
-            color: #666;
-            text-align: right;
-            margin-top: 0.5rem;
-        }
-
-        .last-update {
-            font-size: 0.8rem;
-            color: var(--neon-blue);
-            margin-bottom: 1rem;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        .market-card {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid var(--neon-pink);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .market-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        .price-up { 
-            color: #00ff00;
-            text-shadow: 0 0 5px #00ff00;
-        }
-
-        .price-down { 
-            color: #ff0000;
-            text-shadow: 0 0 5px #ff0000;
-        }
-
-        /* Content Sections Styling */
-        .content-section {
-            background: var(--dark-bg);
-            border: 1px solid var(--neon-purple);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
-        }
-
-        .section-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            background: var(--cyber-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .view-all {
-            color: var(--neon-pink);
-            text-decoration: none;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-            transition: all 0.3s;
-        }
-
-        .view-all:hover {
-            text-shadow: 0 0 10px var(--neon-pink);
-            transform: scale(1.05);
-        }
-
-        /* Market Updates Section */
-        .market-update-card {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid var(--neon-blue);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            color: white;
-            transition: transform 0.3s;
-        }
-
-        .market-update-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
-
-        /* Crypto Section */
-        .metric-card {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid var(--neon-purple);
-            border-radius: 0.5rem;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--neon-purple);
-        }
-
-        .metric-header {
-            background: rgba(176, 38, 255, 0.1);
-            padding: 1rem;
-            border-bottom: 1px solid var(--neon-purple);
-        }
-
-        /* Blog Section */
-        .blog-card {
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid var(--neon-pink);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            color: white;
-            transition: all 0.3s;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        .blog-meta {
-            color: var(--neon-blue);
-            font-size: 0.8rem;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        /* Pixel Art Elements */
-        .pixel-border {
-            position: relative;
-            padding: 3px;
-        }
-
-        .pixel-border::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: var(--cyber-gradient);
-            z-index: -1;
-            clip-path: polygon(
-                0 5px, 5px 0, calc(100% - 5px) 0, 100% 5px,
-                100% calc(100% - 5px), calc(100% - 5px) 100%,
-                5px 100%, 0 calc(100% - 5px)
-            );
-        }
-
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 1rem;
-            }
-            
-            .view-all {
-                font-size: 0.7rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/css/scrolling-story.css">
 </head>
 <body>
     <div id="header"></div>
     
     <main>
-        <!-- Market Summary -->
-        <section class="market-summary">
-            <div class="container">
-                <div class="last-update">Last Close: Feb 14, 2025 4:00 PM EST</div>
-                <div class="market-grid">
-                    <div class="market-card">
-                        <div class="market-header">
-                            <span>S&P 500</span>
-                            <span class="price-down">-0.01%</span>
-                        </div>
-                        <div>6,114.62</div>
-                    </div>
-                    <div class="market-card">
-                        <div class="market-header">
-                            <span>NASDAQ</span>
-                            <span class="price-up">+0.38%</span>
-                        </div>
-                        <div>22,114.49</div>
-                    </div>
-                    <div class="market-card">
-                        <div class="market-header">
-                            <span>DOW 30</span>
-                            <span class="price-down">-0.37%</span>
-                        </div>
-                        <div>44,546.09</div>
-                    </div>
-                </div>
-                <div class="data-source">Source: Yahoo Finance</div>
+        <!-- Welcome Section -->
+        <section class="hero-section">
+            <div class="hero-background"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Welcome to CF's<br>Financial Observatory</h1>
+                <p>Tradfi, Blockchain, Web3, AI</p>
+                <a href="/pages/about.html" class="hero-button">
+                    About CF <span class="arrow-right">→</span>
+                </a>
             </div>
         </section>
 
-        <!-- Market Updates -->
+        <!-- Latest Insights -->
         <section class="content-section pixel-border">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Market Updates</h2>
-                    <a href="/pages/daily.html" class="view-all">View all →</a>
+                    <h2 class="section-title">Latest Insights</h2>
                 </div>
                 <div class="market-updates">
                     <script>
@@ -239,7 +43,10 @@
                                 const marketSections = Array.from(doc.querySelectorAll('.market-section'))
                                     .filter(section => {
                                         const title = section.querySelector('h2').textContent;
-                                        return title.includes('North America') || title.includes('Technology');
+                                        return title.includes('North America') || 
+                                               title.includes('Europe') || 
+                                               title.includes('Asia') || 
+                                               title.includes('Technology');
                                     });
                                 const marketUpdates = document.querySelector('.market-updates');
                                 
@@ -261,77 +68,22 @@
             </div>
         </section>
 
-        <!-- Crypto Section -->
+        <!-- Terminal Section -->
         <section class="content-section pixel-border">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Crypto Metrics</h2>
-                    <a href="/pages/crypto.html" class="view-all">View all →</a>
-                </div>
-                <div class="metrics-preview">
-                    <script>
-                        fetch('/pages/crypto.html')
-                            .then(response => response.text())
-                            .then(html => {
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-                                const allMetricCards = Array.from(doc.querySelectorAll('.metric-card'));
-                                const targetTitles = [
-                                    'Daily BTC Whale vs. Retail Net Buying/Selling Volume',
-                                    'BTC Spot ETF Inflows'
-                                ];
-                                
-                                const selectedCards = allMetricCards.filter(card => {
-                                    const title = card.querySelector('.metric-title').textContent;
-                                    return targetTitles.includes(title);
-                                });
-
-                                const metricsPreview = document.querySelector('.metrics-preview');
-                                
-                                selectedCards.forEach(card => {
-                                    const title = card.querySelector('.metric-title').textContent;
-                                    const description = card.querySelector('.description').textContent;
-                                    const graphSrc = card.querySelector('.graph-container img').src;
-                                    
-                                    const previewCard = document.createElement('div');
-                                    previewCard.className = 'metric-card';
-                                    previewCard.innerHTML = `
-                                        <div class="metric-header">
-                                            <h3 class="metric-title">${title}</h3>
-                                        </div>
-                                        <div class="metric-content">
-                                            <div class="graph-container">
-                                                <img src="${graphSrc}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
-                                            </div>
-                                            <p>${description}</p>
-                                        </div>
-                                    `;
-                                    metricsPreview.appendChild(previewCard);
-                                });
-                            });
-                    </script>
-                </div>
-            </div>
-        </section>
-
-        <!-- Latest Views & Blogs -->
-        <section class="content-section pixel-border">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Latest Views & Blogs</h2>
-                    <a href="/pages/views-and-blogs.html" class="view-all">View all →</a>
-                </div>
-                <div class="blog-preview">
-                    <!-- Static placeholder content until blog system is set up -->
-                    <div class="blog-card">
-                        <div class="blog-meta">Latest Update</div>
-                        <h3 class="blog-card-title">Market Analysis: Weekly Outlook</h3>
-                        <p class="blog-summary">Comprehensive analysis of current market trends and future outlook...</p>
-                    </div>
-                    <div class="blog-card">
-                        <div class="blog-meta">Technical Analysis</div>
-                        <h3 class="blog-card-title">Key Support and Resistance Levels</h3>
-                        <p class="blog-summary">Detailed technical analysis of major market indices...</p>
+                <div class="terminal-container">
+                    <div class="terminal-icon">⌘</div>
+                    <div class="terminal-content">
+                        <p class="terminal-line line-1">> Initializing profile scan...</p>
+                        <p class="terminal-line line-2">> Background: Traditional Finance</p>
+                        <p class="terminal-line line-3">> Expertise: Market Analysis, Crypto</p>
+                        <p class="terminal-line line-4">> Status: Ready for collaboration</p>
+                        <a href="https://linkedin.com/in/c-f-ng-a8300a26" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="terminal-button">
+                            Get Connected
+                        </a>
                     </div>
                 </div>
             </div>
