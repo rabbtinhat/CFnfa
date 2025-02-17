@@ -18,7 +18,7 @@
     margin-top: 2rem;
 }
 
-/* Left Side Navigation - Made more specific to override global styles */
+/* Left Side Navigation */
 .main-container .toc {
     position: sticky;
     top: 180px;
@@ -33,14 +33,133 @@
     overflow-x: hidden;
 }
 
+/* Main Section Titles - New Addition */
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+/* Content Text Styles */
+.content-section p,
+.key-takeaways p,
+.content-section li,
+.key-takeaways li,
+.content-card p,
+.disclaimer-section p,
+.research-sources p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    line-height: 2.2; /* Increased line height */
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem; /* Added space between paragraphs */
+}
+
+/* Executive Summary */
+.executive-summary {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid #4a4a4a;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Content Sections */
+.content-section {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid #4a4a4a;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Content Cards - Adjusted Spacing */
+.content-card {
+    background: rgba(26, 26, 26, 0.9);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem; /* Increased spacing between cards */
+    border-radius: 0.5rem;
+}
+
+.content-card h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Key Points Spacing */
+.key-takeaways .content-card:not(:last-child) {
+    margin-bottom: 2.5rem;
+}
+
+/* Strategy Section */
+.strategy-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Increased gap */
+}
+
+.strategy-card {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid #4a4a4a;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.strategy-header {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a4a4a;
+    background: rgba(26, 26, 26, 0.9);
+}
+
+.strategy-header h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Key Takeaways */
+.key-takeaways {
+    background: rgba(26, 26, 26, 0.9);
+    border-left: 4px solid #4a4a4a;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* Footer Sections */
+.disclaimer-section {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid #4a4a4a;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.research-sources {
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid #4a4a4a;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+/* TOC Styles - Maintained */
 .main-container .toc h2 {
-    color: var(--neon-cyan);
+    color: #fff;
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     text-align: left !important;
 }
 
-/* Force vertical layout for TOC list and remove arrows */
 .main-container .toc ul {
     list-style: none !important;
     padding: 0 !important;
@@ -57,27 +176,14 @@
     padding-left: 1rem !important;
     width: 100% !important;
     display: block !important;
-    list-style-type: none !important;
-}
-
-/* Remove arrow from TOC links */
-.main-container .toc li a::before {
-    display: none !important;
-    content: none !important;
-}
-
-.main-container .toc li::before,
-.main-container .toc li::after {
-    display: none !important;
-    content: none !important;
 }
 
 .main-container .toc li:hover {
-    border-left: 2px solid var(--neon-pink);
+    border-left: 2px solid #4a4a4a;
 }
 
 .main-container .toc a {
-    color: var(--neon-blue) !important;
+    color: #fff !important;
     text-decoration: none !important;
     font-size: 0.8rem !important;
     display: block !important;
@@ -86,118 +192,6 @@
     width: 100% !important;
     text-align: left !important;
     padding: 0.25rem 0 !important;
-}
-
-.main-container .toc a:hover {
-    color: var(--neon-pink) !important;
-}
-
-/* Main Content Area */
-.main-content {
-    flex-grow: 1;
-    max-width: calc(100% - 280px);
-}
-
-/* Pixel Font Style for Content Text */
-.content-section p,
-.key-takeaways p,
-.content-section li,
-.key-takeaways li,
-.content-card p,
-.disclaimer-section p,
-.research-sources p {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-}
-
-/* Executive Summary */
-.executive-summary {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-blue);
-    border-radius: 0.5rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Content Sections */
-.content-section {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* Strategy Section */
-.strategy-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.strategy-card {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-purple);
-    border-radius: 0.5rem;
-    overflow: hidden;
-}
-
-.strategy-header {
-    padding: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--neon-purple);
-}
-
-.strategy-header h3 {
-    margin: 0;
-}
-
-.strategy-content {
-    padding: 1.5rem;
-    display: none;
-}
-
-.strategy-content.active {
-    display: block;
-}
-
-.toggle-icon {
-    color: var(--neon-blue);
-    transition: transform 0.3s;
-}
-
-.toggle-icon.active {
-    transform: rotate(180deg);
-}
-
-/* Key Takeaways */
-.key-takeaways {
-    background: rgba(26, 26, 26, 0.9);
-    border-left: 4px solid var(--neon-pink);
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-}
-
-/* Footer Sections */
-.disclaimer-section {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-pink);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin: 2rem 0;
-}
-
-.research-sources {
-    background: rgba(10, 10, 15, 0.95);
-    border: 1px solid var(--neon-blue);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    margin: 2rem 0;
 }
 
 /* Responsive Design */
@@ -217,4 +211,10 @@
     .main-content {
         max-width: 100%;
     }
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    max-width: calc(100% - 280px);
 }
