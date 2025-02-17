@@ -12,7 +12,7 @@
 .hero-background {
     position: absolute;
     inset: 0;
-    background-image: url('/assets/images/homebanner.png'); /* Update with your image path */
+    background-image: url('/assets/images/homebanner.png');
     background-size: cover;
     background-position: center;
     filter: brightness(0.6);
@@ -36,7 +36,6 @@
     font-family: 'Press Start 2P', cursive;
     font-size: 2.5rem;
     color: #00fff5;
-    text-shadow: 0 0 10px rgba(0, 255, 245, 0.8), 0 0 20px rgba(0, 255, 245, 0.6);
     line-height: 1.6;
     margin-bottom: 2rem;
 }
@@ -58,7 +57,6 @@
     font-family: 'Press Start 2P', cursive;
     text-decoration: none;
     transition: all 0.3s ease;
-    text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
 }
 
@@ -72,12 +70,19 @@
 }
 
 /* Market Updates */
+.section-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: #00fff5;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
 .market-update-card {
     padding: 2rem;
-    border: 1px solid #b026ff;
-    background: #0a0a0a;
+    background: rgba(10, 10, 10, 0.9);
     margin-bottom: 1.5rem;
-    box-shadow: 0 0 15px rgba(176, 38, 255, 0.2);
+    border: 1px solid #1a1a1a;
     transition: transform 0.3s ease;
 }
 
@@ -86,55 +91,89 @@
 }
 
 .market-name {
-    color: #00fff5;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.875rem;
+    color: #00fff5;
     margin-bottom: 1rem;
+}
+
+.market-update-card p {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: #e0e0e0;
 }
 
 /* Terminal Section */
 .terminal-container {
-    padding: 2rem;
-    border: 1px solid #00fff5;
-    background: black;
-    box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+    background: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.terminal-icon {
-    color: #00fff5;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.terminal-header {
+    background: #2d2d2d;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+}
+
+.terminal-dot:nth-child(2) {
+    background: #ffbd2e;
+}
+
+.terminal-dot:nth-child(3) {
+    background: #27c93f;
 }
 
 .terminal-content {
+    padding: 1.5rem;
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
+    background: #1a1a1a;
 }
 
 .terminal-line {
+    color: #ffffff;
     margin-bottom: 1rem;
+    line-height: 1.8;
 }
 
-.line-1 { color: #00fff5; }
-.line-2 { color: #ff00ff; }
-.line-3 { color: #b026ff; }
-.line-4 { color: #00fff5; }
+.terminal-line::before {
+    content: '$ ';
+    color: #27c93f;
+}
 
 .terminal-button {
     display: inline-block;
     margin-top: 1.5rem;
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid #00fff5;
-    color: #00fff5;
+    padding: 0.75rem 1.5rem;
+    background: #2d2d2d;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.75rem;
     text-decoration: none;
     transition: all 0.3s ease;
-    text-shadow: 0 0 10px rgba(0, 255, 245, 0.8);
 }
 
 .terminal-button:hover {
-    background: #00fff5;
-    color: black;
+    background: #3d3d3d;
 }
 
 /* Responsive Adjustments */
@@ -147,8 +186,17 @@
         font-size: 1rem;
     }
     
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
     .market-update-card,
-    .terminal-container {
+    .terminal-content {
         padding: 1rem;
+    }
+    
+    .market-update-card p,
+    .terminal-line {
+        font-size: 0.65rem;
     }
 }
