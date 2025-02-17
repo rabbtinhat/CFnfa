@@ -19,8 +19,7 @@ a:hover {
     font-weight: 700; 
     color: #fff; 
     margin: 2rem 0; 
-    letter-spacing: -0.5px;
-    text-shadow: none;
+    letter-spacing: -0.5px; 
 }
 
 /* Blog list container */
