@@ -245,7 +245,7 @@ footer a:hover {
 
 /* Main content spacing */
 main {
-    margin-top: 120px;
+    margin-top: 160px;
     padding: 0;
 }
 
@@ -291,6 +291,6 @@ main {
     }
 
     main {
-        margin-top: 100px;
+        margin-top: 120px;
     }
 }
