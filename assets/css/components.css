@@ -7,10 +7,10 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #00fff5;
     min-height: 160px;
     position: relative;
     overflow: hidden;
+    border-bottom: none; /* Removed the bottom border */
 }
 
 /* Scanline effect using pseudo-element */
@@ -74,7 +74,7 @@ header::before {
 /* Site title styles */
 .site-title {
     font-family: 'Press Start 2P', cursive;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -99,9 +99,10 @@ header::before {
 /* Navigation styles */
 nav {
     background: #000;
-    border-top: 1px solid #00fff5;
+    border-top: none; /* Removed the top border */
     position: relative;
     z-index: 2;
+    margin-top: -10px; /* Reduce space between title and nav */
 }
 
 nav ul {
@@ -246,7 +247,7 @@ footer a:hover {
 
 /* Main content spacing */
 main {
-    margin-top: 180px;
+    margin-top: 120px;
     padding: 0;
 }
 
@@ -257,7 +258,7 @@ main {
     }
 
     .site-title {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
     }
 
     .header-content::before,
@@ -292,6 +293,6 @@ main {
     }
 
     main {
-        margin-top: 140px;
+        margin-top: 100px;
     }
 }
