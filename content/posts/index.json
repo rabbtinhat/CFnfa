@@ -1,58 +1,9 @@
 [
   {
-    "title": "another day of testing",
-    "slug": "heyt",
+    "title": "Open AI’s Deep Research",
+    "slug": "Open AI’s Deep Research",
     "date": "2025-02-17",
-    "category": "Daily update",
-    "summary": "should be final test"
-  },
-  {
-    "title": "testing every day",
-    "slug": "Hello Sunday",
-    "date": "2025-02-16",
-    "category": "Daily update",
-    "summary": "It is a good Sunday"
-  },
-  {
-    "title": "post v day test",
-    "slug": "Ding",
-    "date": "2025-02-15",
-    "category": "Daily update",
-    "summary": "YES"
-  },
-  {
-    "title": "V day testing",
-    "slug": "Happy V day",
-    "date": "2025-02-14",
-    "category": "Asst Allocation",
-    "summary": "WAGMI"
-  },
-  {
-    "title": "daily test 20250213",
-    "slug": "Daily test",
-    "date": "2025-02-13",
-    "category": "Daily update",
-    "summary": "NGMI"
-  },
-  {
-    "title": "Another testing post",
-    "slug": "WAGMI",
-    "date": "2025-02-12",
-    "category": "Macro",
-    "summary": "DYOR "
-  },
-  {
-    "title": "daily update",
-    "slug": "testing-post-no-2",
-    "date": "2025-02-10",
-    "category": "Daily update",
-    "summary": "To test the sync function"
-  },
-  {
-    "title": "testing to change a post",
-    "slug": "testing-post",
-    "date": "2025-02-10",
-    "category": "Daily update",
-    "summary": "lets see if this works"
+    "category": "AI",
+    "summary": "Deep Research represents both a technological triumph and a societal challenge. "
   }
 ]
