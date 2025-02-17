@@ -68,7 +68,7 @@ function generateMarketHtml(data) {
     
     <main>
         <div class="container">
-            <h1 class="daily-title">Daily Equity Market Wrap-up</h1>
+            <h1 class="page-title">Daily Equity Market Wrap-up</h1>
             <div class="date-header">
                 ${new Date().toLocaleDateString('en-US', {
                     weekday: 'long',
