@@ -31,7 +31,7 @@
 
 .metric-card {
     background: transparent;
-    border: none;
+    border: 1px solid var(--neon-purple);
     border-radius: 0.25rem;
     overflow: hidden;
     transition: transform 0.3s;
