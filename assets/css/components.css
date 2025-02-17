@@ -1,4 +1,11 @@
 /* Updated components.css */
+:root {
+    --neon-blue: #00fff5;
+    --neon-pink: #ff00ff;
+    --neon-purple: #b026ff;
+    /* Add any other color variables used in navigation */
+}
+
 /* Header styles */
 header {
     background-color: #000;
@@ -114,13 +121,12 @@ nav ul {
     justify-content: center;
     gap: 2rem;
     padding: 15px 20px;
-    margin: 0;
-    max-width: 1200px;
     margin: 0 auto;
+    max-width: 1200px;
 }
 
 nav ul li a {
-    color: #00fff5;
+    color: var(--neon-blue);
     text-decoration: none;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.9rem;
@@ -134,14 +140,14 @@ nav ul li a::before {
     content: ">";
     position: absolute;
     left: 0;
-    color: #ff00ff;
+    color: var(--neon-pink);
 }
 
 nav ul li a:hover {
-    color: #ff00ff;
+    color: var(--neon-pink);
     text-shadow: 
-        0 0 10px #ff00ff,
-        0 0 20px #ff00ff;
+        0 0 10px var(--neon-pink),
+        0 0 20px var(--neon-pink);
 }
 
 /* Social links */
