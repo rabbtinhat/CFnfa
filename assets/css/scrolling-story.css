@@ -12,7 +12,7 @@
 .hero-background {
     position: absolute;
     inset: 0;
-    background-image: url('/assets/images/cyberpunk-background.jpg'); /* Update with your image path */
+    background-image: url('/assets/images/homebanner.png'); /* Update with your image path */
     background-size: cover;
     background-position: center;
     filter: brightness(0.6);
