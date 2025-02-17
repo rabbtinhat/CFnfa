@@ -60,8 +60,8 @@ function generateMarketHtml(data) {
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/components.css">
-    <link rel="stylesheet" href="/assets/css/cyberpunk-theme.css">
-    <link rel="stylesheet" href="/assets/css/global-cyberpunk-styles.css">
+    <link rel="stylesheet" href="/assets/css/daily-specific-styles.css">
+    <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk-styles.css">
     <style>
         .container {
             max-width: 1200px;
