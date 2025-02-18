@@ -18,23 +18,15 @@ function cleanTitle(title) {
 
 async function processPost(page) {
     const rawTitle = page.properties.Title.title[0]?.plain_text || 'Untitled';
+    console.log(`Processing post: ${rawTitle}`);
     
-    // Debug logging for content
-    console.log(`\nProcessing: ${rawTitle}`);
+    // Improve content extraction to handle multiple segments properly
+    let content = '';
     if (page.properties.Content && page.properties.Content.rich_text) {
-        console.log('Number of rich_text segments:', page.properties.Content.rich_text.length);
-        page.properties.Content.rich_text.forEach((segment, index) => {
-            console.log(`Segment ${index} length:`, segment.plain_text.length);
-            console.log(`First 50 chars:`, segment.plain_text.substring(0, 50));
-        });
+        content = page.properties.Content.rich_text
+            .map(text => text.plain_text)
+            .join('');
     }
-
-    // Modified content extraction to handle multiple segments
-    const content = page.properties.Content.rich_text
-        ? page.properties.Content.rich_text.map(text => text.plain_text).join('')
-        : '';
-        
-    console.log('Total content length:', content.length);
     
     return {
         title: cleanTitle(rawTitle),
