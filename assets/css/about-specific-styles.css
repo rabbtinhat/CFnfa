@@ -16,16 +16,6 @@
 }
 
 /* Container Styles */
-.story-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0rem;
-}
-
-.story-header {
-    text-align: center;
-    margin-bottom: 0rem;
-}
 
 /* Timeline Section Styles */
 .timeline-section {
