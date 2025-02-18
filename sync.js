@@ -19,18 +19,7 @@ function cleanTitle(title) {
 async function processPost(page) {
     const rawTitle = page.properties.Title.title[0]?.plain_text || 'Untitled';
     console.log(`Processing post: ${rawTitle}`);
-
-        // Debug logging
-    console.log('Content property:', JSON.stringify(page.properties.Content, null, 2));
     
-    const content = page.properties.Content.rich_text
-        .map(text => text.plain_text)
-        .join('') || '';
-    
-    // Debug logging
-    console.log('Extracted content:', content);
-    
-    return {
     
     // Get the content directly from the Content property
     const content = page.properties.Content.rich_text[0]?.plain_text || '';
