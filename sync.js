@@ -95,9 +95,6 @@ function generateHtml(post) {
             white-space: pre-wrap;
             background: transparent;
             padding: 2rem;
-            overflow: visible;  /* Add this line */
-            height: auto;      /* Add this line */
-            min-height: 200px; /* Add this line */
         }
         
         .blog-content h1 { 
