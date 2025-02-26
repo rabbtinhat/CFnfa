@@ -13,14 +13,14 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    height: 160px;
-    border-bottom: 1px solid #00fff5;
+    height: 100px; /* Reduced height */
     box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
+    /* Removed border-bottom */
 }
 
 /* Main content spacing */
 main {
-    margin-top: 160px;
+    margin-top: 140px; /* Adjusted to accommodate header + nav */
     padding: 30px 0;
 }
 
@@ -85,11 +85,12 @@ header::before {
 /* Site title styles */
 .site-title {
     font-family: 'Press Start 2P', cursive;
-    font-size: 4.5rem;
+    font-size: 4.5rem; /* Adjusted font size */
     text-align: center;
     position: relative;
     z-index: 2;
-    font-weight: bold; 
+    font-weight: bold;
+    line-height: 1;
 }
 
 .site-title a {
@@ -111,9 +112,10 @@ header::before {
 /* Navigation styles */
 nav {
     background: #000;
-    position: relative;
-    z-index: 2;
-    margin-top: -10px;
+    position: fixed; /* Changed to fixed */
+    z-index: 1000; /* Match header z-index */
+    width: 100%;
+    top: 100px; /* Position just below header */
 }
 
 nav ul {
@@ -179,7 +181,7 @@ nav ul li a:hover {
 /* Footer styles */
 footer {
     background-color: #000;
-    border-top: 1px solid #00fff5;
+    /* Removed border-top */
     padding: 40px 0;
     margin-top: 60px;
 }
@@ -257,67 +259,47 @@ footer a:hover {
 
 /* Responsive styles */
 @media (max-width: 768px) {
-    /* Increase header height and ensure content stays inside */
     header {
-        height: 220px; /* Significantly increased height to contain all elements */
-        position: absolute; /* Change from fixed to absolute */
-        overflow: visible; /* Allow content to be visible */
-        border-bottom: none; /* Remove border bottom */
+        height: 80px; /* Further reduced height for mobile */
     }
-    
-    /* Adjust main content to not overlap with header */
+
     main {
-        margin-top: 220px; /* Match the header height */
-        padding-top: 20px; /* Add some breathing room */
+        margin-top: 120px; /* Adjusted to accommodate header + nav */
     }
 
     .header-content {
-        padding: 10px 20px;
+        padding: 5px 20px;
     }
 
-    /* Make site title properly contained */
     .site-title {
-        font-size: 2.8rem; /* Reduce font size to fit better */
-        line-height: 1.2; /* Improve line height for readability */
-        padding: 15px 0; /* Add padding for spacing */
-        display: block; /* Ensure it's a block element */
-        text-align: center; /* Center the text */
-        font-weight: bold;
+        font-size: 2.8rem; /* Reduced size for mobile */
+        font-weight: bold; 
+        line-height: 1;
     }
+
     .header-content::before,
     .header-content::after {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
     }
-    /* Fix navigation positioning */
+
     nav {
-        position: relative; /* Change positioning */
-        top: auto; /* Reset top position */
-        margin-top: 0; /* Reset margin */
-        width: 100%; /* Full width */
-        background-color: black; /* Solid background */
-        border-bottom: none; /* Remove border */
+        top: 80px; /* Adjusted to match header height */
+        background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent background */
     }
-    /* Fix navigation links and scrolling */
+
     nav ul {
-        padding: 10px 5px; /* Reduce padding */
-        justify-content: flex-start; /* Left align */
-        overflow-x: auto; /* Allow horizontal scrolling */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-        scrollbar-width: none; /* Hide scrollbar in Firefox */
-        gap: 15px; /* Reduce gap between items */
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 1rem;
+        padding: 8px 10px;
+        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
     }
-    
-    /* Hide scrollbar in WebKit browsers */
-    nav ul::-webkit-scrollbar {
-        display: none;
-    }
-    
-    /* Make nav links more compact */
+
     nav ul li a {
-        font-size: 0.75rem; /* Smaller font */
-        white-space: nowrap; /* Prevent wrapping */
-        padding: 5px 0; /* Reduce padding */
+        font-size: 0.7rem;
+        white-space: nowrap;
     }
 
     .social-links {
@@ -327,17 +309,7 @@ footer a:hover {
     }
 
     .social-links svg {
-        width: 20px;
-        height: 20px;
-    }
-        /* Remove blue lines at top and bottom */
-    header {
-        border-bottom: none !important;
-        box-shadow: none !important;
-    }
-    
-    footer {
-        border-top: none !important;
-        box-shadow: none !important;
+        width: 18px;
+        height: 18px;
     }
 }
