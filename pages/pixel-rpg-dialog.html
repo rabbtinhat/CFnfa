@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel RPG Dialog Box</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-family: 'Press Start 2P', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        
+        .game-container {
+    	position: relative;
+    	width: 800px;
+    	height: 600px;
+    	overflow: hidden;
+    	box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    	background-color: #0a0a2a; /* This is the current background color */
+    	background-image: url('your-background.gif'); /* Add this line for your GIF/PNG */
+    	background-size: cover; /* This makes the image cover the entire container */
+    	background-repeat: no-repeat; /* Prevents the image from repeating */
+    	background-position: center; /* Centers the image */
+    	image-rendering: pixelated;
+	}
+        
+        .character {
+            position: absolute;
+            bottom: 150px;
+            height: 80px;
+            width: 60px;
+            background-color: #197278;
+        }
+        
+        .character-a {
+            left: 260px;
+        }
+        
+        .character-b {
+            right: 260px;
+        }
+        
+        .dialog-box {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 760px;
+            height: 150px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 3px solid #FFD700;
+            border-radius: 5px;
+            padding: 0;
+            color: white;
+            font-size: 14px;
+            line-height: 1.5;
+            cursor: pointer;
+            display: flex;
+        }
+        
+        .dialog-box.intro, .dialog-box.outro {
+            display: block;
+        }
+        
+        .portrait-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 3px solid #FFD700;
+        }
+        
+        .portrait {
+            width: 120px;
+            height: 120px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .dialog-content {
+            flex: 1;
+            padding: 15px;
+            position: relative;
+            overflow-y: auto;
+            max-height: 150px;
+            scrollbar-width: thin;
+            scrollbar-color: #FFD700 rgba(0,0,0,0.3);
+        }
+        
+        .dialog-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .dialog-content::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.3);
+        }
+        
+        .dialog-content::-webkit-scrollbar-thumb {
+            background-color: #FFD700;
+            border-radius: 6px;
+        }
+        
+        #intro-outro-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        #intro-outro-text {
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .speaker {
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .flash {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        #dialog-text {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .continue-prompt {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            animation: blink 1s infinite;
+            font-size: 16px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .floor {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            height: 50px;
+            background-color: #2a4494;
+        }
+        
+        .pixel-item {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .bookshelf {
+            left: 100px;
+            bottom: 150px;
+            width: 60px;
+            height: 80px;
+            background-color: #6a4c93;
+        }
+        
+        .table {
+            right: 100px;
+            bottom: 150px;
+            width: 60px;
+            height: 40px;
+            background-color: #8b6b61;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="floor"></div>
+        <div class="pixel-item bookshelf"></div>
+        <div class="pixel-item table"></div>
+        <div class="character character-a"></div>
+        <div class="character character-b"></div>
+        <div id="dialog-box-container">
+            <div class="dialog-box intro" id="dialog-box">
+                <div id="intro-outro-content">
+                    <div id="intro-outro-text">Click anywhere to begin...</div>
+                    <div class="continue-prompt">▼</div>
+                </div>
+                <div class="portrait-container" style="display: none;">
+                    <div class="portrait" id="portrait"></div>
+                </div>
+                <div class="dialog-content" style="display: none;">
+                    <div class="speaker" id="speaker-name"></div>
+                    <div id="dialog-text"></div>
+                    <div class="continue-prompt">▼</div>
+                </div>
+            </div>
+        </div>
+        <div class="flash" id="flash"></div>
+    </div>
+
+    <script>
+        // Dialog script with image links for each dialog
+        const dialogScript = [
+            { 
+                speaker: "A", 
+                text: "Hey, man, the crypto market just crashed again. Do you think I should buy the dip or wait it out?",
+                image: "https://example.com/portrait1.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "B", 
+                text: "You know, that reminds me of a guy I once knew—he was a struggling artist, could barely sell a painting for $10. One day, he decided to paint with his feet just for fun. A wealthy collector saw it, called it \"revolutionary,\" and bought it for $50,000.",
+                image: "https://example.com/portrait2.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "A", 
+                text: "Uh… okay?",
+                image: "https://example.com/portrait1.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "B", 
+                text: "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk. But then, one day, he tripped over his own paintbrush, sprained both ankles, and could never paint again.",
+                image: "https://example.com/portrait2.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "A", 
+                text: "…I feel like this has nothing to do with what I asked.",
+                image: "https://example.com/portrait1.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "B", 
+                text: "Oh, but it does! You see, when he had no expectations, success came to him. When he started planning for it, life humbled him. The lesson? Maybe stop looking at charts and just let fate decide.",
+                image: "https://example.com/portrait2.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "A", 
+                text: "That's the worst financial advice I've ever heard.",
+                image: "https://example.com/portrait1.jpg"  // Replace with your actual image URL
+            },
+            { 
+                speaker: "B", 
+                text: "And yet, you're still listening.",
+                image: "https://example.com/portrait2.jpg"  // Replace with your actual image URL
+            }
+        ];
+
+        // DOM elements
+        const dialogBox = document.getElementById('dialog-box');
+        const dialogText = document.getElementById('dialog-text');
+        const speakerElement = document.getElementById('speaker-name');
+        const flash = document.getElementById('flash');
+        const portraitContainer = document.querySelector('.portrait-container');
+        const dialogContent = document.querySelector('.dialog-content');
+        const introOutroContent = document.getElementById('intro-outro-content');
+        const introOutroText = document.getElementById('intro-outro-text');
+
+        // Dialog state
+        let currentDialogIndex = -1;
+        let isTyping = false;
+        let typewriterInterval;
+        
+        // Text speed setting (milliseconds per character)
+        // Lower values = faster text, higher values = slower text
+        let textSpeed = 50; // Adjustable text speed (default: 50ms per character)
+
+        // Function to check if text overflow and enable scrolling
+        function checkForTextOverflow() {
+            if (dialogContent.scrollHeight > dialogContent.clientHeight) {
+                dialogContent.scrollTop = dialogContent.scrollHeight;
+            }
+        }
+
+        // Function to display dialog with typewriter effect
+        function displayDialog(index) {
+            if (index >= dialogScript.length) {
+                // Reset to beginning when we reach the end
+                currentDialogIndex = -1;
+                dialogBox.className = "dialog-box outro";
+                portraitContainer.style.display = "none";
+                dialogContent.style.display = "none";
+                introOutroContent.style.display = "flex";
+                introOutroText.innerText = "Click anywhere to restart...";
+                return;
+            }
+
+            // If it's the first actual dialog (index 0), change from intro to regular dialog
+            if (index === 0) {
+                dialogBox.className = "dialog-box";
+                portraitContainer.style.display = "block";
+                dialogContent.style.display = "block";
+                introOutroContent.style.display = "none";
+            }
+
+            const dialog = dialogScript[index];
+            speakerElement.textContent = "";
+            
+            // Set the portrait image to the specific image for this dialog
+            const portrait = document.getElementById('portrait');
+            portrait.style.backgroundImage = `url('${dialog.image}')`;
+            
+            // Change character highlight based on who's speaking
+            document.querySelector('.character-a').style.filter = dialog.speaker === "A" ? "brightness(1.5)" : "brightness(1)";
+            document.querySelector('.character-b').style.filter = dialog.speaker === "B" ? "brightness(1.5)" : "brightness(1)";
+
+            // Typewriter effect
+            isTyping = true;
+            let i = 0;
+            dialogText.innerHTML = "";
+            clearInterval(typewriterInterval);
+            
+            typewriterInterval = setInterval(() => {
+                if (i < dialog.text.length) {
+                    dialogText.innerHTML += dialog.text.charAt(i);
+                    i++;
+                    checkForTextOverflow();
+                } else {
+                    clearInterval(typewriterInterval);
+                    isTyping = false;
+                }
+            }, textSpeed); // Use the configurable text speed
+        }
+
+        // Flash effect when changing dialog
+        function flashEffect() {
+            flash.style.opacity = 0.3;
+            setTimeout(() => {
+                flash.style.opacity = 0;
+            }, 100);
+        }
+
+        // Click handler
+        dialogBox.addEventListener('click', () => {
+            if (isTyping) {
+                // Skip the typewriter effect if clicking during typing
+                clearInterval(typewriterInterval);
+                if (currentDialogIndex >= 0 && currentDialogIndex < dialogScript.length) {
+                    const dialog = dialogScript[currentDialogIndex];
+                    dialogText.innerHTML = dialog.text;
+                    checkForTextOverflow();
+                }
+                isTyping = false;
+                return;
+            }
+            
+            currentDialogIndex++;
+            flashEffect();
+            displayDialog(currentDialogIndex);
+        });
+        
+        // Support for mobile touch events
+        dialogBox.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent default touch behavior
+        });
+    </script>
+</body>
+</html>
