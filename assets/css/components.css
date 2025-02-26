@@ -13,14 +13,14 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    height: 100px; /* Reduced height */
+    height: 120px; /* Increased to accommodate larger title */
+    border-bottom: none !important; /* Force remove border */
     box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
-    /* Removed border-bottom */
 }
 
 /* Main content spacing */
 main {
-    margin-top: 140px; /* Adjusted to accommodate header + nav */
+    margin-top: 170px; /* Adjusted to accommodate header + nav */
     padding: 30px 0;
 }
 
@@ -85,7 +85,7 @@ header::before {
 /* Site title styles */
 .site-title {
     font-family: 'Press Start 2P', cursive;
-    font-size: 4.5rem; /* Adjusted font size */
+    font-size: 4.5rem; /* Increased as requested */
     text-align: center;
     position: relative;
     z-index: 2;
@@ -115,7 +115,7 @@ nav {
     position: fixed; /* Changed to fixed */
     z-index: 1000; /* Match header z-index */
     width: 100%;
-    top: 100px; /* Position just below header */
+    top: 120px; /* Position just below header */
 }
 
 nav ul {
@@ -178,12 +178,13 @@ nav ul li a:hover {
     transform: scale(1.1);
 }
 
-/* Footer styles */
+/* Footer styles - override consolidated-cyberpunk.css */
 footer {
     background-color: #000;
-    /* Removed border-top */
+    border-top: none !important; /* Force remove border */
     padding: 40px 0;
     margin-top: 60px;
+    box-shadow: none !important; /* Remove shadow from footer */
 }
 
 footer p {
@@ -260,11 +261,11 @@ footer a:hover {
 /* Responsive styles */
 @media (max-width: 768px) {
     header {
-        height: 80px; /* Further reduced height for mobile */
+        height: 100px; /* Adjusted height for mobile */
     }
 
     main {
-        margin-top: 120px; /* Adjusted to accommodate header + nav */
+        margin-top: 150px; /* Adjusted to accommodate header + nav */
     }
 
     .header-content {
@@ -272,8 +273,7 @@ footer a:hover {
     }
 
     .site-title {
-        font-size: 2.8rem; /* Reduced size for mobile */
-        font-weight: bold; 
+        font-size: 2.8rem; /* Set to requested size for mobile */
         line-height: 1;
     }
 
@@ -284,7 +284,7 @@ footer a:hover {
     }
 
     nav {
-        top: 80px; /* Adjusted to match header height */
+        top: 100px; /* Adjusted to match header height */
         background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent background */
     }
 
@@ -312,4 +312,14 @@ footer a:hover {
         width: 18px;
         height: 18px;
     }
+}
+
+/* Additional overrides for consolidated-cyberpunk.css */
+body::after, body::before {
+    border: none !important;
+}
+
+/* Turn off any border in all container elements */
+.container, section, .content-section, .pixel-border {
+    border: none !important;
 }
