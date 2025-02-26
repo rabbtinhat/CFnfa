@@ -261,11 +261,11 @@ footer a:hover {
 /* Responsive styles */
 @media (max-width: 768px) {
     header {
-        height: 100px; /* Adjusted height for mobile */
+        height: 150px; /* Adjusted height for mobile */
     }
 
     main {
-        margin-top: 150px; /* Adjusted to accommodate header + nav */
+        margin-top: 200px; /* Adjusted to accommodate header + nav */
     }
 
     .header-content {
@@ -285,7 +285,7 @@ footer a:hover {
     }
 
     nav {
-        top: 100px; /* Adjusted to match header height */
+        top: 150px; /* Adjusted to match header height */
         background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent background */
     }
 
