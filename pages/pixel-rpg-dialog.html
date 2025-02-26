@@ -15,30 +15,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            height: 100%;
             color: white;
         }
         
         .game-container {
-    	position: relative;
-    	width: 800px;
-    	height: 600px;
-    	overflow: hidden;
-    	box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    	background-color: #0a0a2a; /* This is the current background color */
-    	background-image: url('/assets/images/rpg/galaxy.gif'); /* Add this line for your GIF/PNG */
-    	background-size: cover; /* This makes the image cover the entire container */
-    	background-repeat: no-repeat; /* Prevents the image from repeating */
-    	background-position: center; /* Centers the image */
-    	image-rendering: pixelated;
-	}
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            background-color: #0a0a2a;
+            background-image: url('/assets/images/rpg/galaxy.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            image-rendering: pixelated;
+        }
         
         .character {
             position: absolute;
             bottom: 150px;
             height: 80px;
             width: 60px;
-            background-color: #197278;
+            background-color: transparent;
         }
         
         .character-a {
@@ -54,7 +56,8 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 760px;
+            width: 92%;
+            max-width: 760px;
             height: 150px;
             background-color: rgba(0, 0, 0, 0.8);
             border: 3px solid #FFD700;
@@ -86,6 +89,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            object-fit: contain;
         }
         
         .dialog-content {
@@ -163,42 +167,53 @@
             50% { opacity: 1; }
         }
         
-        .floor {
-            position: absolute;
-            bottom: 100px;
-            width: 100%;
-            height: 50px;
-            background-color: #2a4494;
+        /* Remove the floor and background items as they're not needed */
+        .floor, .bookshelf, .table {
+            display: none;
         }
         
-        .pixel-item {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-        }
-        
-        .bookshelf {
-            left: 100px;
-            bottom: 150px;
-            width: 60px;
-            height: 80px;
-            background-color: #6a4c93;
-        }
-        
-        .table {
-            right: 100px;
-            bottom: 150px;
-            width: 60px;
-            height: 40px;
-            background-color: #8b6b61;
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .game-container {
+                height: 450px;
+            }
+            
+            .dialog-box {
+                height: 130px;
+            }
+            
+            .portrait-container {
+                width: 110px;
+                height: 130px;
+            }
+            
+            .portrait {
+                width: 90px;
+                height: 90px;
+            }
+            
+            #dialog-text {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+            
+            .speaker {
+                font-size: 14px;
+            }
+            
+            #intro-outro-text {
+                font-size: 18px;
+            }
+            
+            .continue-prompt {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="game-container">
-        <div class="floor"></div>
-        <div class="pixel-item bookshelf"></div>
-        <div class="pixel-item table"></div>
+        <!-- Removed the floor and pixel items as they are not needed -->
         <div class="character character-a"></div>
         <div class="character character-b"></div>
         <div id="dialog-box-container">
@@ -221,49 +236,75 @@
     </div>
 
     <script>
+        // Preload images to improve load times
+        function preloadImages(array) {
+            if (!preloadImages.list) {
+                preloadImages.list = [];
+            }
+            const list = preloadImages.list;
+            for (let i = 0; i < array.length; i++) {
+                const img = new Image();
+                img.onload = function() {
+                    const index = list.indexOf(this);
+                    if (index !== -1) {
+                        list.splice(index, 1);
+                    }
+                }
+                list.push(img);
+                img.src = array[i];
+            }
+        }
+
         // Dialog script with image links for each dialog
         const dialogScript = [
             { 
                 speaker: "A", 
                 text: "Hey, man, the crypto market just crashed again. Do you think I should buy the dip or wait it out?",
-                image: "/assets/images/rpg/banker.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/banker.png"
             },
             { 
                 speaker: "B", 
                 text: "You know, that reminds me of a guy I once knew—he was a struggling artist, could barely sell a painting for $10. One day, he decided to paint with his feet just for fun. A wealthy collector saw it, called it \"revolutionary,\" and bought it for $50,000.",
-                image: "/assets/images/rpg/wiseman.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/wiseman.png"
             },
             { 
                 speaker: "A", 
                 text: "Uh… okay?",
-                image: "/assets/images/rpg/banker.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/banker.png"
             },
             { 
                 speaker: "B", 
                 text: "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk. But then, one day, he tripped over his own paintbrush, sprained both ankles, and could never paint again.",
-                image: "/assets/images/rpg/wiseman.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/wiseman.png"
             },
             { 
                 speaker: "A", 
                 text: "…I feel like this has nothing to do with what I asked.",
-                image: "/assets/images/rpg/banker_nervous.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/banker_nervous.png"
             },
             { 
                 speaker: "B", 
                 text: "Oh, but it does! You see, when he had no expectations, success came to him. When he started planning for it, life humbled him. The lesson? Maybe stop looking at charts and just let fate decide.",
-                image: "/assets/images/rpg/wiseman.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/wiseman.png"
             },
             { 
                 speaker: "A", 
                 text: "That's the worst financial advice I've ever heard.",
-                image: "/assets/images/rpg/banker_nervous.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/banker_nervous.png"
             },
             { 
                 speaker: "B", 
                 text: "And yet, you're still listening.",
-                image: "/assets/images/rpg/wiseman.png"  // Replace with your actual image URL
+                image: "/assets/images/rpg/wiseman.png"
             }
         ];
+
+        // Create array of image URLs for preloading
+        const imagesToPreload = dialogScript.map(dialog => dialog.image);
+        imagesToPreload.push('/assets/images/rpg/galaxy.gif');
+        
+        // Preload images
+        preloadImages(imagesToPreload);
 
         // DOM elements
         const dialogBox = document.getElementById('dialog-box');
@@ -313,7 +354,7 @@
             }
 
             const dialog = dialogScript[index];
-            speakerElement.textContent = "";
+            speakerElement.textContent = dialog.speaker === "A" ? "Banker" : "Advisor";
             
             // Set the portrait image to the specific image for this dialog
             const portrait = document.getElementById('portrait');
@@ -372,6 +413,22 @@
         dialogBox.addEventListener('touchstart', function(e) {
             e.preventDefault(); // Prevent default touch behavior
         });
+
+        // Make sure the game container resizes properly on window resize
+        function adjustGameContainer() {
+            const gameContainer = document.querySelector('.game-container');
+            const width = gameContainer.offsetWidth;
+            const aspectRatio = 800 / 600;
+            
+            if (window.innerWidth <= 768) {
+                gameContainer.style.height = (width / aspectRatio) + 'px';
+            } else {
+                gameContainer.style.height = '600px';
+            }
+        }
+
+        window.addEventListener('resize', adjustGameContainer);
+        window.addEventListener('load', adjustGameContainer);
     </script>
 </body>
 </html>
