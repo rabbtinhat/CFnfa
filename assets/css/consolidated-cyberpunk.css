@@ -186,7 +186,7 @@ a:hover {
 /* Footer Styles */
 footer {
     background-color: var(--dark-bg) !important;
-    border-top: 1px solid var(--neon-blue) !important;
+    border-top: 1px solid var(--neon-blue) ;
     box-shadow: 0 0 20px rgba(0, 255, 245, 0.2);
 }
 
