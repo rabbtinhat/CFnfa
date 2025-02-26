@@ -261,15 +261,15 @@ footer a:hover {
 /* Responsive styles */
 @media (max-width: 768px) {
     header {
-        height: 160px; /* Adjusted height for mobile */
+        height: 170px; /* Adjusted height for mobile */
     }
 
     main {
-        margin-top: 210px; /* Adjusted to accommodate header + nav */
+        margin-top: 200px; /* Adjusted to accommodate header + nav */
     }
 
     .header-content {
-        padding: 10px 25px;
+        padding: 2px 20px;
     }
 
     .site-title {
@@ -285,7 +285,7 @@ footer a:hover {
     }
 
     nav {
-        top: 160px; /* Adjusted to match header height */
+        top: 170px; /* Adjusted to match header height */
         background-color: rgba(0, 0, 0, 0.95); /* Slightly transparent background */
     }
 
