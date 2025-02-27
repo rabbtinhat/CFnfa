@@ -28,7 +28,7 @@ const CHARACTER_CONFIG = {
   "B": {
     speaker: "B", 
     imageDefault: "/assets/images/rpg/wiseman.png",
-    imageCalm: "/assets/images/rpg/wiseman_happy.png"
+    imageCalm: "/assets/images/rpg/banker.png"
   }
 };
 
@@ -169,58 +169,105 @@ async function queryNotionDatabase(date) {
  */
 function parseRawContentToDialog(content) {
   console.log('Parsing dialog content...');
+  console.log('Content preview:', content.substring(0, 200) + '...');
   
   const dialogItems = [];
   
-  // Simple regex pattern that matches "Name:" or "**Name:**"
-  const pattern = /(?:\*\*)?(.*?)(?:\*\*)?:/g;
-  const matches = Array.from(content.matchAll(pattern));
+  // Use a simple approach: Split by "Alex:" and "Morgan:"
+  // First, normalize all names to either Alex or Morgan
+  let normalizedContent = content.replace(/\*\*Alex\*\*:/g, "Alex:");
+  normalizedContent = normalizedContent.replace(/\*\*Morgan\*\*:/g, "Morgan:");
   
-  if (matches.length === 0) {
-    console.log('No speaker patterns found in content. Using default dialog.');
-    return DEFAULT_DIALOG;
+  // Also normalize A: and B: to Alex: and Morgan:
+  normalizedContent = normalizedContent.replace(/A:/g, "Alex:");
+  normalizedContent = normalizedContent.replace(/B:/g, "Morgan:");
+  
+  // Also normalize Taylor: to Alex: and Jordan: to Morgan:
+  normalizedContent = normalizedContent.replace(/Taylor:/g, "Alex:");
+  normalizedContent = normalizedContent.replace(/Jordan:/g, "Morgan:");
+  
+  // Split by Alex: and Morgan:
+  const parts = normalizedContent.split(/(?:Alex:|Morgan:)/g);
+  
+  // The first part is likely empty
+  if (parts[0].trim() === '') {
+    parts.shift();
   }
   
-  console.log(`Found ${matches.length} dialog turns`);
+  // Count how many "Alex:" and "Morgan:" there are in the content
+  const alexCount = (normalizedContent.match(/Alex:/g) || []).length;
+  const morganCount = (normalizedContent.match(/Morgan:/g) || []).length;
   
-  // Extract text between speaker markers
-  let prevIndex = 0;
-  let speakerTexts = [];
+  console.log(`Detected ${alexCount} Alex parts and ${morganCount} Morgan parts`);
   
-  matches.forEach((match, i) => {
-    const matchIndex = match.index;
-    const matchLength = match[0].length;
-    const speaker = match[1].trim();
+  // Determine speaker pattern
+  const speakerPattern = [];
+  let alexIndex = normalizedContent.indexOf("Alex:");
+  let morganIndex = normalizedContent.indexOf("Morgan:");
+  
+  // Figure out who speaks first
+  let firstSpeaker = (alexIndex !== -1 && (morganIndex === -1 || alexIndex < morganIndex)) ? "Alex" : "Morgan";
+  
+  console.log(`First speaker is ${firstSpeaker}`);
+  
+  // Re-scan the content to get the exact speaker sequence
+  let currentPos = 0;
+  const speakerPositions = [];
+  
+  while (true) {
+    const nextAlex = normalizedContent.indexOf("Alex:", currentPos);
+    const nextMorgan = normalizedContent.indexOf("Morgan:", currentPos);
     
-    // For all but the first speaker, get the previous speaker's text
-    if (i > 0) {
-      const prevMatchEndIndex = prevIndex;
-      const text = content.substring(prevMatchEndIndex, matchIndex).trim();
-      
-      // Add the previous speaker and their text
-      speakerTexts.push({
-        speaker: matches[i-1][1].trim(),
-        text: text
-      });
+    // If neither is found, we're done
+    if (nextAlex === -1 && nextMorgan === -1) break;
+    
+    // If one is not found, use the other
+    if (nextAlex === -1) {
+      speakerPositions.push({ pos: nextMorgan, speaker: "Morgan" });
+      currentPos = nextMorgan + 7; // Length of "Morgan:"
+      continue;
     }
     
-    // Update previous index to the end of this match
-    prevIndex = matchIndex + matchLength;
-    
-    // For the last speaker, get their text too
-    if (i === matches.length - 1) {
-      const text = content.substring(prevIndex).trim();
-      speakerTexts.push({
-        speaker: speaker,
-        text: text
-      });
+    if (nextMorgan === -1) {
+      speakerPositions.push({ pos: nextAlex, speaker: "Alex" });
+      currentPos = nextAlex + 5; // Length of "Alex:"
+      continue;
     }
-  });
+    
+    // Both found, use the earlier one
+    if (nextAlex < nextMorgan) {
+      speakerPositions.push({ pos: nextAlex, speaker: "Alex" });
+      currentPos = nextAlex + 5;
+    } else {
+      speakerPositions.push({ pos: nextMorgan, speaker: "Morgan" });
+      currentPos = nextMorgan + 7;
+    }
+  }
   
-  // Simplify by just alternating A and B
-  speakerTexts.forEach((item, index) => {
-    // Even indexes are A, odd indexes are B
-    const speakerType = index % 2 === 0 ? "A" : "B";
+  console.log(`Found ${speakerPositions.length} speakers in sequence`);
+  
+  // Now we have positions and speakers, extract the text
+  for (let i = 0; i < speakerPositions.length; i++) {
+    const current = speakerPositions[i];
+    let endPos = normalizedContent.length;
+    
+    // If there's a next speaker, use their position as the end
+    if (i < speakerPositions.length - 1) {
+      endPos = speakerPositions[i+1].pos;
+    }
+    
+    // Extract text and remove the speaker prefix
+    let startPos = current.pos;
+    if (current.speaker === "Alex") {
+      startPos += 5; // Length of "Alex:"
+    } else {
+      startPos += 7; // Length of "Morgan:"
+    }
+    
+    const text = normalizedContent.substring(startPos, endPos).trim();
+    
+    // Map Alex to A, Morgan to B
+    const speakerType = current.speaker === "Alex" ? "A" : "B";
     const config = CHARACTER_CONFIG[speakerType];
     
     // Determine which image to use
@@ -230,26 +277,28 @@ function parseRawContentToDialog(content) {
       // Check for nervous keywords
       const nervousKeywords = ['worried', 'nervous', 'concerned', 'lost', 'unsure', 
                               'confused', 'what', 'down', 'trying', 'completely'];
-      if (nervousKeywords.some(keyword => item.text.toLowerCase().includes(keyword))) {
+      if (nervousKeywords.some(keyword => text.toLowerCase().includes(keyword))) {
         image = config.imageNervous;
       }
     } else if (speakerType === "B") {
       // Check for calm keywords
       const calmKeywords = ['simple', 'clear', 'moral', 'certainly', 'absolutely'];
-      if (calmKeywords.some(keyword => item.text.toLowerCase().includes(keyword))) {
+      if (calmKeywords.some(keyword => text.toLowerCase().includes(keyword))) {
         image = config.imageCalm;
       }
     }
     
-    // Add dialog item
-    dialogItems.push({
-      speaker: speakerType,
-      text: item.text,
-      image: image
-    });
-    
-    console.log(`Dialog item ${index+1}: Speaker ${speakerType}, Image: ${image.split('/').pop()}`);
-  });
+    // Add dialog item if text is not empty
+    if (text.trim() !== '') {
+      dialogItems.push({
+        speaker: speakerType,
+        text: text,
+        image: image
+      });
+      
+      console.log(`Dialog item ${i+1}: Speaker ${speakerType} (${current.speaker}), Image: ${image.split('/').pop()}`);
+    }
+  }
   
   if (dialogItems.length === 0) {
     console.log('No valid dialog items extracted. Using default dialog.');
