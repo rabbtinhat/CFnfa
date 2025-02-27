@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 */6 * * *'  # Runs every 6 hours
   workflow_dispatch:  # Allows manual trigger
+    inputs:
+      dialog_date:
+        description: 'Override dialog date (YYYY-MM-DD format)'
+        required: false
+        default: ''
 
 jobs:
   sync:
@@ -19,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
         
+      - name: Install Notion client
+        run: npm install @notionhq/client
+        
       - name: Run blog sync script
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -30,6 +38,18 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DAILY_DATABASE_ID: ${{ secrets.NOTION_DAILY_DATABASE_ID }}
         run: node sync-daily.js
+        
+      - name: Run dialog sync script
+        env:
+          NOTION_KEY: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DIALOG_DATABASE_ID }}
+          DIALOG_JSON_PATH: './assets/js/dialog.json'
+        run: |
+          DATE_PARAM=""
+          if [ -n "${{ github.event.inputs.dialog_date }}" ]; then
+            DATE_PARAM="--date=${{ github.event.inputs.dialog_date }}"
+          fi
+          node update-dialog.js $DATE_PARAM
         
       - name: Commit and push changes
         run: |
