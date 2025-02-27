@@ -107,6 +107,7 @@
             overflow-wrap: break-word; /* For modern browsers */
             word-break: normal; /* This prevents breaking words in the middle */
             hyphens: none; /* Disable hyphenation */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
         
         .dialog-content::-webkit-scrollbar {
@@ -157,6 +158,7 @@
             font-size: 16px;
             line-height: 1.8;
             margin-top: 5px;
+            margin-bottom: 25px; /* Space for continue prompt */
             letter-spacing: 1px;
             word-wrap: break-word; /* Ensure text wraps properly */
             overflow-wrap: break-word; /* For modern browsers */
@@ -170,6 +172,28 @@
             right: 15px;
             animation: blink 1s infinite;
             font-size: 16px;
+        }
+        
+        /* Next dialog button for better touch control */
+        .next-dialog {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 215, 0, 0.2);
+            border: 2px solid #FFD700;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 20;
+        }
+        
+        .next-icon {
+            font-size: 16px;
+            color: #FFD700;
         }
         
         @keyframes blink {
@@ -222,6 +246,11 @@
                 word-break: normal; /* Keep words intact */
                 hyphens: none;
             }
+            
+            .next-dialog {
+                width: 35px;
+                height: 35px;
+            }
         }
     </style>
 </head>
@@ -241,7 +270,9 @@
                 <div class="dialog-content" style="display: none;">
                     <div class="speaker" id="speaker-name"></div>
                     <div id="dialog-text"></div>
-                    <div class="continue-prompt">▼</div>
+                    <div class="next-dialog" id="next-dialog-btn">
+                        <div class="next-icon">▶</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -328,6 +359,7 @@
         const dialogContent = document.querySelector('.dialog-content');
         const introOutroContent = document.getElementById('intro-outro-content');
         const introOutroText = document.getElementById('intro-outro-text');
+        const nextDialogBtn = document.getElementById('next-dialog-btn');
 
         // Dialog state
         let currentDialogIndex = -1;
@@ -376,6 +408,11 @@
             document.querySelector('.character-a').style.filter = dialog.speaker === "A" ? "brightness(1.5)" : "brightness(1)";
             document.querySelector('.character-b').style.filter = dialog.speaker === "B" ? "brightness(1.5)" : "brightness(1)";
 
+            // Hide next button during typing
+            if (nextDialogBtn) {
+                nextDialogBtn.style.visibility = "hidden";
+            }
+
             // Typewriter effect
             isTyping = true;
             let i = 0;
@@ -390,6 +427,10 @@
                 } else {
                     clearInterval(typewriterInterval);
                     isTyping = false;
+                    // Show next button when typing is complete
+                    if (nextDialogBtn) {
+                        nextDialogBtn.style.visibility = "visible";
+                    }
                 }
             }, textSpeed);
         }
@@ -402,9 +443,13 @@
             }, 100);
         }
 
-        // Add event listener to the entire game container to ensure clicks work everywhere
-        document.querySelector('.game-container').addEventListener('click', (e) => {
-            if (isTyping) {
+        // Advance to the next dialog
+        function nextDialog() {
+            if (!isTyping) {
+                currentDialogIndex++;
+                flashEffect();
+                displayDialog(currentDialogIndex);
+            } else {
                 // Skip the typewriter effect if clicking during typing
                 clearInterval(typewriterInterval);
                 if (currentDialogIndex >= 0 && currentDialogIndex < dialogScript.length) {
@@ -413,21 +458,84 @@
                     checkForTextOverflow();
                 }
                 isTyping = false;
-                return;
+                // Show next button
+                if (nextDialogBtn) {
+                    nextDialogBtn.style.visibility = "visible";
+                }
             }
-            
-            currentDialogIndex++;
-            flashEffect();
-            displayDialog(currentDialogIndex);
+        }
+
+        // Variables for touch gesture detection
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchMoved = false;
+        const TOUCH_THRESHOLD = 10; // Pixel threshold to determine if it's a tap or scroll
+
+        // Event listener for intro/outro only
+        introOutroContent.addEventListener('click', () => {
+            nextDialog();
         });
-        
-        // Support for mobile touch events
-        document.querySelector('.game-container').addEventListener('touchstart', function(e) {
-            e.preventDefault(); // Prevent default touch behavior
+
+        // Touch event handling for dialog with gesture detection
+        dialogContent.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            touchMoved = false;
             
-            // Trigger click event to handle dialog progression
-            const clickEvent = new Event('click');
-            document.querySelector('.game-container').dispatchEvent(clickEvent);
+            // Don't prevent default here to allow scrolling to work
+        });
+
+        dialogContent.addEventListener('touchmove', function(e) {
+            const touchX = e.touches[0].clientX;
+            const touchY = e.touches[0].clientY;
+            
+            // Calculate distance moved
+            const deltaX = Math.abs(touchX - touchStartX);
+            const deltaY = Math.abs(touchY - touchStartY);
+            
+            // If moved more than threshold in any direction, consider it a scroll
+            if (deltaX > TOUCH_THRESHOLD || deltaY > TOUCH_THRESHOLD) {
+                touchMoved = true;
+                // Don't prevent default to allow scrolling
+            }
+        });
+
+        dialogContent.addEventListener('touchend', function(e) {
+            // If it's a tap (didn't move much), prevent default behavior
+            if (!touchMoved) {
+                e.preventDefault();
+                
+                // Only advance dialog if we specifically clicked the next button
+                // (other taps are ignored to allow for text selection)
+                
+                // Do nothing on text area taps that aren't on the next button
+            }
+        });
+
+        // Next button click event 
+        if (nextDialogBtn) {
+            nextDialogBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                nextDialog();
+            });
+            
+            // Touch event for next button (separate from content scrolling)
+            nextDialogBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling up
+                nextDialog();
+            });
+        }
+
+        // Click events for intro/outro screens
+        document.querySelector('.game-container').addEventListener('click', (e) => {
+            // Only handle clicks for intro/outro screens or if user clicked outside dialog content
+            if (currentDialogIndex === -1 || 
+                dialogBox.className.includes('outro') || 
+                (!dialogContent.contains(e.target) && dialogBox.contains(e.target))) {
+                nextDialog();
+            }
         });
 
         // Make sure the game container resizes properly on window resize
