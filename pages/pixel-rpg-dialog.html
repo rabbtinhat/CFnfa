@@ -68,6 +68,7 @@
             line-height: 1.5;
             cursor: pointer;
             display: flex;
+            z-index: 10; /* Ensure dialog box is above other elements */
         }
         
         .dialog-box.intro, .dialog-box.outro {
@@ -76,20 +77,22 @@
         
         .portrait-container {
             width: 150px;
+            min-width: 150px; /* Prevent shrinking */
             height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-right: 3px solid #FFD700;
+            overflow: hidden; /* Ensure image doesn't overflow */
+            padding: 0;
         }
         
         .portrait {
-            width: 120px;
-            height: 120px;
+            width: 100%;
+            height: 100%;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            object-fit: contain;
         }
         
         .dialog-content {
@@ -100,6 +103,7 @@
             max-height: 150px;
             scrollbar-width: thin;
             scrollbar-color: #FFD700 rgba(0,0,0,0.3);
+            word-wrap: break-word; /* Ensure text wraps properly */
         }
         
         .dialog-content::-webkit-scrollbar {
@@ -123,6 +127,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            box-sizing: border-box;
         }
         
         #intro-outro-text {
@@ -131,11 +136,9 @@
             margin-bottom: 20px;
         }
         
+        /* Remove speaker name display */
         .speaker {
-            font-weight: bold;
-            color: #FFD700;
-            margin-bottom: 10px;
-            font-size: 18px;
+            display: none;
         }
         
         .flash {
@@ -167,7 +170,7 @@
             50% { opacity: 1; }
         }
         
-        /* Remove the floor and background items as they're not needed */
+        /* Remove unused elements */
         .floor, .bookshelf, .table {
             display: none;
         }
@@ -180,25 +183,20 @@
             
             .dialog-box {
                 height: 130px;
+                width: 95%;
             }
             
             .portrait-container {
-                width: 110px;
+                width: 100px;
+                min-width: 100px;
                 height: 130px;
-            }
-            
-            .portrait {
-                width: 90px;
-                height: 90px;
             }
             
             #dialog-text {
                 font-size: 12px;
                 line-height: 1.6;
-            }
-            
-            .speaker {
-                font-size: 14px;
+                overflow-wrap: break-word;
+                word-break: break-all;
             }
             
             #intro-outro-text {
@@ -208,12 +206,16 @@
             .continue-prompt {
                 font-size: 12px;
             }
+            
+            .dialog-content {
+                max-height: 130px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="game-container">
-        <!-- Removed the floor and pixel items as they are not needed -->
         <div class="character character-a"></div>
         <div class="character character-b"></div>
         <div id="dialog-box-container">
@@ -322,8 +324,7 @@
         let typewriterInterval;
         
         // Text speed setting (milliseconds per character)
-        // Lower values = faster text, higher values = slower text
-        let textSpeed = 50; // Adjustable text speed (default: 50ms per character)
+        let textSpeed = 50;
 
         // Function to check if text overflow and enable scrolling
         function checkForTextOverflow() {
@@ -354,7 +355,7 @@
             }
 
             const dialog = dialogScript[index];
-            speakerElement.textContent = dialog.speaker === "A" ? "Banker" : "Advisor";
+            speakerElement.textContent = ""; // Don't display speaker names
             
             // Set the portrait image to the specific image for this dialog
             const portrait = document.getElementById('portrait');
@@ -379,7 +380,7 @@
                     clearInterval(typewriterInterval);
                     isTyping = false;
                 }
-            }, textSpeed); // Use the configurable text speed
+            }, textSpeed);
         }
 
         // Flash effect when changing dialog
@@ -390,8 +391,8 @@
             }, 100);
         }
 
-        // Click handler
-        dialogBox.addEventListener('click', () => {
+        // Add event listener to the entire game container to ensure clicks work everywhere
+        document.querySelector('.game-container').addEventListener('click', (e) => {
             if (isTyping) {
                 // Skip the typewriter effect if clicking during typing
                 clearInterval(typewriterInterval);
@@ -410,8 +411,12 @@
         });
         
         // Support for mobile touch events
-        dialogBox.addEventListener('touchstart', function(e) {
+        document.querySelector('.game-container').addEventListener('touchstart', function(e) {
             e.preventDefault(); // Prevent default touch behavior
+            
+            // Trigger click event to handle dialog progression
+            const clickEvent = new Event('click');
+            document.querySelector('.game-container').dispatchEvent(clickEvent);
         });
 
         // Make sure the game container resizes properly on window resize
