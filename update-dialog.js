@@ -56,6 +56,9 @@ const notion = new Client({ auth: NOTION_KEY });
 async function updateDialog() {
   try {
     console.log('Starting dialog update process...');
+    console.log('Script version: 1.1.0');
+    console.log('Using dialog.json path:', DIALOG_JSON_PATH);
+    console.log('Using Notion database ID:', NOTION_DATABASE_ID);
     
     // Get today's date in YYYY-MM-DD format
     const today = new Date().toISOString().split('T')[0];
@@ -81,17 +84,38 @@ async function updateDialog() {
     
     // Get the first (and hopefully only) matching entry
     const page = response.results[0];
-    const contentProperty = page.properties.Content;
     
-    if (!contentProperty || !contentProperty.rich_text || contentProperty.rich_text.length === 0) {
-      console.log('Content property is empty or missing');
+    // Detect which property contains the content (handle case differences)
+    let contentProperty;
+    const propertyNames = Object.keys(page.properties);
+    
+    // Look for content in various possible property names (case-insensitive)
+    const contentPropertyName = propertyNames.find(
+      name => name.toLowerCase() === 'content'
+    );
+    
+    if (contentPropertyName) {
+      contentProperty = page.properties[contentPropertyName];
+    } else {
+      console.log('Could not find content property. Available properties:', propertyNames);
       console.log('Using default dialog content');
       await saveDialogJson(DEFAULT_DIALOG);
       return;
     }
     
-    // Extract the rich text content
-    const rawContent = contentProperty.rich_text.map(text => text.plain_text).join('');
+    // Handle different property types (rich_text or title)
+    let rawContent = '';
+    if (contentProperty.rich_text && contentProperty.rich_text.length > 0) {
+      rawContent = contentProperty.rich_text.map(text => text.plain_text).join('');
+    } else if (contentProperty.title && contentProperty.title.length > 0) {
+      rawContent = contentProperty.title.map(text => text.plain_text).join('');
+    } else {
+      console.log('Content property is empty or in an unexpected format');
+      console.log('Property content:', contentProperty);
+      console.log('Using default dialog content');
+      await saveDialogJson(DEFAULT_DIALOG);
+      return;
+    }
     
     // Parse the raw content into dialog format
     const parsedDialog = parseRawContentToDialog(rawContent);
@@ -114,13 +138,16 @@ async function updateDialog() {
  * Handles both YYYY-MM-DD and YYYY/MM/DD formats
  */
 async function queryNotionDatabase(date) {
+  console.log(`Querying Notion database ${NOTION_DATABASE_ID} for date ${date}`);
+  
   // Convert YYYY-MM-DD to YYYY/MM/DD if needed
   const dateSlash = date.replace(/-/g, '/');
   
   // Try both formats since Notion's date filter can be particular
   try {
     // First try with the original format (YYYY-MM-DD)
-    const response = await notion.databases.query({
+    console.log(`Trying date format: ${date}`);
+    let response = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
       filter: {
         property: 'Date',
@@ -131,12 +158,13 @@ async function queryNotionDatabase(date) {
     });
     
     if (response.results.length > 0) {
+      console.log(`Found ${response.results.length} results with date ${date}`);
       return response;
     }
     
     // If no results, try with slash format
     console.log(`No results with date ${date}, trying ${dateSlash}`);
-    return await notion.databases.query({
+    response = await notion.databases.query({
       database_id: NOTION_DATABASE_ID,
       filter: {
         property: 'Date',
@@ -145,6 +173,52 @@ async function queryNotionDatabase(date) {
         }
       }
     });
+    
+    console.log(`Found ${response.results.length} results with date ${dateSlash}`);
+    
+    // If still nothing, try without any date filter to debug
+    if (response.results.length === 0) {
+      console.log('No results with either date format, checking database structure...');
+      const dbResponse = await notion.databases.retrieve({ database_id: NOTION_DATABASE_ID });
+      console.log('Database properties:', Object.keys(dbResponse.properties));
+      
+      // Try to find the actual date property name
+      const dateProperty = Object.keys(dbResponse.properties).find(key => 
+        dbResponse.properties[key].type === 'date'
+      );
+      
+      if (dateProperty && dateProperty !== 'Date') {
+        console.log(`Found date property with name: ${dateProperty}, trying query with this name...`);
+        response = await notion.databases.query({
+          database_id: NOTION_DATABASE_ID,
+          filter: {
+            property: dateProperty,
+            date: {
+              equals: date
+            }
+          }
+        });
+        console.log(`Found ${response.results.length} results using property name ${dateProperty}`);
+      } else {
+        // Get a sample of entries to diagnose
+        console.log('Fetching a few entries to diagnose database structure...');
+        const sampleResponse = await notion.databases.query({
+          database_id: NOTION_DATABASE_ID,
+          page_size: 3
+        });
+        
+        if (sampleResponse.results.length > 0) {
+          console.log('Sample entry properties:', Object.keys(sampleResponse.results[0].properties));
+          // Look for any properties that might contain dates
+          const firstEntry = sampleResponse.results[0];
+          for (const [key, value] of Object.entries(firstEntry.properties)) {
+            console.log(`Property ${key} has type ${value.type}`);
+          }
+        }
+      }
+    }
+    
+    return response;
   } catch (error) {
     console.error('Error querying Notion database:', error);
     throw error;
@@ -157,9 +231,30 @@ async function queryNotionDatabase(date) {
 function parseRawContentToDialog(content) {
   const dialogItems = [];
   
-  // Split by speaker indicators (**Speaker:**)
-  const speakerRegex = /\*\*(.*?):\*\*/g;
-  const parts = content.split(speakerRegex);
+  // Try different speaker formatting patterns
+  const patterns = [
+    /\*\*(.*?):\*\*/g,  // **Speaker:**
+    /(.*?):/g           // Speaker:
+  ];
+  
+  let parts = [];
+  let pattern = null;
+  
+  // Try each pattern until we find one that works
+  for (const p of patterns) {
+    parts = content.split(p);
+    if (parts.length > 1) {
+      pattern = p;
+      console.log(`Using pattern: ${pattern}`);
+      break;
+    }
+  }
+  
+  if (parts.length <= 1) {
+    console.log('Could not identify dialog pattern in content');
+    console.log('Content:', content);
+    return DEFAULT_DIALOG;
+  }
   
   // Skip the first part if it's empty (content starts with a speaker)
   let startIndex = parts[0].trim() === '' ? 1 : 0;
@@ -168,38 +263,73 @@ function parseRawContentToDialog(content) {
   const speakerAssignments = {};
   let speakerCount = 0;
   
+  // Support for different speaker formats (A:, Alex:, etc.)
+  const speakerMap = {
+    'a': 'A',
+    'b': 'B',
+    'alex': 'A',
+    'taylor': 'A',
+    'casey': 'B',
+    'morgan': 'B',
+    'jake': 'B',
+    'jason': 'B'
+  };
+  
   // Process pairs of speaker and text
   for (let i = startIndex; i < parts.length; i += 2) {
-    const speaker = parts[i].trim();
+    // Get the speaker and clean it up
+    let speaker = parts[i].trim();
+    
+    // Remove extra formatting if present
+    speaker = speaker.replace(/^\*|\*$/g, '').trim();
+    
+    // Get the corresponding text
     const text = parts[i + 1]?.trim() || '';
     
     if (!speaker || !text) continue;
     
-    // Assign A/B to any speaker consistently
-    if (!speakerAssignments[speaker]) {
-      // First speaker is A, second is B, and alternate from there
-      speakerAssignments[speaker] = speakerCount === 0 ? 'A' : 'B';
-      speakerCount++;
-    }
+    // Try to map the speaker to A or B
+    let speakerKey = speaker.toLowerCase();
     
-    // Assign a character config, using CHARACTER_MAP if the speaker is known
-    let characterConfig = CHARACTER_MAP[speaker];
-    
-    // If the speaker is not in our map, create a default config
-    if (!characterConfig) {
-      characterConfig = {
-        speaker: speakerAssignments[speaker],
-        imageDefault: speakerAssignments[speaker] === 'A' 
-          ? '/assets/images/rpg/banker.png' 
-          : '/assets/images/rpg/wiseman.png'
-      };
-      
-      // Log unknown speaker for future reference
-      console.log(`Unknown speaker "${speaker}" assigned as "${speakerAssignments[speaker]}" with default image`);
+    // Handle formats like "A:" or "A" directly
+    if (speakerKey === 'a' || speakerKey === 'b') {
+      speakerKey = speakerKey.toUpperCase();
     } else {
-      // Ensure the speaker value matches our assignment
-      characterConfig.speaker = speakerAssignments[speaker];
+      // For actual names, check our map or assign dynamically
+      if (!speakerAssignments[speakerKey]) {
+        if (speakerMap[speakerKey]) {
+          // Use predefined mapping
+          speakerAssignments[speakerKey] = speakerMap[speakerKey];
+        } else {
+          // Assign dynamically
+          speakerAssignments[speakerKey] = speakerCount === 0 ? 'A' : 'B';
+          speakerCount++;
+        }
+      }
     }
+    
+    const speakerType = speakerKey === 'a' || speakerKey === 'b' 
+      ? speakerKey 
+      : speakerAssignments[speakerKey] || 'A';
+    
+    // Get character config or create default
+    let characterConfig;
+    if (speakerType === 'A') {
+      characterConfig = CHARACTER_MAP['Alex'] || {
+        speaker: 'A',
+        imageDefault: '/assets/images/rpg/banker.png',
+        imageNervous: '/assets/images/rpg/banker_nervous.png'
+      };
+    } else {
+      characterConfig = CHARACTER_MAP['Morgan'] || {
+        speaker: 'B',
+        imageDefault: '/assets/images/rpg/wiseman.png',
+        imageCalm: '/assets/images/rpg/banker.png'
+      };
+    }
+    
+    // Ensure the speaker value is correctly assigned
+    characterConfig.speaker = speakerType;
     
     // Determine which image to use based on text content
     let image = characterConfig.imageDefault;
@@ -234,6 +364,7 @@ function parseRawContentToDialog(content) {
     return DEFAULT_DIALOG;
   }
   
+  console.log(`Successfully parsed ${dialogItems.length} dialog items`);
   return dialogItems;
 }
 
