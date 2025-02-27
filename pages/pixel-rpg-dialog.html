@@ -171,24 +171,25 @@
             font-size: 16px;
         }
         
-        /* Next button for mobile - normally hidden */
+        /* Next button - positioned outside the dialog box */
         .next-button {
             display: none; /* Hidden by default, shown only on mobile */
             position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 70px;
-            height: 40px;
-            background-color: rgba(0, 0, 0, 0.6);
+            bottom: -45px; /* Position below dialog box */
+            right: 4%; /* Align with right edge of dialog box */
+            width: 60px;
+            height: 35px;
+            background-color: rgba(0, 0, 0, 0.8);
             border: 2px solid #FFD700;
             border-radius: 5px;
             color: #FFD700;
             font-family: 'Press Start 2P', cursive;
-            font-size: 14px;
+            font-size: 12px;
             text-align: center;
-            line-height: 40px;
+            line-height: 35px;
             z-index: 20;
             cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
         
         @keyframes blink {
@@ -204,11 +205,13 @@
         @media (max-width: 768px) {
             .game-container {
                 height: 450px;
+                padding-bottom: 50px; /* Add padding to make room for the button */
             }
             
             .dialog-box {
                 height: 130px;
                 width: 95%;
+                bottom: 60px; /* Move up to make room for button */
                 cursor: default; /* Remove cursor pointer on mobile */
             }
             
@@ -224,7 +227,6 @@
                 overflow-wrap: break-word;
                 word-break: normal;
                 hyphens: none;
-                padding-bottom: 40px; /* Make space for the next button */
             }
             
             #intro-outro-text {
@@ -268,10 +270,10 @@
                     <div class="speaker" id="speaker-name"></div>
                     <div id="dialog-text"></div>
                     <div class="continue-prompt">▼</div>
-                    <!-- Next button for mobile -->
-                    <div class="next-button" id="next-button">NEXT</div>
                 </div>
             </div>
+            <!-- Next button positioned outside the dialog box -->
+            <div class="next-button" id="next-button">NEXT</div>
         </div>
         <div class="flash" id="flash"></div>
     </div>
