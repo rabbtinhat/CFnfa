@@ -1,62 +1,12 @@
 [
-    { 
-        "speaker": "A", 
-        "text": "Hey, I've been watching Bitcoin drop like 15% this week. Do you think I should sell now or hold? I'm really worried about my investment.",
-        "image": "/assets/images/rpg/banker.png"
-    },
-    { 
-        "speaker": "B", 
-        "text": "You know, this reminds me of my uncle. Brilliant investor. Started with nothing but a rusty bicycle and a dream.",
-        "image": "/assets/images/rpg/wiseman.png"
-    },
-    { 
-        "speaker": "A", 
-        "text": "Oh great, so he bought Bitcoin early?",
-        "image": "/assets/images/rpg/banker.png"
-    },
-    { 
-        "speaker": "B", 
-        "text": "No, no. But he did have this amazing talent for timing. One day, he's riding his bicycle past this mansion on the hill, absolutely gorgeous place. And he thinks to himself, \"That's where I want to be in ten years.\"",
-        "image": "/assets/images/rpg/wiseman.png"
-    },
-    { 
-        "speaker": "A", 
-        "text": "So... did he invest in something that paid off big time?",
-        "image": "/assets/images/rpg/banker_nervous.png"
-    },
-    { 
-        "speaker": "B", 
-        "text": "Well, he developed a very specific routine. Every morning at exactly 7:15 AM, he would ride his bicycle to the top of that hill and just stare at the mansion for precisely 12 minutes. Rain or shine. For three years straight.",
-        "image": "/assets/images/rpg/wiseman.png"
-    },
-    { 
-        "speaker": "A", 
-        "text": "I'm not seeing how this connects to my Bitcoin situation...",
-        "image": "/assets/images/rpg/banker_nervous.png"
-    },
-    { 
-        "speaker": "B", 
-        "text": "Patience! So one morning, the owner of the mansion comes out and asks my uncle what he's doing. My uncle explains his visualization technique, and how he's manifesting his future success.",
-        "image": "/assets/images/rpg/wiseman.png"
-    },
-    { 
-        "speaker": "A", 
-        "text": "And then the mansion owner gave him investment advice that made him rich?",
-        "image": "/assets/images/rpg/banker.png"
-    },
-    { 
-        "speaker": "B", 
-        "text": "No, he hired my uncle as his gardener on the spot. Said anyone with that level of dedication and consistency would be perfect for maintaining his prize-winning topiary collection. Fifteen years later, my uncle still works there. Never made it into the mansion, but he has a lovely shed on the property with excellent Wi-Fi.",
-        "image": "/assets/images/rpg/wiseman.png"
-    },
-    { 
-        "speaker": "A", 
-        "text": "What's the point of this story? How does it help me decide whether to sell my Bitcoin?",
-        "image": "/assets/images/rpg/banker_nervous.png"
-    },
-    { 
-        "speaker": "B", 
-        "text": "The point? Oh, simple. Sometimes what looks like a path to riches is actually just you standing on someone else's lawn for three years. But hey, at least my uncle got healthcare benefits. Does Bitcoin offer dental?",
-        "image": "/assets/images/rpg/wiseman_happy.png"
-    }
+  {
+    "speaker": "A",
+    "text": "The crypto market just crashed again... Do you think I should buy the dip or wait it out?",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "That reminds me the story about a struggling artist, who could barely sell a painting for $10...",
+    "image": "/assets/images/rpg/wiseman.png"
+  }
 ]
