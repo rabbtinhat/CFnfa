@@ -173,22 +173,23 @@
         
         /* Next button - positioned outside the dialog box */
         .next-button {
-    display: none;
+    display: none; /* Hidden by default, shown only on mobile */
     position: absolute;
-    top: 70px; /* Position above the dialog box */
-    right: 4%;
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0, 0, 0, 0.9);
+    top: 70px; /* Moved up from -45px */
+    right: 4%; 
+    width: 60px;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.8);
     border: 2px solid #FFD700;
-    border-radius: 50%; /* Make it circular */
+    border-radius: 5px;
     color: #FFD700;
-    font-size: 16px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
     text-align: center;
-    line-height: 30px;
+    line-height: 35px;
     z-index: 20;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Increased glow for visibility */
 }
         
         @keyframes blink {
@@ -272,7 +273,7 @@
                 </div>
             </div>
             <!-- Next button positioned outside the dialog box -->
-            <div class="next-button" id="next-button">▶</div>
+            <div class="next-button" id="next-button">NEXT</div>
         </div>
         <div class="flash" id="flash"></div>
     </div>
