@@ -229,6 +229,11 @@ async function queryNotionDatabase(date) {
  * Parse raw text content into dialog format
  */
 function parseRawContentToDialog(content) {
+  console.log('Parsing dialog content...');
+  
+  // Print the first 200 characters of content for debugging
+  console.log('Content preview:', content.substring(0, 200) + '...');
+  
   const dialogItems = [];
   
   // Try different speaker formatting patterns
@@ -237,82 +242,116 @@ function parseRawContentToDialog(content) {
     /(.*?):/g           // Speaker:
   ];
   
-  let parts = [];
+  // Determine which pattern to use by testing each one
   let pattern = null;
+  let matches = [];
   
-  // Try each pattern until we find one that works
   for (const p of patterns) {
-    parts = content.split(p);
-    if (parts.length > 1) {
+    const testMatches = Array.from(content.matchAll(p));
+    if (testMatches.length > 0) {
       pattern = p;
-      console.log(`Using pattern: ${pattern}`);
+      matches = testMatches;
+      console.log(`Found pattern match: ${pattern}, detected ${matches.length} speakers`);
+      
+      // Print out the detected speakers for debugging
+      console.log('Detected speakers:', matches.map(m => m[1].trim()).join(', '));
       break;
     }
   }
   
-  if (parts.length <= 1) {
+  if (!pattern || matches.length === 0) {
     console.log('Could not identify dialog pattern in content');
-    console.log('Content:', content);
     return DEFAULT_DIALOG;
   }
   
-  // Skip the first part if it's empty (content starts with a speaker)
-  let startIndex = parts[0].trim() === '' ? 1 : 0;
+  // Extract dialog parts with indexes for proper ordering
+  const dialogParts = [];
+  let lastIndex = 0;
   
-  // Track speakers we've seen to assign consistent A/B values
-  const speakerAssignments = {};
-  let speakerCount = 0;
+  for (const match of matches) {
+    const speakerMatch = match[0];
+    const speaker = match[1].trim();
+    const startPos = match.index;
+    
+    // Skip if this is the first match and there's text before it
+    if (dialogParts.length === 0 && startPos > 0) {
+      // There's content before the first speaker
+      const preamble = content.substring(0, startPos).trim();
+      if (preamble) {
+        console.log('Ignoring preamble text:', preamble);
+      }
+    }
+    
+    // Add the previous speaker's text
+    if (dialogParts.length > 0) {
+      const previousPart = dialogParts[dialogParts.length - 1];
+      const textEnd = startPos;
+      const speakerTextStart = previousPart.matchEnd;
+      const text = content.substring(speakerTextStart, textEnd).trim();
+      previousPart.text = text;
+    }
+    
+    // Add this speaker
+    dialogParts.push({
+      speaker: speaker,
+      matchEnd: startPos + speakerMatch.length,
+      text: '' // Will be filled in the next iteration or at the end
+    });
+    
+    lastIndex = startPos + speakerMatch.length;
+  }
   
-  // Support for different speaker formats (A:, Alex:, etc.)
+  // Get text for the last speaker
+  if (dialogParts.length > 0) {
+    const lastPart = dialogParts[dialogParts.length - 1];
+    lastPart.text = content.substring(lastPart.matchEnd).trim();
+  }
+  
+  // Log the extracted dialog parts
+  console.log(`Extracted ${dialogParts.length} dialog parts`);
+  
+  // Map speakers to ensure correct alternation between A and B
+  let firstSpeaker = null;
+  let secondSpeaker = null;
+  
+  // Speaker mapping
   const speakerMap = {
-    'a': 'A',
-    'b': 'B',
-    'alex': 'A',
     'taylor': 'A',
-    'casey': 'B',
+    'alex': 'A',
+    'a': 'A',
+    'jordan': 'B',
     'morgan': 'B',
+    'b': 'B',
+    'casey': 'B',
     'jake': 'B',
     'jason': 'B'
   };
   
-  // Process pairs of speaker and text
-  for (let i = startIndex; i < parts.length; i += 2) {
-    // Get the speaker and clean it up
-    let speaker = parts[i].trim();
+  // Process each dialog part
+  for (const part of dialogParts) {
+    // Clean speaker name and convert to lowercase for mapping
+    const speakerKey = part.speaker.toLowerCase().trim();
+    let speakerType;
     
-    // Remove extra formatting if present
-    speaker = speaker.replace(/^\*|\*$/g, '').trim();
-    
-    // Get the corresponding text
-    const text = parts[i + 1]?.trim() || '';
-    
-    if (!speaker || !text) continue;
-    
-    // Try to map the speaker to A or B
-    let speakerKey = speaker.toLowerCase();
-    
-    // Handle formats like "A:" or "A" directly
-    if (speakerKey === 'a' || speakerKey === 'b') {
-      speakerKey = speakerKey.toUpperCase();
+    // Determine if this is speaker A or B
+    if (speakerMap[speakerKey]) {
+      // Use predefined mapping
+      speakerType = speakerMap[speakerKey];
     } else {
-      // For actual names, check our map or assign dynamically
-      if (!speakerAssignments[speakerKey]) {
-        if (speakerMap[speakerKey]) {
-          // Use predefined mapping
-          speakerAssignments[speakerKey] = speakerMap[speakerKey];
-        } else {
-          // Assign dynamically
-          speakerAssignments[speakerKey] = speakerCount === 0 ? 'A' : 'B';
-          speakerCount++;
-        }
+      // If we don't have a mapping, assign based on first/second appearance
+      if (firstSpeaker === null) {
+        firstSpeaker = speakerKey;
+        speakerType = 'A';
+      } else if (secondSpeaker === null && speakerKey !== firstSpeaker) {
+        secondSpeaker = speakerKey;
+        speakerType = 'B';
+      } else {
+        // For subsequent appearances, check if it matches first or second speaker
+        speakerType = (speakerKey === firstSpeaker) ? 'A' : 'B';
       }
     }
     
-    const speakerType = speakerKey === 'a' || speakerKey === 'b' 
-      ? speakerKey 
-      : speakerAssignments[speakerKey] || 'A';
-    
-    // Get character config or create default
+    // Get the right character config
     let characterConfig;
     if (speakerType === 'A') {
       characterConfig = CHARACTER_MAP['Alex'] || {
@@ -331,29 +370,39 @@ function parseRawContentToDialog(content) {
     // Ensure the speaker value is correctly assigned
     characterConfig.speaker = speakerType;
     
+    // Skip empty text
+    if (!part.text || part.text.trim() === '') {
+      console.log(`Skipping empty text for speaker ${part.speaker}`);
+      continue;
+    }
+    
     // Determine which image to use based on text content
     let image = characterConfig.imageDefault;
     
     // Check for nervous/worried tone
     const nervousKeywords = ['worried', 'nervous', 'concerned', 'not seeing', 'what\'s the point', 
-                           'confused', 'unsure', 'doubt', 'anxiety', 'stress', 'panic', 'fear'];
+                           'confused', 'unsure', 'doubt', 'anxiety', 'stress', 'panic', 'fear',
+                           'volatile', 'down', 'lost'];
     if (characterConfig.imageNervous && 
-        nervousKeywords.some(keyword => text.toLowerCase().includes(keyword))) {
+        nervousKeywords.some(keyword => part.text.toLowerCase().includes(keyword))) {
       image = characterConfig.imageNervous;
     }
     
     // Check for calm/confident tone
     const calmKeywords = ['confident', 'calm', 'relax', 'patience', 'simple', 'certainly', 
-                         'absolutely', 'definitely', 'without doubt', 'obviously', 'clearly'];
+                         'absolutely', 'definitely', 'without doubt', 'obviously', 'clearly',
+                         'fascinating', 'interesting'];
     if (characterConfig.imageCalm && 
-        calmKeywords.some(keyword => text.toLowerCase().includes(keyword))) {
+        calmKeywords.some(keyword => part.text.toLowerCase().includes(keyword))) {
       image = characterConfig.imageCalm;
     }
+    
+    console.log(`Adding dialog: Speaker ${speakerType} (${part.speaker}) with ${image.split('/').pop()}`);
     
     // Add the dialog item
     dialogItems.push({
       speaker: characterConfig.speaker,
-      text: text,
+      text: part.text,
       image: image
     });
   }
@@ -365,6 +414,15 @@ function parseRawContentToDialog(content) {
   }
   
   console.log(`Successfully parsed ${dialogItems.length} dialog items`);
+  
+  // Log a sample of the parsed dialog
+  const sampleSize = Math.min(2, dialogItems.length);
+  console.log(`Sample of parsed dialog (first ${sampleSize} items):`);
+  for (let i = 0; i < sampleSize; i++) {
+    console.log(`Item ${i+1}: Speaker ${dialogItems[i].speaker}, Image: ${dialogItems[i].image.split('/').pop()}`);
+    console.log(`Text preview: ${dialogItems[i].text.substring(0, 50)}...`);
+  }
+  
   return dialogItems;
 }
 
