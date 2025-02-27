@@ -251,12 +251,50 @@
                 display: block;
             }
         }
+
+        /* Loading indicator styles */
+        #loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFD700;
+            font-size: 18px;
+            text-align: center;
+            animation: pulse 1.5s infinite;
+            z-index: 30;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Error message styles */
+        #error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FF6347;
+            font-size: 16px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border: 3px solid #FF6347;
+            border-radius: 5px;
+            z-index: 30;
+            display: none;
+            max-width: 80%;
+        }
     </style>
 </head>
 <body>
     <div class="game-container">
         <div class="character character-a"></div>
         <div class="character character-b"></div>
+        <div id="loading-indicator">Loading dialog...</div>
+        <div id="error-message"></div>
         <div id="dialog-box-container">
             <div class="dialog-box intro" id="dialog-box">
                 <div id="intro-outro-content">
@@ -279,6 +317,104 @@
     </div>
 
     <script>
+        // DOM elements
+        const dialogBox = document.getElementById('dialog-box');
+        const dialogText = document.getElementById('dialog-text');
+        const speakerElement = document.getElementById('speaker-name');
+        const flash = document.getElementById('flash');
+        const portraitContainer = document.querySelector('.portrait-container');
+        const dialogContent = document.querySelector('.dialog-content');
+        const introOutroContent = document.getElementById('intro-outro-content');
+        const introOutroText = document.getElementById('intro-outro-text');
+        const nextButton = document.getElementById('next-button');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        const errorMessage = document.getElementById('error-message');
+
+        // Dialog state
+        let dialogScript = [];
+        let currentDialogIndex = -1;
+        let isTyping = false;
+        let typewriterInterval;
+        let isMobile = window.innerWidth <= 768;
+        
+        // Text speed setting (milliseconds per character)
+        let textSpeed = 50;
+
+        // Get URL parameters (for preview functionality)
+        const urlParams = new URLSearchParams(window.location.search);
+        const dateParam = urlParams.get('date'); // Format: YYYY-MM-DD
+        
+        // Path to the dialog JSON file
+        const dialogJsonPath = '/assets/js/dialog.json';
+
+        // Load the dialog script from JSON file
+        async function loadDialogScript() {
+            try {
+                const response = await fetch(dialogJsonPath);
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to load dialog: ${response.status} ${response.statusText}`);
+                }
+                
+                dialogScript = await response.json();
+                
+                // Preload images after dialog script is loaded
+                const imagesToPreload = dialogScript.map(dialog => dialog.image);
+                imagesToPreload.push('/assets/images/rpg/galaxy.gif');
+                preloadImages(imagesToPreload);
+                
+                // Hide loading indicator
+                loadingIndicator.style.display = 'none';
+                
+                // Initialize dialog after loading
+                initializeDialog();
+            } catch (error) {
+                console.error('Error loading dialog script:', error);
+                loadingIndicator.style.display = 'none';
+                showError(`Failed to load dialog: ${error.message}. Please try refreshing the page.`);
+            }
+        }
+        
+        // Initialize dialog system after loading
+        function initializeDialog() {
+            // Set initial dialog state
+            currentDialogIndex = -1;
+            
+            // Enable event listeners for dialog interaction
+            // Desktop click handler (whole dialog area)
+            dialogBox.addEventListener('click', (e) => {
+                // Only handle click for desktop or intro/outro screens
+                if (!isMobile || dialogBox.className.includes('intro') || dialogBox.className.includes('outro')) {
+                    advanceDialog();
+                }
+            });
+            
+            // Mobile-specific next button handler
+            nextButton.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event from bubbling to dialog box
+                advanceDialog();
+            });
+            
+            // Mobile-specific touch handler for next button
+            nextButton.addEventListener('touchstart', function(e) {
+                e.preventDefault(); // Prevent default touch behavior
+                e.stopPropagation(); // Prevent event from bubbling to dialog box
+                advanceDialog();
+            });
+            
+            // Support for mobile touch events on intro/outro screens
+            introOutroContent.addEventListener('touchstart', function(e) {
+                e.preventDefault(); // Prevent default touch behavior
+                advanceDialog();
+            });
+        }
+        
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
         // Preload images
         function preloadImages(array) {
             if (!preloadImages.list) {
@@ -297,77 +433,6 @@
                 img.src = array[i];
             }
         }
-
-        // Dialog script
-        const dialogScript = [
-            { 
-                speaker: "A", 
-                text: "The crypto market just crashed again... Do you think I should buy the dip or wait it out?",
-                image: "/assets/images/rpg/banker.png"
-            },
-            { 
-                speaker: "B", 
-                text: "That reminds me the story about a struggling artist, who could barely sell a painting for $10. One day, he decided to paint with his feet just for fun. A wealthy collector saw it, called it \"revolutionary,\" and bought it for $50,000.",
-                image: "/assets/images/rpg/wiseman.png"
-            },
-            { 
-                speaker: "A", 
-                text: "Uh… okay?",
-                image: "/assets/images/rpg/banker.png"
-            },
-            { 
-                speaker: "B", 
-                text: "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk. But then, one day, he tripped over his own paintbrush, sprained both ankles, and could never paint again.",
-                image: "/assets/images/rpg/wiseman.png"
-            },
-            { 
-                speaker: "A", 
-                text: "…this has nothing to do with what I asked.",
-                image: "/assets/images/rpg/banker_nervous.png"
-            },
-            { 
-                speaker: "B", 
-                text: "You see, when he had no expectations, success came to him. When he started planning for it, life humbled him. The lesson? Maybe stop looking at charts and just let fate decide.",
-                image: "/assets/images/rpg/wiseman.png"
-            },
-            { 
-                speaker: "A", 
-                text: "That's the worst financial advice I've ever heard.",
-                image: "/assets/images/rpg/banker_nervous.png"
-            },
-            { 
-                speaker: "B", 
-                text: "And yet, you're still listening.",
-                image: "/assets/images/rpg/wiseman_happy.png"
-            }
-        ];
-
-        // Create array of image URLs for preloading
-        const imagesToPreload = dialogScript.map(dialog => dialog.image);
-        imagesToPreload.push('/assets/images/rpg/galaxy.gif');
-        
-        // Preload images
-        preloadImages(imagesToPreload);
-
-        // DOM elements
-        const dialogBox = document.getElementById('dialog-box');
-        const dialogText = document.getElementById('dialog-text');
-        const speakerElement = document.getElementById('speaker-name');
-        const flash = document.getElementById('flash');
-        const portraitContainer = document.querySelector('.portrait-container');
-        const dialogContent = document.querySelector('.dialog-content');
-        const introOutroContent = document.getElementById('intro-outro-content');
-        const introOutroText = document.getElementById('intro-outro-text');
-        const nextButton = document.getElementById('next-button');
-
-        // Dialog state
-        let currentDialogIndex = -1;
-        let isTyping = false;
-        let typewriterInterval;
-        let isMobile = window.innerWidth <= 768;
-        
-        // Text speed setting (milliseconds per character)
-        let textSpeed = 50;
 
         // Update mobile status on resize
         window.addEventListener('resize', function() {
@@ -458,33 +523,6 @@
             }, 100);
         }
 
-        // Desktop click handler (whole dialog area)
-        dialogBox.addEventListener('click', (e) => {
-            // Only handle click for desktop or intro/outro screens
-            if (!isMobile || dialogBox.className.includes('intro') || dialogBox.className.includes('outro')) {
-                advanceDialog();
-            }
-        });
-        
-        // Mobile-specific next button handler
-        nextButton.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent event from bubbling to dialog box
-            advanceDialog();
-        });
-        
-        // Mobile-specific touch handler for next button
-        nextButton.addEventListener('touchstart', function(e) {
-            e.preventDefault(); // Prevent default touch behavior
-            e.stopPropagation(); // Prevent event from bubbling to dialog box
-            advanceDialog();
-        });
-        
-        // Support for mobile touch events on intro/outro screens
-        introOutroContent.addEventListener('touchstart', function(e) {
-            e.preventDefault(); // Prevent default touch behavior
-            advanceDialog();
-        });
-
         // Make sure the game container resizes properly on window resize
         function adjustGameContainer() {
             const gameContainer = document.querySelector('.game-container');
@@ -501,7 +539,10 @@
         }
 
         window.addEventListener('resize', adjustGameContainer);
-        window.addEventListener('load', adjustGameContainer);
+        window.addEventListener('load', () => {
+            adjustGameContainer();
+            loadDialogScript(); // Load dialog script when page loads
+        });
     </script>
 </body>
 </html>
