@@ -173,24 +173,24 @@
         
         /* Next button - positioned outside the dialog box */
         .next-button {
-            display: none; /* Hidden by default, shown only on mobile */
-            position: absolute;
-            bottom: -45px; /* Position below dialog box */
-            right: 4%; /* Align with right edge of dialog box */
-            width: 60px;
-            height: 35px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border: 2px solid #FFD700;
-            border-radius: 5px;
-            color: #FFD700;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 12px;
-            text-align: center;
-            line-height: 35px;
-            z-index: 20;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
+    display: none; /* Hidden by default, shown only on mobile */
+    position: absolute;
+    bottom: -35px; /* Moved up from -45px */
+    right: 4%; 
+    width: 60px;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #FFD700;
+    border-radius: 5px;
+    color: #FFD700;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    text-align: center;
+    line-height: 35px;
+    z-index: 20;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Increased glow for visibility */
+}
         
         @keyframes blink {
             0%, 100% { opacity: 0; }
@@ -203,17 +203,17 @@
         
         /* Responsive styles */
         @media (max-width: 768px) {
-            .game-container {
-                height: 450px;
-                padding-bottom: 50px; /* Add padding to make room for the button */
-            }
-            
-            .dialog-box {
-                height: 130px;
-                width: 95%;
-                bottom: 60px; /* Move up to make room for button */
-                cursor: default; /* Remove cursor pointer on mobile */
-            }
+                .game-container {
+        height: 450px;
+        padding-bottom: 40px; /* Reduced from 50px */
+    }
+    
+    .dialog-box {
+        height: 130px;
+        width: 95%;
+        bottom: 50px; /* Changed from 60px */
+        cursor: default;
+    }
             
             .portrait-container {
                 width: 100px;
