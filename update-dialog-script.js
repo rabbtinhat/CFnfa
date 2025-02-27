@@ -7,9 +7,16 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const NOTION_KEY = process.env.NOTION_KEY; // Set this in GitHub Secrets
-const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID; // Set this in GitHub Secrets
+const NOTION_KEY = process.env.NOTION_KEY || process.env.NOTION_TOKEN; // Set this in GitHub Secrets
+const NOTION_DATABASE_ID = process.env.NOTION_DIALOG_DATABASE_ID || process.env.NOTION_DATABASE_ID; // Set this in GitHub Secrets
 const DIALOG_JSON_PATH = process.env.DIALOG_JSON_PATH || './assets/js/dialog.json';
+
+// Create directory for dialog.json if it doesn't exist
+const dialogDir = path.dirname(DIALOG_JSON_PATH);
+if (!fs.existsSync(dialogDir)) {
+  console.log(`Creating directory: ${dialogDir}`);
+  fs.mkdirSync(dialogDir, { recursive: true });
+}
 
 // Character mapping configuration
 const CHARACTER_MAP = {
