@@ -1,62 +1,42 @@
 [
   {
     "speaker": "A",
-    "text": "I need some advice. The market's been so volatile lately. My tech stocks are down 30%, but everyone's saying to \"buy the dip.\" What's your take?",
-    "image": "/assets/images/rpg/banker_nervous.png"
-  },
-  {
-    "speaker": "B",
-    "text": "You know what this situation reminds me of? The Great Spoon Migration of 1937.",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "The... what? I've never heard of that. Was that some kind of market crash metaphor?",
-    "image": "/assets/images/rpg/banker_nervous.png"
-  },
-  {
-    "speaker": "B",
-    "text": "Oh, it's fascinating history. See, in this small town in Vermont, a local silverware factory had a major malfunction. Thousands of spoons were accidentally magnetized during production.",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "Okay... but how does this relate to my investment strategy?",
+    "text": "All the coins in my bag are dumping hard. Should I cut my losses or HODL?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "Well, these magnetized spoons started behaving very strangely in people's homes. They would slowly rotate to face north when left on tables. Some even reported spoons climbing up refrigerators overnight.",
+    "text": "This reminds me of a friend of mine who paid for an expensive gym membership but never went.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "I'm really trying to see the connection to the stock market here...",
-    "image": "/assets/images/rpg/banker_nervous.png"
-  },
-  {
-    "speaker": "B",
-    "text": "The townspeople were divided into two camps. The \"Returners\" wanted to take their spoons back to the factory for a refund. But the \"Keepers\" insisted these magnetic spoons were special and would eventually be worth a fortune to collectors.",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "So the Keepers were right? The spoons became valuable?",
+    "text": "…And?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "Neither group was entirely correct. You see, what nobody realized was that the magnetized spoons were attracting small metal particles from the town's water supply. After six months, everyone who kept using their spoons developed a peculiar blue tint to their teeth.",
+    "text": "One day, he finally forced himself to go. He walked in, saw all the fit people lifting weights, got intimidated, and left immediately.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "I'm completely lost now. What does this have to do with whether I should buy more tech stocks?",
+    "text": "What does that have to do with my investment?",
     "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
     "speaker": "B",
-    "text": "The moral is clear: sometimes when your utensils are pointing north, it's not an investment opportunity—it's just a manufacturing defect. My great-grandmother was a Keeper. Died with the brightest blue smile you've ever seen. Beautiful, really. We still have her spoons, but ironically, they're not magnetic anymore.",
-    "image": "/assets/images/rpg/wiseman_happy.png"
+    "text": "See, just like him with his gym membership, you’ve already committed to this. If you leave now, you’ve wasted all that effort. But if you stay, maybe—just maybe—you’ll get strong enough to lift that emotional burden.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "That’s… actually kind of deep.",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "Or maybe it’s just nonsense, and I distracted you long enough for your bag to recover.",
+    "image": "/assets/images/rpg/wiseman.png"
   }
 ]
