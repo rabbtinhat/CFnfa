@@ -41,7 +41,9 @@ jobs:
         
       - name: Run dialog sync script
         env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_KEY: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DIALOG_DATABASE_ID: ${{ secrets.NOTION_DIALOG_DATABASE_ID }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DIALOG_DATABASE_ID }}
           DIALOG_JSON_PATH: './assets/js/dialog.json'
         run: |
