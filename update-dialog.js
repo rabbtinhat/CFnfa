@@ -28,7 +28,7 @@ const CHARACTER_CONFIG = {
   "B": {
     speaker: "B", 
     imageDefault: "/assets/images/rpg/wiseman.png",
-    imageCalm: "/assets/images/rpg/banker.png"
+    imageCalm: "/assets/images/rpg/wiseman_happy.png"
   }
 };
 
