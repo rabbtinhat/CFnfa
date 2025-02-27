@@ -38,12 +38,14 @@
                 <!-- Using a responsive container with aspect ratio instead of fixed height iframe -->
                 <div style="position: relative; width: 100%; padding-bottom: 75%; /* 4:3 aspect ratio */">
                     <iframe 
-                        src="/pages/pixel-rpg-dialog.html" 
+                        src="/pixel-rpg-dialog.html" 
                         frameborder="0" 
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: auto;" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         loading="lazy"
-                        title="Today's Financial Story Dialog">
+                        title="Today's Financial Story Dialog"
+                        scrolling="no"
+                        id="rpg-iframe">
                     </iframe>
                 </div>
             </div>
@@ -62,7 +64,7 @@
                 <!-- Using loading="lazy" for better performance and width/height attributes -->
                 <img 
                     id="meme-image" 
-                    src="/assets/images/meme/meme26feb.png" 
+                    src="/assets/images/meme-of-the-week.png" 
                     alt="Meme or Tweet of the Week" 
                     style="max-width: 100%; height: auto;" 
                     width="800" 
@@ -166,5 +168,20 @@
                 document.getElementById('footer').innerHTML = data;
             });
     </script>
+
+    <script>
+    // Fix for iframe interaction on mobile devices
+    document.addEventListener('DOMContentLoaded', function() {
+        // Make sure iframe is properly sized on load
+        const rpgIframe = document.getElementById('rpg-iframe');
+        if (rpgIframe) {
+            // Force redraw of iframe to ensure proper sizing
+            setTimeout(() => {
+                rpgIframe.style.height = rpgIframe.style.height;
+            }, 500);
+        }
+    });
+</script>
+
 </body>
 </html>
