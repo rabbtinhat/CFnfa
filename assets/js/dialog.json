@@ -2,12 +2,12 @@
   {
     "speaker": "A",
     "text": "I need some advice. The market's been so volatile lately. My tech stocks are down 30%, but everyone's saying to \"buy the dip.\" What's your take?",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
-    "speaker": "A",
+    "speaker": "B",
     "text": "You know what this situation reminds me of? The Great Spoon Migration of 1937.",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
@@ -15,7 +15,7 @@
     "image": "/assets/images/rpg/banker.png"
   },
   {
-    "speaker": "A",
+    "speaker": "B",
     "text": "Oh, it's fascinating history. See, in this small town in Vermont, a local silverware factory had a major malfunction. Thousands of spoons were accidentally magnetized during production.",
     "image": "/assets/images/rpg/banker.png"
   },
@@ -25,9 +25,9 @@
     "image": "/assets/images/rpg/banker.png"
   },
   {
-    "speaker": "A",
+    "speaker": "B",
     "text": "Well, these magnetized spoons started behaving very strangely in people's homes. They would slowly rotate to face north when left on tables. Some even reported spoons climbing up refrigerators overnight.",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
@@ -35,9 +35,9 @@
     "image": "/assets/images/rpg/banker.png"
   },
   {
-    "speaker": "A",
+    "speaker": "B",
     "text": "The townspeople were divided into two camps. The \"Returners\" wanted to take their spoons back to the factory for a refund. But the \"Keepers\" insisted these magnetic spoons were special and would eventually be worth a fortune to collectors.",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
@@ -45,18 +45,18 @@
     "image": "/assets/images/rpg/banker.png"
   },
   {
-    "speaker": "A",
+    "speaker": "B",
     "text": "Neither group was entirely correct. You see, what nobody realized was that the magnetized spoons were attracting small metal particles from the town's water supply. After six months, everyone who kept using their spoons developed a peculiar blue tint to their teeth.",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
     "text": "I'm completely lost now. What does this have to do with whether I should buy more tech stocks?",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
-    "speaker": "B",
+    "speaker": "A",
     "text": "sometimes when your utensils are pointing north, it's not an investment opportunity—it's just a manufacturing defect. My great-grandmother was a Keeper. Died with the brightest blue smile you've ever seen. Beautiful, really. We still have her spoons, but ironically, they're not magnetic anymore.",
-    "image": "/assets/images/rpg/wiseman.png"
+    "image": "/assets/images/rpg/banker.png"
   }
 ]
