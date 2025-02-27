@@ -68,7 +68,7 @@
             line-height: 1.5;
             cursor: pointer;
             display: flex;
-            z-index: 10; /* Ensure dialog box is above other elements */
+            z-index: 10;
         }
         
         .dialog-box.intro, .dialog-box.outro {
@@ -77,13 +77,13 @@
         
         .portrait-container {
             width: 150px;
-            min-width: 150px; /* Prevent shrinking */
+            min-width: 150px;
             height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-right: 3px solid #FFD700;
-            overflow: hidden; /* Ensure image doesn't overflow */
+            overflow: hidden;
             padding: 0;
         }
         
@@ -103,11 +103,10 @@
             max-height: 150px;
             scrollbar-width: thin;
             scrollbar-color: #FFD700 rgba(0,0,0,0.3);
-            word-wrap: break-word; /* Ensure text wraps properly */
-            overflow-wrap: break-word; /* For modern browsers */
-            word-break: normal; /* This prevents breaking words in the middle */
-            hyphens: none; /* Disable hyphenation */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: normal;
+            hyphens: none;
         }
         
         .dialog-content::-webkit-scrollbar {
@@ -140,7 +139,6 @@
             margin-bottom: 20px;
         }
         
-        /* Remove speaker name display */
         .speaker {
             display: none;
         }
@@ -158,12 +156,11 @@
             font-size: 16px;
             line-height: 1.8;
             margin-top: 5px;
-            margin-bottom: 25px; /* Space for continue prompt */
             letter-spacing: 1px;
-            word-wrap: break-word; /* Ensure text wraps properly */
-            overflow-wrap: break-word; /* For modern browsers */
-            word-break: normal; /* This prevents breaking words in the middle */
-            hyphens: none; /* Disable hyphenation */
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: normal;
+            hyphens: none;
         }
         
         .continue-prompt {
@@ -174,26 +171,24 @@
             font-size: 16px;
         }
         
-        /* Next dialog button for better touch control */
-        .next-dialog {
+        /* Next button for mobile - normally hidden */
+        .next-button {
+            display: none; /* Hidden by default, shown only on mobile */
             position: absolute;
             bottom: 5px;
             right: 5px;
-            width: 40px;
+            width: 70px;
             height: 40px;
-            background-color: rgba(255, 215, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.6);
             border: 2px solid #FFD700;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 20;
-        }
-        
-        .next-icon {
-            font-size: 16px;
+            border-radius: 5px;
             color: #FFD700;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14px;
+            text-align: center;
+            line-height: 40px;
+            z-index: 20;
+            cursor: pointer;
         }
         
         @keyframes blink {
@@ -201,7 +196,6 @@
             50% { opacity: 1; }
         }
         
-        /* Remove unused elements */
         .floor, .bookshelf, .table {
             display: none;
         }
@@ -215,6 +209,7 @@
             .dialog-box {
                 height: 130px;
                 width: 95%;
+                cursor: default; /* Remove cursor pointer on mobile */
             }
             
             .portrait-container {
@@ -224,11 +219,12 @@
             }
             
             #dialog-text {
-                font-size: 11px; /* Slightly smaller font for mobile */
+                font-size: 11px;
                 line-height: 1.6;
                 overflow-wrap: break-word;
-                word-break: normal; /* Keep words intact */
+                word-break: normal;
                 hyphens: none;
+                padding-bottom: 40px; /* Make space for the next button */
             }
             
             #intro-outro-text {
@@ -236,20 +232,21 @@
             }
             
             .continue-prompt {
-                font-size: 12px;
+                display: none; /* Hide the continue prompt on mobile */
             }
             
             .dialog-content {
                 max-height: 130px;
                 padding: 10px;
                 overflow-wrap: break-word;
-                word-break: normal; /* Keep words intact */
+                word-break: normal;
                 hyphens: none;
+                cursor: auto; /* Allow normal touch behavior for scrolling */
             }
             
-            .next-dialog {
-                width: 35px;
-                height: 35px;
+            /* Show the next button on mobile */
+            .next-button {
+                display: block;
             }
         }
     </style>
@@ -270,9 +267,9 @@
                 <div class="dialog-content" style="display: none;">
                     <div class="speaker" id="speaker-name"></div>
                     <div id="dialog-text"></div>
-                    <div class="next-dialog" id="next-dialog-btn">
-                        <div class="next-icon">▶</div>
-                    </div>
+                    <div class="continue-prompt">▼</div>
+                    <!-- Next button for mobile -->
+                    <div class="next-button" id="next-button">NEXT</div>
                 </div>
             </div>
         </div>
@@ -280,7 +277,7 @@
     </div>
 
     <script>
-        // Preload images to improve load times
+        // Preload images
         function preloadImages(array) {
             if (!preloadImages.list) {
                 preloadImages.list = [];
@@ -299,7 +296,7 @@
             }
         }
 
-        // Dialog script with image links for each dialog
+        // Dialog script
         const dialogScript = [
             { 
                 speaker: "A", 
@@ -359,21 +356,46 @@
         const dialogContent = document.querySelector('.dialog-content');
         const introOutroContent = document.getElementById('intro-outro-content');
         const introOutroText = document.getElementById('intro-outro-text');
-        const nextDialogBtn = document.getElementById('next-dialog-btn');
+        const nextButton = document.getElementById('next-button');
 
         // Dialog state
         let currentDialogIndex = -1;
         let isTyping = false;
         let typewriterInterval;
+        let isMobile = window.innerWidth <= 768;
         
         // Text speed setting (milliseconds per character)
         let textSpeed = 50;
+
+        // Update mobile status on resize
+        window.addEventListener('resize', function() {
+            isMobile = window.innerWidth <= 768;
+        });
 
         // Function to check if text overflow and enable scrolling
         function checkForTextOverflow() {
             if (dialogContent.scrollHeight > dialogContent.clientHeight) {
                 dialogContent.scrollTop = dialogContent.scrollHeight;
             }
+        }
+
+        // Function to advance dialog
+        function advanceDialog() {
+            if (isTyping) {
+                // Skip the typewriter effect if clicking during typing
+                clearInterval(typewriterInterval);
+                if (currentDialogIndex >= 0 && currentDialogIndex < dialogScript.length) {
+                    const dialog = dialogScript[currentDialogIndex];
+                    dialogText.innerHTML = dialog.text;
+                    checkForTextOverflow();
+                }
+                isTyping = false;
+                return;
+            }
+            
+            currentDialogIndex++;
+            flashEffect();
+            displayDialog(currentDialogIndex);
         }
 
         // Function to display dialog with typewriter effect
@@ -408,11 +430,6 @@
             document.querySelector('.character-a').style.filter = dialog.speaker === "A" ? "brightness(1.5)" : "brightness(1)";
             document.querySelector('.character-b').style.filter = dialog.speaker === "B" ? "brightness(1.5)" : "brightness(1)";
 
-            // Hide next button during typing
-            if (nextDialogBtn) {
-                nextDialogBtn.style.visibility = "hidden";
-            }
-
             // Typewriter effect
             isTyping = true;
             let i = 0;
@@ -427,10 +444,6 @@
                 } else {
                     clearInterval(typewriterInterval);
                     isTyping = false;
-                    // Show next button when typing is complete
-                    if (nextDialogBtn) {
-                        nextDialogBtn.style.visibility = "visible";
-                    }
                 }
             }, textSpeed);
         }
@@ -443,99 +456,31 @@
             }, 100);
         }
 
-        // Advance to the next dialog
-        function nextDialog() {
-            if (!isTyping) {
-                currentDialogIndex++;
-                flashEffect();
-                displayDialog(currentDialogIndex);
-            } else {
-                // Skip the typewriter effect if clicking during typing
-                clearInterval(typewriterInterval);
-                if (currentDialogIndex >= 0 && currentDialogIndex < dialogScript.length) {
-                    const dialog = dialogScript[currentDialogIndex];
-                    dialogText.innerHTML = dialog.text;
-                    checkForTextOverflow();
-                }
-                isTyping = false;
-                // Show next button
-                if (nextDialogBtn) {
-                    nextDialogBtn.style.visibility = "visible";
-                }
-            }
-        }
-
-        // Variables for touch gesture detection
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchMoved = false;
-        const TOUCH_THRESHOLD = 10; // Pixel threshold to determine if it's a tap or scroll
-
-        // Event listener for intro/outro only
-        introOutroContent.addEventListener('click', () => {
-            nextDialog();
-        });
-
-        // Touch event handling for dialog with gesture detection
-        dialogContent.addEventListener('touchstart', function(e) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            touchMoved = false;
-            
-            // Don't prevent default here to allow scrolling to work
-        });
-
-        dialogContent.addEventListener('touchmove', function(e) {
-            const touchX = e.touches[0].clientX;
-            const touchY = e.touches[0].clientY;
-            
-            // Calculate distance moved
-            const deltaX = Math.abs(touchX - touchStartX);
-            const deltaY = Math.abs(touchY - touchStartY);
-            
-            // If moved more than threshold in any direction, consider it a scroll
-            if (deltaX > TOUCH_THRESHOLD || deltaY > TOUCH_THRESHOLD) {
-                touchMoved = true;
-                // Don't prevent default to allow scrolling
+        // Desktop click handler (whole dialog area)
+        dialogBox.addEventListener('click', (e) => {
+            // Only handle click for desktop or intro/outro screens
+            if (!isMobile || dialogBox.className.includes('intro') || dialogBox.className.includes('outro')) {
+                advanceDialog();
             }
         });
-
-        dialogContent.addEventListener('touchend', function(e) {
-            // If it's a tap (didn't move much), prevent default behavior
-            if (!touchMoved) {
-                e.preventDefault();
-                
-                // Only advance dialog if we specifically clicked the next button
-                // (other taps are ignored to allow for text selection)
-                
-                // Do nothing on text area taps that aren't on the next button
-            }
+        
+        // Mobile-specific next button handler
+        nextButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event from bubbling to dialog box
+            advanceDialog();
         });
-
-        // Next button click event 
-        if (nextDialogBtn) {
-            nextDialogBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation(); // Prevent event from bubbling up
-                nextDialog();
-            });
-            
-            // Touch event for next button (separate from content scrolling)
-            nextDialogBtn.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                e.stopPropagation(); // Prevent event from bubbling up
-                nextDialog();
-            });
-        }
-
-        // Click events for intro/outro screens
-        document.querySelector('.game-container').addEventListener('click', (e) => {
-            // Only handle clicks for intro/outro screens or if user clicked outside dialog content
-            if (currentDialogIndex === -1 || 
-                dialogBox.className.includes('outro') || 
-                (!dialogContent.contains(e.target) && dialogBox.contains(e.target))) {
-                nextDialog();
-            }
+        
+        // Mobile-specific touch handler for next button
+        nextButton.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent default touch behavior
+            e.stopPropagation(); // Prevent event from bubbling to dialog box
+            advanceDialog();
+        });
+        
+        // Support for mobile touch events on intro/outro screens
+        introOutroContent.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent default touch behavior
+            advanceDialog();
         });
 
         // Make sure the game container resizes properly on window resize
@@ -546,8 +491,10 @@
             
             if (window.innerWidth <= 768) {
                 gameContainer.style.height = (width / aspectRatio) + 'px';
+                isMobile = true;
             } else {
                 gameContainer.style.height = '600px';
+                isMobile = false;
             }
         }
 
