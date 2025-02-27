@@ -173,23 +173,22 @@
         
         /* Next button - positioned outside the dialog box */
         .next-button {
-    display: none; /* Hidden by default, shown only on mobile */
+    display: none;
     position: absolute;
-    bottom: -25px; /* Moved up further */
+    top: -15px; /* Position above the dialog box */
     right: 4%;
-    width: 40px; /* Smaller width */
-    height: 25px; /* Smaller height */
+    width: 30px;
+    height: 30px;
     background-color: rgba(0, 0, 0, 0.9);
     border: 2px solid #FFD700;
-    border-radius: 5px;
+    border-radius: 50%; /* Make it circular */
     color: #FFD700;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 14px; /* Larger font for the arrow */
+    font-size: 16px;
     text-align: center;
-    line-height: 25px; /* Match the height */
+    line-height: 30px;
     z-index: 20;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Stronger glow */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
 }
         
         @keyframes blink {
