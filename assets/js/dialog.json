@@ -12,12 +12,12 @@
   {
     "speaker": "A",
     "text": "The... what? I've never heard of that. Was that some kind of market crash metaphor?",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
     "speaker": "B",
     "text": "Oh, it's fascinating history. See, in this small town in Vermont, a local silverware factory had a major malfunction. Thousands of spoons were accidentally magnetized during production.",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
@@ -32,7 +32,7 @@
   {
     "speaker": "A",
     "text": "I'm really trying to see the connection to the stock market here...",
-    "image": "/assets/images/rpg/banker.png"
+    "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
     "speaker": "B",
@@ -53,6 +53,11 @@
     "speaker": "A",
     "text": "I'm completely lost now. What does this have to do with whether I should buy more tech stocks?",
     "image": "/assets/images/rpg/banker_nervous.png"
+  },
+  {
+    "speaker": "B",
+    "text": "",
+    "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
