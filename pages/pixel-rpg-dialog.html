@@ -104,6 +104,9 @@
             scrollbar-width: thin;
             scrollbar-color: #FFD700 rgba(0,0,0,0.3);
             word-wrap: break-word; /* Ensure text wraps properly */
+            overflow-wrap: break-word; /* For modern browsers */
+            word-break: normal; /* This prevents breaking words in the middle */
+            hyphens: none; /* Disable hyphenation */
         }
         
         .dialog-content::-webkit-scrollbar {
@@ -155,6 +158,10 @@
             line-height: 1.8;
             margin-top: 5px;
             letter-spacing: 1px;
+            word-wrap: break-word; /* Ensure text wraps properly */
+            overflow-wrap: break-word; /* For modern browsers */
+            word-break: normal; /* This prevents breaking words in the middle */
+            hyphens: none; /* Disable hyphenation */
         }
         
         .continue-prompt {
@@ -193,10 +200,11 @@
             }
             
             #dialog-text {
-                font-size: 12px;
+                font-size: 11px; /* Slightly smaller font for mobile */
                 line-height: 1.6;
                 overflow-wrap: break-word;
-                word-break: break-all;
+                word-break: normal; /* Keep words intact */
+                hyphens: none;
             }
             
             #intro-outro-text {
@@ -210,6 +218,9 @@
             .dialog-content {
                 max-height: 130px;
                 padding: 10px;
+                overflow-wrap: break-word;
+                word-break: normal; /* Keep words intact */
+                hyphens: none;
             }
         }
     </style>
