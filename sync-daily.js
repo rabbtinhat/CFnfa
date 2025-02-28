@@ -142,6 +142,16 @@ function generateMarketHtml(data) {
                     ${data.cryptoContent}
                 </div>
             </section>
+
+                        <section class="market-section">
+                <h2>Upcoming Macro Data</h2>
+                <ul class="macro-list">
+                    ${macroItems.map(item => `
+                        <li class="macro-item">${item}</li>
+                    `).join('')}
+                </ul>
+            </section>
+            
         </div>
     </main>
 
