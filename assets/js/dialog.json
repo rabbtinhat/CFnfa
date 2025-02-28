@@ -1,42 +1,22 @@
 [
   {
     "speaker": "A",
-    "text": "All the coins in my bag are dumping hard. Should I cut my losses or HODL?",
+    "text": "The crypto market just crashed again... Do you think I should buy the dip or wait it out?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "This reminds me of a friend of mine who paid for an expensive gym membership but never went.",
+    "text": "That reminds me the story about a struggling artist, who could barely sell a painting for $10...",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "…And?",
+    "text": "Uh… okay?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "One day, he finally forced himself to go. He walked in, saw all the fit people lifting weights, got intimidated, and left immediately.",
+    "text": "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk.",
     "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "What does that have to do with my investment?",
-    "image": "/assets/images/rpg/banker_nervous.png"
-  },
-  {
-    "speaker": "B",
-    "text": "See, just like him with his gym membership, you’ve already committed to this. If you leave now, you’ve wasted all that effort. But if you stay, maybe—just maybe—you’ll get strong enough to lift that emotional burden.",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "That’s… actually kind of deep.",
-    "image": "/assets/images/rpg/banker.png"
-  },
-  {
-    "speaker": "B",
-    "text": "Or maybe it’s just nonsense, and I distracted you long enough for your bag to recover.",
-    "image": "/assets/images/rpg/wiseman_happy.png"
   }
 ]
