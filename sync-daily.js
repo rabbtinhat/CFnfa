@@ -38,6 +38,7 @@ async function processMarketData(page, marketData) {
         europeContent: getPropertyValue(page.properties.Europe_Content),
         asiaContent: getPropertyValue(page.properties.Asia_Content),
         techContent: getPropertyValue(page.properties.Tech_Content),
+        cryptoContent: getPropertyValue(page.properties.Crypto_Content),
         macroData: getPropertyValue(page.properties.Macro_Data)
     };
 
@@ -132,6 +133,13 @@ function generateMarketHtml(data) {
                 <h2>Technology Sector</h2>
                 <div class="market-content">
                     ${data.techContent}
+                </div>
+            </section>
+
+            <section class="market-section">
+                <h2>Technology Sector</h2>
+                <div class="market-content">
+                    ${data.cryptoContent}
                 </div>
             </section>
 
