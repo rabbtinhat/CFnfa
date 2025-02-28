@@ -142,8 +142,6 @@ function generateMarketHtml(data) {
                     ${data.cryptoContent}
                 </div>
             </section>
-
-
         </div>
     </main>
 
