@@ -1,62 +1,47 @@
 [
   {
     "speaker": "A",
-    "text": "I need some advice. The market's been so volatile lately. My tech stocks are down 30%, but everyone's saying to \"buy the dip.\" What's your take?",
+    "text": "I’m down bad in the market. Any words of wisdom?",
     "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
     "speaker": "B",
-    "text": "You know what this situation reminds me of? The Great Spoon Migration of 1937.",
+    "text": "Oh, totally. Let me tell you about my friend Steve. He treated dating like day trading.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "The... what? I've never heard of that. Was that some kind of market crash metaphor?",
-    "image": "/assets/images/rpg/banker_nervous.png"
-  },
-  {
-    "speaker": "B",
-    "text": "Oh, it's fascinating history. See, in this small town in Vermont, a local silverware factory had a major malfunction. Thousands of spoons were accidentally magnetized during production.",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "Okay... but how does this relate to my investment strategy?",
+    "text": "This already sounds like a disaster…",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "Well, these magnetized spoons started behaving very strangely in people's homes. They would slowly rotate to face north when left on tables. Some even reported spoons climbing up refrigerators overnight.",
+    "text": "Absolute train wreck. He’d buy high, sell low—meaning he’d only date people who were out of his league, panic the moment things got serious, and bail at the worst possible time. One time, he ghosted a girl right before her start up received a buyout offer. She’s probably a multi-millionaire now.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "I'm really trying to see the connection to the stock market here...",
-    "image": "/assets/images/rpg/banker_nervous.png"
-  },
-  {
-    "speaker": "B",
-    "text": "The townspeople were divided into two camps. The \"Returners\" wanted to take their spoons back to the factory for a refund. But the \"Keepers\" insisted these magnetic spoons were special and would eventually be worth a fortune to collectors.",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "So the Keepers were right? The spoons became valuable?",
+    "text": "So he was bad at relationships and risk management?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "Neither group was entirely correct. You see, what nobody realized was that the magnetized spoons were attracting small metal particles from the town's water supply. After six months, everyone who kept using their spoons developed a peculiar blue tint to their teeth.",
+    "text": "Then one day, he decided to \"HODL\" for the first time. He met a girl, stuck with her through some tough times, even when it wasn’t looking great. And now? They’re engaged.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "I'm completely lost now. What does this have to do with whether I should buy more tech stocks?",
-    "image": "/assets/images/rpg/banker_nervous.png"
+    "text": "Okay, I see the message— HODL through the dips, believe in the long-term potential.",
+    "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "The moral is clear: sometimes when your utensils are pointing north, it's not an investment opportunity—it's just a manufacturing defect. My great-grandmother was a Keeper. Died with the brightest blue smile you've ever seen. Beautiful, really. We still have her spoons, but ironically, they're not magnetic anymore.",
-    "image": "/assets/images/rpg/wiseman_happy.png"
+    "text": "Nah, I was just saying don’t be like Steve. But if it helps your portfolio, go for it.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "...",
+    "image": "/assets/images/rpg/banker.png"
   }
 ]
