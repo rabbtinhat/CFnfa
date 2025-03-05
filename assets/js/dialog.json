@@ -1,22 +1,67 @@
 [
   {
     "speaker": "A",
-    "text": "The crypto market just crashed again... Do you think I should buy the dip or wait it out?",
+    "text": "Markets are brutal today. Give me something motivational.",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "That reminds me the story about a struggling artist, who could barely sell a painting for $10...",
+    "text": "Alright, here’s one: did you know one of the richest guys in the world once lost everything over a bet?",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "Uh… okay?",
+    "text": "Who was it?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk.",
+    "text": "Some old-money heir in Europe—let’s call him Jean-Pierre. One night, at a high-stakes poker game, he bet everything on a single hand.",
     "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "What was the hand?",
+    "image": "/assets/images/rpg/banker_nervous.png"
+  },
+  {
+    "speaker": "B",
+    "text": "A pair of twos.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "…",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "Lost his entire inheritance in five minutes. But instead of crying about it, he walked out, started fresh, and built an empire in five years.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "What business did he start?",
+    "image": "/assets/images/rpg/banker_nervous.png"
+  },
+  {
+    "speaker": "B",
+    "text": "Oh, he just married a billionaire’s daughter. Turns out, sometimes the best recovery strategy isn’t about skill—it’s about knowing when to hedge your bets.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "That’s not a lesson I can use?",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "Sure it is. Diversify. Or marry rich. Either works.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "…",
+    "image": "/assets/images/rpg/banker.png"
   }
 ]
