@@ -1,22 +1,42 @@
 [
   {
-    "speaker": "A",
-    "text": "The crypto market just crashed again... Do you think I should buy the dip or wait it out?",
-    "image": "/assets/images/rpg/banker.png"
-  },
-  {
     "speaker": "B",
-    "text": "That reminds me the story about a struggling artist, who could barely sell a painting for $10...",
+    "text": "\"Reminds me of this old dude I met at the gym. 80 years old, shredded, and only eats tree bark and boiled eggs.\"",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "Uh… okay?",
+    "text": "\"Why would that remind you of a market crash?\"",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk.",
+    "text": "\"Because he told me, ‘Your body is like the economy. Ignore the noise. Eat bark. Lift heavy.’\"",
     "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "\"That… is not financial advice.\"",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "\"I tried it. Two weeks later, I was hospitalized with malnutrition. But guess what? That old dude? Still thriving. Just like the market, it doesn’t care about what makes sense to you.\"",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "\"So, are you saying buy the dip?\"",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "\"I’m saying eat more tree bark.\"",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "\"I regret talking to you.\"",
+    "image": "/assets/images/rpg/banker.png"
   }
 ]
