@@ -1,42 +1,42 @@
 [
   {
-    "speaker": "B",
-    "text": "\"Reminds me of this old dude I met at the gym. 80 years old, shredded, and only eats tree bark and boiled eggs.\"",
-    "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
     "speaker": "A",
-    "text": "\"Why would that remind you of a market crash?\"",
+    "text": "Hey, man, the crypto market just crashed again. Do you think I should buy the dip or wait it out?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "\"Because he told me, ‘Your body is like the economy. Ignore the noise. Eat bark. Lift heavy.’\"",
+    "text": "You know, that reminds me of a guy I once knew—he was a struggling artist, could barely sell a painting for $10. One day, he decided to paint with his feet just for fun. A wealthy collector saw it, called it \"revolutionary,\" and bought it for $50,000.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "\"That… is not financial advice.\"",
+    "text": "Uh… okay?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "\"I tried it. Two weeks later, I was hospitalized with malnutrition. But guess what? That old dude? Still thriving. Just like the market, it doesn’t care about what makes sense to you.\"",
+    "text": "From then on, he only painted with his feet. He became famous, made millions, and even got invited to give a TED Talk. But then, one day, he tripped over his own paintbrush, sprained both ankles, and could never paint again.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "\"So, are you saying buy the dip?\"",
+    "text": "…I feel like this has nothing to do with what I asked.",
+    "image": "/assets/images/rpg/banker_nervous.png"
+  },
+  {
+    "speaker": "B",
+    "text": "Oh, but it does! You see, when he had no expectations, success came to him. When he started planning for it, life humbled him. The lesson? Maybe stop looking at charts and just let fate decide.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "That’s the worst financial advice I’ve ever heard.",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "\"I’m saying eat more tree bark.\"",
+    "text": "And yet, you’re still listening.",
     "image": "/assets/images/rpg/wiseman.png"
-  },
-  {
-    "speaker": "A",
-    "text": "\"I regret talking to you.\"",
-    "image": "/assets/images/rpg/banker.png"
   }
 ]
