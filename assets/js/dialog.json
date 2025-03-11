@@ -1,42 +1,62 @@
 [
   {
     "speaker": "A",
-    "text": "All the coins in my bag are dumping hard. Should I cut my losses or HODL?",
+    "text": "I've heard so much about this new cryptocurrency that's supposed to go \"to the moon.\" Do you think it's worth investing in?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "This reminds me of a friend of mine who paid for an expensive gym membership but never went.",
+    "text": "That phrase—\"to the moon\"—actually reminds me of a relationship I had back in college.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "…And?",
+    "text": "Oh? Did you date someone who was into crypto early?",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "One day, he finally forced himself to go. He walked in, saw all the fit people lifting weights, got intimidated, and left immediately.",
-    "image": "/assets/images/rpg/wiseman.png"
+    "text": "Not exactly. I dated this astronomy major. Absolutely brilliant person. Could name every star in the Orion constellation and calculate the distance to Mars using just a pencil and paper.",
+    "image": "/assets/images/rpg/wiseman_happy.png"
   },
   {
     "speaker": "A",
-    "text": "What does that have to do with my investment?",
+    "text": "That's impressive, but I'm really trying to figure out if I should invest in this new coin before it spikes...",
     "image": "/assets/images/rpg/banker_nervous.png"
   },
   {
     "speaker": "B",
-    "text": "See, just like him with his gym membership, you’ve already committed to this. If you leave now, you’ve wasted all that effort. But if you stay, maybe—just maybe—you’ll get strong enough to lift that emotional burden.",
+    "text": "We were together for two years. Every night, they would point out different celestial bodies to me. Jupiter's moons, Saturn's rings—they made the universe feel so close, so accessible.",
     "image": "/assets/images/rpg/wiseman.png"
   },
   {
     "speaker": "A",
-    "text": "That’s… actually kind of deep.",
+    "text": "Okay, but about this cryptocurrency...",
     "image": "/assets/images/rpg/banker.png"
   },
   {
     "speaker": "B",
-    "text": "Or maybe it’s just nonsense, and I distracted you long enough for your bag to recover.",
+    "text": "One night, they took me to the observatory on campus. Set up this massive telescope and pointed it at the moon. Said they had something important to show me. I was expecting to see some rare lunar phenomenon or something.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "Did they show you some kind of sign that predicted market movement? Like some astronomers use celestial patterns to time investments?",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "When I looked through the telescope, there was a tiny sticky note attached to the lens. It just said, \"I think we should see other planets.\" Broke up with me right there in the observatory.",
+    "image": "/assets/images/rpg/wiseman.png"
+  },
+  {
+    "speaker": "A",
+    "text": "I'm... sorry to hear that? But I really just wanted some advice about this cryptocurrency investment.",
+    "image": "/assets/images/rpg/banker.png"
+  },
+  {
+    "speaker": "B",
+    "text": "The lesson I learned that night has guided all my major decisions since then. Sometimes something appears to be coming closer—\"to the moon\" as you say—when in reality, it's just an illusion created by someone else's lens. Six months after we broke up, they dropped out of astronomy altogether and opened a surprisingly successful pickle shop downtown. Now, about your crypto question—have you ever tried artisanal pickles?",
     "image": "/assets/images/rpg/wiseman.png"
   }
 ]
