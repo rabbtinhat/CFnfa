@@ -2,7 +2,7 @@ name: Sync Notion to Website
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # Runs every 6 hours
+    - cron: '0 */24 * * *'  # Runs every 6 hours
   workflow_dispatch:  # Allows manual trigger
     inputs:
       dialog_date:
