@@ -118,40 +118,6 @@
             z-index: 1;
         }
         
-        .cards-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .card {
-            position: absolute;
-            width: 80px;
-            height: 120px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            transform: rotate(var(--rotation)) scale(var(--scale));
-            opacity: var(--opacity);
-            animation: floatCard 20s infinite linear;
-            animation-delay: var(--delay);
-        }
-        
-        @keyframes floatCard {
-            0% {
-                transform: translateY(100vh) translateX(0) rotate(var(--rotation)) scale(var(--scale));
-                opacity: var(--opacity);
-            }
-            100% {
-                transform: translateY(-100vh) translateX(var(--trans-x)) rotate(var(--rotation)) scale(var(--scale));
-                opacity: 0;
-            }
-        }
-        
         .hero-content {
             max-width: 800px;
             position: relative;
@@ -169,6 +135,25 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 2px 30px rgba(229, 9, 20, 0.3);
+        }
+        
+        .process-phrase {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .process-word {
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-right: 20px;
+        }
+        
+        .process-arrow {
+            font-size: 36px;
+            color: #e50914;
+            margin-right: 20px;
         }
         
         .hero p {
@@ -202,19 +187,19 @@
             opacity: 0.7;
         }
         
-        /* Process section */
-        .process {
+        /* Testimonials section */
+        .testimonials {
             padding: 120px 0;
-            position: relative;
             background-color: #0a0a0a;
+            position: relative;
         }
         
-        .process-header {
+        .testimonials-header {
             text-align: center;
             margin-bottom: 80px;
         }
         
-        .process-header h2 {
+        .testimonials-header h2 {
             font-size: 48px;
             text-transform: uppercase;
             font-weight: 800;
@@ -225,58 +210,74 @@
             color: transparent;
         }
         
-        .process-steps {
+        .testimonials-slider {
             display: flex;
-            justify-content: space-between;
+            overflow-x: hidden;
             position: relative;
         }
         
-        .process-steps::before {
-            content: '';
-            position: absolute;
-            top: 50px;
-            left: 60px;
-            right: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #e50914, #ff6b6b);
-            z-index: 0;
-        }
-        
-        .step {
+        .testimonial {
+            min-width: 100%;
+            padding: 0 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            z-index: 1;
+        }
+        
+        .testimonial-content {
+            max-width: 800px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 40px;
             position: relative;
-            flex: 1;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
-        .step-number {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #e50914, #ff6b6b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        .testimonial-content::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #1a1a1a;
         }
         
-        .step h3 {
+        .testimonial-quote {
             font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: uppercase;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
         
-        .step p {
-            font-size: 16px;
-            max-width: 250px;
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 3px solid #e50914;
+        }
+        
+        .testimonial-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-title {
+            font-size: 14px;
             opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         /* Membership section */
@@ -397,19 +398,273 @@
             box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
         }
         
-        /* Results section */
-        .results {
-            padding: 120px 0;
+        /* Footer */
+        footer {
             background-color: #0a0a0a;
-            position: relative;
-            overflow: hidden;
+            padding: 60px 0 30px;
         }
         
-        .results::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to bottom, #121212,
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-logo span {
+            color: #e50914;
+        }
+        
+        .footer-description {
+            max-width: 400px;
+            opacity: 0.7;
+            margin-bottom: 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            text-decoration: none;
+            color: #fff;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: #e50914;
+            transform: translateY(-5px);
+        }
+        
+        .footer-links h3 {
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links ul li a {
+            text-decoration: none;
+            color: #f1f1f1;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: #e50914;
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">ELEVATE <span>YOUR</span> GAME</a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Coaching</a></li>
+                        <li><a href="#">Results</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="btn">Join Now</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Elevate<br>Your Game</h1>
+                <div class="process-phrase">
+                    <div class="process-word">Train</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-word">Apply</div>
+                    <div class="process-arrow">→</div>
+                    <div class="process-word">Profit</div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">20</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">352</div>
+                        <div class="stat-label">Winning Students</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$14M+</div>
+                        <div class="stat-label">Student Winnings</div>
+                    </div>
+                </div>
+                <a href="#" class="btn">Select Your Path</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2>Success Stories</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <div class="testimonial-quote">"I went from grinding $2 MTTs to the final table of the WSOP Main Event in just 18 months. The strategies I learned completely transformed how I approach tournament poker."</div>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/80/80" alt="Michael K." class="testimonial-img">
+                        <div class="testimonial-name">Michael K.</div>
+                        <div class="testimonial-title">WSOP Final Tablist</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="membership">
+        <div class="container">
+            <div class="membership-header">
+                <h2>Select Your Path</h2>
+            </div>
+            <div class="membership-options">
+                <div class="membership-option">
+                    <div class="membership-header-bg">
+                        <h3>Basic</h3>
+                    </div>
+                    <div class="membership-content">
+                        <div class="price">$49<span>/month</span></div>
+                        <ul class="membership-features">
+                            <li>Fundamental strategy content</li>
+                            <li>Community forum access</li>
+                            <li>1 group coaching session monthly</li>
+                            <li>Basic hand analyzer tool</li>
+                        </ul>
+                        <a href="#" class="membership-btn">Get Started</a>
+                    </div>
+                </div>
+                <div class="membership-option">
+                    <div class="membership-header-bg">
+                        <h3>Advanced</h3>
+                    </div>
+                    <div class="membership-content">
+                        <div class="price">$149<span>/month</span></div>
+                        <ul class="membership-features">
+                            <li>Weekly group coaching sessions</li>
+                            <li>Expanded strategy library access</li>
+                            <li>1 private coaching session monthly</li>
+                            <li>Advanced hand analysis</li>
+                            <li>Progress tracking tools</li>
+                        </ul>
+                        <a href="#" class="membership-btn">Level Up</a>
+                    </div>
+                </div>
+                <div class="membership-option">
+                    <div class="membership-header-bg">
+                        <h3>Elite</h3>
+                    </div>
+                    <div class="membership-content">
+                        <div class="price">$399<span>/month</span></div>
+                        <ul class="membership-features">
+                            <li>Unlimited access to all content</li>
+                            <li>Priority booking for sessions</li>
+                            <li>4 private coaching sessions monthly</li>
+                            <li>Direct coach WhatsApp access</li>
+                            <li>Personalized study plan</li>
+                            <li>Tournament preparation strategy</li>
+                        </ul>
+                        <a href="#" class="membership-btn">Join Elite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="#" class="footer-logo">ELEVATE <span>YOUR</span> GAME</a>
+                    <p class="footer-description">Professional poker coaching from industry veterans with proven results. Transform your game with our scientific approach to poker profitability.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">IG</a>
+                        <a href="#" class="social-link">TW</a>
+                        <a href="#" class="social-link">TG</a>
+                        <a href="#" class="social-link">YT</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Coaching Programs</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Membership</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Strategy Blog</a></li>
+                        <li><a href="#">Hand Analysis</a></li>
+                        <li><a href="#">Poker Tools</a></li>
+                        <li><a href="#">Free Training</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">&copy; 2025 Elevate Your Game. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
