@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Fundamentals</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #60a5fa;
+            --secondary: #fb923c;
+            --secondary-dark: #ea580c;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --success: #22c55e;
+            --warning: #eab308;
+            --red: #ef4444;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white) !important;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            border: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            box-shadow: 0 4px 12px rgba(251, 146, 60, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary) !important;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white) !important;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo img {
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background-color: var(--light);
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23cbd5e1' fill-opacity='0.3' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            max-width: 500px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .feature-description {
+            color: var(--text-light);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 75px;
+            left: 60px;
+            right: 60px;
+            height: 3px;
+            background-color: var(--primary-light);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+        
+        .step-description {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .testimonials-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .testimonial-video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            background-color: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 5rem;
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-title {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Membership Section */
+        .membership {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .membership-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .membership-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .membership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .membership-header {
+            background-color: var(--primary);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .membership-header h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .membership-price {
+            color: var(--white);
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        
+        .membership-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        
+        .membership-content {
+            padding: 30px;
+        }
+        
+        .membership-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .membership-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .membership-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .membership-features li::before {
+            content: '✓';
+            color: var(--success);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .membership-cta {
+            display: block;
+            width: 100%;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .footer-description {
+            color: var(--gray-200);
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary-light);
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--gray-200);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+        
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--gray-200);
+            font-size: 0.9rem;
+        }
+        
+        /* Card suits decorations */
+        .cards-decoration {
+            position: absolute;
+            z-index: -1;
+            font-size: 3rem;
+            color: var(--gray-100);
+            opacity: 0.5;
+        }
+        
+        .card-spade {
+            top: 10%;
+            left: 5%;
+        }
+        
+        .card-heart {
+            bottom: 15%;
+            right: 10%;
+        }
+        
+        .card-diamond {
+            top: 30%;
+            right: 5%;
+        }
+        
+        .card-club {
+            bottom: 10%;
+            left: 10%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span>♠</span>
+                    Poker Fundamentals
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Coaching</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="btn">Start Your Journey</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="cards-decoration card-spade">♠</div>
+        <div class="cards-decoration card-heart">♥</div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Learn the Game. Master the Skills. Win Consistently.</h1>
+                    <p>Our structured poker coaching program helps you develop a winning strategy through expert guidance and practical techniques that work at any level.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn">Join Our Program</a>
+                        <a href="#" class="btn btn-outline">How It Works</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/api/placeholder/500/400" alt="Poker player learning strategy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Our Coaching</h2>
+                <p>We've helped hundreds of players transform their poker skills through our proven teaching methods.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">♠</div>
+                    <h3 class="feature-title">Expert Coaches</h3>
+                    <p class="feature-description">Learn from professionals with 20+ years of experience in both live and online poker environments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♥</div>
+                    <h3 class="feature-title">Personalized Feedback</h3>
+                    <p class="feature-description">Get individualized guidance on your specific gameplay through our live video coaching sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♦</div>
+                    <h3 class="feature-title">Proven System</h3>
+                    <p class="feature-description">Follow our structured learning path that builds your skills progressively from fundamentals to advanced concepts.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♣</div>
+                    <h3 class="feature-title">Active Community</h3>
+                    <p class="feature-description">Join a supportive group of fellow students to share insights, discuss hands, and grow together.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Hand Analysis Tools</h3>
+                    <p class="feature-description">Use our specialized software to identify leaks and optimize your strategy with data-driven insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Track Progress</h3>
+                    <p class="feature-description">Monitor your improvement with detailed performance metrics and regular progress reviews.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="cards-decoration card-diamond">♦</div>
+        <div class="cards-decoration card-club">♣</div>
+        <div class="container">
+            <div class="section-header">
+                <h2>How Our Coaching Works</h2>
+                <p>Our systematic approach ensures you build a solid foundation and develop advanced skills at your own pace.</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Assessment</h3>
+                    <p class="step-description">We evaluate your current skill level and identify specific areas for improvement.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Learning Plan</h3>
+                    <p class="step-description">We create a customized curriculum based on your goals and playing style.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Live Coaching</h3>
+                    <p class="step-description">Regular one-on-one sessions with your dedicated poker coach.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Practice</h3>
+                    <p class="step-description">Apply what you've learned with structured practice assignments.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Review</h3>
+                    <p class="step-description">Analyze your results and refine your strategy with coach feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Student Spotlight</h2>
+                <p>Hear from players who have transformed their poker game through our coaching program.</p>
+            </div>
+            
+            <div class="testimonials-wrapper">
+                <div class="testimonial">
+                    <div class="testimonial-video">
+                        ▶
+                    </div>
+                    <p class="testimonial-content">"I was a break-even player for years before joining Poker Fundamentals. Within 3 months, I moved up two stakes and have consistently profitable sessions. The structured approach made all the difference."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">
+                            <img src="/api/placeholder/60/60" alt="Sarah J.">
+                        </div>
+                        <div>
+                            <div class="testimonial-name">Sarah J.</div>
+                            <div class="testimonial-title">Cash Game Player</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="membership">
+        <div class="container">
+            <div class="section-header">
+                <h2>Start Your Journey</h2>
+                <p>Choose the membership plan that fits your poker goals and commitment level.</p>
+            </div>
+            
+            <div class="membership-options">
+                <div class="membership-card">
+                    <div class="membership-header">
+                        <h3>Basic</h3>
+                        <div class="membership-price">$49<span>/month</span></div>
+                    </div>
+                    <div class="membership-content">
+                        <ul class="membership-features">
+                            <li>Fundamental strategy content</li>
+                            <li>Community forum access</li>
+                            <li>1 group coaching session monthly</li>
+                            <li>Basic hand analyzer tool</li>
+                            <li>Email support</li>
+                        </ul>
+                        <a href="#" class="btn membership-cta">Choose Basic</a>
+                    </div>
+                </div>
+                <div class="membership-card">
+                    <div class="membership-header" style="background-color: var(--secondary);">
+                        <h3>Advanced</h3>
+                        <div class="membership-price">$149<span>/month</span></div>
+                    </div>
+                    <div class="membership-content">
+                        <ul class="membership-features">
+                            <li>All Basic features</li>
+                            <li>Weekly group coaching sessions</li>
+                            <li>1 private coaching session monthly</li>
+                            <li>Advanced hand analysis</li>
+                            <li>Custom strategy development</li>
+                            <li>Progress tracking dashboard</li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary membership-cta">Choose Advanced</a>
+                    </div>
+                </div>
+                <div class="membership-card">
+                    <div class="membership-header">
+                        <h3>Elite</h3>
+                        <div class="membership-price">$399<span>/month</span></div>
+                    </div>
+                    <div class="membership-content">
+                        <ul class="membership-features">
+                            <li>All Advanced features</li>
+                            <li>4 private coaching sessions monthly</li>
+                            <li>Direct coach access via messaging</li>
+                            <li>Personalized study plan</li>
+                            <li>VIP community access</li>
+                            <li>Tournament preparation</li>
+                            <li>Lifetime strategy updates</li>
+                        </ul>
+                        <a href="#" class="btn membership-cta">Choose Elite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Poker Game?</h2>
+            <p>Join hundreds of successful students who have taken their skills to the next level through our structured coaching program.</p>
+            <a href="#" class="btn btn-secondary">Start Your Journey Today</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo">Poker Fundamentals</a>
+                    <p class="footer-description">We help poker players of all levels develop winning strategies through expert coaching and proven learning techniques.</p>
+                    <div class="footer-social">
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">TG</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Coaching</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Poker Tools</a></li>
+                        <li><a href="#">Free Training</a></li>
+                        <li><a href="#">Hand Analysis</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email Us</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Join Our Team</a></li>
+                        <li><a href="#">Affiliates</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Poker Fundamentals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
