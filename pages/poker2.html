@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEVATE YOUR GAME</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #f1f1f1;
+            background-color: #121212;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #e50914;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #e50914;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #e50914;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #ff0a16;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1400/800') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, #121212, transparent);
+            z-index: 1;
+        }
+        
+        .cards-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .card {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transform: rotate(var(--rotation)) scale(var(--scale));
+            opacity: var(--opacity);
+            animation: floatCard 20s infinite linear;
+            animation-delay: var(--delay);
+        }
+        
+        @keyframes floatCard {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(var(--rotation)) scale(var(--scale));
+                opacity: var(--opacity);
+            }
+            100% {
+                transform: translateY(-100vh) translateX(var(--trans-x)) rotate(var(--rotation)) scale(var(--scale));
+                opacity: 0;
+            }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 84px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 0 20px;
+            line-height: 1;
+            background: linear-gradient(45deg, #e50914, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 30px rgba(229, 9, 20, 0.3);
+        }
+        
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #e50914;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+        
+        /* Process section */
+        .process {
+            padding: 120px 0;
+            position: relative;
+            background-color: #0a0a0a;
+        }
+        
+        .process-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .process-header h2 {
+            font-size: 48px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #e50914, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 60px;
+            right: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #e50914, #ff6b6b);
+            z-index: 0;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #e50914, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        }
+        
+        .step h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .step p {
+            font-size: 16px;
+            max-width: 250px;
+            opacity: 0.7;
+        }
+        
+        /* Membership section */
+        .membership {
+            padding: 120px 0;
+            background-color: #121212;
+        }
+        
+        .membership-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .membership-header h2 {
+            font-size: 48px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #e50914, #ff6b6b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .membership-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .membership-option {
+            flex: 1;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .membership-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(229, 9, 20, 0.2);
+        }
+        
+        .membership-header-bg {
+            height: 120px;
+            background: linear-gradient(45deg, #e50914, #ff6b6b);
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 20px;
+        }
+        
+        .membership-header-bg h3 {
+            font-size: 28px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        
+        .membership-content {
+            padding: 30px;
+        }
+        
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+        
+        .membership-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+        
+        .membership-features li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .membership-features li::before {
+            content: '✓';
+            display: inline-block;
+            margin-right: 10px;
+            color: #e50914;
+            font-weight: bold;
+        }
+        
+        .membership-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            background-color: #e50914;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .membership-btn:hover {
+            background-color: #ff0a16;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+        }
+        
+        /* Results section */
+        .results {
+            padding: 120px 0;
+            background-color: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .results::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, #121212,
