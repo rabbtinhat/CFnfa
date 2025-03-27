@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE INNER CIRCLE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #e0e0e0;
+            background-color: #121212;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5cc3e;
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: background-color 0.3s;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        header.scrolled {
+            background-color: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #d4af37;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 40px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #d4af37;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #121212;
+            padding: 14px 30px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #f5cc3e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.8)),
+                        url('/api/placeholder/1920/1080') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/400/400') repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, #121212, transparent);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .hero-subheading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        
+        .hero-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        
+        .hero-description {
+            font-size: 18px;
+            font-weight: 300;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        /* Ticker for recent wins */
+        .ticker-container {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            padding: 15px 0;
+            background-color: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+        
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 60s linear infinite;
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            padding: 0 30px;
+            color: #d4af37;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .section-subheading {
+            font-size: 18px;
+            font-weight: 300;
+            color: #d4af37;
+            margin-bottom: 60px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            letter-spacing: 1px;
+        }
+        
+        /* Approach Section */
+        .approach {
+            background-color: #171717;
+        }
+        
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .approach-item {
+            text-align: center;
+            padding: 30px;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        
+        .approach-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #d4af37;
+        }
+        
+        .approach-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #d4af37;
+            color: #121212;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 36px;
+            font-weight: 700;
+        }
+        
+        .approach-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        .approach-description {
+            color: #a0a0a0;
+            font-size: 16px;
+            font-weight: 300;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #121212;
+            position: relative;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/400/400') repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .testimonials-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+        
+        .testimonial {
+            background-color: #1e1e1e;
+            padding: 40px;
+            border: 1px solid #333;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #d4af37;
+        }
+        
+        .testimonial::before {
+            content: """;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 120px;
+            color: rgba(212, 175, 55, 0.1);
+            line-height: 0.8;
+        }
+        
+        .testimonial-content {
+            font-size: 18px;
+            font-weight: 300;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 2px solid #d4af37;
+        }
+        
+        .testimonial-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        
+        .testimonial-position {
+            font-size: 14px;
+            font-weight: 400;
+            color: #d4af37;
+        }
+        
+        /* Membership Section */
+        .membership {
+            background-color: #171717;
+            position: relative;
+        }
+        
+        .membership::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/400/400') repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .membership-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        .membership-item {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .membership-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: #d4af37;
+        }
+        
+        .membership-header {
+            background-color: #d4af37;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .membership-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #121212;
+            margin-bottom: 10px;
+        }
+        
+        .membership-price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #121212;
+        }
+        
+        .membership-price span {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .membership-content {
+            padding: 40px;
+        }
+        
+        .membership-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+        
+        .membership-features li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: #e0e0e0;
+        }
+        
+        .membership-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #d4af37;
+            font-weight: 700;
+        }
+        
+        /* Application Form Section */
+        .application {
+            background-color: #121212;
+            position: relative;
+        }
+        
+        .application::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/400/400') repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .application-form {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #1e1e1e;
+            padding: 60px;
+            border: 1px solid #333;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background-color: #121212;
+            border: 1px solid #333;
+            color: #e0e0e0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        
+        .form-input::placeholder {
+            color: #666;
+        }
+        
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 18px;
+            background-color: #d4af37;
+            color: #121212;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .form-submit:hover {
+            background-color: #f5cc3e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0c0c0c;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/400/400') repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #d4af37;
+            text-decoration: none;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-description {
+            color: #a0a0a0;
+            font-size: 16px;
+            margin-bottom: 30px;
+            max-width: 400px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #1e1e1e;
+            color: #d4af37;
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: #d4af37;
+            color: #121212;
+            transform: translateY(-3px);
+        }
+        
+        .footer-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+        
+        .footer-links a:hover {
+            color: #d4af37;
+        }
+        
+        .footer-bottom {
+            position: relative;
+            z-index: 1;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">THE INNER CIRCLE</a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Approach</a></li>
+                        <li><a href="#">Results</a></li>
+                        <li><a href="#">Membership</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="btn">Apply Now</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subheading">By Invitation Only</div>
+                <h1 class="hero-heading">Exceptional Poker Coaching For Exceptional Players</h1>
+                <p class="hero-description">The Inner Circle is an exclusive poker coaching community reserved for serious players committed to mastering the game at the highest level. Our members enjoy unprecedented success across all formats and stakes.</p>
+                <a href="#" class="btn">Apply For Membership</a>
+            </div>
+        </div>
+        <div class="ticker-container">
+            <div class="ticker">
+                <div class="ticker-item">James M. wins $258,000 in WSOP Main Event</div>
+                <div class="ticker-item">Sarah K. increases cash game win rate by 7BB/100</div>
+                <div class="ticker-item">Michael T. takes down Sunday Million for $180,000</div>
+                <div class="ticker-item">Alex R. finalizes 3-month coaching program with 243% ROI</div>
+                <div class="ticker-item">Jessica W. moves up to high stakes after 6 months with us</div>
+                <div class="ticker-item">James M. wins $258,000 in WSOP Main Event</div>
+                <div class="ticker-item">Sarah K. increases cash game win rate by 7BB/100</div>
+                <div class="ticker-item">Michael T. takes down Sunday Million for $180,000</div>
+                <div class="ticker-item">Alex R. finalizes 3-month coaching program with 243% ROI</div>
+                <div class="ticker-item">Jessica W. moves up to high stakes after 6 months with us</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section approach">
+        <div class="container">
+            <h2 class="section-heading">Our Approach</h2>
+            <p class="section-subheading">We combine cutting-edge strategy, personalized coaching, and exclusive resources to transform talented players into elite performers.</p>
+            
+            <div class="approach-grid">
+                <div class="approach-item">
+                    <div class="approach-icon">1</div>
+                    <h3 class="approach-title">Elite Strategy</h3>
+                    <p class="approach-description">Access proprietary strategies developed through thousands of hours of high-stakes play and sophisticated analytical methods.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-icon">2</div>
+                    <h3 class="approach-title">Personalized Coaching</h3>
+                    <p class="approach-description">Work directly with world-class players who tailor their guidance to your specific playing style and career objectives.</p>
+                </div>
+                <div class="approach-item">
+                    <div class="approach-icon">3</div>
+                    <h3 class="approach-title">Exclusive Network</h3>
+                    <p class="approach-description">Join a private community of successful players who share insights, opportunities, and support each other's growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-heading">Member Success</h2>
+            <p class="section-subheading">Our selective approach ensures that every member achieves exceptional results with our methodology.</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-content">The personalized coaching I received transformed my tournament game completely. Within six months, I went from struggling mid-stakes to making three final tables in major events, culminating in my first six-figure score.</p>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/60/60" alt="Michael K." class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">Michael K.</div>
+                            <div class="testimonial-position">Tournament Professional</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-content">The depth of analysis and strategic insights provided by my coach identified multiple leaks in my high-stakes cash game approach. After implementing the recommended adjustments, my win rate nearly doubled.</p>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/60/60" alt="Alexandra J." class="testimonial-avatar">
+                        <div>
+                            <div class="testimonial-name">Alexandra J.</div>
+                            <div class="testimonial-position">High-Stakes Cash Player</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section membership">
+        <div class="container">
+            <h2 class="section-heading">Membership Levels</h2>
+            <p class="section-subheading">Choose the tier that aligns with your poker ambitions and commitment level.</p>
+            
+            <div class="membership-grid">
+                <div class="membership-item">
+                    <div class="membership-header">
+                        <h3 class="membership-title">Foundation</h3>
+                        <div class="membership-price">$499<span>/month</span></div>
+                    </div>
+                    <div class="membership-content">
+                        <ul class="membership-features">
+                            <li>Access to fundamental strategy resources</li>
+                            <li>Monthly group coaching sessions</li>
+                            <li>Basic hand analysis (5 hands/week)</li>
+                            <li>Inner Circle community access</li>
+                            <li>Monthly progress assessment</li>
+                            <li>Database of annotated hand histories</li>
+                        </ul>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                <div class="membership-item">
+                    <div class="membership-header">
+                        <h3 class="membership-title">Excellence</h3>
+                        <div class="membership-price">$1,499<span>/month</span></div>
+                    </div>
+                    <div class="membership-content">
+                        <ul class="membership-features">
+                            <li>Everything in Foundation tier</li>
+                            <li>Two private coaching sessions monthly</li>
+                            <li>Advanced hand analysis (unlimited)</li>
+                            <li>Custom strategy development</li>
+                            <li>Tournament preparation sessions</li>
+                            <li>Priority scheduling for coaching</li>
+                            <li>Elite member discussion group</li>
+                        </ul>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+                <div class="membership-item">
+                    <div class="membership-header">
+                        <h3 class="membership-title">Mastery</h3>
+                        <div class="membership-price">$3,999<span>/month</span></div>
+                    </div>
+                    <div class="membership-content">
+                        <ul class="membership-features">
+                            <li>Everything in Excellence tier</li>
+                            <li>Unlimited private coaching</li>
+                            <li>24/7 direct coach access</li>
+                            <li>Customized study and career plan</li>
+                            <li>Live session reviews</li>
+                            <li>High-stakes game selection advice</li>
+                            <li>Annual retreat with coaches</li>
+                            <li>Staking opportunities</li>
+                        </ul>
+                        <a href="#" class="btn">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section application">
+        <div class="container">
+            <h2 class="section-heading">Apply For Membership</h2>
+            <p class="section-subheading">Due to our high-touch coaching approach, we maintain limited membership. Please complete the application below to be considered.</p>
+            
+            <form class="application-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Full Name</label>
+                    <input type="text" id="name" class="form-input" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="Your email address">
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="Your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="experience" class="form-label">Poker Experience</label>
+                    <textarea id="experience" class="form-input" placeholder="Please describe your poker background, current stakes, and notable achievements"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="goals" class="form-label">Poker Goals</label>
+                    <textarea id="goals" class="form-input" placeholder="What are you looking to achieve with our coaching?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="membership" class="form-label">Preferred Membership Level</label>
+                    <select id="membership" class="form-input">
+                        <option value="" disabled selected>Select membership level</option>
+                        <option value="foundation">Foundation</option>
+                        <option value="excellence">Excellence</option>
+                        <option value="mastery">Mastery</option>
+                    </select>
+                </div>
+                <button type="submit" class="form-submit">Submit Application</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="#" class="footer-logo">THE INNER CIRCLE</a>
+                    <p class="footer-description">Exclusive poker coaching for serious players committed to excellence. Our selective membership ensures the highest quality experience and results for every member.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">IG</a>
+                        <a href="#" class="social-icon">TW</a>
+                        <a href="#" class="social-icon">TG</a>
+                        <a href="#" class="social-icon">YT</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Explore</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Our Approach</a></li>
+                        <li><a href="#">Member Success</a></li>
+                        <li><a href="#">Membership Levels</a></li>
+                        <li><a href="#">Application</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Elite Strategy Library</a></li>
+                        <li><a href="#">Hand Analysis Archive</a></li>
+                        <li><a href="#">Coach Profiles</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Inner Circle. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Duplicate ticker content for seamless animation
+        const ticker = document.querySelector('.ticker');
+        ticker.innerHTML += ticker.innerHTML;
+    </script>
+</body>
+</html>
