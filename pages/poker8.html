@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTT Poker Tournament Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .profit {
+            color: green;
+            font-weight: bold;
+        }
+        .loss {
+            color: red;
+            font-weight: bold;
+        }
+        .summary {
+            background-color: #eaf7ea;
+            font-weight: bold;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 2px solid white;
+        }
+        .tab-content {
+            display: none;
+            border: 1px solid #ddd;
+            padding: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .filters {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        select, input {
+            padding: 5px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MTT Poker Tournament Tracking System</h1>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="openTab(event, 'tournaments')">Tournaments</div>
+        <div class="tab" onclick="openTab(event, 'backers')">Backers & Action</div>
+        <div class="tab" onclick="openTab(event, 'expenses')">Expenses</div>
+        <div class="tab" onclick="openTab(event, 'reports')">Reports</div>
+    </div>
+    
+    <div id="tournaments" class="tab-content active">
+        <h2>Tournament Records</h2>
+        <div class="filters">
+            <label>Filter by Date Range:</label>
+            <input type="date" id="startDate"> to <input type="date" id="endDate">
+            <label>Filter by Status:</label>
+            <select>
+                <option value="all">All Tournaments</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="completed">Completed</option>
+            </select>
+            <button>Apply Filters</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Tournament Name</th>
+                    <th>Location</th>
+                    <th>Buy-in</th>
+                    <th>Fee</th>
+                    <th>Rebuys/Add-ons</th>
+                    <th>Total Investment</th>
+                    <th>Result</th>
+                    <th>Payout</th>
+                    <th>Profit/Loss</th>
+                    <th>ROI</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>T001</td>
+                    <td>2025-03-01</td>
+                    <td>WSOP Circuit Main Event</td>
+                    <td>Las Vegas, NV</td>
+                    <td>$1,700</td>
+                    <td>$170</td>
+                    <td>$0</td>
+                    <td>$1,870</td>
+                    <td>14th</td>
+                    <td>$5,430</td>
+                    <td class="profit">$3,560</td>
+                    <td>190.4%</td>
+                    <td>Played extremely tight early, opened up on bubble</td>
+                </tr>
+                <tr>
+                    <td>T002</td>
+                    <td>2025-03-05</td>
+                    <td>WPT DeepStacks</td>
+                    <td>Los Angeles, CA</td>
+                    <td>$1,100</td>
+                    <td>$100</td>
+                    <td>$1,100</td>
+                    <td>$2,300</td>
+                    <td>87th</td>
+                    <td>$0</td>
+                    <td class="loss">-$2,300</td>
+                    <td>-100%</td>
+                    <td>Lost AK vs 77 all-in preflop, rebought and busted KK vs AA</td>
+                </tr>
+                <tr>
+                    <td>T003</td>
+                    <td>2025-03-10</td>
+                    <td>Sunday Million</td>
+                    <td>Online (PokerStars)</td>
+                    <td>$200</td>
+                    <td>$15</td>
+                    <td>$0</td>
+                    <td>$215</td>
+                    <td>5th</td>
+                    <td>$12,500</td>
+                    <td class="profit">$12,285</td>
+                    <td>5713.95%</td>
+                    <td>Ran extremely hot early, built big stack</td>
+                </tr>
+                <tr>
+                    <td>T004</td>
+                    <td>2025-03-15</td>
+                    <td>WSOP Daily DeepStack</td>
+                    <td>Las Vegas, NV</td>
+                    <td>$250</td>
+                    <td>$40</td>
+                    <td>$250</td>
+                    <td>$540</td>
+                    <td>23rd</td>
+                    <td>$840</td>
+                    <td class="profit">$300</td>
+                    <td>55.56%</td>
+                    <td>Rebought after level 4, steady climb</td>
+                </tr>
+                <tr>
+                    <td>T005</td>
+                    <td>2025-03-20</td>
+                    <td>EPT Barcelona Main Event</td>
+                    <td>Barcelona, Spain</td>
+                    <td>€5,000</td>
+                    <td>€300</td>
+                    <td>€0</td>
+                    <td>€5,300</td>
+                    <td>In Progress</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Day 1A completed with above average stack</td>
+                </tr>
+                <tr class="summary">
+                    <td colspan="7">Total (Completed Tournaments)</td>
+                    <td>$4,925</td>
+                    <td></td>
+                    <td>$18,770</td>
+                    <td class="profit">$13,845</td>
+                    <td>281.12%</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="backers" class="tab-content">
+        <h2>Backers & Action Sold</h2>
+        <div class="filters">
+            <label>Filter by Backer:</label>
+            <select>
+                <option value="all">All Backers</option>
+                <option value="john">John D.</option>
+                <option value="sarah">Sarah M.</option>
+                <option value="mike">Mike P.</option>
+                <option value="tina">Tina K.</option>
+            </select>
+            <button>Apply Filter</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tournament ID</th>
+                    <th>Tournament Name</th>
+                    <th>Date</th>
+                    <th>Backer Name</th>
+                    <th>% Bought</th>
+                    <th>Amount Invested</th>
+                    <th>Markup</th>
+                    <th>Total Paid</th>
+                    <th>Payout to Backer</th>
+                    <th>Backer P/L</th>
+                    <th>Backer ROI</th>
+                    <th>Payment Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>T001</td>
+                    <td>WSOP Circuit Main Event</td>
+                    <td>2025-03-01</td>
+                    <td>John D.</td>
+                    <td>30%</td>
+                    <td>$561</td>
+                    <td>1.1</td>
+                    <td>$617.10</td>
+                    <td>$1,629</td>
+                    <td class="profit">$1,011.90</td>
+                    <td>164.0%</td>
+                    <td>Paid</td>
+                </tr>
+                <tr>
+                    <td>T001</td>
+                    <td>WSOP Circuit Main Event</td>
+                    <td>2025-03-01</td>
+                    <td>Sarah M.</td>
+                    <td>20%</td>
+                    <td>$374</td>
+                    <td>1.1</td>
+                    <td>$411.40</td>
+                    <td>$1,086</td>
+                    <td class="profit">$674.60</td>
+                    <td>164.0%</td>
+                    <td>Paid</td>
+                </tr>
+                <tr>
+                    <td>T002</td>
+                    <td>WPT DeepStacks</td>
+                    <td>2025-03-05</td>
+                    <td>Mike P.</td>
+                    <td>40%</td>
+                    <td>$920</td>
+                    <td>1.0</td>
+                    <td>$920</td>
+                    <td>$0</td>
+                    <td class="loss">-$920</td>
+                    <td>-100%</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>T003</td>
+                    <td>Sunday Million</td>
+                    <td>2025-03-10</td>
+                    <td>John D.</td>
+                    <td>25%</td>
+                    <td>$53.75</td>
+                    <td>1.2</td>
+                    <td>$64.50</td>
+                    <td>$3,125</td>
+                    <td class="profit">$3,060.50</td>
+                    <td>4746.5%</td>
+                    <td>Paid</td>
+                </tr>
+                <tr>
+                    <td>T003</td>
+                    <td>Sunday Million</td>
+                    <td>2025-03-10</td>
+                    <td>Tina K.</td>
+                    <td>25%</td>
+                    <td>$53.75</td>
+                    <td>1.2</td>
+                    <td>$64.50</td>
+                    <td>$3,125</td>
+                    <td class="profit">$3,060.50</td>
+                    <td>4746.5%</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>T004</td>
+                    <td>WSOP Daily DeepStack</td>
+                    <td>2025-03-15</td>
+                    <td>Sarah M.</td>
+                    <td>50%</td>
+                    <td>$270</td>
+                    <td>1.0</td>
+                    <td>$270</td>
+                    <td>$420</td>
+                    <td class="profit">$150</td>
+                    <td>55.56%</td>
+                    <td>Paid</td>
+                </tr>
+                <tr>
+                    <td>T005</td>
+                    <td>EPT Barcelona Main Event</td>
+                    <td>2025-03-20</td>
+                    <td>John D.</td>
+                    <td>30%</td>
+                    <td>€1,590</td>
+                    <td>1.1</td>
+                    <td>€1,749</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>T005</td>
+                    <td>EPT Barcelona Main Event</td>
+                    <td>2025-03-20</td>
+                    <td>Mike P.</td>
+                    <td>20%</td>
+                    <td>€1,060</td>
+                    <td>1.1</td>
+                    <td>€1,166</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Pending</td>
+                </tr>
+                <tr class="summary">
+                    <td colspan="4">Total (All Backers - Completed Only)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>$2,347.50</td>
+                    <td>$9,385</td>
+                    <td class="profit">$7,037.50</td>
+                    <td>299.79%</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Backer Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Backer Name</th>
+                    <th>Total Invested</th>
+                    <th>Total Return</th>
+                    <th>Net P/L</th>
+                    <th>ROI</th>
+                    <th>Number of Tournaments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John D.</td>
+                    <td>$681.60</td>
+                    <td>$4,754</td>
+                    <td class="profit">$4,072.40</td>
+                    <td>597.47%</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Sarah M.</td>
+                    <td>$681.40</td>
+                    <td>$1,506</td>
+                    <td class="profit">$824.60</td>
+                    <td>121.01%</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Mike P.</td>
+                    <td>$920</td>
+                    <td>$0</td>
+                    <td class="loss">-$920</td>
+                    <td>-100%</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Tina K.</td>
+                    <td>$64.50</td>
+                    <td>$3,125</td>
+                    <td class="profit">$3,060.50</td>
+                    <td>4746.5%</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="expenses" class="tab-content">
+        <h2>Expenses Tracking</h2>
+        <div class="filters">
+            <label>Filter by Date Range:</label>
+            <input type="date" id="expStartDate"> to <input type="date" id="expEndDate">
+            <label>Filter by Category:</label>
+            <select>
+                <option value="all">All Categories</option>
+                <option value="travel">Travel</option>
+                <option value="accommodation">Accommodation</option>
+                <option value="food">Food</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="misc">Miscellaneous</option>
+            </select>
+            <button>Apply Filters</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Tournament ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Tax Deductible</th>
+                    <th>Receipt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025-02-28</td>
+                    <td>T001</td>
+                    <td>Travel</td>
+                    <td>Flight to Las Vegas (roundtrip)</td>
+                    <td>$350</td>
+                    <td>Yes</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-02-28 - 2025-03-03</td>
+                    <td>T001</td>
+                    <td>Accommodation</td>
+                    <td>Rio Hotel & Casino (4 nights)</td>
+                    <td>$620</td>
+                    <td>Yes</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-01 - 2025-03-03</td>
+                    <td>T001</td>
+                    <td>Food</td>
+                    <td>Meals during tournament</td>
+                    <td>$240</td>
+                    <td>Partial</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-02</td>
+                    <td>T001</td>
+                    <td>Entertainment</td>
+                    <td>Show tickets (stress relief)</td>
+                    <td>$180</td>
+                    <td>No</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-04</td>
+                    <td>T002</td>
+                    <td>Travel</td>
+                    <td>Gas to LA</td>
+                    <td>$65</td>
+                    <td>Yes</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-04 - 2025-03-06</td>
+                    <td>T002</td>
+                    <td>Accommodation</td>
+                    <td>Commerce Casino Hotel (2 nights)</td>
+                    <td>$390</td>
+                    <td>Yes</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-05 - 2025-03-06</td>
+                    <td>T002</td>
+                    <td>Food</td>
+                    <td>Meals during tournament</td>
+                    <td>$120</td>
+                    <td>Partial</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-18</td>
+                    <td>T005</td>
+                    <td>Travel</td>
+                    <td>Flight to Barcelona (roundtrip)</td>
+                    <td>€850</td>
+                    <td>Yes</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-19 - 2025-03-24</td>
+                    <td>T005</td>
+                    <td>Accommodation</td>
+                    <td>Hotel Arts Barcelona (5 nights)</td>
+                    <td>€1,250</td>
+                    <td>Yes</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-19 - 2025-03-24</td>
+                    <td>T005</td>
+                    <td>Food</td>
+                    <td>Meals during tournament</td>
+                    <td>€420</td>
+                    <td>Partial</td>
+                    <td>✓</td>
+                </tr>
+                <tr>
+                    <td>2025-03-21</td>
+                    <td>T005</td>
+                    <td>Entertainment</td>
+                    <td>Sagrada Familia Tour</td>
+                    <td>€50</td>
+                    <td>No</td>
+                    <td>✓</td>
+                </tr>
+                <tr class="summary">
+                    <td colspan="4">Total USD Expenses</td>
+                    <td>$1,965</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="summary">
+                    <td colspan="4">Total EUR Expenses</td>
+                    <td>€2,570</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Expense Summary by Category</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>USD Amount</th>
+                    <th>EUR Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Travel</td>
+                    <td>$415</td>
+                    <td>€850</td>
+                </tr>
+                <tr>
+                    <td>Accommodation</td>
+                    <td>$1,010</td>
+                    <td>€1,250</td>
+                </tr>
+                <tr>
+                    <td>Food</td>
+                    <td>$360</td>
+                    <td>€420</td>
+                </tr>
+                <tr>
+                    <td>Entertainment</td>
+                    <td>$180</td>
+                    <td>€50</td>
+                </tr>
+                <tr>
+                    <td>Miscellaneous</td>
+                    <td>$0</td>
+                    <td>€0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="reports" class="tab-content">
+        <h2>Performance Reports</h2>
+        
+        <h3>Overall Performance Summary</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total Tournaments Played</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Total Buy-ins (Including Rebuys)</td>
+                    <td>$4,925</td>
+                </tr>
+                <tr>
+                    <td>Total Cashes</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Cash Rate</td>
+                    <td>75%</td>
+                </tr>
+                <tr>
+                    <td>Total Winnings</td>
+                    <td>$18,770</td>
+                </tr>
+                <tr>
+                    <td>Net Profit</td>
+                    <td class="profit">$13,845</td>
+                </tr>
+                <tr>
+                    <td>ROI</td>
+                    <td>281.12%</td>
+                </tr>
+                <tr>
+                    <td>Net Profit (After Expenses)</td>
+                    <td class="profit">$11,880</td>
+                </tr>
+                <tr>
+                    <td>ROI (After Expenses)</td>
+                    <td>241.22%</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Monthly Performance</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Tournaments</th>
+                    <th>Buy-ins</th>
+                    <th>Cashes</th>
+                    <th>Cash Rate</th>
+                    <th>Winnings</th>
+                    <th>Net Profit</th>
+                    <th>ROI</th>
+                    <th>Expenses</th>
+                    <th>Net After Expenses</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>January 2025</td>
+                    <td>6</td>
+                    <td>$8,820</td>
+                    <td>2</td>
+                    <td>33.3%</td>
+                    <td>$15,400</td>
+                    <td class="profit">$6,580</td>
+                    <td>74.6%</td>
+                    <td>$2,350</td>
+                    <td class="profit">$4,230</td>
+                </tr>
+                <tr>
+                    <td>February 2025</td>
+                    <td>5</td>
+                    <td>$6,750</td>
+                    <td>1</td>
+                    <td>20.0%</td>
+                    <td>$7,890</td>
+                    <td class="profit">$1,140</td>
+                    <td>16.9%</td>
+                    <td>$1,890</td>
+                    <td class="loss">-$750</td>
+                </tr>
+                <tr>
+                    <td>March 2025</td>
+                    <td>4</td>
+                    <td>$4,925</td>
+                    <td>3</td>
+                    <td>75.0%</td>
+                    <td>$18,770</td>
+                    <td class="profit">$13,845</td>
+                    <td>281.1%</td>
+                    <td>$1,965</td>
+                    <td class="profit">$11,880</td>
+                </tr>
+                <tr class="summary">
+                    <td>YTD 2025</td>
+                    <td>15</td>
+                    <td>$20,495</td>
+                    <td>6</td>
+                    <td>40.0%</td>
+                    <td>$42,060</td>
+                    <td class="profit">$21,565</td>
+                    <td>105.2%</td>
+                    <td>$6,205</td>
+                    <td class="profit">$15,360</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Backer Performance Reports</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Backer</th>
+                    <th>YTD Investment</th>
+                    <th>YTD Return</th>
+                    <th>YTD Net P/L</th>
+                    <th>YTD ROI</th>
+                    <th>Lifetime Investment</th>
+                    <th>Lifetime Return</th>
+                    <th>Lifetime P/L</th>
+                    <th>Lifetime ROI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John D.</td>
+                    <td>$2,281.60</td>
+                    <td>$9,254</td>
+                    <td class="profit">$6,972.40</td>
+                    <td>305.6%</td>
+                    <td>$15,482.60</td>
+                    <td>$24,654</td>
+                    <td class="profit">$9,171.40</td>
+                    <td>59.2%</td>
+                </tr>
+                <tr>
+                    <td>Sarah M.</td>
+                    <td>$1,581.40</td>
+                    <td>$3,006</td>
+                    <td class="profit">$1,424.60</td>
+                    <td>90.1%</td>
+                    <td>$8,981.40</td>
+                    <td>$11,316</td>
+                    <td class="profit">$2,334.60</td>
+                    <td>26.0%</td>
+                </tr>
+                <tr>
+                    <td>Mike P.</td>
+                    <td>$2,420</td>
+                    <td>$1,240</td>
+                    <td class="loss">-$1,180</td>
+                    <td>-48.8%</td>
+                    <td>$10,820</td>
+                    <td>$12,840</td>
+                    <td class="profit">$2,020</td>
+                    <td>18.7%</td>
+                </tr>
+                <tr>
+                    <td>Tina K.</td>
+                    <td>$564.50</td>
+                    <td>$4,125</td>
+                    <td class="profit">$3,560.50</td>
+                    <td>630.7%</td>
+                    <td>$3,564.50</td>
+                    <td>$9,825</td>
+                    <td class="profit">$6,260.50</td>
+                    <td>175.6%</td>
+                    </tr>
+            </tbody>
+        </table>
+        
+        <h3>Action Package Offerings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Package ID</th>
+                    <th>Date Offered</th>
+                    <th>Description</th>
+                    <th>Total Value</th>
+                    <th>Markup</th>
+                    <th>% Available</th>
+                    <th>% Sold</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>P001</td>
+                    <td>2025-02-15</td>
+                    <td>WSOP Circuit Las Vegas Package</td>
+                    <td>$5,000</td>
+                    <td>1.1</td>
+                    <td>60%</td>
+                    <td>50%</td>
+                    <td>Complete</td>
+                </tr>
+                <tr>
+                    <td>P002</td>
+                    <td>2025-03-01</td>
+                    <td>LA Poker Classic Package</td>
+                    <td>$8,000</td>
+                    <td>1.0</td>
+                    <td>70%</td>
+                    <td>40%</td>
+                    <td>Complete</td>
+                </tr>
+                <tr>
+                    <td>P003</td>
+                    <td>2025-03-10</td>
+                    <td>European Series Package</td>
+                    <td>€15,000</td>
+                    <td>1.1</td>
+                    <td>80%</td>
+                    <td>50%</td>
+                    <td>In Progress</td>
+                </tr>
+                <tr>
+                    <td>P004</td>
+                    <td>2025-04-01</td>
+                    <td>WSOP Summer Package</td>
+                    <td>$50,000</td>
+                    <td>1.2</td>
+                    <td>80%</td>
+                    <td>35%</td>
+                    <td>Collecting</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+    
+    <h2>Instructions for Using This Spreadsheet</h2>
+    <div style="padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+        <p><strong>Tournaments Tab:</strong> Record all tournaments played. Enter buy-in, fees, rebuys separately. Profit/Loss and ROI are calculated automatically.</p>
+        <p><strong>Backers & Action Tab:</strong> Track all action sold to backers. Manage markup rates, payments, and calculate individual backer performance.</p>
+        <p><strong>Expenses Tab:</strong> Track all poker-related expenses by category. Flag tax-deductible items for easy reference during tax season.</p>
+        <p><strong>Reports Tab:</strong> View performance summaries, ROI by month, and backer-specific reports. See packages offered and their status.</p>
+        <p><strong>Tips for Maintaining:</strong></p>
+        <ul>
+            <li>Update the spreadsheet promptly after each tournament</li>
+            <li>Keep digital copies of all receipts linked to expense entries</li>
+            <li>Send monthly reports to backers with tournament results</li>
+            <li>Review performance quarterly to identify profitable tournament types/venues</li>
+            <li>Export data regularly for backup and tax preparation</li>
+        </ul>
+    </div>
+    
+    <h2>Notes for Distribution to Backers</h2>
+    <div style="padding: 15px; background-color: #e8f4f8; border-radius: 5px; margin-top: 20px;">
+        <p>When sharing reports with backers, consider the following:</p>
+        <ol>
+            <li><strong>Regular Updates:</strong> Send monthly statements showing their investment performance</li>
+            <li><strong>Transparency:</strong> Include all relevant tournament details, including fees and rebuys</li>
+            <li><strong>Payment Schedule:</strong> Clearly communicate when payouts will be processed</li>
+            <li><strong>Tax Documentation:</strong> Provide necessary tax forms at year-end for significant winnings</li>
+            <li><strong>Future Opportunities:</strong> Include information about upcoming action packages available</li>
+        </ol>
+        <p><strong>Sample Backer Report Email:</strong></p>
+        <pre style="background-color: #f9f9f9; padding: 10px; border-radius: 5px;">
+Dear [Backer Name],
+
+I hope this email finds you well. I'm writing to provide your monthly poker backing report for March 2025.
+
+This month, you had action in the following tournaments:
+- 30% of WSOP Circuit Main Event ($617.10 investment)
+- 25% of Sunday Million ($64.50 investment)
+
+Results:
+- WSOP Circuit: 14th place finish, your share of winnings: $1,629
+- Sunday Million: 5th place finish, your share of winnings: $3,125
+
+Total Investment: $681.60
+Total Return: $4,754
+Net Profit: +$4,072.40
+Monthly ROI: 597.47%
+
+Your payment of $4,754 has been sent via [Payment Method] on [Date].
+
+I'll be playing the EPT Barcelona Main Event next week, and I have several WSOP events planned for the summer. If you're interested in investing in my upcoming WSOP Summer Package (markup 1.2), please let me know as I have limited availability.
+
+As always, thank you for your support and backing. I'm committed to providing the best possible return on your investment.
+
+Best regards,
+[Your Name]
+        </pre>
+    </div>
+    
+    <h2>Action Contract Template</h2>
+    <div style="padding: 15px; background-color: #f5f5f5; border-radius: 5px; margin-top: 20px;">
+        <h3>Poker Tournament Backing Agreement</h3>
+        <p><strong>BETWEEN:</strong> [Player Name] ("Player") and [Backer Name] ("Backer")</p>
+        <p><strong>EFFECTIVE DATE:</strong> [Date]</p>
+        <p><strong>AGREEMENT TERMS:</strong></p>
+        <ol>
+            <li><strong>Investment:</strong> Backer agrees to invest $[Amount] to purchase [Percentage]% of Player's action in [Tournament Name(s)] with a markup of [Markup].</li>
+            <li><strong>Total Due:</strong> Backer will pay Player $[Total with Markup] prior to the start of the tournament(s).</li>
+            <li><strong>Profit Sharing:</strong> Backer will receive [Percentage]% of all net profits earned by Player in the specified tournament(s).</li>
+            <li><strong>Expenses:</strong> [Specify if any expenses are deducted before profit calculation]</li>
+            <li><strong>Payment Terms:</strong> Player agrees to pay Backer their share of winnings within [X] business days of receiving tournament payout.</li>
+            <li><strong>Verification:</strong> Player will provide documentation of tournament results upon request.</li>
+            <li><strong>Cancellation:</strong> [Terms for tournament cancellation or player inability to participate]</li>
+            <li><strong>Termination:</strong> This agreement terminates upon completion of the specified tournament(s) and settlement of all payments.</li>
+        </ol>
+        <p><strong>SIGNATURES:</strong></p>
+        <p>Player: _________________________ Date: _____________</p>
+        <p>Backer: _________________________ Date: _____________</p>
+    </div>
+</body>
+</html>
