@@ -51,17 +51,6 @@ function generateMarketHtml(data) {
 
     const { us = [], europe = [], asia = [] } = data.marketData || {};
     const macroItems = data.macroData.split('\n').filter(item => item.trim() !== '');
-    
-    // Current date (when the page is generated)
-    const currentDate = new Date().toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-    
-    // Data date (from the title)
-    const dataDate = data.title || 'Unknown';
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -74,18 +63,6 @@ function generateMarketHtml(data) {
     <link rel="stylesheet" href="/assets/css/components.css">
     <link rel="stylesheet" href="/assets/css/consolidated-cyberpunk.css">
     <link rel="stylesheet" href="/assets/css/daily-specific-styles.css">
-    <style>
-        .data-info {
-            background-color: #222;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-size: 0.9em;
-        }
-        .data-info p {
-            margin: 5px 0;
-        }
-    </style>
 </head>
 <body>
     <div id="header"></div>
@@ -94,12 +71,12 @@ function generateMarketHtml(data) {
         <div class="container">
             <h1 class="page-title">Daily Equity Market Wrap-up</h1>
             <div class="date-header">
-                ${currentDate}
-            </div>
-            
-            <div class="data-info">
-                <p><strong>Data Source:</strong> ${dataDate}</p>
-                <p><strong>Page Generated:</strong> ${currentDate}</p>
+                ${new Date().toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                })}
             </div>
 
             <div class="quick-overview">
@@ -221,7 +198,6 @@ async function syncDailyMarket() {
         
         console.log(`Looking for entries with today's date: ${formattedToday}`);
         
-        // Query Notion database for entries - get more than 1 to search through them
         console.log('Querying Notion database...');
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DAILY_DATABASE_ID,
@@ -237,21 +213,21 @@ async function syncDailyMarket() {
                     direction: 'descending',
                 }
             ],
-            page_size: 10 // Get more results to search through
+            page_size: 10 // Get a few results to find today's entry
         });
         
         if (response.results.length === 0) {
-            console.log('No published daily market updates found');
+            console.log('No published daily market update found');
             return;
         }
 
-        console.log(`Found ${response.results.length} published entries. Looking for today's entry.`);
+        console.log('Found published entries in Notion');
         
         // Find the entry for today
         let targetPage = null;
         for (const page of response.results) {
             const title = getPropertyValue(page.properties.Title, 'title');
-            console.log(`Checking title: "${title}" against today's date: "${formattedToday}"`);
+            console.log(`Checking entry with title: "${title}"`);
             
             // Check if the title contains today's date
             if (title.includes(formattedToday)) {
@@ -265,10 +241,6 @@ async function syncDailyMarket() {
         if (!targetPage) {
             console.log('No entry found for today, using the most recent entry instead');
             targetPage = response.results[0];
-            
-            // Log the title of the entry we're using
-            const title = getPropertyValue(targetPage.properties.Title, 'title');
-            console.log(`Using entry with title: "${title}"`);
         }
         
         const pageData = await processMarketData(targetPage, marketData);
