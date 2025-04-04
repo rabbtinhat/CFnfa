@@ -188,16 +188,18 @@ async function syncDailyMarket() {
         const marketData = await getMarketData();
         console.log('Market data fetched:', JSON.stringify(marketData, null, 2));
         
-        // Format today's date in the same format as your title: "MMM DD, YYYY"
+        // Format today's date exactly as it appears in your Notion titles
         const today = new Date();
+        // Note: Using en-US locale to match "Apr 03, 2025" format exactly
         const formattedToday = today.toLocaleDateString('en-US', {
-            month: 'short', // "Apr"
+            month: 'short',  // "Apr"
             day: '2-digit',  // "03"
             year: 'numeric'  // "2025"
         });
         
-        console.log(`Looking for entries with today's date: ${formattedToday}`);
+        console.log(`Looking for entries with today's date: "${formattedToday}"`);
         
+        // Get all published entries
         console.log('Querying Notion database...');
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DAILY_DATABASE_ID,
@@ -207,40 +209,58 @@ async function syncDailyMarket() {
                     equals: 'Published'
                 }
             },
-            sorts: [
-                {
-                    property: 'Title',
-                    direction: 'descending',
-                }
-            ],
-            page_size: 10 // Get a few results to find today's entry
+            // Don't limit the sort direction to descending - get all entries
+            page_size: 100 // Get more results to ensure we find today's
         });
         
         if (response.results.length === 0) {
-            console.log('No published daily market update found');
+            console.log('No published daily market updates found');
             return;
         }
 
-        console.log('Found published entries in Notion');
+        console.log(`Found ${response.results.length} published entries`);
         
-        // Find the entry for today
+        // Find entry that exactly matches today's date
         let targetPage = null;
+        let latestPage = null;
+        let latestDate = new Date(0); // Start with epoch time
+        
         for (const page of response.results) {
             const title = getPropertyValue(page.properties.Title, 'title');
-            console.log(`Checking entry with title: "${title}"`);
+            console.log(`Checking entry: "${title}"`);
             
-            // Check if the title contains today's date
-            if (title.includes(formattedToday)) {
-                console.log('Found entry for today!');
+            // Check for exact match with today's date
+            if (title === formattedToday) {
+                console.log(`Found exact match for today (${formattedToday})`);
                 targetPage = page;
                 break;
             }
+            
+            // Parse date from title for comparison (as fallback)
+            try {
+                const pageDate = new Date(title);
+                if (!isNaN(pageDate.getTime()) && pageDate > latestDate) {
+                    latestDate = pageDate;
+                    latestPage = page;
+                    console.log(`New latest date found: ${title}`);
+                }
+            } catch (e) {
+                console.log(`Could not parse date from title: "${title}"`);
+            }
         }
         
-        // If no entry for today, use the most recent one
-        if (!targetPage) {
-            console.log('No entry found for today, using the most recent entry instead');
+        // If no exact match for today, use the latest date entry
+        if (!targetPage && latestPage) {
+            console.log('No exact match for today, using latest date entry instead');
+            targetPage = latestPage;
+            const title = getPropertyValue(targetPage.properties.Title, 'title');
+            console.log(`Using entry with title: "${title}"`);
+        } else if (!targetPage) {
+            // If we couldn't find by date parsing, fall back to first result (most recent by API sort)
+            console.log('Falling back to first result from query');
             targetPage = response.results[0];
+            const title = getPropertyValue(targetPage.properties.Title, 'title');
+            console.log(`Using entry with title: "${title}"`);
         }
         
         const pageData = await processMarketData(targetPage, marketData);
